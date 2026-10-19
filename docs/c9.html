@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>실습 따라가기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html">홈</a><a href="c0.html" class=on>공부</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="chhead"><span>9 / 9장</span><a href="index.html">목차</a></div><h2>9장. 실습 따라가기</h2>
+<p class="lead">실습 명령어의 옵션은 외울 필요가 없어요. 교수님도 디테일은 뺀다고 했어요. 대신 "지금 하는 명령이 <a class="w" href="words.html#w165" data-w="165">파이프라인</a>의 어느 단계인지"는 알아야 해요.</p>
+
+<h3>9-1. 실습 전체 지도</h3>
+<p>교수님은 개념을 모르면 실습할 때 지금 무슨 스텝인지 모른다고 여러 번 말했어요. 그래서 이 장은 실습을 "단계"로 나눠서 보여 줘요. 아래 번호는 이 책에서 편의상 붙인 단계 번호이고, 시험에 번호가 나오지는 않아요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>요리 순서와 같아요. 재료 손질(<a class="w" href="words.html#w102" data-w="102">품질 검사</a>·<a class="w" href="words.html#w104" data-w="104">트리밍</a>) → 위치 맞춰 담기(정렬) → 불순물 거르기(<a class="w" href="words.html#w133" data-w="133">중복 제거</a>·<a class="w" href="words.html#w136" data-w="136">BQSR</a>) → 맛 보며 골라내기(<a class="w" href="words.html#w147" data-w="147">변이 호출</a>·<a class="w" href="words.html#w157" data-w="157">필터</a>) → 의미 적기(<a class="w" href="words.html#w159" data-w="159">annotation</a>)로 이어져요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th>구간</th><th>단계 번호</th><th>하는 일</th></tr>
+  <tr><td>A. 준비와 점검</td><td>0~5</td><td>환경 준비, <a class="w" href="words.html#w78" data-w="78">FASTQ</a> 받기, 품질 검사, <a class="w" href="words.html#w98" data-w="98">어댑터</a> 자르기, 합치기, <a class="w" href="words.html#w113" data-w="113">BLAST</a> 구경</td></tr>
+  <tr><td>B. 정렬</td><td>6~12</td><td><a class="w" href="words.html#w73" data-w="73">read</a>를 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 위치에 맞추고 숫자와 눈으로 점검</td></tr>
+  <tr><td>C. 후처리</td><td>13~15</td><td><a class="w" href="words.html#w134" data-w="134">PCR 중복</a> 제거, BQSR (7장)</td></tr>
+  <tr><td>D. 변이 호출과 필터</td><td>16~19</td><td><a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a>, <a class="w" href="words.html#w151" data-w="151">GenotypeGVCFs</a>, <a class="w" href="words.html#w158" data-w="158">하드 필터</a> (7장)</td></tr>
+  <tr><td>E. Annotation</td><td>20~22</td><td><a class="w" href="words.html#w160" data-w="160">ANNOVAR</a>로 의미 붙이기 (8장)</td></tr>
+</table></div>
+<p>변이 호출 실습은 번호가 붙은 스크립트를 순서대로 돌렸어요. 02번 품질 검사·트리밍, 03번 정렬, 04번 후처리(MarkDuplicates), 05번 BQSR, 06번 변이 호출, 07번 하드 필터예요. 번호가 곧 순서예요.</p>
+<p>실습은 모두 <a class="w" href="words.html#w128" data-w="128">리눅스</a> 서버에서 했어요. 도구가 설치된 <a class="w" href="words.html#w131" data-w="131">가상환경</a>(conda)에 들어간 뒤, 내 폴더로 이동해서 스크립트를 돌렸어요. 결과 <a class="w" href="words.html#w118" data-w="118">BAM</a>·<a class="w" href="words.html#w119" data-w="119">BAI</a>는 WinSCP로 내 PC에 옮겨서 웹 <a class="w" href="words.html#w127" data-w="127">IGV</a>에 올려 봤어요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w50" data-w="50">변이</a> 분석 파이프라인은 FASTQ를 QC·트리밍한 뒤 <a class="w" href="words.html#w114" data-w="114">BWA</a>로 정렬해 sorted BAM과 <a class="w" href="words.html#w115" data-w="115">index</a>를 만들고, MarkDuplicates와 BQSR로 후처리한 후 HaplotypeCaller(<a class="w" href="words.html#w149" data-w="149">GVCF</a>)와 GenotypeGVCFs(<a class="w" href="words.html#w148" data-w="148">VCF</a>), 하드 필터를 거쳐 ANNOVAR로 annotation하는 순서이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 실습에서 07번 스크립트는 파이프라인의 어디인가요?</summary>
+  <p>하드 필터 단계예요. 06번 변이 호출 다음에 기준 미달 변이를 버려요.</p>
+</details>
+
+<h3>9-2. 구간 A — 준비와 점검 (0~5단계)</h3>
+<p>본격적인 분석 전에 서버를 준비하고, 데이터가 쓸 만한지 확인하고, 불필요한 부분을 잘라 내는 단계예요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>0. 환경 준비</td><td>ssh 접속, <code>conda activate</code>, 폴더 만들기</td><td>실습 데이터 → 내 작업 폴더</td><td>도구가 깔린 가상환경에 들어가야 해요. 안 들어가면 "도구가 없다"는 오류가 나요.</td></tr>
+  <tr><td>1. <a class="w" href="words.html#w77" data-w="77">Base calling</a></td><td><a class="w" href="words.html#w58" data-w="58">NGS</a> 기기(<a class="w" href="words.html#w71" data-w="71">Illumina</a> 등)</td><td><a class="w" href="words.html#w69" data-w="69">형광</a> 이미지 → FASTQ (<a class="w" href="words.html#w96" data-w="96">R1</a>, R2)</td><td>빛 사진을 ATGC 글자와 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>로 바꿔요.</td></tr>
+  <tr><td>2. 품질 검사(QC)</td><td><code>fastqc</code></td><td>FASTQ → HTML 리포트</td><td>데이터가 쓸 만한지 <a class="w" href="words.html#w82" data-w="82">Q30</a> 기준으로 봐요. 뒤쪽 점수가 떨어지면 어댑터를 의심해요.</td></tr>
+  <tr><td>3. 어댑터 트리밍</td><td><code>cutadapt</code> (변이 실습은 <code>fastp</code>)</td><td>FASTQ → 트리밍된 FASTQ</td><td>조각이 짧아 read에 딸려 온 어댑터와 뒤쪽 노이즈를 잘라 내요.</td></tr>
+  <tr><td>4. <a class="w" href="words.html#w95" data-w="95">페어드엔드</a> <a class="w" href="words.html#w109" data-w="109">머지</a>(연습용)</td><td><code>pear</code></td><td>R1 + R2 → 한 줄로 합친 긴 read</td><td>겹치는 부분(overlap)으로 두 read를 이어 붙여요. 합쳐지지 않은 read는 따로 정렬하고, 변이 호출 스크립트에는 안 들어 있어요.</td></tr>
+  <tr><td>5. BLAST(웹 시연)</td><td>NCBI BLAST 웹페이지</td><td>짧은 서열 하나 → 일치하는 레퍼런스 목록</td><td><a class="w" href="words.html#w112" data-w="112">local alignment</a>가 어떤 모습인지 눈으로 봐요. NGS 대량 데이터에는 너무 느려요.</td></tr>
+</table></div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w103" data-w="103">FastQC</a>로 FASTQ의 품질(Q30 기준)을 확인하고, <a class="w" href="words.html#w100" data-w="100">인서트</a>가 read보다 짧아 섞여 들어온 어댑터와 저품질 구간을 <a class="w" href="words.html#w105" data-w="105">cutadapt</a>나 <a class="w" href="words.html#w107" data-w="107">fastp</a>로 트리밍한다. 트리밍하지 않으면 레퍼런스에 없는 서열이 정렬을 방해하고 변이로 오인될 수 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — PEAR(머지)는 변이 호출 스크립트에 들어 있나요?</summary>
+  <p>아니요. 6주차에 도구 하나씩 연습한 용도였어요. 변이 호출 스크립트는 fastp로 트리밍한 뒤 곧바로 정렬해요.</p>
+</details>
+
+<h3>9-3. 구간 B — 정렬 (6~12단계)</h3>
+<p>트리밍한 read를 레퍼런스 위의 제자리에 놓는 단계예요. 놓은 뒤에는 숫자와 눈으로 잘 됐는지 점검해요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>6. 레퍼런스 인덱싱</td><td><code>bwa index</code> (한 번만)</td><td>레퍼런스 <a class="w" href="words.html#w79" data-w="79">FASTA</a> → 인덱스 파일들</td><td>레퍼런스에 포스트잇을 붙여 두어 정렬이 빨라져요. 실습에서는 교수님이 미리 해 두었어요.</td></tr>
+  <tr><td>7. <a class="w" href="words.html#w110" data-w="110">얼라인먼트</a></td><td><code>bwa mem</code> (실습은 <code>bwa-mem2</code>)</td><td>트리밍된 FASTQ + 인덱싱된 레퍼런스 → <a class="w" href="words.html#w117" data-w="117">SAM</a></td><td>짧은 read가 레퍼런스의 어느 위치인지 맞춰요(<a class="w" href="words.html#w116" data-w="116">seed-and-extend</a>).</td></tr>
+  <tr><td>8. SAM을 BAM으로</td><td><code>samtools view -b</code></td><td>SAM(텍스트, 큼) → BAM(이진, 작음)</td><td>인간 <a class="w" href="words.html#w14" data-w="14">유전체</a>는 31억 <a class="w" href="words.html#w8" data-w="8">염기</a>라 SAM이 너무 커서 압축해요. 실습에서는 <a class="w" href="words.html#w120" data-w="120">sort</a> 단계에 합쳐졌어요.</td></tr>
+  <tr><td>9. 정렬(sort)</td><td><code>samtools sort</code></td><td>BAM → sorted BAM</td><td>뒤죽박죽 순서를 <a class="w" href="words.html#w2" data-w="2">염색체</a>·위치 순으로 정리해요. 다음 단계와 IGV에 필수예요.</td></tr>
+  <tr><td>10. 인덱스</td><td><code>samtools index</code></td><td>sorted BAM → .bai 파일</td><td>BAM을 위치로 빨리 찾게 해 주는 색인이에요.</td></tr>
+  <tr><td>11. 통계 확인</td><td><code>samtools flagstat</code>, <code>samtools coverage</code></td><td>sorted BAM → 통계 텍스트</td><td>붙은 read 수, duplicates, <a class="w" href="words.html#w87" data-w="87">coverage</a>, mean <a class="w" href="words.html#w86" data-w="86">depth</a>를 숫자로 확인해요.</td></tr>
+  <tr><td>12. 눈으로 확인</td><td>IGV 웹앱</td><td>sorted BAM + BAI → 화면</td><td>read가 쌓인 모습과 레퍼런스와 다른 곳(색깔)을 눈으로 봐요.</td></tr>
+</table></div>
+<p>실습에서는 7~9단계를 <a class="w" href="words.html#w132" data-w="132">파이프</a>(<code>|</code>)로 이어서 한 번에 했어요. 파이프는 앞 명령의 결과를 파일로 저장하지 않고 곧바로 다음 명령에 넘겨주는 거예요. 그래서 큰 SAM 파일이 중간에 안 생겨요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>정렬(sort)은 도서관 책을 번호순으로 꽂는 일이고, 인덱스(.bai)는 "이 책은 몇 번째 칸"이라고 적은 목차예요. 목차가 있어야 원하는 위치를 바로 찾을 수 있어요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>BWA는 레퍼런스를 미리 인덱싱하고 read를 짧은 seed로 쪼개 후보 위치를 찾은 뒤 확장하는 seed-and-extend 방식으로 정렬한다. 정렬 결과인 SAM을 BAM으로 바꿔 용량을 줄이고, 위치 순으로 sort한 뒤 index(.bai)를 만든다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 정렬 직후 samtools로 확인하는 숫자 두 가지는?</summary>
+  <p>flagstat(붙은 read 수와 duplicates)과 coverage(coverage와 mean depth)예요. 실습에서는 coverage 99%, depth 약 20x가 나왔어요.</p>
+</details>
+
+<h3>9-4. 구간 C — 후처리 (13~15단계)</h3>
+<p>7장에서 배운 두 가지 다듬기예요. 실습에서는 04번과 05번 스크립트예요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>13. PCR 중복 제거</td><td><code>picard MarkDuplicates</code> (이후 SortSam)</td><td>sorted BAM → dedup BAM + metrics 파일</td><td><a class="w" href="words.html#w27" data-w="27">PCR</a> 복사본이 변이 비율을 부풀리는 걸 막아요. <a class="w" href="words.html#w101" data-w="101">amplicon</a> 데이터는 생략해요.</td></tr>
+  <tr><td>14. BQSR (1) 보정표 만들기</td><td><code>gatk BaseRecalibrator</code></td><td>dedup BAM + 레퍼런스 + 알려진 <a class="w" href="words.html#w51" data-w="51">SNP</a>(<a class="w" href="words.html#w138" data-w="138">dbSNP</a>) → recal_data.table</td><td>알려진 SNP를 정답지로 삼아 품질 점수의 버릇을 계산해요.</td></tr>
+  <tr><td>15. BQSR (2) 보정 적용</td><td><code>gatk ApplyBQSR</code></td><td>dedup BAM + 보정표 → final BAM(실습 이름 recal.bam)</td><td>품질 점수를 다시 써서 에러를 변이로 착각하는 일을 줄여요. 분석 준비 완료(analysis-ready)예요.</td></tr>
+</table></div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>정렬된 BAM에서 <a class="w" href="words.html#w135" data-w="135">Picard</a> MarkDuplicates로 PCR 중복을 제거하고 다시 정렬한 뒤, dbSNP를 정답지로 BaseRecalibrator가 재보정 테이블을 만들고 ApplyBQSR가 품질 점수를 다시 써서 final BAM을 만든다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 후처리가 끝나면 어떤 BAM이 나오나요?</summary>
+  <p>분석 준비 완료 BAM(analysis-ready BAM, final BAM)이에요. 실습 스크립트에서는 recal.bam이라고 불러요.</p>
+</details>
+
+<h3>9-5. 구간 D — 변이 호출과 필터 (16~19단계)</h3>
+<p>드디어 변이를 찾는 단계예요. 실습에서는 06번과 07번 스크립트예요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>16. 변이 호출</td><td><code>gatk HaplotypeCaller</code> (<code>-ERC GVCF</code>)</td><td>final BAM + 레퍼런스 + 분석 영역(<code>-L</code>) → GVCF(.g.vcf)</td><td><a class="w" href="words.html#w143" data-w="143">active region</a>과 <a class="w" href="words.html#w142" data-w="142">haplotype</a> 확률로 진짜 변이일 가능성이 높은 것을 찾아요. 모르는 위치도 <a class="w" href="words.html#w150" data-w="150">NON_REF</a>로 기록해요.</td></tr>
+  <tr><td>17. <a class="w" href="words.html#w153" data-w="153">Genotype</a> 부여</td><td><code>gatk GenotypeGVCFs</code></td><td>GVCF → VCF(raw, 확실한 변이만)</td><td>GVCF에서 최종 genotype(GT)을 붙여 변이만 추려요.</td></tr>
+  <tr><td>18. SNP와 <a class="w" href="words.html#w53" data-w="53">INDEL</a> 분리</td><td><code>gatk SelectVariants</code></td><td>raw VCF → SNP VCF, INDEL VCF</td><td>종류별로 다른 필터를 쓰려고 나눠요.</td></tr>
+  <tr><td>19. 하드 필터</td><td><code>gatk VariantFiltration</code> (QD, FS, MQ 등) + <code>bcftools view -f PASS</code></td><td>SNP VCF → FILTER 칸이 채워진 VCF, PASS만 모은 VCF</td><td>기준 미달 변이를 버려요. 통과하면 PASS, 못 통과하면 걸린 필터 이름이 찍혀요. 희귀 변이 탐색에서는 생략하기도 해요.</td></tr>
+</table></div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>변이 호출은 "GVCF 먼저 → VCF 추리기 → 필터"의 3박자예요. HaplotypeCaller(GVCF) → GenotypeGVCFs(VCF) → 하드 필터(PASS)로 외우세요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w139" data-w="139">GATK</a> HaplotypeCaller로 final BAM에서 GVCF를 만들고, GenotypeGVCFs로 genotype을 붙인 VCF를 추린 뒤, 하드 필터로 기준 미달 변이를 제거해 PASS인 변이만 남긴다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — SNP와 INDEL을 왜 따로 나눠서 필터링하나요?</summary>
+  <p>종류별로 다른 필터 기준을 적용하기 위해서예요. 그래서 SelectVariants로 먼저 나눠요.</p>
+</details>
+
+<h3>9-6. 구간 E — Annotation (20~22단계)</h3>
+<p>8장에서 배운 ANNOVAR 순서 그대로예요. 다만 실습에서는 시간이 오래 걸려 이론으로만 다뤘어요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>20. DB 내려받기</td><td><code>annotate_variation.pl -downdb</code></td><td>(없음) → humandb 폴더의 DB 파일</td><td>쓸 DB를 먼저 받아 두어야 annotation을 할 수 있어요.</td></tr>
+  <tr><td>21. VCF를 avinput으로</td><td><code>convert2annovar.pl</code></td><td>VCF → .avinput(탭 구분 텍스트)</td><td>ANNOVAR가 읽기 쉬운 형식으로 바꿔요. <code>--vcfinput</code>으로 바로 넣을 수도 있어요.</td></tr>
+  <tr><td>22. Annotation</td><td><code>table_annovar.pl</code></td><td>VCF(또는 avinput) + humandb → annotation 표</td><td>찾은 변이가 무슨 의미인지 DB와 연결해요.</td></tr>
+</table></div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>ANNOVAR를 쓰려면 먼저 필요한 DB를 내려받고, VCF를 avinput으로 변환한 뒤 table_annovar로 annotation하여 변이의 위치와 질병 관련성 등을 얻는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — annotation을 하기 전에 가장 먼저 해야 하는 일은?</summary>
+  <p>쓸 DB를 먼저 내려받는 것이에요. DB가 없으면 변이를 찾아볼 사전이 없어요.</p>
+</details>
+
+<h3>9-7. 파일 이름이 어떻게 바뀌나요</h3>
+<p>단계마다 파일의 이름과 모양이 바뀌어요. 이것만 알아도 파이프라인이 머릿속에 그려져요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>나오는 파일</th></tr>
+  <tr><td>시퀀서</td><td><b>FASTQ</b> (.fastq, .fq.gz) — R1, R2 두 개</td></tr>
+  <tr><td>정렬 직후</td><td><b>SAM</b>(텍스트) → <b>BAM</b>(이진) → <b>sorted BAM + .bai</b></td></tr>
+  <tr><td>레퍼런스 쪽</td><td><b>FASTA</b> (.fa)와 그 인덱스</td></tr>
+  <tr><td>MarkDuplicates</td><td>dedup.bam + metrics 파일</td></tr>
+  <tr><td>BQSR</td><td>recal_data.table → 최종 BAM (final 또는 recal)</td></tr>
+  <tr><td>HaplotypeCaller</td><td><b>.g.vcf</b> (GVCF)</td></tr>
+  <tr><td>GenotypeGVCFs</td><td><b>.vcf</b> → 하드 필터 후 FILTER 칸이 채워짐</td></tr>
+  <tr><td>ANNOVAR</td><td>.avinput → annotation 표</td></tr>
+</table></div>
+<p>교수님은 분석 준비가 끝난 지점을 ".bam까지 오면 이후 결과 확장자는 VCF"라고 정리했어요. BAM까지는 정렬과 후처리, 그 뒤로는 변이 파일이라는 뜻이에요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>시퀀서가 FASTQ를 만들고, 정렬하면 SAM이 나오며 이를 BAM으로 바꿔 sort하고 .bai 인덱스를 만든다. 변이 호출 후에는 GVCF와 VCF가 나온다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 정렬된 BAM의 인덱스 파일 확장자는?</summary>
+  <p>.bai예요. 단답형으로 나온 적이 있어요.</p>
+</details>
+
+<h3>9-8. 실습 숫자는 무슨 뜻일까요</h3>
+<p>실습 결과에는 숫자가 많이 나와요. 시험에서 숫자를 물으면 어디서 나온 숫자인지부터 기억하면 안 헷갈려요. 먼저 정렬 결과(NA12878의 20번 염색체 데이터)를 볼게요.</p>
+<div class="tw"><table>
+  <tr><th>숫자</th><th>어느 단계에서</th><th>이게 무슨 뜻이에요</th></tr>
+  <tr><td>전체 <b>8,592,478</b>개</td><td>정렬 후 flagstat</td><td>정렬한 read가 모두 약 859만 개라는 뜻이에요.</td></tr>
+  <tr><td>매핑 <b>100%</b>, 짝지어짐 <b>100%</b></td><td>flagstat</td><td>read가 전부 레퍼런스에 자리를 잡았고, 짝(R1, R2)도 제대로 붙었다는 뜻이에요. 짝이 없는 singleton은 2개뿐이었어요.</td></tr>
+  <tr><td>coverage <b>99.221%</b></td><td>samtools coverage</td><td>20번 염색체의 99.2%가 적어도 한 번은 읽혔다는 뜻이에요. 빈 곳이 거의 없다는 거예요.</td></tr>
+  <tr><td>mean depth <b>19.9649</b> (약 20x)</td><td>samtools coverage</td><td>한 위치를 평균 약 20번 읽었다는 뜻이에요. 많이 읽을수록 에러와 진짜를 구별하기 쉬워요.</td></tr>
+  <tr><td>평균 염기 품질 <b>23</b></td><td>samtools coverage</td><td>평균 Q23, 정확도로는 약 99.5%예요. Q30(99.9%) 기준보다는 낮은 평균이에요.</td></tr>
+  <tr><td>평균 <a class="w" href="words.html#w123" data-w="123">매핑 품질</a> <b>57.8</b></td><td>samtools coverage</td><td>MAPQ 60이 "잘 붙음"이라서, 평균이 60에 가까우면 대부분 제자리에 잘 붙었다는 뜻이에요.</td></tr>
+  <tr><td>duplicates <b>0 → 1,542</b></td><td>flagstat (정렬 직후 → MarkDuplicates 뒤)</td><td>처음엔 중복 표시가 0이었는데, MarkDuplicates가 복사본 1,542개를 찾아 표시했다는 뜻이에요. 전체의 약 0.018%로 아주 일부예요.</td></tr>
+  <tr><td>MQ <b>60</b>과 <b>21</b></td><td>하드 필터 결과 화면</td><td>MQ 60인 변이는 통과, MQ 21인 변이는 기준(MQ 40 미만 제거)에 걸려 MQ_filter가 찍혔어요.</td></tr>
+</table></div>
+<p>6주차 실습 숫자도 있어요.</p>
+<div class="tw"><table>
+  <tr><th>숫자</th><th>어느 단계에서</th><th>이게 무슨 뜻이에요</th></tr>
+  <tr><td>32 read(<b>64.0%</b>), 4,225bp → 3,230bp(<b>76.4%</b>)</td><td>cutadapt (50 read짜리 가짜 데이터)</td><td>50개 중 32개에 어댑터가 있었고, 어댑터를 자르니 전체 길이가 4,225bp에서 3,230bp로 줄었다는 뜻이에요.</td></tr>
+  <tr><td>48,277 / 51,122 (<b>94.435%</b>) assembled</td><td><a class="w" href="words.html#w108" data-w="108">PEAR</a> 실습 예시</td><td>51,122쌍 중 48,277쌍이 겹치는 부분으로 합쳐졌고, 2,845쌍(5.565%)은 못 합쳐졌다는 뜻이에요. 수업에서 학생들은 약 70%가 합쳐질 거라고 답했어요.</td></tr>
+</table></div>
+<p>마지막으로 교수님 말로는 이번 실습은 coverage 99%, mean depth 약 20x였고, 정렬 스크립트는 5분 이상 걸렸어요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>실습 데이터는 coverage가 약 99%로 대부분의 위치가 읽혔고 mean depth는 약 20x로 한 위치를 평균 20번 읽었다. depth가 높을수록 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 에러와 진짜 변이를 구별하기 쉽다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — coverage 99%와 depth 20x의 차이는?</summary>
+  <p>coverage는 전체 중 몇 %를 읽었는지(99%), depth는 한 위치를 몇 번 읽었는지(약 20번)예요. 매 시간 반복되는 질문이에요.</p>
+</details>
+
+<h3>9-9. 3주차·4주차 실습 코드 쉽게 읽기</h3>
+<p>변이 호출 실습 전에 3주차와 4주차에도 실습이 있었어요. 코드를 외울 필요는 없고, 무엇을 하는 코드인지만 이해하면 돼요.</p>
+<p><b>3주차 read_fastq 노트북</b>은 FASTQ를 4줄씩 묶어서 읽는 파이썬 코드예요. FASTQ는 read 하나가 4줄이기 때문이에요(ID, 서열, +, 퀄리티).</p>
+<ul>
+  <li><code>open_fastq</code> — 파일 이름이 .gz(압축)로 끝나면 풀어서 열고, 아니면 보통대로 열어요.</li>
+  <li><code>parse_fastq</code> — 한 줄씩 4번 읽어서 ID·서열·+·퀄리티를 차례로 가져와요. 첫 줄이 비어 있으면 파일 끝이라 멈춰요.</li>
+  <li><code>yield</code> — "read 하나를 건네주고 다음에 이어서 계속"하는 방식이라 파일 전체를 메모리에 올리지 않아요.</li>
+</ul>
+<div class="box eg"><span class="t">비유</span>
+  <p>4칸짜리 도시락을 한 통씩 건네주는 자판기예요. 도시락 한 통이 read 하나이고, 자판기는 필요할 때마다 한 통씩만 꺼내 줘요.</p>
+</div>
+<p>실행 결과는 read가 <b>1,187개</b>, 평균 길이가 <b>151.0</b>이었어요. 파일이 4,748줄이니까 4,748 ÷ 4 = 1,187이 딱 맞아요. 교수님은 평균 길이를 150이라고 했지만 실제로는 151이에요.</p>
+<p><b>4주차 FastQC 실습</b>은 순서가 중요해요. 서버에 접속하고, 가상환경(<code>conda activate</code>)에 들어가고, 내 폴더를 만들고, 데이터 파일을 복사하고, <code>fastqc 파일명</code>을 실행하고, 만들어진 HTML 리포트를 WinSCP로 내 PC에 가져와 열어요. 가상환경에 들어가면 프롬프트 앞의 이름이 (base)에서 바뀌어요.</p>
+<p>이어서 파일 만지기 5문제를 했어요. head로 엿보기, awk로 ID·서열·퀄리티 뽑기, grep으로 특정 서열 잡기, 서열 길이를 뽑아 uniq -c로 길이 분포 보기, vi로 셸 스크립트 만들어 실행하기예요. 교수님은 1~2번은 꼭 해 보라고 했어요. grep은 그 서열이 있는 줄만 남기는 도구이고, awk는 칸을 나눠서 필요한 칸만 꺼내는 도구예요.</p>
+<p>슬라이드 91쪽에는 <b>Q30 필터링</b> 코드(Biopython)도 있어요. 수업에서 직접 다루지는 않았어요. "맨 앞 7개 염기의 <a class="w" href="words.html#w80" data-w="80">Phred 점수</a>가 모두 30 이상인 read만 골라 저장"하는 코드이고, 앞 7개만 보는 것은 예시용 가정이에요. 직접 계산해 보니 실습 파일은 R1의 평균 Q가 약 36.6, R2가 약 24.6이라서 Q30 아래가 많은 쪽, 즉 버려야 할 쪽은 R2였어요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ는 read 하나가 ID, 염기서열, +, 퀄리티 점수의 4줄로 이루어져 있다. 실습 코드는 파일을 4줄씩 읽어 read 개수와 평균 길이를 구했고, Q30 미만의 저품질 read는 제거 대상이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 4,748줄짜리 FASTQ에는 read가 몇 개 들어 있나요?</summary>
+  <p>4,748 ÷ 4 = 1,187개예요. read 하나가 4줄이기 때문이에요.</p>
+</details>
+
+<div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>실습은 준비·QC·트리밍(A) → 정렬(B) → 후처리 MarkDuplicates·BQSR(C) → 변이 호출·하드 필터(D) → ANNOVAR(E) 순서이고, 명령 옵션은 외우지 않아도 지금 어느 단계인지는 알아야 해요.</li>
+    <li>파일은 FASTQ → SAM → BAM(sorted, .bai) → final BAM → GVCF → VCF 순으로 바뀌고, 교수님은 ".bam까지 오면 이후 결과는 VCF"라고 정리했어요.</li>
+    <li>실습 숫자는 coverage 99.2%(전체 중 읽은 비율), depth 약 20x(한 위치를 읽은 횟수), duplicates 0에서 1,542(복사본 표시)로 읽으면 돼요.</li>
+  </ul>
+</div>
+<div class="done"><button class="go ghost" id="markread" data-ch="c9" type="button">다 읽었어요 ✓</button><a class="go" href="quiz.html#c9">이 장 문제 풀기</a><div class="pn"><a href="c8.html"><b>← 이전</b>Annotation</a><a class="next" href="cheat.html"><b>다음 →</b>시험 전 1장</a></div></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

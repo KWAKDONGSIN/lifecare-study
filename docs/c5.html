@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Depth · 어디를 읽을까 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html">홈</a><a href="c0.html" class=on>공부</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="chhead"><span>5 / 9장</span><a href="index.html">목차</a></div><h2>Depth · 어디를 읽을까</h2>
+<p class="lead">이 장에서 배울 것 — <a class="w" href="words.html#w3" data-w="3">DNA</a>를 읽은 뒤 "얼마나 많이, 얼마나 넓게 읽혔나"를 재는 두 숫자(<a class="w" href="words.html#w86" data-w="86">depth</a>, <a class="w" href="words.html#w87" data-w="87">coverage</a>), 어디를 얼마나 읽을지 고르는 세 가지 방법(<a class="w" href="words.html#w89" data-w="89">WGS</a>·<a class="w" href="words.html#w90" data-w="90">WES</a>·<a class="w" href="words.html#w91" data-w="91">Targeted</a>), 그리고 조각을 양쪽에서 읽는 <a class="w" href="words.html#w95" data-w="95">페어드엔드</a>와 조각에 붙이는 꼬리표(<a class="w" href="words.html#w97" data-w="97">라이브러리</a>)예요. 교수님이 거의 매 시간 반복한 부분이라 시험에 나올 가능성이 아주 높아요.</p>
+
+<h3>1. 먼저 용어 4개</h3>
+<p>DNA를 읽는 기계(<a class="w" href="words.html#w58" data-w="58">NGS</a> 시퀀서)는 DNA를 아주 짧게 토막 내서 읽어요. 이때 읽은 토막 하나를 <b><a class="w" href="words.html#w73" data-w="73">read</a>(리드, 읽은 조각)</b>라고 불러요.</p>
+<p>이 조각들에 대해 숫자 4개를 물어보는 게 이 장의 시작이에요.</p>
+<div class="tw"><table>
+  <tr><th style="width:28%">용어</th><th>쉬운 뜻</th></tr>
+  <tr><td>Read 수</td><td>읽은 조각이 <b>모두 몇 개</b>인가</td></tr>
+  <tr><td><a class="w" href="words.html#w74" data-w="74">Read length</a></td><td>조각 <b>하나의 길이</b> (<a class="w" href="words.html#w71" data-w="71">Illumina</a> 기계는 약 150글자)</td></tr>
+  <tr><td>Depth (깊이)</td><td><b>한 자리를 조각 몇 개가 겹쳐서 읽었나.</b> 5개가 겹치면 5x</td></tr>
+  <tr><td>Coverage (덮은 비율)</td><td><b>전체 중 한 번이라도 읽힌 자리의 비율.</b> 10%가 비었으면 90%</td></tr>
+</table></div>
+<div class="box eg"><span class="t">비유</span>
+  <p>책 한 권을 여러 친구에게 나눠서 읽게 했다고 해 보세요. 어떤 줄은 친구 5명이 읽었고, 어떤 줄은 아무도 안 읽었어요.</p>
+  <p><b>한 줄을 몇 명이 읽었나가 depth</b>, <b>책 전체 중 적어도 한 명이 읽은 줄의 비율이 coverage</b>예요.</p>
+</div>
+<p>왜 둘을 따로 재냐면, 조각이 많아도 한쪽에만 몰려 있을 수 있기 때문이에요. 많이 읽었는지(depth)와 골고루 읽었는지(coverage)는 서로 다른 이야기예요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Depth는 <b>한 위치를 몇 개의 read가 겹쳐 읽었는지</b>(예 <a class="w" href="words.html#w88" data-w="88">30x</a>)를 뜻하고, coverage는 <b><a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 전체 중 한 번이라도 읽힌 비율</b>(예 99%)을 뜻한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — "5x"와 "90%" 중 depth는 어느 쪽일까요?</summary><p>"5x"가 depth예요. x는 "몇 번 읽었나"를 세는 단위이고, %는 "전체 중 얼마나 읽혔나"를 말하는 coverage예요.</p></details>
+
+<h3>2. 그림으로 보기</h3>
+<p>아래 표는 DNA 14자리를 조각 6개가 읽은 모습이에요. 맨 윗줄은 자리 번호, 둘째 줄 "정답지"는 표준 <a class="w" href="words.html#w14" data-w="14">게놈</a>(레퍼런스)의 글자예요.</p>
+<p>조각1~6은 각 조각이 정답지의 어느 자리에 붙었는지를 보여 줘요. 파란 칸은 정답과 같은 글자, 붉은 칸과 노란 칸은 정답과 다른 글자예요. 맨 아랫줄 숫자가 그 자리의 depth예요.</p>
+<div class="tw"><table class="seq">
+  <tr><td class="lb">자리</td><td class="n">1</td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">5</td><td class="n">6</td><td class="n">7</td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td><td class="n">13</td><td class="n">14</td></tr>
+  <tr><td class="lb">정답지</td><td class="r">A</td><td class="r">T</td><td class="r">G</td><td class="r">C</td><td class="r">C</td><td class="r">A</td><td class="r">T</td><td class="r">T</td><td class="r">G</td><td class="r">A</td><td class="r">C</td><td class="r">G</td><td class="r">T</td><td class="r">A</td></tr>
+  <tr><td class="lb">조각1</td><td class="m">A</td><td class="m">T</td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각2</td><td></td><td class="m">T</td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td class="m">A</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각3</td><td></td><td></td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각4</td><td></td><td></td><td></td><td class="m">C</td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td class="m">G</td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각5</td><td></td><td></td><td></td><td></td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td class="e">C</td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각6</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="m">T</td><td class="m">T</td><td class="m">G</td><td class="m">A</td><td class="m">C</td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">depth</td><td class="d">1</td><td class="d">2</td><td class="d">3</td><td class="d">4</td><td class="d">5</td><td class="d">4</td><td class="d">4</td><td class="d">4</td><td class="d">3</td><td class="d">1</td><td class="d">1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td></tr>
+</table></div>
+<p>세 군데만 눈여겨보세요.</p>
+<ul>
+  <li><b>6번 자리</b> — 읽은 조각 4개 중 <b>3개가 G</b>예요(정답지는 A). 여러 조각이 똑같이 말하니까 <b>진짜 <a class="w" href="words.html#w50" data-w="50">변이</a></b>일 가능성이 높아요.</li>
+  <li><b>9번 자리</b> — 읽은 조각 3개 중 <b>1개만 C</b>예요(정답지는 G). 혼자 다른 말을 하니까 <b>기계가 실수한 것(<a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 에러)</b>일 가능성이 높아요.</li>
+  <li><b>12~14번 자리</b> — 아무도 읽지 않았어요(depth 0). 이게 <b>coverage 구멍</b>이에요. 14자리 중 11자리만 읽혔으니 coverage는 약 <b>79%</b>예요.</li>
+</ul>
+<p>"변이"는 사람마다 다른 DNA 글자(정답지와 다른 글자)를 말해요. 변이를 찾는 게 이 수업의 최종 목표라서, 진짜 변이와 기계 실수를 가려내는 일이 중요해요.</p>
+<details class="check"><summary>잠깐 확인 — 12번 자리의 depth는 얼마이고, 이런 자리를 뭐라고 부를까요?</summary><p>depth는 0이고, 아무 조각도 닿지 않은 "coverage 구멍"이에요. 이런 자리가 많을수록 coverage가 낮아져요.</p></details>
+
+<h3>3. 왜 depth가 높아야 할까 — 투표 비유</h3>
+<div class="box eg"><span class="t">비유</span>
+  <p>depth는 "투표에 참여한 사람 수"예요. 100명(100x)에게 물었는데 1명만 "T"라고 했다면, 그 1명이 잘못 본 거예요. 99명이 같은 말을 했으니까요.</p>
+  <p>그런데 2명(2x)에게 물었는데 1명은 A, 1명은 T라고 하면 어느 쪽이 맞는지 알 수 없어요. 판단 불가예요.</p>
+</div>
+<p>정리하면 <b>depth가 높을수록 변이 판정이 정확해요.</b> 조각 하나가 틀려도 나<a class="w" href="words.html#w109" data-w="109">머지</a> 조각들이 바로잡아 주기 때문이에요.</p>
+<p>반대로 depth를 너무 낮게 잡으면 어떤 자리는 20번, 어떤 자리는 0번처럼 들쭉날쭉해져요. 0번인 자리가 생기면 coverage도 떨어져요. 그래서 연구자들은 "depth 100x, coverage 95%를 원한다"처럼 목표를 정하고 시퀀싱을 맡겨요. 다만 많이 읽을수록 돈이 더 들어요.</p>
+<figure class="slide"><img src="slides/v10.jpg"><figcaption>교수님 슬라이드 — Depth of coverage vs Breadth of coverage. "High read depth gives high accuracy"</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Depth가 높을수록 한 read의 에러를 다른 read들이 보완해 <b>진짜 변이와 시퀀싱 에러를 구분</b>할 수 있다. 예를 들어 100x에서 하나만 다르면 에러로 걸러 내지만, 2x에서 하나가 다르면 판단할 수 없다. Depth가 너무 낮으면 안 읽힌 영역이 생겨 coverage도 떨어진다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 어떤 자리를 2번만 읽었더니 A 하나, T 하나였어요. 왜 변이라고 말할 수 없을까요?</summary><p>2명 중 1명씩 다른 말을 하면 누가 맞는지 알 수 없어서 "진짜 변이"인지 "기계 실수"인지 가릴 수 없기 때문이에요. depth가 낮아서 생기는 문제예요.</p></details>
+
+<h3>4. depth 계산식</h3>
+<p>depth는 "읽은 글자를 전부 더한 양"을 "게놈 전체 글자 수"로 나눈 값이에요. 전체 벽 넓이에 비해 페인트를 몇 겹 칠했느냐와 같은 생각이에요.</p>
+<div class="box def"><span class="t">depth 계산식</span>
+  <p><b>depth = <a class="w" href="words.html#w110" data-w="110">매핑</a>된 read 수 × 평균 read 길이 ÷ 레퍼런스 전체 길이</b></p>
+  <p>예) read 6억 개 × 150글자 ÷ 30억 글자 = <b>30x</b></p>
+</div>
+<p>6억 × 150은 읽은 글자 총합(900억 글자)이고, 이를 사람 게놈 30억 글자로 나누면 평균 30번씩 읽었다는 뜻이에요.</p>
+<p>7주차 실습 결과는 <b>coverage 99%, 평균 depth 약 20x</b>였어요. 교수님이 "얼라인 결과에서 궁금한 건 결국 coverage와 depth 두 가지"라고 정리하셨어요.</p>
+<details class="check"><summary>잠깐 확인 — read 3억 개, 길이 150, 게놈 30억 글자이면 depth는?</summary><p>3억 × 150 ÷ 30억 = 15x예요. 읽은 글자 450억 개를 30억으로 나눈 값이에요.</p></details>
+
+<h3>5. WGS · WES · Targeted — 어디를 읽을까</h3>
+<p>기계가 한 번에 읽을 수 있는 양은 정해져 있어요. 그래서 "어디를 읽을지"를 정해야 하고, 범위를 정하면 depth가 따라서 정해져요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>페인트 한 통으로 <b>넓은 벽</b>을 칠하면 얇게, <b>좁은 벽</b>을 칠하면 두껍게 칠해져요. 칠의 두께가 depth예요.</p>
+  <p>교수님은 이걸 <b>"선택과 집중"</b>이라고 하셨어요.</p>
+</div>
+<div class="paper"><svg viewBox="0 0 380 108">
+  <text x="0" y="18" font-size="11" font-weight="bold" fill="#1b2333">WGS</text><rect x="70" y="10" width="300" height="5" fill="#2563eb"/><text x="70" y="30" font-size="9.5" fill="#5d6b80">전체 30억 글자 · 얇게 ~30x</text>
+  <text x="0" y="56" font-size="11" font-weight="bold" fill="#1b2333">WES</text><rect x="70" y="44" width="120" height="12" fill="#16a34a"/><text x="70" y="70" font-size="9.5" fill="#5d6b80">엑손만 · 중간 50~100x</text>
+  <text x="0" y="94" font-size="11" font-weight="bold" fill="#1b2333">Targeted</text><rect x="70" y="80" width="30" height="22" fill="#d6264a"/><text x="108" y="96" font-size="9.5" fill="#5d6b80">특정 유전자만 · 두껍게 500x 이상</text>
+</svg></div>
+<div class="tw"><table>
+  <tr><th style="width:23%">종류</th><th>읽는 범위</th><th style="width:20%">Depth</th><th>쓰임</th></tr>
+  <tr><td><b>WGS</b><br>Whole Genome Sequencing</td><td>전체 게놈 (30억 글자)</td><td>~30x</td><td>큰 그림, 처음 보는 <a class="w" href="words.html#w147" data-w="147">변이 찾기</a>(<a class="w" href="words.html#w93" data-w="93">de novo</a>)</td></tr>
+  <tr><td><b>WES</b><br>Whole Exome Sequencing</td><td><a class="w" href="words.html#w29" data-w="29">엑손</a>만 (약 2만 <a class="w" href="words.html#w13" data-w="13">유전자</a>)</td><td>50~100x</td><td><a class="w" href="words.html#w15" data-w="15">단백질</a>에 관한 변이, 돈 절약</td></tr>
+  <tr><td><b>Targeted</b><br>(gene panel)</td><td>특정 유전자 10~500개</td><td>500x↑<br>암 조기진단 ~3000x</td><td><b>아주 적은 비율의 변이</b>(Low <a class="w" href="words.html#w92" data-w="92">VAF</a>), 병원 암 진단</td></tr>
+</table></div>
+<p>낯선 말을 풀어 볼게요.</p>
+<ul>
+  <li><b>엑손(exon)</b> — 유전자 중에서 실제로 단백질을 만드는 설계도 부분이에요. 엑손을 모아 놓은 것이 엑솜(exome)이에요. 나머지 부분(<a class="w" href="words.html#w30" data-w="30">인트론</a>)은 읽지 않으니 돈이 덜 들어요.</li>
+  <li><b>de novo(데 노보)</b> — 라틴어로 "처음부터, 새로"라는 뜻이에요. 부모에게 없던 새 변이, 처음 보는 변이를 말해요.</li>
+  <li><b>Low VAF</b> — 변이를 가진 DNA가 <b>아주 적은 비율</b>만 섞여 있는 상태예요(VAF는 변이 DNA의 비율).</li>
+</ul>
+<p>왜 암 조기진단은 3000x나 읽을까요? 초기 암이면 피 속 DNA 중 <b>암에서 나온 DNA가 약 1%</b>뿐이에요. 100번 읽어서는 1번 나올까 말까 해서 에러와 구분이 안 돼요. 아주 많이 읽어야 그 1%가 진짜로 잡혀요.</p>
+<p>숫자(30x, 50~100x, 500x↑)는 "정해진 규칙"이 아니라 대표적인 예시라고 교수님이 말씀하셨어요. 시험에서는 이 숫자들로 쓰면 돼요.</p>
+<figure class="slide"><img src="slides/n29.jpg"><figcaption>교수님 슬라이드 — 1. WGS, WES (De novo)  2. Targeted sequencing (Low VAF)</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>기기 <a class="w" href="words.html#w75" data-w="75">처리량</a>이 정해져 있어서 범위를 넓히면 depth가 얕아지고 좁히면 깊어진다. <b>WGS</b>는 전체 게놈을 약 30x로 읽어 큰 그림과 새 변이(de novo) 탐색에 쓰고, <b>WES</b>는 단백질을 만드는 엑손만 50~100x로 읽어 비용을 아낀다. <b>Targeted sequencing</b>은 특정 유전자만 500x 이상(암 조기진단 약 3000x)으로 읽어 비율이 낮은 변이(Low VAF)를 잡으며 임상 암 진단에 많이 쓴다.</p>
+</div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>넓을수록 얇고(WGS 30x), 좁을수록 두껍다(Targeted 500x↑). 범위 → depth 순서로 30 → 50~100 → 500 이에요.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 같은 기계로 WGS와 Targeted를 각각 돌리면 어느 쪽 depth가 더 높을까요?</summary><p>Targeted가 더 높아요. 읽을 범위가 훨씬 좁아서 같은 양의 "페인트"를 좁은 벽에 두껍게 칠하는 셈이기 때문이에요.</p></details>
+
+<h3>6. 싱글엔드 vs 페어드엔드</h3>
+<p>NGS 기계는 DNA 조각을 한쪽 끝에서 <b>150~250글자</b>까지밖에 못 읽어요. 이 한계를 넘으려는 방법이 페어드엔드예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>긴 터널을 뚫을 때 한쪽에서만 파는 것보다, <b>양쪽 입구에서 동시에 파다가 가운데서 만나게</b> 하면 더 빨리 길게 뚫을 수 있어요. 페어드엔드가 그 방식이에요.</p>
+</div>
+<div class="paper"><svg viewBox="0 0 380 100">
+  <text x="0" y="14" font-size="10" fill="#5d6b80">DNA 조각 (약 250글자)</text>
+  <rect x="20" y="22" width="340" height="12" rx="3" fill="#cbd5e1"/>
+  <rect x="154" y="40" width="72" height="44" fill="#fbbf24" opacity="0.3"/>
+  <rect x="20" y="45" width="196" height="7" fill="#d6264a"/><path d="M214,41 L228,48.5 L214,56 z" fill="#d6264a"/>
+  <text x="20" y="66" font-size="10" fill="#d6264a" font-weight="bold">R1 → 150</text>
+  <rect x="164" y="72" width="196" height="7" fill="#1d4ed8"/><path d="M166,68 L152,75.5 L166,83 z" fill="#1d4ed8"/>
+  <text x="360" y="96" font-size="10" fill="#1d4ed8" font-weight="bold" text-anchor="end">150 ← R2</text>
+  <text x="190" y="96" font-size="9" text-anchor="middle" fill="#8a5a00" font-weight="bold">겹침 ~50</text>
+</svg></div>
+<ul>
+  <li><b><a class="w" href="words.html#w94" data-w="94">싱글엔드</a></b> — 조각의 한쪽 끝에서만 읽어요.</li>
+  <li><b>페어드엔드(paired-end)</b> — 조각의 <b>양쪽 끝에서 각각</b> 읽어요. 왼쪽에서 읽은 것이 <b><a class="w" href="words.html#w96" data-w="96">R1</a></b>(정방향, forward), 오른쪽에서 읽은 것이 <b>R2</b>(역방향, reverse)예요. 가운데 <b>겹치는 부분(overlap, 약 50글자)</b>으로 이어붙여요.</li>
+  <li><b>2×150</b> — 양쪽에서 150글자씩 읽었다는 표기예요. 파일 이름에 <b>R1, R2</b>가 붙어서 두 파일로 나와요.</li>
+</ul>
+<p>계산해 보면 150 + 150 − 겹침 50 = <b>약 250글자</b>짜리 조각을 통째로 알 수 있어요.</p>
+<p>장점은 두 가지예요. 첫째, <b>더 길게 읽어요.</b> 둘째, 읽다 보면 뒤로 갈수록 품질이 떨어지는데, 그 부분을 <b>반대쪽에서 읽은 것이 보완(교정)</b>해 줘요.</p>
+<figure class="slide"><img src="slides/v08.jpg"><figcaption>교수님 슬라이드 — Single End Read vs Paired-End Read</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>페어드엔드는 DNA 조각의 양 끝에서 각각 읽어(R1, R2) 겹치는 부분으로 합치는 방식이다. <b>더 긴 서열을 읽을 수 있고</b>, 뒤로 갈수록 떨어지는 품질을 <b>반대쪽 read가 보완</b>한다는 장점이 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 2×150으로 읽고 겹침이 50이면, 합친 조각은 대략 몇 글자일까요?</summary><p>약 250글자예요. 150 + 150 = 300에서 겹친 50을 한 번 빼 주면 돼요.</p></details>
+
+<h3>7. 라이브러리 — 조각에 붙이는 꼬리표</h3>
+<p>여기서 라이브러리(library)는 도서관이 아니에요. DNA를 기계에 넣어 읽을 수 있게 <b>손질해서 부품을 붙여 놓은 준비물</b>을 말해요.</p>
+<p>읽고 싶은 DNA 조각 앞뒤에 아래 부품들을 붙여요. 바깥쪽부터 안쪽 순서는 <b><a class="w" href="words.html#w98" data-w="98">어댑터</a> → <a class="w" href="words.html#w99" data-w="99">바코드</a> → <a class="w" href="words.html#w28" data-w="28">프라이머</a> → <a class="w" href="words.html#w100" data-w="100">인서트</a></b>예요.</p>
+<div class="paper"><svg viewBox="0 0 380 56">
+  <rect x="0" y="12" width="40" height="22" fill="#94a3b8"/><text x="20" y="27" font-size="9" text-anchor="middle" fill="#fff">어댑터</text>
+  <rect x="40" y="12" width="44" height="22" fill="#a855f7"/><text x="62" y="27" font-size="9" text-anchor="middle" fill="#fff">바코드</text>
+  <rect x="84" y="12" width="44" height="22" fill="#0ea5e9"/><text x="106" y="27" font-size="9" text-anchor="middle" fill="#fff">프라이머</text>
+  <rect x="128" y="12" width="124" height="22" fill="#16a34a"/><text x="190" y="27" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">인서트 (읽고 싶은 DNA)</text>
+  <rect x="252" y="12" width="44" height="22" fill="#0ea5e9"/><rect x="296" y="12" width="44" height="22" fill="#a855f7"/><rect x="340" y="12" width="40" height="22" fill="#94a3b8"/>
+  <text x="190" y="52" font-size="9" text-anchor="middle" fill="#5d6b80">어댑터 = 판에 붙는 손잡이 · 바코드 = 이름표 · 프라이머 = 읽기 시작점</text>
+</svg></div>
+<div class="tw"><table>
+  <tr><th style="width:24%">부품</th><th>하는 일</th></tr>
+  <tr><td><b>어댑터</b> (adapter)</td><td>기계의 유리판(<a class="w" href="words.html#w66" data-w="66">flow cell</a>)에 DNA를 붙이는 <b>손잡이</b>. 페어드엔드로 양쪽을 읽으려고 양 끝에 있어요</td></tr>
+  <tr><td><b>바코드</b> (barcode)</td><td>샘플마다 다른 짧은 글자열로 된 <b>이름표</b></td></tr>
+  <tr><td><b>프라이머 결합부</b> (primer)</td><td>글자 읽기가 <b>시작되는 자리</b></td></tr>
+  <tr><td><b>인서트</b> (insert)</td><td>우리가 진짜로 읽고 싶은 <b>분석 대상 DNA</b></td></tr>
+</table></div>
+<p>바코드가 왜 중요할까요? 기계 한 번에 나오는 read가 엄청 많아서(약 10억 개 수준) 한 사람 샘플만 돌리면 대부분이 낭비돼요.</p>
+<p>그래서 여러 사람의 샘플을 <b>바코드로 구분해서 섞어 한 번에 돌리고</b>, 나중에 이름표(바코드)로 사람별로 나눠요. 이러면 <b>비용이 사람 수(n)만큼 나뉘어 1/n</b>이 돼요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>택시를 혼자 타면 요금이 비싸지만 친구 여러 명과 같이 타면 n분의 1이 되는 것과 같아요. 짐에 이름표를 붙여 두면 내릴 때 각자 짐을 찾을 수 있고요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>라이브러리는 인서트의 양 끝에 <b>어댑터, 샘플 바코드, 프라이머 결합부</b>가 붙은 구조다. 바코드로 여러 샘플을 섞어 한 번에 시퀀싱하고 나중에 구분할 수 있어 <b>비용을 1/n로 줄인다</b>.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 샘플 10개를 바코드로 섞어 돌리면 한 샘플당 비용은 대략 얼마가 될까요?</summary><p>대략 1/10이에요. 기계 한 번의 비용을 샘플 수(n=10)로 나눠 쓰기 때문이에요.</p></details>
+
+<div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>Depth = 한 자리를 몇 번 읽었나(5x), coverage = 전체 중 몇 %가 읽혔나(90%). Depth 계산은 read 수 × 길이 ÷ 게놈 길이이고, 높을수록 진짜 변이와 에러를 잘 가려요.</li>
+    <li>WGS ~30x(전체), WES 50~100x(엑손만), Targeted 500x↑(특정 유전자, 암 조기진단 ~3000x)이고 범위를 좁힐수록 depth가 깊어져요(선택과 집중).</li>
+    <li>페어드엔드는 양쪽에서 읽어(R1/R2, 2×150, 겹침 ~50) 더 길게 읽고 품질도 보완해요. 라이브러리의 바코드 덕분에 샘플을 섞어 돌려 비용이 1/n이에요.</li>
+  </ul>
+</div>
+<div class="done"><button class="go ghost" id="markread" data-ch="c5" type="button">다 읽었어요 ✓</button><a class="go" href="quiz.html#c5">이 장 문제 풀기</a><div class="pn"><a href="c4.html"><b>← 이전</b>FASTQ와 품질 점수</a><a class="next" href="c6.html"><b>다음 →</b>QC → 얼라인먼트 → BAM</a></div></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1011 @@
+<!-- 라이프케어빅데이터분석 중간고사 대비 — 폰으로 보는 아주 쉬운 설명서 (Chrome으로 PDF 출력) -->
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>라이프케어빅데이터분석 중간고사 쉬운 설명서</title>
+<style>
+@page { size: 108mm 192mm; margin: 7mm 6mm 9mm 6mm;
+  @bottom-center { content: counter(page); font: 8pt "Malgun Gothic"; color: #8a94a6; } }
+:root{
+  --ink:#1b2333; --mut:#5d6b80; --acc:#1d4ed8; --acc2:#dbe6ff;
+  --red:#d6264a; --redbg:#ffeef1; --grn:#0f7a4f; --grnbg:#e8f7ef;
+  --yel:#8a5a00; --yelbg:#fff6d6; --pur:#6d28d9; --purbg:#f1eaff; --line:#d8dee9; --gray:#f3f5f9;
+}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{margin:0;font-family:"Malgun Gothic","맑은 고딕",sans-serif;color:var(--ink);font-size:10.4pt;line-height:1.62;word-break:keep-all;background:#fff}
+h1{font-size:19pt;line-height:1.3;margin:0 0 2mm;color:var(--acc)}
+h2{font-size:14pt;line-height:1.35;margin:0 0 2.5mm;color:var(--acc);padding-bottom:1.5mm;border-bottom:0.6mm solid var(--acc)}
+h3{font-size:11.6pt;margin:4.5mm 0 1.5mm;color:var(--ink)}
+h3 .st{color:var(--red);font-size:10pt;margin-left:1mm}
+p{margin:1.2mm 0}
+ul,ol{margin:1mm 0;padding-left:5mm}
+li{margin:0.6mm 0}
+b,strong{color:#0b1a3a}
+.ch{break-before:page}
+.chno{display:inline-block;background:var(--acc);color:#fff;border-radius:2mm;padding:0.2mm 2.2mm;font-size:9pt;margin-bottom:1.5mm}
+.lead{color:var(--mut);font-size:9.6pt;margin-bottom:2mm}
+.box{border-radius:2.6mm;padding:2.4mm 3mm;margin:2.4mm 0;break-inside:avoid}
+.box .t{font-weight:bold;font-size:9.4pt;margin-bottom:0.8mm;display:block}
+.def{background:var(--acc2);border-left:1.4mm solid var(--acc)}
+.def .t{color:var(--acc)}
+.eg{background:var(--grnbg);border-left:1.4mm solid var(--grn)}
+.eg .t{color:var(--grn)}
+.exam{background:var(--redbg);border-left:1.4mm solid var(--red)}
+.exam .t{color:var(--red)}
+.tip{background:var(--yelbg);border-left:1.4mm solid #e0a800}
+.tip .t{color:var(--yel)}
+.pro{background:var(--purbg);border-left:1.4mm solid var(--pur)}
+.pro .t{color:var(--pur)}
+.gray{background:var(--gray)}
+.big{font-size:12pt;font-weight:bold;text-align:center;margin:1.5mm 0}
+.mut{color:var(--mut)}
+.small{font-size:8.8pt}
+.red{color:var(--red);font-weight:bold}
+.grn{color:var(--grn);font-weight:bold}
+.acc{color:var(--acc);font-weight:bold}
+table{width:100%;border-collapse:collapse;margin:2mm 0;font-size:8.9pt;line-height:1.45}
+tr{break-inside:avoid}
+th{background:var(--acc);color:#fff;padding:1.2mm 1.3mm;text-align:left;font-weight:bold}
+td{padding:1.1mm 1.3mm;border-bottom:0.25mm solid var(--line);vertical-align:top}
+table:not(.seq) tr:nth-child(even) td{background:#f8faff}
+code{font-family:Consolas,monospace;font-size:0.92em;background:#eef1f6;border-radius:0.8mm;padding:0 0.6mm}
+figure.slide{margin:2.5mm 0;break-inside:avoid;border:0.3mm solid var(--line);border-radius:2mm;overflow:hidden}
+figure.slide img{width:100%;display:block}
+figure.slide figcaption{font-size:8.2pt;color:var(--mut);padding:1mm 2mm;background:var(--gray)}
+.flow{display:flex;flex-direction:column;align-items:stretch;gap:0;margin:2mm 0}
+.step{border-radius:2mm;padding:1.4mm 2.4mm;display:flex;justify-content:space-between;align-items:center;font-size:9.3pt;break-inside:avoid}
+.step .nm{font-weight:bold}
+.step .an{font-size:8.3pt;color:#374151;text-align:right;max-width:52%}
+.arrow{text-align:center;color:var(--mut);font-size:9pt;line-height:1.1;margin:0.4mm 0}
+.c1{background:#e0ecff}.c2{background:#e3f6ec}.c3{background:#fff1d6}.c4{background:#f4e8ff}.c5{background:#ffe6ea}
+.seq{border-collapse:separate;border-spacing:0.5mm;width:auto;margin:2mm auto;font-family:Consolas,"Malgun Gothic",monospace;break-inside:avoid}
+.seq td{width:5.1mm;height:5.3mm;padding:0;text-align:center;font-size:8.6pt;border:none;background:none;vertical-align:middle}
+.seq td.lb{width:auto;font-family:"Malgun Gothic";font-size:7.6pt;color:var(--mut);text-align:right;padding-right:1mm;white-space:nowrap}
+.seq td.r{background:#e9edf5;border-radius:1mm}
+.seq td.m{background:#dbe6ff;border-radius:1mm}
+.seq td.x{background:#ffd3db;color:var(--red);font-weight:bold;border-radius:1mm}
+.seq td.e{background:#fff1c2;color:#8a5a00;font-weight:bold;border-radius:1mm}
+.seq td.g{background:#d6f3e3;color:var(--grn);font-weight:bold;border-radius:1mm}
+.seq td.n{color:#9aa4b5}
+.seq td.d{font-weight:bold;color:var(--acc)}
+.seq td.z{font-weight:bold;color:var(--red)}
+.code{font-family:Consolas,"Malgun Gothic",monospace;font-size:8.2pt;background:#0f172a;color:#e2e8f0;border-radius:2mm;padding:2mm 2.4mm;line-height:1.5;white-space:pre-wrap;word-break:break-all;margin:2mm 0;break-inside:avoid}
+.code .h{color:#fbbf24}.code .k{color:#7dd3fc}.code .q{color:#86efac}.code .c{color:#94a3b8}
+.two{display:flex;gap:2mm}.two>div{flex:1}
+.pill{display:inline-block;border-radius:5mm;padding:0 2mm;font-size:8.4pt;font-weight:bold;margin:0.3mm 0}
+.qa{border:0.3mm solid var(--line);border-radius:2mm;padding:2mm 2.6mm;margin:2mm 0;break-inside:avoid}
+.qa .q{font-weight:bold;color:#0b1a3a}
+.qa .a{margin-top:1mm}
+.cover{height:170mm;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.cover h1{font-size:23pt;margin-bottom:3mm}
+.cover .sub{font-size:11pt;color:var(--mut)}
+.badge{display:inline-block;background:var(--red);color:#fff;border-radius:1.5mm;padding:0.4mm 2mm;font-size:9pt;font-weight:bold}
+svg{display:block;margin:2mm auto;max-width:100%}
+.check li{list-style:none;margin-left:-4mm}
+.kw{background:#fff1c2;border-radius:1mm;padding:0 0.8mm}
+</style>
+</head>
+<body>
+
+<!-- ============ 표지 ============ -->
+<section class="cover">
+  <div><span class="badge">10/20(화) 12:30 중간고사</span></div>
+  <h1 style="margin-top:6mm">라이프케어<br>빅데이터분석<br>중간고사 쉬운 설명서</h1>
+  <p class="sub">파이썬 몰라도 OK · 생물 몰라도 OK<br>중학생도 읽을 수 있게 비유로 풀었어요</p>
+  <p class="small mut" style="margin-top:10mm">근거 — 1~7주차 녹취록, 교수님 강의자료<br>(2. 기본생물학 · 3. NGS 기술소개 · 5. DNA variant 분석_수정)<br>만든 날 2026-10-17</p>
+</section>
+
+<!-- ============ 0. 시험 정보 ============ -->
+<section class="ch">
+  <span class="chno">0장</span>
+  <h2>먼저 안심하세요</h2>
+
+  <div class="box exam"><span class="t">🎯 시험 정보 (7주차 마지막에 교수님이 직접 말함)</span>
+    <ul>
+      <li><b>날짜</b> 10월 20일 화요일, 수업 시간, 강의실</li>
+      <li><b>방식</b> <span class="red">종이에 손으로 쓰는 시험.</span> 코딩·컴퓨터 없음</li>
+      <li><b>문제</b> 개수 적음, <b>서술형 + 단답형</b></li>
+      <li><b>범위</b> 기본생물학 + NGS + FASTQ부터 variant calling까지</li>
+      <li><b>비중</b> 중간고사 25% (출석·중간·팀프로젝트·과제 각 25%)</li>
+    </ul>
+  </div>
+
+  <div class="box pro"><span class="t">🗣 교수님 힌트 (녹취 요지)</span>
+    <ul>
+      <li>"<b>NGS가 뭔가</b> 이런 거 설명하는, 개념적인 거 많이 물어볼 거예요"</li>
+      <li>"<b>GATK가 이니셜이 뭔가</b> 이런 기본적인 거"  → <span class="red">약어 풀네임 문제</span></li>
+      <li>"디테일 다 외우는 건 어려우니까 <b>뺄 거고</b>, 수업에 <b>자주 반복된 심플한 개념</b> 위주로"</li>
+      <li>"<b>강의자료 중심으로 키워드</b> 찾아가면서 보세요"</li>
+      <li>중요한 세 가지 — ① <b>바이오 백그라운드</b> ② <b>파이프라인을 어떤 로직으로 분석했는지</b> ③ <b>NGS 개념</b></li>
+    </ul>
+  </div>
+
+  <div class="box tip"><span class="t">💡 그래서 이 설명서는 이렇게 공부하면 돼요</span>
+    <ul>
+      <li><b>코딩·명령어 옵션은 안 외워도 돼요.</b> "이 단계를 <b>왜</b> 하나"를 말로 쓸 수 있으면 됩니다</li>
+      <li>각 장의 <span class="pill" style="background:var(--redbg);color:var(--red)">시험에 이렇게 나와요</span> 상자와 ★★★만 먼저 보세요</li>
+      <li>B+ 목표라면 <b>9장 약어 카드 + 10장 필승 10문제</b>만 확실히 외워도 반 이상 써요</li>
+    </ul>
+  </div>
+
+  <h3>3일 공부 계획</h3>
+  <table>
+    <tr><th style="width:24%">날짜</th><th>할 일</th><th style="width:16%">시간</th></tr>
+    <tr><td>10/17 토</td><td>1장 큰 그림 → 2장 생물 → 3장 NGS</td><td>1.5시간</td></tr>
+    <tr><td>10/18 일</td><td>4장 FASTQ → 5장 depth → 6장 QC·얼라인먼트</td><td>2시간</td></tr>
+    <tr><td>10/19 월</td><td>7장 변이 찾기 → 8장 annotation → 9장 카드 → 10장 문제 <b>답 가리고 손으로 쓰기</b></td><td>2시간</td></tr>
+    <tr><td>10/20 화 아침</td><td>1장 파이프라인 그림 한 번 그리기 + 9장 약어 카드</td><td>20분</td></tr>
+  </table>
+</section>
+
+<!-- ============ 1. 큰 그림 ============ -->
+<section class="ch">
+  <span class="chno">1장</span>
+  <h2>한 장으로 보는 이 과목 전체 이야기 ★★★</h2>
+  <p class="lead">교수님이 매 시간 "우리 지금 어디까지 왔냐면" 하고 보여준 그림이에요. 이것만 머리에 있으면 서술형 절반은 써요.</p>
+
+  <div class="box eg"><span class="t">📖 전체를 이야기 하나로</span>
+    <p>사람 몸에는 <b>설계도 책(DNA)</b>이 있어요. 글자가 A·T·G·C 네 가지뿐인데 <b>30억 글자</b>나 돼요.</p>
+    <p>이 책에 <b>오타(변이)</b>가 생기면 병이 될 수 있어요. 그래서 <b>내 책을 읽어서</b> 표준 책(레퍼런스)과 비교하고, 오타를 찾는 게 이 과목의 목표예요.</p>
+    <p>그런데 책이 너무 길어서 통째로는 못 읽어요. 그래서 → <b>잘게 찢어서(조각)</b> → <b>수억 조각을 동시에 읽고(NGS)</b> → <b>원래 자리를 찾아 맞추고(얼라인먼트)</b> → <b>진짜 오타인지 판정(variant calling)</b> → <b>그 오타가 무슨 뜻인지 사전 찾기(annotation)</b>.</p>
+  </div>
+
+  <div class="flow">
+    <div class="step c1"><span class="nm">① 피 뽑기 → DNA 꺼내기</span><span class="an">책 꺼내기</span></div><div class="arrow">▼</div>
+    <div class="step c1"><span class="nm">② DNA 잘게 자르기 (~150글자)</span><span class="an">책을 쪽지로 찢기</span></div><div class="arrow">▼</div>
+    <div class="step c1"><span class="nm">③ NGS 기계로 읽기 → <span class="red">FASTQ</span></span><span class="an">쪽지 수억 장 동시에 읽기</span></div><div class="arrow">▼</div>
+    <div class="step c2"><span class="nm">④ QC (FastQC)</span><span class="an">읽은 게 믿을 만한지 성적표</span></div><div class="arrow">▼</div>
+    <div class="step c2"><span class="nm">⑤ 트리밍 (cutadapt) · 머지 (PEAR)</span><span class="an">쓰레기 부분 잘라내고 이어붙이기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑥ 얼라인먼트 (BWA) → SAM → <span class="red">BAM</span></span><span class="an">쪽지를 표준 책 제자리에 붙이기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑦ MarkDuplicates (Picard)</span><span class="an">복사본 쪽지 빼기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑧ BQSR (GATK)</span><span class="an">기계 점수 영점 맞추기</span></div><div class="arrow">▼</div>
+    <div class="step c4"><span class="nm">⑨ Variant calling (HaplotypeCaller) → <span class="red">VCF</span></span><span class="an">진짜 오타만 골라내기</span></div><div class="arrow">▼</div>
+    <div class="step c5"><span class="nm">⑩ Annotation (ANNOVAR)</span><span class="an">그 오타 뜻을 사전에서 찾기</span></div>
+  </div>
+
+  <div class="box tip"><span class="t">💡 파일 이름 3개만 외우기</span>
+    <p class="big">FASTQ → BAM → VCF</p>
+    <p class="small">읽은 결과(FASTQ) → 제자리에 붙인 결과(BAM) → 찾은 변이 목록(VCF).<br>
+    FASTQ→BAM 구간을 <b>Pre-processing(전처리)</b>, BAM→VCF 구간을 <b>Variant discovery(변이 발견)</b>라고 불러요.</p>
+  </div>
+
+  <figure class="slide"><img src="slides/v03.jpg"><figcaption>교수님 슬라이드 — Full process to analyze genomic data. 오른쪽 노란 상자들이 위 ④~⑨ 순서예요.</figcaption></figure>
+
+  <div class="box pro"><span class="t">🗣 교수님이 반복한 문장 (서술형에 그대로 쓰면 좋아요)</span>
+    <ul>
+      <li>"<b>틀린 그림 찾기는 쉽다. 중요한 건 그게 진짜 변이인지 계산하는 것.</b>"</li>
+      <li>"이 분야는 코딩을 잘해야 하는 게 아니라 <b>백그라운드를 이해하고 목적에 맞게 파이프라인 로직을 짜는 것</b>이 중요하다."</li>
+      <li>"<b>목적에 따라 판단한다.</b>" (어떤 단계는 상황에 따라 생략해요 — 7장에서 나와요)</li>
+      <li>"툴은 이미 다 있다. FASTQ에서 BAM까지 다섯 줄이면 된다."</li>
+    </ul>
+  </div>
+
+  <div class="box exam"><span class="t">📝 시험에 이렇게 나와요</span>
+    <p>"FASTQ에서 VCF까지 분석 과정을 순서대로 쓰고 각 단계의 목적을 설명하시오."</p>
+    <p class="small">→ 위 그림의 ③~⑩을 순서대로 쓰고, 오른쪽 비유를 어른 말로 바꿔 한 줄씩 붙이면 돼요. 모범답안은 10장 21번.</p>
+  </div>
+</section>
+
+<!-- ============ 2. 생물 ============ -->
+<section class="ch">
+  <span class="chno">2장</span>
+  <h2>바이오 기초 — 몸은 설계도로 만들어진다</h2>
+  <p class="lead">2주차 "기본생물학". 식품공학에서 배운 생화학과 많이 겹쳐요.</p>
+
+  <h3>2-1. 몸의 크기 감각</h3>
+  <div class="box gray">
+    <p>세포 → 조직 → 장기 → 시스템(기관계) → 사람. 작은 게 모여 큰 걸 만들어요.</p>
+    <ul class="small">
+      <li>사람 몸 세포 <b>약 30조 개</b> (슬라이드 요약 3×10¹³)</li>
+      <li>모든 세포의 핵 안에 <b>똑같은 설계도</b>가 들어 있어요 — 염색체 <b>23쌍</b></li>
+      <li>설계도 전체(게놈) = <b>약 30억(3×10⁹) 염기쌍</b>, 유전자는 <b>약 2만 개</b></li>
+    </ul>
+  </div>
+  <div class="box def"><span class="t">📌 유전자(gene)란</span>
+    <p>설계도 책 안에서 <b>단백질 하나를 만드는 방법이 적힌 구간</b>. 책 전체(30억 글자) 중 요리 레시피 한 개라고 생각하세요.</p>
+  </div>
+
+  <h3>2-2. 센트럴 도그마 <span class="st">★★★</span></h3>
+  <svg viewBox="0 0 380 130" width="96mm">
+    <defs><marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1d4ed8"/></marker></defs>
+    <rect x="8" y="48" width="92" height="42" rx="8" fill="#dbe6ff"/><text x="54" y="75" text-anchor="middle" font-size="20" font-weight="bold" fill="#1b2333">DNA</text>
+    <rect x="144" y="48" width="92" height="42" rx="8" fill="#e3f6ec"/><text x="190" y="75" text-anchor="middle" font-size="20" font-weight="bold" fill="#1b2333">RNA</text>
+    <rect x="280" y="48" width="92" height="42" rx="8" fill="#fff1d6"/><text x="326" y="75" text-anchor="middle" font-size="18" font-weight="bold" fill="#1b2333">단백질</text>
+    <line x1="100" y1="69" x2="142" y2="69" stroke="#1d4ed8" stroke-width="3" marker-end="url(#ar)"/>
+    <line x1="236" y1="69" x2="278" y2="69" stroke="#1d4ed8" stroke-width="3" marker-end="url(#ar)"/>
+    <text x="121" y="108" text-anchor="middle" font-size="13" fill="#1d4ed8" font-weight="bold">전사</text>
+    <text x="121" y="123" text-anchor="middle" font-size="10" fill="#5d6b80">transcription</text>
+    <text x="257" y="108" text-anchor="middle" font-size="13" fill="#1d4ed8" font-weight="bold">번역</text>
+    <text x="257" y="123" text-anchor="middle" font-size="10" fill="#5d6b80">translation</text>
+    <path d="M30,48 C14,22 94,22 78,46" fill="none" stroke="#0f7a4f" stroke-width="3" marker-end="url(#ar)"/>
+    <text x="54" y="16" text-anchor="middle" font-size="12" fill="#0f7a4f" font-weight="bold">복제 replication</text>
+  </svg>
+  <div class="box eg"><span class="t">🍳 요리로 비유</span>
+    <table>
+      <tr><td style="width:30%"><b>DNA</b></td><td>도서관 금고에 있는 <b>요리책 원본</b> (반출 금지)</td></tr>
+      <tr><td><b>전사</b></td><td>필요한 레시피 페이지만 <b>복사</b>하기</td></tr>
+      <tr><td><b>mRNA</b></td><td>그 <b>복사본</b> (부엌으로 들고 감)</td></tr>
+      <tr><td><b>번역</b></td><td>복사본 보고 <b>요리하기</b> (리보솜이 주방)</td></tr>
+      <tr><td><b>단백질</b></td><td>완성된 <b>요리</b> — 몸에서 실제로 일하는 것</td></tr>
+      <tr><td><b>복제</b></td><td>세포가 둘로 나뉠 때 <b>요리책을 통째로 한 권 더</b> 만들기</td></tr>
+    </table>
+  </div>
+  <figure class="slide"><img src="slides/b14.jpg"><figcaption>교수님 슬라이드 — "Simple but important". DNA → RNA → Protein</figcaption></figure>
+  <div class="box exam"><span class="t">📝 시험에 이렇게 나와요</span>
+    <p>Q. DNA→RNA, RNA→단백질 과정의 이름은? → <b>전사(transcription), 번역(translation)</b></p>
+    <p class="small">결론 문장 하나 — "<b>이 흐름 어디든 어긋나면 질병이 된다.</b>" (교수님 슬라이드 "Central Dogma and disease")</p>
+  </div>
+
+  <h3>2-3. 코돈 = 글자 3개 = 단어 1개</h3>
+  <div class="box def"><span class="t">📌 코돈(codon)</span>
+    <p>mRNA 글자를 <b>3개씩 끊어 읽은 것.</b> 코돈 1개 = <b>아미노산 1개</b>. 아미노산(20종)이 줄줄이 이어지면 단백질이 돼요.</p>
+  </div>
+  <table class="seq">
+    <tr><td class="lb">mRNA</td><td class="m">A</td><td class="m">U</td><td class="m">G</td><td></td><td class="r">G</td><td class="r">A</td><td class="r">G</td><td></td><td class="m">G</td><td class="m">C</td><td class="m">U</td><td></td><td class="x">U</td><td class="x">A</td><td class="x">A</td></tr>
+  </table>
+  <p class="small" style="text-align:center">AUG = <b>시작</b>(메티오닌) · GAG = 글루탐산 · GCU = 알라닌 · UAA = <b>끝(종결)</b></p>
+  <ul class="small">
+    <li>시작 코돈 <b>AUG</b> 한 개, 종결 코돈 <b>UAA · UAG · UGA</b> 세 개</li>
+    <li>RNA에서는 T 대신 <b>U</b>(우라실)를 써요</li>
+  </ul>
+
+  <h3>2-4. DNA 복제와 PCR</h3>
+  <ul>
+    <li>DNA는 두 가닥이 꼬인 <b>이중나선</b>. A는 T와, G는 C와 짝</li>
+    <li><b>G–C는 수소결합 3개, A–T는 2개</b> → <b>GC가 더 단단해요</b></li>
+    <li>복제는 <b>5'→3' 한 방향으로만</b> 만들어져요. 그래서 한쪽은 쭉(선도가닥), 반대쪽은 조각조각(<b>오카자키 절편</b>) 만들어 붙여요</li>
+    <li>새 DNA = 헌 가닥 1 + 새 가닥 1 → <b>반보존적 복제</b></li>
+  </ul>
+  <div class="box eg"><span class="t">🧪 PCR = 복제를 시험관에서 따라하기</span>
+    <p>PCR(Polymerase Chain Reaction)은 이 복제 원리를 튜브 안에서 반복해서 <b>DNA를 수백만 배로 불리는 것</b>. 코로나 검사가 바로 이거예요. NGS에서도 DNA 양을 늘릴 때 계속 나와요.</p>
+  </div>
+
+  <h3>2-5. 엑손 · 인트론 · 스플라이싱</h3>
+  <svg viewBox="0 0 380 118" width="96mm">
+    <text x="0" y="22" font-size="11" fill="#5d6b80">처음 RNA</text>
+    <rect x="62" y="10" width="54" height="18" rx="3" fill="#2563eb"/><text x="89" y="23" text-anchor="middle" font-size="10" fill="#fff">엑손1</text>
+    <rect x="116" y="13" width="44" height="12" fill="#cbd5e1"/><text x="138" y="22" text-anchor="middle" font-size="8" fill="#475569">인트론</text>
+    <rect x="160" y="10" width="54" height="18" rx="3" fill="#16a34a"/><text x="187" y="23" text-anchor="middle" font-size="10" fill="#fff">엑손2</text>
+    <rect x="214" y="13" width="44" height="12" fill="#cbd5e1"/><text x="236" y="22" text-anchor="middle" font-size="8" fill="#475569">인트론</text>
+    <rect x="258" y="10" width="54" height="18" rx="3" fill="#ea580c"/><text x="285" y="23" text-anchor="middle" font-size="10" fill="#fff">엑손3</text>
+    <text x="0" y="62" font-size="11" fill="#5d6b80">mRNA</text>
+    <rect x="62" y="50" width="54" height="18" rx="3" fill="#2563eb"/><text x="89" y="63" text-anchor="middle" font-size="10" fill="#fff">엑손1</text>
+    <rect x="116" y="50" width="54" height="18" rx="3" fill="#16a34a"/><text x="143" y="63" text-anchor="middle" font-size="10" fill="#fff">엑손2</text>
+    <rect x="170" y="50" width="54" height="18" rx="3" fill="#ea580c"/><text x="197" y="63" text-anchor="middle" font-size="10" fill="#fff">엑손3</text>
+    <text x="232" y="63" font-size="10" fill="#1b2333">→ 단백질 A</text>
+    <text x="0" y="102" font-size="11" fill="#5d6b80">대체</text>
+    <rect x="62" y="90" width="54" height="18" rx="3" fill="#2563eb"/><text x="89" y="103" text-anchor="middle" font-size="10" fill="#fff">엑손1</text>
+    <rect x="116" y="90" width="54" height="18" rx="3" fill="#ea580c"/><text x="143" y="103" text-anchor="middle" font-size="10" fill="#fff">엑손3</text>
+    <text x="178" y="103" font-size="10" fill="#1b2333">→ 단백질 B (다른 단백질!)</text>
+  </svg>
+  <div class="box eg"><span class="t">🎬 영화 편집으로 비유</span>
+    <p><b>엑손</b> = 영화에 쓰일 좋은 장면, <b>인트론</b> = NG 컷. <b>스플라이싱</b> = NG 컷을 잘라내고 좋은 장면만 이어붙이는 편집.</p>
+    <p><b>대체 스플라이싱</b> = 같은 촬영본으로 극장판·감독판을 따로 만드는 것 → <b>유전자 하나로 여러 단백질</b>.</p>
+  </div>
+  <p class="small">강의자료 "97% of human DNA seems to be junk" — 대부분은 단백질을 직접 안 만들어요. 그래서 나중에 <b>엑손만 읽는 WES</b>가 등장해요(5장).</p>
+  <figure class="slide"><img src="slides/b25.jpg"><figcaption>교수님 슬라이드 — mRNA Splicing: 인트론 제거, 엑손 연결</figcaption></figure>
+
+  <h3>2-6. 후성유전 — 글자는 그대로, 스위치만 바뀜 <span class="st">★</span></h3>
+  <div class="box def"><span class="t">📌 후성유전(epigenetics)</span>
+    <p><b>DNA 글자(서열)는 안 바뀌었는데 유전자가 켜지고 꺼지는 게 달라지는 현상.</b> 간세포와 뇌세포가 같은 DNA인데 모양이 다른 이유예요 — 켜 둔 유전자가 달라서.</p>
+  </div>
+  <div class="box eg"><span class="t">📚 같은 요리책, 다른 책갈피</span>
+    <ul>
+      <li><b>히스톤 변형</b> — DNA는 히스톤이라는 실패(실감개)에 감겨 있어요. <b>꽉 감기면 못 읽고(OFF)</b>, 느슨하면 잘 읽혀요(ON)</li>
+      <li><b>DNA 메틸화</b> — 페이지에 <b>클립(메틸기 -CH₃)</b>을 꽂아 못 펼치게 하는 것. <b>C(사이토신)</b>에 붙어요</li>
+    </ul>
+  </div>
+  <ul>
+    <li><b>CpG</b> = C 바로 다음에 G가 오는 자리. 이게 몰린 곳이 <b>CpG 아일랜드</b>, 대부분 <b>프로모터</b>(유전자 시작 스위치)에 있어요</li>
+    <li>프로모터가 메틸화되면 → 전사인자가 못 붙음 → <b>유전자 OFF</b></li>
+    <li><b>암</b> — 종양억제유전자(몸의 <b>브레이크</b>) 프로모터가 <b>과메틸화</b> → 브레이크 꺼짐 → 암. 동시에 전체적으론 <b>저메틸화</b></li>
+    <li><b>노화</b> — 메틸화 패턴으로 생체 나이를 예측해요</li>
+  </ul>
+  <figure class="slide"><img src="slides/b54.jpg"><figcaption>교수님 슬라이드 — Methylated CpG Islands Inhibit Transcription</figcaption></figure>
+
+  <h3>2-7. 돌연변이 3종 <span class="st">★★ 시험 단골</span></h3>
+  <p>DNA 글자 하나가 바뀌는 걸 <b>점 돌연변이(point mutation)</b>라 해요. 결과에 따라 세 종류.</p>
+  <table>
+    <tr><th style="width:22%">종류</th><th>무슨 일</th><th style="width:36%">문장 비유<br><span style="font-weight:normal">"나는 밥을 먹었다"</span></th></tr>
+    <tr><td><b>침묵</b><br>silent</td><td>글자는 바뀌었는데 <b>같은 아미노산</b> → 단백질 정상</td><td>"나는 밥을 <b>먹엇다</b>" — 오타지만 뜻 같음</td></tr>
+    <tr><td><b>넌센스</b><br>nonsense</td><td><b>종결 코돈</b>이 되어 단백질이 <b>중간에 끊김</b></td><td>"나는 밥을<b>.</b>" — 문장이 중간에 끝남</td></tr>
+    <tr><td><b>미스센스</b><br>missense</td><td><b>다른 아미노산</b> → 엉뚱한 단백질</td><td>"나는 <b>빵</b>을 먹었다" — 뜻이 바뀜</td></tr>
+  </table>
+  <figure class="slide"><img src="slides/b43.jpg"><figcaption>교수님 슬라이드 — Point mutations. AAG(Lys)→AAA(Lys) 침묵, →UAG(STOP) 넌센스, →AGG(Arg) 미스센스</figcaption></figure>
+  <div class="box eg"><span class="t">🩸 미스센스 대표 예 — 겸상 적혈구 빈혈증</span>
+    <p>헤모글로빈 유전자에서 <b>GAG(글루탐산) → GTG(발린)</b> 글자 하나가 바뀜 → 적혈구가 <b>낫 모양</b>으로 찌그러짐 → 산소를 못 날라 빈혈.</p>
+    <p class="small"><b>글자 하나 → 아미노산 하나 → 단백질 모양 → 세포 모양 → 병.</b> 센트럴 도그마가 어긋나면 병이 된다는 대표 사례.</p>
+  </div>
+  <figure class="slide"><img src="slides/b44.jpg"><figcaption>교수님 슬라이드 — Sickle cell disease (Glu → Val)</figcaption></figure>
+  <p class="small">글자 하나가 아니라 큰 덩어리가 바뀌는 건 <b>구조 변이</b> — 결실·중복·역위·삽입·전좌.</p>
+
+  <h3>2-8. SNP · SNV · 대립유전자</h3>
+  <table>
+    <tr><th style="width:26%">용어</th><th>쉬운 뜻</th></tr>
+    <tr><td><b>SNP</b><br><span class="small">Single Nucleotide Polymorphism</span></td><td>글자 하나 차이인데 <b>많은 사람이 공유하는 흔한 차이</b>. 눈 색깔 같은 개인차. 사람끼리 DNA는 <b>99% 이상 같고</b>, 약 <b>0.1%</b>가 달라요</td></tr>
+    <tr><td><b>SNV</b><br><span class="small">Single Nucleotide Variant</span></td><td>그냥 <b>표준과 글자 하나가 "다르다"</b>는 것 자체. SNP보다 넓은 말</td></tr>
+    <tr><td><b>대립유전자</b><br>allele</td><td>같은 자리에 올 수 있는 <b>여러 버전</b>. 예) 술 마시면 얼굴 빨개지는 버전 / 안 빨개지는 버전</td></tr>
+  </table>
+  <div class="box gray small">
+    <b>BRCA1/2</b> — 종양억제유전자(브레이크). 망가지면 유방암 위험↑(100%는 아님). 안젤리나 졸리가 예방 수술을 받아 유명해졌어요.<br>
+    <b>리퀴드 바이옵시</b> — 피 한 방울 속 떠다니는 DNA로 암을 일찍 찾는 기술. 암 DNA 비율이 아주 낮아서 <b>기계 실수(노이즈)에 묻히는 게 어려운 점</b> → 그래서 depth(5장)가 중요해요.
+  </div>
+</section>
+
+<!-- ============ 3. NGS ============ -->
+<section class="ch">
+  <span class="chno">3장</span>
+  <h2>NGS — 수억 조각을 동시에 읽는 기계 ★★★</h2>
+  <p class="lead">교수님이 "NGS가 뭔가"를 시험 예시로 직접 말했어요. 이 장이 제일 중요해요.</p>
+
+  <div class="box def"><span class="t">📌 DNA 시퀀싱</span>
+    <p>DNA의 <b>A·T·G·C 글자 순서를 읽는 것.</b></p>
+  </div>
+  <div class="box def"><span class="t">📌 NGS (Next Generation Sequencing, 차세대 염기서열 분석) — 이 문장을 외우세요</span>
+    <p>DNA 조각들을 <b>유리판 위에 먼저 고정</b>해 놓고, 글자를 <b>하나씩 붙이면서(합성) 동시에 형광 사진을 찍어</b>(Sequencing by Synthesis) <b>수억~수십억 개 조각을 한꺼번에(병렬로)</b> 읽는 기술. 그 덕분에 <b>비용이 확 떨어졌다.</b></p>
+  </div>
+
+  <h3>3-1. 옛날 방식(Sanger) vs NGS</h3>
+  <div class="box eg"><span class="t">✍️ 비유</span>
+    <p><b>Sanger</b> = 한 사람이 책을 <b>한 줄씩</b> 베껴 쓰기. 관(캐필러리) 하나에 한 종류만 → 동시에 약 20개.</p>
+    <p><b>NGS</b> = 책을 잘게 찢어 <b>운동장에 수억 장 깔아놓고</b>, 드론이 위에서 <b>한 글자씩 동시에 사진</b> 찍기 → 동시에 약 <b>10억(10⁹)개</b>.</p>
+  </div>
+  <table>
+    <tr><th style="width:22%"></th><th>Sanger</th><th>NGS</th></tr>
+    <tr><td>순서</td><td>늘리기(Extend) → 관에 정렬(Arrange) → 읽기(Detect)</td><td><b>먼저 판에 고정(Arrange)</b> → <b>늘리기와 읽기를 동시에</b></td></tr>
+    <tr><td>한 칸 크기</td><td>관 지름 약 1cm</td><td>점 하나 약 <b>7μm</b></td></tr>
+    <tr><td>동시에</td><td>관 1개당 1종류</td><td>판 하나에 <b>약 10⁹개</b></td></tr>
+  </table>
+  <figure class="slide"><img src="slides/n08.jpg"><figcaption>교수님 슬라이드 — Sanger(1 read/capillary) vs NGS(10⁹ reads/array)</figcaption></figure>
+
+  <h3>3-2. 비용이 얼마나 떨어졌나</h3>
+  <div class="box gray">
+    <p><b>휴먼 게놈 프로젝트</b> — Sanger로 <b>1990~2003년, 13년, 30억 달러</b> 걸려 사람 게놈 하나를 읽었어요.</p>
+    <p><b>지금</b>은 NGS로 한 사람 게놈이 <b>약 200달러</b>.</p>
+    <p class="small mut">※ 녹취에서 "3조"라고 잘못 말한 부분이 있는데 <b>자료 기준 30억 달러</b>가 맞아요.</p>
+  </div>
+
+  <h3>3-3. NGS가 읽는 원리 — SBS (Sequencing by Synthesis) <span class="st">★★</span></h3>
+  <p>두 단계로 기억하세요.</p>
+  <div class="box gray">
+    <p><b>① 클론 증폭 (Clonal amplification)</b> — DNA 한 가닥의 빛은 너무 약해요. 그래서 <b>같은 조각을 약 1,000개로 복사해 한 점(클러스터)에 모아</b> 빛을 키워요.<br>
+    <span class="small">→ 비유: 혼자 손전등 켜면 안 보이니까 같은 반 친구 천 명이 같이 켜기</span></p>
+    <p><b>② 글자 붙이며 감지 (Sensing)</b> — 한 사이클마다 글자 하나를 붙이고 <b>형광 사진</b>을 찍어 무슨 글자인지 봐요. 이걸 약 150번 반복.</p>
+  </div>
+  <p class="small" style="text-align:center"><b>사이클마다 사진 한 장 → 같은 점의 색을 이어 읽으면 서열</b></p>
+  <table class="seq">
+    <tr><td class="lb"></td><td class="lb">1회</td><td class="lb">2회</td><td class="lb">3회</td><td class="lb">4회</td><td class="lb"> </td><td class="lb">읽은 결과</td></tr>
+    <tr><td class="lb">점 ①</td><td class="g">A</td><td class="x">C</td><td class="m">G</td><td class="e">T</td><td></td><td class="lb" style="text-align:left"><b>ACGT…</b></td></tr>
+    <tr><td class="lb">점 ②</td><td class="m">G</td><td class="m">G</td><td class="g">A</td><td class="x">C</td><td></td><td class="lb" style="text-align:left"><b>GGAC…</b></td></tr>
+    <tr><td class="lb">점 ③</td><td class="e">T</td><td class="g">A</td><td class="g">A</td><td class="m">G</td><td></td><td class="lb" style="text-align:left"><b>TAAG…</b></td></tr>
+  </table>
+  <p class="small mut" style="text-align:center">글자마다 형광 색이 달라서 사진 색으로 글자를 알아요 (색은 설명용)</p>
+  <figure class="slide"><img src="slides/n11.jpg"><figcaption>교수님 슬라이드 — Sequencing by synthesis: 1.Arrange 2.Extend 3.Detect, Cycle 1·2·3</figcaption></figure>
+
+  <h3>3-4. Roche vs Illumina — 왜 Illumina가 이겼나 <span class="st">★★</span></h3>
+  <table>
+    <tr><th style="width:24%"></th><th>Roche (454)</th><th>Illumina</th></tr>
+    <tr><td>복사 방법</td><td><b>Emulsion PCR</b><br><span class="small">기름 속 물방울 안 구슬에서 복사</span></td><td><b>Bridge PCR</b><br><span class="small">유리판 위에서 다리처럼 휘어 복사</span></td></tr>
+    <tr><td>읽는 방법</td><td><b>SNA</b><br><span class="small">글자를 한 종류씩 흘려보내고 빛 ON/OFF</span></td><td><b>CRT</b><br><span class="small">4글자에 다른 색 붙여 한 번에 흘리고, 찍고, 색 잘라내고 반복</span></td></tr>
+    <tr><td>한 번에 읽는 길이</td><td><b>~700</b> (더 김)</td><td>~150</td></tr>
+    <tr><td>에러</td><td>1%</td><td><b>0.1%</b></td></tr>
+    <tr><td>처리량</td><td>~100만 reads</td><td><b>~30억 reads</b></td></tr>
+    <tr><td>1Gb당 비용</td><td class="red">$9,500</td><td class="grn">$7</td></tr>
+  </table>
+  <svg viewBox="0 0 380 70" width="94mm">
+    <text x="0" y="20" font-size="12" fill="#1b2333">Roche</text><rect x="58" y="8" width="300" height="16" rx="3" fill="#d6264a"/><text x="350" y="21" font-size="11" text-anchor="end" fill="#fff" font-weight="bold">$9,500</text>
+    <text x="0" y="52" font-size="12" fill="#1b2333">Illumina</text><rect x="58" y="40" width="2" height="16" fill="#0f7a4f"/><text x="66" y="53" font-size="11" fill="#0f7a4f" font-weight="bold">$7  ← 1,000배 이상 쌈</text>
+  </svg>
+  <div class="box exam"><span class="t">📝 시험 단골 — "Illumina가 이긴 이유"</span>
+    <p>읽는 길이·속도는 Roche가 더 좋았어요. 하지만 Illumina는 <b>처리량이 압도적으로 커서 1Gb당 비용이 $7, Roche는 $9,500</b> — 1,000배 이상 쌌어요. 에러도 0.1%로 더 낮았고요. 연구비로 연구하는 사람들은 싼 쪽을 골랐고, Roche는 <b>2016년 문을 닫았어요.</b> Illumina 시장 점유율 약 70%.</p>
+    <p class="big">"기술 혁신은 결국 비용과 연결된다"</p>
+  </div>
+  <figure class="slide"><img src="slides/n20.jpg"><figcaption>교수님 슬라이드 — Roche "Shut down in 2016", Cost per Gb $9,500 vs $7</figcaption></figure>
+  <figure class="slide"><img src="slides/n15.jpg"><figcaption>교수님 슬라이드 — Bridge PCR: 유리판(flow cell) 위 클러스터 만들기</figcaption></figure>
+  <figure class="slide"><img src="slides/n18.jpg"><figcaption>교수님 슬라이드 — CRT: ①글자 붙이기 ②사진 찍기 ③형광 잘라내기 → 반복</figcaption></figure>
+</section>
+
+<!-- ============ 4. FASTQ ============ -->
+<section class="ch">
+  <span class="chno">4장</span>
+  <h2>FASTQ — NGS가 뱉어낸 결과 파일 ★★★</h2>
+
+  <div class="box def"><span class="t">📌 FASTQ</span>
+    <p>NGS 기계가 사진을 글자로 바꾼(base calling) 결과 파일. <b>조각(read) 하나가 4줄</b>로 적혀요.</p>
+  </div>
+  <div class="code"><span class="h">@M02595:107:...:1:1101:17207:1849 1:N:0:130</span>
+<span class="k">TGTGATGCCTATCCCCTGTGTGCCTGGCAGTC</span>
++
+<span class="q">BCCBBFFFFFFFGGGGGGGGGGHHHHHHHHHH</span></div>
+  <table>
+    <tr><th style="width:15%">줄</th><th>뭐가 적혀 있나</th></tr>
+    <tr><td><b>1</b></td><td><b>ID</b> — <code>@</code>로 시작. 기계 판의 레인·타일·<b>x,y 좌표</b> = 조각의 주소. <b>주소라서 겹치면 안 돼요</b> (같으면 오류)</td></tr>
+    <tr><td><b>2</b></td><td><b>서열</b> — 읽은 ATGC. <b>N</b> = 색이 섞여서 <b>무슨 글자인지 못 읽은 자리</b></td></tr>
+    <tr><td><b>3</b></td><td><b>+</b> — 그냥 구분선</td></tr>
+    <tr><td><b>4</b></td><td><b>품질 점수</b> — 2번 줄 글자 하나하나를 <b>얼마나 믿을 수 있는지</b>, 문자 한 개로 표시</td></tr>
+  </table>
+  <div class="box tip"><span class="t">💡 FASTQ 4줄 외우기</span><p class="big">이름표 → 글자 → + → 점수</p></div>
+  <figure class="slide"><img src="slides/n24.jpg"><figcaption>교수님 슬라이드 — ID / Sequence / Q-score, 그리고 Phred 점수표</figcaption></figure>
+
+  <h3>4-1. Phred 품질 점수 <span class="st">★★★</span></h3>
+  <div class="box def"><span class="t">📌 공식 (외우면 좋아요)</span>
+    <p class="big">Q = −10 × log₁₀(P)</p>
+    <p class="small" style="text-align:center">P = 그 글자가 <b>틀렸을 확률</b></p>
+  </div>
+  <table>
+    <tr><th>Q 점수</th><th>틀릴 확률</th><th>맞을 확률</th></tr>
+    <tr><td>Q10</td><td>1/10</td><td>90%</td></tr>
+    <tr><td>Q20</td><td>1/100</td><td>99%</td></tr>
+    <tr><td class="red">Q30</td><td class="red">1/1,000</td><td class="red">99.9%</td></tr>
+    <tr><td>Q40</td><td>1/10,000</td><td>99.99%</td></tr>
+  </table>
+  <div class="box tip"><span class="t">💡 교수님 암기법</span>
+    <p><b>Q의 앞자리 숫자 = 0의 개수.</b> Q30 → 3 → 1/1<b>000</b> → 99.9%. Q40 → 4 → 1/1<b>0000</b> → 99.99%.</p>
+    <p>보통 <b>Q30 이상이면 합격</b>(QC 기준). Illumina 점수는 0~41 정도.</p>
+  </div>
+
+  <h3>4-2. FASTA vs FASTQ</h3>
+  <table>
+    <tr><th></th><th>FASTA</th><th>FASTQ</th></tr>
+    <tr><td>뭐에 쓰나</td><td><b>레퍼런스(표준 정답지)</b></td><td><b>내 시퀀싱 결과</b></td></tr>
+    <tr><td>모양</td><td><code>&gt;</code>이름 + 서열 (2줄)</td><td><code>@</code>이름, 서열, +, 점수 (4줄)</td></tr>
+    <tr><td>품질 점수</td><td>없음</td><td><b>있음</b></td></tr>
+  </table>
+  <div class="box exam"><span class="t">📝 시험에 이렇게 나와요</span>
+    <p>Q. FASTQ 한 read는 몇 줄이고 각 줄은? → <b>4줄. ID(@), 염기서열, +, 품질 점수</b></p>
+    <p>Q. Phred Q30의 정확도는? → <b>99.9%</b> (에러 1/1,000)</p>
+    <p>Q. 서열의 N은? → <b>염기를 판별하지 못한 자리</b></p>
+  </div>
+</section>
+
+<!-- ============ 5. depth / coverage / 종류 ============ -->
+<section class="ch">
+  <span class="chno">5장</span>
+  <h2>Depth · Coverage, 그리고 어디를 읽을까 ★★★</h2>
+  <p class="lead">교수님이 거의 매 시간 반복한 개념이에요. "얼라인 결과에서 궁금한 건 결국 coverage와 depth."</p>
+
+  <h3>5-1. 용어 4개</h3>
+  <table>
+    <tr><th style="width:28%">용어</th><th>쉬운 뜻</th></tr>
+    <tr><td>Read 수</td><td>읽은 조각 <b>개수</b></td></tr>
+    <tr><td>Read length</td><td>조각 하나 <b>길이</b> (Illumina 약 150)</td></tr>
+    <tr><td class="red">Depth</td><td><b>한 자리를 조각 몇 개가 겹쳐 읽었나.</b> 5개면 5x</td></tr>
+    <tr><td class="red">Coverage</td><td><b>전체 중 한 번이라도 읽힌 비율.</b> 10% 비었으면 90%</td></tr>
+  </table>
+
+  <h3>5-2. 그림으로 보기</h3>
+  <table class="seq">
+    <tr><td class="lb">자리</td><td class="n">1</td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">5</td><td class="n">6</td><td class="n">7</td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td><td class="n">13</td><td class="n">14</td></tr>
+    <tr><td class="lb">정답지</td><td class="r">A</td><td class="r">T</td><td class="r">G</td><td class="r">C</td><td class="r">C</td><td class="r">A</td><td class="r">T</td><td class="r">T</td><td class="r">G</td><td class="r">A</td><td class="r">C</td><td class="r">G</td><td class="r">T</td><td class="r">A</td></tr>
+    <tr><td class="lb">조각1</td><td class="m">A</td><td class="m">T</td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">조각2</td><td></td><td class="m">T</td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td class="m">A</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">조각3</td><td></td><td></td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">조각4</td><td></td><td></td><td></td><td class="m">C</td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td class="m">G</td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">조각5</td><td></td><td></td><td></td><td></td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td class="e">C</td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">조각6</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="m">T</td><td class="m">T</td><td class="m">G</td><td class="m">A</td><td class="m">C</td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">depth</td><td class="d">1</td><td class="d">2</td><td class="d">3</td><td class="d">4</td><td class="d">5</td><td class="d">4</td><td class="d">4</td><td class="d">4</td><td class="d">3</td><td class="d">1</td><td class="d">1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td></tr>
+  </table>
+  <ul class="small">
+    <li><span class="red">6번 자리</span> — 4개 중 <b>3개가 G</b> → 여러 조각이 똑같이 말하니까 <b>진짜 변이</b>일 가능성 높음</li>
+    <li><span style="color:#8a5a00;font-weight:bold">9번 자리</span> — 3개 중 <b>1개만 C</b> → 혼자 다른 말 → <b>기계 실수</b>일 가능성 높음</li>
+    <li><span class="red">12~14번</span> — 아무도 안 읽음(depth 0) → <b>coverage 구멍</b>. 14자리 중 11자리만 읽힘 → coverage 약 <b>79%</b></li>
+  </ul>
+  <div class="box eg"><span class="t">🗳 depth는 "투표 인원 수"</span>
+    <p>100명(100x)에게 물었는데 1명만 T라고 하면 → 그 1명이 잘못 본 거예요(에러). 그런데 2명(2x)에게 물었는데 1명은 A, 1명은 T면 → <b>판단 불가</b>.</p>
+    <p class="big">depth가 높을수록 변이 판정이 정확하다</p>
+  </div>
+  <figure class="slide"><img src="slides/v10.jpg"><figcaption>교수님 슬라이드 — Depth of coverage vs Breadth of coverage. "High read depth gives high accuracy"</figcaption></figure>
+  <div class="box gray small">
+    <b>depth 계산식</b> = 매핑된 read 수 × 평균 read 길이 ÷ 레퍼런스 전체 길이<br>
+    예) 6억 개 × 150 ÷ 30억 = <b>30x</b><br>
+    7주차 실습 결과 — coverage <b>99%</b>, 평균 depth 약 <b>20x</b>
+  </div>
+
+  <h3>5-3. WGS · WES · Targeted — 어디를 읽을까 <span class="st">★★</span></h3>
+  <div class="box eg"><span class="t">🎨 페인트 한 통 비유</span>
+    <p>기계가 한 번에 읽을 수 있는 양(페인트 한 통)은 정해져 있어요. <b>넓은 벽에 칠하면 얇게</b>, <b>좁은 벽에 칠하면 두껍게</b> 칠해져요. 두께 = depth.</p>
+  </div>
+  <svg viewBox="0 0 380 108" width="94mm">
+    <text x="0" y="18" font-size="11" font-weight="bold" fill="#1b2333">WGS</text><rect x="70" y="10" width="300" height="5" fill="#2563eb"/><text x="70" y="30" font-size="9.5" fill="#5d6b80">전체 30억 글자 · 얇게 ~30x</text>
+    <text x="0" y="56" font-size="11" font-weight="bold" fill="#1b2333">WES</text><rect x="70" y="44" width="120" height="12" fill="#16a34a"/><text x="70" y="70" font-size="9.5" fill="#5d6b80">엑손만 · 중간 50~100x</text>
+    <text x="0" y="94" font-size="11" font-weight="bold" fill="#1b2333">Targeted</text><rect x="70" y="80" width="30" height="22" fill="#d6264a"/><text x="108" y="96" font-size="9.5" fill="#5d6b80">특정 유전자만 · 두껍게 500x 이상</text>
+  </svg>
+  <table>
+    <tr><th style="width:23%">종류</th><th>읽는 범위</th><th style="width:20%">Depth</th><th>쓰임</th></tr>
+    <tr><td><b>WGS</b><br><span class="small">Whole Genome</span></td><td>전체 게놈</td><td>~30x</td><td>큰 그림, 처음 보는 변이 찾기(de novo)</td></tr>
+    <tr><td><b>WES</b><br><span class="small">Whole Exome</span></td><td>엑손만 (약 2만 유전자)</td><td>50~100x</td><td>단백질 관련 변이, 돈 절약</td></tr>
+    <tr><td><b>Targeted</b><br><span class="small">panel</span></td><td>특정 유전자 10~500개</td><td>500x↑<br><span class="small">암 조기진단 ~3000x</span></td><td><b>아주 적은 비율의 변이</b>(Low VAF), 병원 암 진단</td></tr>
+  </table>
+  <p class="small">왜 암 조기진단은 3000x나? → 초기 암은 피 속 DNA 중 <b>암 DNA가 약 1%</b>뿐이라, 아주 많이 읽어야 그 1%가 잡혀요. 교수님 말로 <b>"선택과 집중"</b>.</p>
+  <figure class="slide"><img src="slides/n29.jpg"><figcaption>교수님 슬라이드 — 1. WGS, WES (De novo)  2. Targeted sequencing (Low VAF)</figcaption></figure>
+
+  <h3>5-4. 싱글엔드 vs 페어드엔드 <span class="st">★</span></h3>
+  <svg viewBox="0 0 380 100" width="94mm">
+    <text x="0" y="14" font-size="10" fill="#5d6b80">DNA 조각 (약 250글자)</text>
+    <rect x="20" y="22" width="340" height="12" rx="3" fill="#cbd5e1"/>
+    <rect x="154" y="40" width="72" height="44" fill="#fbbf24" opacity="0.3"/>
+    <rect x="20" y="45" width="196" height="7" fill="#d6264a"/><path d="M214,41 L228,48.5 L214,56 z" fill="#d6264a"/>
+    <text x="20" y="66" font-size="10" fill="#d6264a" font-weight="bold">R1 → 150</text>
+    <rect x="164" y="72" width="196" height="7" fill="#1d4ed8"/><path d="M166,68 L152,75.5 L166,83 z" fill="#1d4ed8"/>
+    <text x="360" y="96" font-size="10" fill="#1d4ed8" font-weight="bold" text-anchor="end">150 ← R2</text>
+    <text x="190" y="96" font-size="9" text-anchor="middle" fill="#8a5a00" font-weight="bold">겹침 ~50</text>
+  </svg>
+  <ul>
+    <li>NGS는 한 방향으로 150~250글자밖에 못 읽어요</li>
+    <li><b>페어드엔드</b> = 조각 <b>양쪽 끝에서 각각</b> 읽고(R1, R2) <b>겹치는 부분으로 이어붙이기</b></li>
+    <li>장점 ① <b>더 길게</b> 읽음 ② 뒤로 갈수록 떨어지는 품질을 <b>반대쪽이 보완</b></li>
+    <li><b>2×150</b> = 양쪽에서 150씩 읽는 페어드엔드. 파일 이름에 <b>R1/R2</b></li>
+  </ul>
+  <figure class="slide"><img src="slides/v08.jpg"><figcaption>교수님 슬라이드 — Single End Read vs Paired-End Read</figcaption></figure>
+
+  <h3>5-5. 라이브러리 — 조각에 붙이는 꼬리표</h3>
+  <svg viewBox="0 0 380 56" width="94mm">
+    <rect x="0" y="12" width="40" height="22" fill="#94a3b8"/><text x="20" y="27" font-size="9" text-anchor="middle" fill="#fff">어댑터</text>
+    <rect x="40" y="12" width="44" height="22" fill="#a855f7"/><text x="62" y="27" font-size="9" text-anchor="middle" fill="#fff">바코드</text>
+    <rect x="84" y="12" width="44" height="22" fill="#0ea5e9"/><text x="106" y="27" font-size="9" text-anchor="middle" fill="#fff">프라이머</text>
+    <rect x="128" y="12" width="124" height="22" fill="#16a34a"/><text x="190" y="27" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">인서트 (읽고 싶은 DNA)</text>
+    <rect x="252" y="12" width="44" height="22" fill="#0ea5e9"/><rect x="296" y="12" width="44" height="22" fill="#a855f7"/><rect x="340" y="12" width="40" height="22" fill="#94a3b8"/>
+    <text x="190" y="52" font-size="9" text-anchor="middle" fill="#5d6b80">어댑터 = 판에 붙는 손잡이 · 바코드 = 이름표 · 프라이머 = 읽기 시작점</text>
+  </svg>
+  <p class="small"><b>바코드</b> 덕분에 여러 사람 샘플을 섞어 한 번에 돌리고 나중에 이름표로 나눠요 → <b>비용 1/n</b>.</p>
+</section>
+
+<!-- ============ 6. QC · 트리밍 · 얼라인먼트 ============ -->
+<section class="ch">
+  <span class="chno">6장</span>
+  <h2>QC → 트리밍 → 얼라인먼트 → BAM</h2>
+
+  <h3>6-1. QC — FastQC 성적표</h3>
+  <div class="box def"><span class="t">📌 QC (Quality Control, 품질 검사)</span>
+    <p>읽은 데이터가 <b>분석에 쓸 만한지</b> 확인하는 것. 도구는 <b>FastQC</b>. 결과는 그래프가 든 성적표(HTML).</p>
+  </div>
+  <ul>
+    <li>제일 중요한 그래프 = <b>Per base sequence quality</b> — 가로는 글자 위치(1~150), 세로는 품질 점수</li>
+    <li><b>뒤로 갈수록 품질이 떨어져요.</b> 이유 2가지 <span class="red">(서술형 단골)</span>
+      <ol>
+        <li>짧은 조각도 기계는 150번째까지 찍어요 → 조각이 끝난 뒤에는 <b>어댑터·노이즈</b>를 읽음</li>
+        <li>사이클을 반복할수록 형광 <b>노이즈가 쌓여요</b></li>
+      </ol></li>
+    <li>ATGC 비율 그래프 — WGS(무작위로 자름)는 <b>고르게</b> 나와야 정상, targeted는 <b>안 고른 게 정상</b> → "<b>목적에 따라 판단</b>"</li>
+  </ul>
+  <figure class="slide"><img src="slides/n39.jpg"><figcaption>교수님 슬라이드 — FastQC: 대부분 read의 평균 점수가 28~38</figcaption></figure>
+
+  <h3>6-2. 트리밍 · 머지</h3>
+  <svg viewBox="0 0 380 66" width="94mm">
+    <text x="0" y="12" font-size="10" fill="#5d6b80">기계가 읽은 150글자</text>
+    <rect x="0" y="18" width="200" height="18" fill="#16a34a"/><text x="100" y="31" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">진짜 DNA (100)</text>
+    <rect x="200" y="18" width="70" height="18" fill="#94a3b8"/><text x="235" y="31" font-size="9" text-anchor="middle" fill="#fff">어댑터</text>
+    <rect x="270" y="18" width="110" height="18" fill="#fecaca"/><text x="325" y="31" font-size="9" text-anchor="middle" fill="#b91c1c">노이즈</text>
+    <line x1="200" y1="12" x2="200" y2="44" stroke="#d6264a" stroke-width="2" stroke-dasharray="3,2"/><text x="204" y="58" font-size="10" fill="#d6264a" font-weight="bold">✂ 여기서 자르기 = 트리밍</text>
+  </svg>
+  <div class="box eg"><span class="t">📷 비유</span>
+    <p>사진을 찍었는데 <b>액자 테두리(어댑터)와 벽(노이즈)</b>까지 찍혔어요. 테두리부터 잘라내야 다음 단계에서 제자리를 잘 찾아요. 실제로 <b>트리밍한 데이터가 얼라인율이 훨씬 높아요.</b></p>
+  </div>
+  <ul class="small">
+    <li><b>cutadapt</b> — 어댑터만 정확히 자름 (교수님 선호, 뭐가 잘리는지 통제 가능)</li>
+    <li><b>Trim Galore</b> — 품질 낮은 부분까지 자동으로 자름</li>
+    <li><b>PEAR</b> — 페어드엔드 R1·R2를 겹침으로 <b>이어붙이기(머지)</b>. 실습에서 약 70%가 붙었어요. 안 붙은 건 버리지 않고 따로 써요</li>
+  </ul>
+  <figure class="slide"><img src="slides/v21.jpg"><figcaption>교수님 슬라이드 — Quality trimming + Adaptor trimming</figcaption></figure>
+
+  <h3>6-3. 얼라인먼트 — 조각을 제자리에 <span class="st">★★</span></h3>
+  <div class="box def"><span class="t">📌 얼라인먼트 (alignment, 매핑)</span>
+    <p>짧은 조각(read)들이 <b>레퍼런스(표준 게놈, 정답지)의 몇 번째 자리인지 찾아 맞추는 것.</b> 자리를 알아야 "원래 G인데 여기는 A네" 하고 변이를 찾을 수 있어요.</p>
+  </div>
+  <div class="box eg"><span class="t">🧩 퍼즐 비유</span>
+    <p>박스 뚜껑의 <b>완성 그림(레퍼런스)</b>을 보면서 <b>수억 개 퍼즐 조각(read)</b>을 제자리에 놓는 일이에요.</p>
+  </div>
+  <table>
+    <tr><th></th><th>Global (전체)</th><th>Local (부분)</th></tr>
+    <tr><td>방법</td><td>두 서열을 <b>처음부터 끝까지</b> 비교</td><td><b>가장 비슷한 부분</b>만 찾아 비교</td></tr>
+    <tr><td>비유</td><td>숲 보기 — 무슨 종인지</td><td>나무 보기 — 어디가 다른지</td></tr>
+    <tr><td>변이 찾기</td><td></td><td class="grn">이걸 써요</td></tr>
+  </table>
+  <figure class="slide"><img src="slides/v26.jpg"><figcaption>교수님 슬라이드 — Global vs Local Alignment</figcaption></figure>
+
+  <h3>6-4. BLAST → BWA, 왜 빠른가</h3>
+  <ul>
+    <li><b>BLAST</b> (Basic Local Alignment Search Tool) — 옛날부터 쓰던 웹 도구. NGS 수억 조각엔 <b>너무 느려요</b></li>
+    <li>그래서 aligner가 90개 넘게 나왔고, 대표가 <b>BWA</b> (Burrows-Wheeler Aligner)</li>
+  </ul>
+  <div class="box eg"><span class="t">📒 BWA 원리 = 색인 + 씨앗 찾고 늘리기 (seed-and-extend)</span>
+    <ol>
+      <li><b>색인(index) 만들기</b> — 레퍼런스 책에 미리 <b>포스트잇</b>을 붙여 둬요 (교수님 비유). <code>bwa index</code></li>
+      <li><b>씨앗(seed)</b> — 조각에서 짧은 10~20글자만 떼서 포스트잇으로 <b>후보 위치</b>를 빨리 찾아요</li>
+      <li><b>늘리기(extend)</b> — 그 후보 자리에서 양옆으로 늘려가며 맞춰보고 점수로 확정</li>
+    </ol>
+    <p class="small">→ 책 전체를 처음부터 넘기지 않고 <b>색인으로 바로 찾아가니까 빨라요.</b></p>
+  </div>
+  <figure class="slide"><img src="slides/v54.jpg"><figcaption>교수님 슬라이드 — Read alignment with seed-and-extend (10~20bp seed)</figcaption></figure>
+  <p class="small">레퍼런스는 버전이 있어요(<b>hg19, hg38</b>). 버전이 다르면 변이 위치가 달라질 수 있어요.</p>
+
+  <h3>6-5. SAM과 BAM <span class="st">★★</span></h3>
+  <table>
+    <tr><th></th><th>SAM</th><th>BAM</th></tr>
+    <tr><td>풀네임</td><td>Sequence Alignment/Map</td><td>Binary (Alignment/Map)</td></tr>
+    <tr><td>모양</td><td><b>글자 파일</b> (사람이 읽을 수 있음)</td><td><b>압축된 파일</b> (컴퓨터용)</td></tr>
+    <tr><td>크기</td><td>큼</td><td>작음</td></tr>
+  </table>
+  <ul class="small">
+    <li><b>sort(정렬)</b> — 조각들을 <b>위치 순서대로</b> 줄 세우기. 다음 단계에 <b>꼭 필요</b></li>
+    <li><b>index</b> — 정렬된 BAM의 목차 파일 <b>.bai</b></li>
+    <li>실무에선 SAM을 따로 저장 안 하고 바로 sorted BAM으로 만들어요</li>
+  </ul>
+  <p><b>SAM 한 줄에 적힌 것 (11칸)</b> — 다 외울 필요 없고 <b>굵은 것만</b>.</p>
+  <table class="small">
+    <tr><th>칸</th><th>뜻</th></tr>
+    <tr><td>QNAME</td><td>조각 이름</td></tr>
+    <tr><td><b>FLAG</b></td><td>상태 번호. 0 = 정방향, 16 = 역방향, 4 = 못 붙음</td></tr>
+    <tr><td>RNAME</td><td>어느 레퍼런스(염색체)</td></tr>
+    <tr><td><b>POS</b></td><td><b>몇 번째 자리부터</b> 붙었나</td></tr>
+    <tr><td><b>MAPQ</b></td><td><b>제자리 확신도</b>. 60 = 확실</td></tr>
+    <tr><td class="red">CIGAR</td><td class="red">어떻게 붙었나 (바로 아래)</td></tr>
+    <tr><td>RNEXT·PNEXT·TLEN</td><td>짝꿍 조각 정보</td></tr>
+    <tr><td>SEQ · QUAL</td><td>서열 · 품질 점수</td></tr>
+  </table>
+
+  <h3>6-6. CIGAR <span class="st">★★★ 매 시간 반복</span></h3>
+  <div class="box def"><span class="t">📌 CIGAR</span>
+    <p><b>숫자 + 글자</b>로 조각이 레퍼런스에 어떻게 붙었는지 적은 것.</p>
+    <p><b>M</b> = 맞춤(match) · <b>I</b> = 끼어듦(삽입, insertion) · <b>D</b> = 빠짐(결실, deletion) · <b>S</b> = 잘려나감(soft clip)</p>
+  </div>
+  <p><b>예 1</b> — <code>151M</code> = 151글자 전부 쭉 맞춤</p>
+  <p><b>예 2</b> — POS 5, <code>3M1I3M1D5M</code> (교수님 슬라이드 예시)</p>
+  <table class="seq">
+    <tr><td class="lb">자리</td><td class="n">5</td><td class="n">6</td><td class="n">7</td><td class="n"></td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td><td class="n">13</td><td class="n">14</td><td class="n">15</td><td class="n">16</td></tr>
+    <tr><td class="lb">정답지</td><td class="r">A</td><td class="r">C</td><td class="r">T</td><td class="n">-</td><td class="r">G</td><td class="r">A</td><td class="r">A</td><td class="r">C</td><td class="r">T</td><td class="r">G</td><td class="r">A</td><td class="r">C</td><td class="r">T</td></tr>
+    <tr><td class="lb">내 조각</td><td class="m">A</td><td class="m">C</td><td class="m">T</td><td class="g">A</td><td class="m">G</td><td class="m">A</td><td class="m">A</td><td class="x">-</td><td class="m">T</td><td class="m">G</td><td class="e">G</td><td class="m">C</td><td class="m">T</td></tr>
+    <tr><td class="lb">CIGAR</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d" style="color:var(--grn)">I</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="z">D</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d">M</td></tr>
+  </table>
+  <p class="small" style="text-align:center"><b>3M</b> 맞춤 3 → <b class="grn">1I</b> A가 끼어듦 → <b>3M</b> → <b class="red">1D</b> C가 빠짐 → <b>5M</b><br>
+  (14번 자리 A↔G처럼 글자가 달라도 <b>M</b>으로 써요. 다른 글자 정보는 MD·NM 태그에 따로 적어요)</p>
+  <div class="box tip"><span class="t">💡 핵심</span><p><b>POS + CIGAR만 보면 조각이 어디에 어떻게 붙었는지 그릴 수 있다.</b></p></div>
+  <figure class="slide"><img src="slides/v45.jpg"><figcaption>교수님 슬라이드 — POS 5, CIGAR 3M1I3M1D5M</figcaption></figure>
+  <div class="box exam"><span class="t">📝 시험에 이렇게 나와요</span>
+    <p>Q. CIGAR <code>5M2I10M</code>의 뜻은? → <b>5글자 맞춤, 2글자 삽입, 10글자 맞춤</b></p>
+  </div>
+
+  <h3>6-7. IGV — 눈으로 확인</h3>
+  <ul>
+    <li><b>IGV</b> (Integrative Genomics Viewer) — 지도 앱처럼 확대해 보는 뷰어</li>
+    <li>레퍼런스(FASTA + .fai)와 내 결과(sorted BAM + <b>.bai</b>)를 올려요</li>
+    <li>위쪽 <b>회색 막대 = 자리별 조각 수(depth)</b>, 화살표 막대 = 조각 하나(방향), <b>색칠된 글자 = 다른 글자(변이 후보)</b></li>
+  </ul>
+  <figure class="slide"><img src="slides/v57.jpg"><figcaption>교수님 슬라이드 — IGV로 본 BAM. 빨강·파랑 = 정방향·역방향 조각</figcaption></figure>
+  <div class="box pro"><span class="t">🗣 교수님 로직</span><p>"단계마다 <b>눈(IGV)</b>과 <b>통계(coverage·depth)</b>로 잘 됐는지 확인한다."</p></div>
+
+  <h3>6-8. 리눅스 — 딱 이것만</h3>
+  <div class="box gray small">
+    <p><b>왜 리눅스?</b> 바이오 분석 도구들이 수십 년간 <b>리눅스(무료·공개) 기반으로 만들어져서</b> 선택이 아니라 필수예요.</p>
+    <p><b>셸(bash)</b> = 명령어를 받는 창. <b>셸 스크립트</b> = 명령어 모음 파일 (첫 줄 <code>#!/bin/bash</code>).</p>
+    <p><b>가상환경(conda)</b> = 도구마다 버전이 달라 꼬이니까 목적별 <b>작은 방</b>을 따로 만드는 것.</p>
+    <p>권한 r=4(읽기) w=2(쓰기) x=1(실행). 명령어 세부는 "디테일이라 뺀다"고 하셨어요.</p>
+  </div>
+</section>
+
+<!-- ============ 7. 변이 찾기 ============ -->
+<section class="ch">
+  <span class="chno">7장</span>
+  <h2>진짜 변이 골라내기 ★★★</h2>
+  <p class="lead">BAM을 바로 쓰지 않고 두 번 다듬은 뒤(7-1, 7-2) 변이를 불러요(7-3).</p>
+
+  <h3>7-1. MarkDuplicates — 복사본 빼기</h3>
+  <div class="box def"><span class="t">📌 PCR duplicate (중복)</span>
+    <p>DNA가 부족해서 PCR로 불리면 <b>같은 조각의 복사본</b>이 여러 개 생겨요. DNA는 <b>무작위로 잘랐으니 시작점·끝점이 똑같은 조각이 우연히 여러 개 나올 리 없어요</b> → 똑같으면 복사본으로 보고 하나만 남겨요.</p>
+  </div>
+  <div class="box eg"><span class="t">🗳 부정 투표 비유</span>
+    <p>한 사람이 투표용지를 복사해서 여러 번 내면 결과가 왜곡돼요. 그래서 <b>한 사람 한 표</b>만 인정.</p>
+    <p>예) 진짜는 조각 10개 중 변이 3개 = <b>30%</b>. 그런데 변이 조각 3개가 PCR로 28개까지 불어나면 28 ÷ (28+7) = <b>80%</b>로 보여요 → 실제보다 심하게("말기") 판단할 수 있어요.</p>
+  </div>
+  <div class="box exam"><span class="t">📝 "생략해도 되는 경우"까지 묻기 좋아요</span>
+    <p><b>Amplicon(targeted) 데이터</b>는 원하는 부위만 PCR로 뽑은 거라 <b>원래 모든 조각의 시작·끝이 같아요</b> → MarkDuplicates를 하면 다 지워져 버리니 <b>생략</b>. 무작위로 자른 DNA에서만 해요. → "<b>목적에 따라 판단</b>"</p>
+  </div>
+  <p class="small">도구 <b>Picard</b>. 끝나면 다시 정렬(SortSam).</p>
+  <figure class="slide"><img src="slides/v63.jpg"><figcaption>교수님 슬라이드 — 같은 위치에 정렬된 reads = Amplification duplicate로 판단해 제거</figcaption></figure>
+
+  <h3>7-2. BQSR — 기계 점수 영점 맞추기</h3>
+  <div class="box def"><span class="t">📌 BQSR (Base Quality Score Recalibration, 염기 품질 점수 재보정)</span>
+    <p>기계가 매긴 품질 점수에는 <b>버릇(bias)</b>이 있어요. 이걸 그대로 믿으면 <b>기계 실수를 변이로 착각</b>해요. 그래서 점수를 다시 매겨요.</p>
+  </div>
+  <div class="box eg"><span class="t">⚖️ 체중계 영점 맞추기</span>
+    <p>체중계가 늘 1kg 더 나오면 영점을 맞추죠. BQSR은 <b>이미 알려진 진짜 변이 목록(dbSNP)</b>을 참고해서, 그 외의 불일치를 "기계 실수"로 세어 보고 <b>점수가 실제보다 후한지 짠지 보정</b>해요.</p>
+  </div>
+  <ol class="small">
+    <li><b>BaseRecalibrator</b> — 보정표(테이블) 만들기</li>
+    <li><b>ApplyBQSR</b> — 그 표대로 BAM 점수를 다시 쓰기</li>
+    <li>결과 = <b>분석 준비 완료 BAM(analysis-ready, final BAM)</b></li>
+  </ol>
+
+  <h3>7-3. Variant calling — 진짜 오타만 <span class="st">★★★</span></h3>
+  <div class="box def"><span class="t">📌 Variant calling (변이 호출) — 슬라이드 정의</span>
+    <p>내 서열을 레퍼런스와 비교해서 <b>다른 곳을 일단 변이라고 가정</b>하고, 여러 방법으로 <b>진짜 변이일 확률을 계산해서 확실한 것만 뽑아내는 과정.</b></p>
+  </div>
+  <div class="box pro"><span class="t">🗣 교수님 핵심</span>
+    <p class="big">"틀린 그림 찾기는 쉽다.<br>그게 진짜 변이인지 계산하는 게 중요하다."</p>
+    <p class="small">→ 그래서 depth(5장), MarkDuplicates·BQSR(위), HaplotypeCaller(아래)가 존재해요. 전부 <b>에러와 진짜를 구별하려는 장치</b>예요.</p>
+  </div>
+  <ul>
+    <li>도구 <b>GATK</b> = <b>Genome Analysis Toolkit</b>, <b>Broad Institute</b>(하버드+MIT)가 만듦</li>
+    <li>그 안의 <b>HaplotypeCaller</b>가 변이를 불러요</li>
+  </ul>
+
+  <h3>7-4. HaplotypeCaller는 어떻게 판단하나</h3>
+  <div class="box def"><span class="t">📌 Haplotype (하플로타입)</span>
+    <p><b>한 염색체 위에서 같이 붙어 유전되는 변이들의 묶음.</b></p>
+  </div>
+  <table class="seq">
+    <tr><td class="lb">엄마 쪽</td><td class="x">A</td><td class="r">·</td><td class="r">·</td><td class="x">C</td><td class="r">·</td><td class="r">·</td><td class="x">G</td></tr>
+    <tr><td class="lb">아빠 쪽</td><td class="m">G</td><td class="r">·</td><td class="r">·</td><td class="m">T</td><td class="r">·</td><td class="r">·</td><td class="m">G</td></tr>
+    <tr><td class="lb">조각 a</td><td class="x">A</td><td class="r">·</td><td class="r">·</td><td class="x">C</td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">조각 b</td><td></td><td></td><td></td><td class="m">T</td><td class="r">·</td><td class="r">·</td><td class="m">G</td></tr>
+    <tr><td class="lb">조각 c</td><td class="x">A</td><td class="r">·</td><td class="r">·</td><td class="e">T</td><td></td><td></td><td></td></tr>
+  </table>
+  <p class="small">조각 a·b는 엄마/아빠 묶음과 딱 맞아요 → 진짜. 조각 c는 "A 다음에 T" — <b>어느 묶음과도 안 맞아요</b> → 에러일 가능성↑.<br>
+  즉 변이를 <b>하나씩 따로 보지 않고 여러 개를 묶음으로</b> 봐요.</p>
+  <ol>
+    <li><b>Active region</b> — 다른 글자가 몰린 동네만 골라 집중 (전부 보면 너무 많으니까)</li>
+    <li>그 동네에서 가능한 <b>haplotype 후보</b>를 만들고</li>
+    <li><b>PairHMM</b>으로 "이 조각이 이 묶음에서 나왔을 확률"을 계산 (에러·삽입결실 고려)</li>
+    <li><b>베이지안 모델</b>로 확률을 정리해 <b>확률 높은 변이만</b> 호출</li>
+  </ol>
+  <p class="small">옵션 두 개만 — <code>-L</code> 분석할 영역 지정 (병원에선 알려진 위치만 보니까 빠름), <code>-ploidy 2</code> 사람은 이배체(엄마·아빠 한 벌씩).</p>
+
+  <h3>7-5. GVCF vs VCF <span class="st">★★</span></h3>
+  <div class="box eg"><span class="t">📋 출석부 비유</span>
+    <p><b>GVCF</b> = 반 전체 <b>출석부</b>. 출석·결석에 "<b>?(모름)</b>" 칸까지 다 적음.<br>
+    <b>VCF</b> = <b>결석자(변이) 명단만.</b></p>
+  </div>
+  <table>
+    <tr><th></th><th>GVCF (Genomic VCF)</th><th>VCF (Variant Call Format)</th></tr>
+    <tr><td>적는 것</td><td><b>모든 위치</b>. 판단 못 한 곳은 <code>&lt;NON_REF&gt;</code></td><td><b>확실한 변이만</b></td></tr>
+    <tr><td>순서</td><td>먼저 만듦</td><td>GVCF에서 <b>GenotypeGVCFs</b>로 추림</td></tr>
+  </table>
+  <figure class="slide"><img src="slides/v74.jpg"><figcaption>교수님 슬라이드 — GVCF(NON_REF 포함) vs VCF</figcaption></figure>
+
+  <h3>7-6. VCF 읽는 법</h3>
+  <div class="code"><span class="c">#CHROM POS ID  REF ALT QUAL FILTER</span>
+chr1   100 .   <span class="h">C</span>   <span class="q">T</span>   50   PASS   <span class="c">← SNP (글자 바뀜)</span>
+chr1   200 .   <span class="h">ACG</span> <span class="q">A</span>   50   PASS   <span class="c">← 결실 (CG 빠짐)</span>
+chr1   300 .   <span class="h">C</span>   <span class="q">CT</span>  50   PASS   <span class="c">← 삽입 (T 끼어듦)</span></div>
+  <ul class="small">
+    <li><b>REF</b> = 정답지 글자, <b>ALT</b> = 내 글자. <b>둘을 비교하면 변이 종류</b>를 알아요</li>
+    <li><b>FILTER PASS</b> = 기준 통과. 기준 미달은 버려요(hard filter, 예 QD &lt; 2.0). 단 희귀 변이 찾을 땐 일부러 안 거르기도 해요 — "목적에 따라"</li>
+    <li><b>GT</b>(유전자형) — 0 = 정답지 글자, 1 = 바뀐 글자. 엄마·아빠 하나씩이라 두 개를 써요.<br>
+      <b>0/0 = 변이 없음</b>, <b>0/1 = 한쪽만 변이</b>, <b>1/1 = 양쪽 다 변이</b></li>
+    <li><b>DP</b> = depth, <b>GQ</b> = 유전자형 확신도 (Phred 점수), <b>AD</b> = 글자별 조각 수</li>
+  </ul>
+  <figure class="slide"><img src="slides/v75.jpg"><figcaption>교수님 슬라이드 — VCF 해석: SNP / Insertion / Deletion / Large SV</figcaption></figure>
+  <figure class="slide"><img src="slides/v77.jpg"><figcaption>교수님 슬라이드 — GT 0/0 변이 없음, 0/1·1/1 변이 있음 / AD / DP / GQ / PL</figcaption></figure>
+</section>
+
+<!-- ============ 8. annotation ============ -->
+<section class="ch">
+  <span class="chno">8장</span>
+  <h2>Annotation — 찾은 변이의 뜻 찾기 ★</h2>
+  <div class="box def"><span class="t">📌 Annotation (주석 달기)</span>
+    <p>찾은 변이가 <b>무슨 의미인지 데이터베이스(DB)와 연결</b>하는 것. 도구 <b>ANNOVAR</b> (ANNOtate VARiation).</p>
+  </div>
+  <div class="box eg"><span class="t">📖 비유</span><p>오타 목록(VCF)을 들고 <b>여러 사전</b>을 찾아보는 일. "이 오타 이름은? 흔한가? 병이랑 관련 있나?"</p></div>
+  <table>
+    <tr><th style="width:30%">DB (사전)</th><th>답해주는 질문</th></tr>
+    <tr><td><b>dbSNP</b></td><td>이 변이 <b>이름</b>이 뭔가? (rs번호)</td></tr>
+    <tr><td><b>1000 Genomes</b></td><td>일반인한테 <b>흔한가</b>?</td></tr>
+    <tr><td><b>dbNSFP</b></td><td><b>단백질 기능</b>에 영향을 주나?</td></tr>
+    <tr><td>dbscSNV · SPIDEX</td><td>스플라이싱에 영향을 주나?</td></tr>
+    <tr><td class="red">ClinVar</td><td class="red">질병과 관련 있나? (병원성 / 무해)</td></tr>
+  </table>
+  <ul class="small">
+    <li>ANNOVAR 방식 3가지 — <b>Gene-based</b>(유전자 안인가) / <b>Region-based</b>(기능 영역인가) / <b>Filter-based</b>(특정 DB에 있나)</li>
+    <li>순서 — VCF → <code>convert2annovar</code>(avinput 변환) → <code>table_annovar</code></li>
+    <li><b>GWAS</b>(Genome-Wide Association Study) — 환자군과 정상군을 비교해 병과 관련된 위치를 찾는 연구</li>
+  </ul>
+  <figure class="slide"><img src="slides/v88.jpg"><figcaption>교수님 슬라이드 — ANNOVAR DB별 질문 (이 변이 이름이 뭔가? / 일반인에게 흔한가? / 질병과 관련 있나?)</figcaption></figure>
+  <div class="box exam"><span class="t">📝 시험에 이렇게 나와요</span>
+    <p>Q. 변이가 질병과 관련 있는지 확인하는 대표 DB는? → <b>ClinVar</b></p>
+  </div>
+</section>
+
+<!-- ============ 9. 암기 카드 ============ -->
+<section class="ch">
+  <span class="chno">9장</span>
+  <h2>암기 카드 — 약어 · 숫자 · 비교</h2>
+  <p class="lead">교수님이 "GATK 이니셜이 뭔가" 같은 문제를 낸다고 했어요. 단답형 점수는 여기서 나와요.</p>
+
+  <h3>9-1. 약어 풀네임 <span class="st">★★★</span></h3>
+  <table class="small">
+    <tr><th style="width:21%">약어</th><th style="width:44%">풀네임</th><th>한 줄</th></tr>
+    <tr><td><b>NGS</b></td><td>Next Generation Sequencing</td><td>대량 동시 시퀀싱</td></tr>
+    <tr><td><b>SBS</b></td><td>Sequencing by Synthesis</td><td>합성하며 동시에 읽기</td></tr>
+    <tr><td><b>PCR</b></td><td>Polymerase Chain Reaction</td><td>DNA 불리기</td></tr>
+    <tr><td><b>SNP</b></td><td>Single Nucleotide Polymorphism</td><td>흔한 한 글자 차이</td></tr>
+    <tr><td><b>SNV</b></td><td>Single Nucleotide Variant</td><td>한 글자 다름</td></tr>
+    <tr><td><b>Indel</b></td><td>Insertion + Deletion</td><td>삽입·결실</td></tr>
+    <tr><td>SNA</td><td>Single Nucleotide Addition</td><td>Roche 읽기 방식</td></tr>
+    <tr><td>CRT</td><td>Cyclic Reversible Termination</td><td>Illumina 읽기 방식</td></tr>
+    <tr><td><b>WGS</b></td><td>Whole Genome Sequencing</td><td>전체 읽기</td></tr>
+    <tr><td><b>WES</b></td><td>Whole Exome Sequencing</td><td>엑손만 읽기</td></tr>
+    <tr><td>SE / PE</td><td>Single-end / Paired-end</td><td>한쪽 / 양쪽 읽기</td></tr>
+    <tr><td><b>QC</b></td><td>Quality Control</td><td>품질 검사</td></tr>
+    <tr><td>BLAST</td><td>Basic Local Alignment Search Tool</td><td>옛 웹 얼라이너</td></tr>
+    <tr><td><b>BWA</b></td><td>Burrows-Wheeler Aligner</td><td>NGS용 얼라이너</td></tr>
+    <tr><td><b>SAM</b></td><td>Sequence Alignment/Map</td><td>얼라인 결과(글자)</td></tr>
+    <tr><td><b>BAM</b></td><td>Binary Alignment/Map</td><td>얼라인 결과(압축)</td></tr>
+    <tr><td>CIGAR</td><td>Compact Idiosyncratic Gapped Alignment Report</td><td>M·I·D·S 표기</td></tr>
+    <tr><td>MAPQ</td><td>Mapping Quality</td><td>제자리 확신도</td></tr>
+    <tr><td><b>IGV</b></td><td>Integrative Genomics Viewer</td><td>눈으로 보는 뷰어</td></tr>
+    <tr><td><b>BQSR</b></td><td>Base Quality Score Recalibration</td><td>품질 점수 재보정</td></tr>
+    <tr><td class="red">GATK</td><td class="red">Genome Analysis Toolkit</td><td>Broad Institute 변이 도구</td></tr>
+    <tr><td>HMM</td><td>Hidden Markov Model</td><td>PairHMM의 HMM</td></tr>
+    <tr><td><b>VCF</b></td><td>Variant Call Format</td><td>변이 목록</td></tr>
+    <tr><td>GVCF</td><td>Genomic VCF</td><td>모든 위치 포함</td></tr>
+    <tr><td>GT·DP·GQ</td><td>Genotype · Depth · Genotype Quality</td><td>VCF 칸</td></tr>
+    <tr><td><b>ANNOVAR</b></td><td>ANNOtate VARiation</td><td>변이 주석</td></tr>
+    <tr><td>GWAS</td><td>Genome-Wide Association Study</td><td>환자 vs 정상 비교</td></tr>
+    <tr><td>CpG</td><td>C-phosphate-G</td><td>C 다음 G, 메틸화 자리</td></tr>
+    <tr><td>hg19 / hg38</td><td>human genome 19 / 38</td><td>레퍼런스 버전</td></tr>
+  </table>
+
+  <h3>9-2. 외울 숫자</h3>
+  <table class="small">
+    <tr><th style="width:38%">항목</th><th>값</th></tr>
+    <tr><td>사람 게놈</td><td><b>약 30억 염기쌍</b> · 유전자 약 2만 · 염색체 23쌍</td></tr>
+    <tr><td>사람 세포</td><td>약 30조 개</td></tr>
+    <tr><td>사람끼리 DNA 차이</td><td>약 <b>0.1%</b> (99% 이상 같음)</td></tr>
+    <tr><td>휴먼 게놈 프로젝트</td><td>1990~<b>2003</b>, <b>13년</b>, <b>30억 달러</b></td></tr>
+    <tr><td>지금 한 사람 게놈</td><td>약 <b>200달러</b></td></tr>
+    <tr><td>Phred</td><td>Q = −10log₁₀P · <b>Q30 = 99.9%</b> · Q40 = 99.99%</td></tr>
+    <tr><td>Illumina</td><td>길이 ~150 · 에러 0.1% · <b>$7/Gb</b> · 점유율 ~70%</td></tr>
+    <tr><td>Roche</td><td>길이 ~700 · 에러 1% · <b>$9,500/Gb</b> · <b>2016 폐업</b></td></tr>
+    <tr><td>Depth 기준</td><td>WGS <b>30x</b> · WES <b>50~100x</b> · Targeted <b>500x+</b> (암 ~3000x)</td></tr>
+    <tr><td>페어드엔드</td><td><b>2×150</b>, 겹침 ~50</td></tr>
+    <tr><td>MAPQ</td><td>60 = 확실히 붙음</td></tr>
+    <tr><td>코돈</td><td>3글자 = 아미노산 1 · 아미노산 20종 · 시작 AUG · 끝 UAA/UAG/UGA</td></tr>
+    <tr><td>수소결합</td><td>G–C <b>3개</b>, A–T 2개</td></tr>
+    <tr><td>클러스터</td><td>같은 조각 약 1,000개를 한 점에</td></tr>
+  </table>
+
+  <h3>9-3. 비교 한 줄 정리 (서술형 "차이를 쓰시오")</h3>
+  <table class="small">
+    <tr><th style="width:30%">비교</th><th>한 줄</th></tr>
+    <tr><td>Sanger vs NGS</td><td>한 줄씩 하나씩 vs <b>판에 고정해 합성하며 동시에 사진, 대량 병렬</b></td></tr>
+    <tr><td>Roche vs Illumina</td><td>Emulsion PCR·SNA·긴 read vs <b>Bridge PCR·CRT·초저가</b> → 비용으로 Illumina 승</td></tr>
+    <tr><td>Depth vs Coverage</td><td><b>한 자리를 몇 번</b> 읽었나 vs <b>전체 중 몇 %</b> 읽었나</td></tr>
+    <tr><td>SE vs PE</td><td>한쪽만 vs <b>양쪽 읽어 길고 정확하게</b></td></tr>
+    <tr><td>WGS / WES / Targeted</td><td>넓을수록 얕게, 좁을수록 깊게</td></tr>
+    <tr><td>FASTA vs FASTQ</td><td>정답지(이름+서열) vs 내 결과(4줄, 점수 포함)</td></tr>
+    <tr><td>SAM vs BAM</td><td>글자(큼) vs 압축(작음)</td></tr>
+    <tr><td>Global vs Local</td><td>전체 비교 vs 부분 비교(변이 찾기)</td></tr>
+    <tr><td>SNP vs SNV</td><td>흔한 개인차 vs 다른 것 전부</td></tr>
+    <tr><td>GVCF vs VCF</td><td>모르는 위치까지 전부 vs 확실한 변이만</td></tr>
+    <tr><td>침묵 / 넌센스 / 미스센스</td><td>같은 아미노산 / 종결 코돈 / 다른 아미노산</td></tr>
+    <tr><td>cutadapt vs Trim Galore</td><td>어댑터만 vs 품질까지 자동</td></tr>
+    <tr><td>히스톤 vs 메틸화</td><td>감긴 정도 vs C에 메틸기 — 둘 다 글자 안 바꾸고 ON/OFF</td></tr>
+  </table>
+</section>
+
+<!-- ============ 10. 예상문제 ============ -->
+<section class="ch">
+  <span class="chno">10장</span>
+  <h2>B+ 필승 10문제 — 짧은 답 외우기</h2>
+  <p class="lead">서술형은 <b>정의 → 왜 → 예시/숫자</b> 순서로 3문장만 쓰면 돼요. 아래 답을 소리 내어 읽고, 다음엔 가리고 써 보세요.</p>
+
+  <div class="qa"><div class="q">① NGS란 무엇인가?</div><div class="a">DNA 조각을 판에 고정하고 염기를 하나씩 <b>합성하면서 동시에 형광으로 읽는(SBS)</b> 기술이다. <b>수억 개 조각을 병렬로</b> 읽어 Sanger보다 훨씬 빠르고 싸다. 휴먼 게놈 분석 비용이 <b>30억 달러에서 약 200달러</b>로 떨어졌다.</div></div>
+  <div class="qa"><div class="q">② Illumina가 Roche를 이긴 이유는?</div><div class="a">읽는 길이는 Roche(700)가 길었지만, Illumina는 처리량이 커서 <b>1Gb당 $7로 Roche($9,500)보다 1,000배 이상 쌌다.</b> 에러도 0.1%로 낮았다. <b>기술 혁신은 비용과 연결되고</b>, Roche는 2016년 문을 닫았다.</div></div>
+  <div class="qa"><div class="q">③ Depth와 coverage의 차이, depth가 중요한 이유는?</div><div class="a">Depth는 <b>한 자리를 몇 개 read가 겹쳐 읽었나</b>, coverage는 <b>전체 중 한 번이라도 읽힌 비율</b>이다. depth가 높으면 한 read의 에러를 다른 read들이 보완해 <b>진짜 변이와 기계 에러를 구별</b>할 수 있다. 100x 중 1개만 다르면 에러, 2x에서 1개 다르면 판단 불가다.</div></div>
+  <div class="qa"><div class="q">④ WGS, WES, Targeted의 차이는?</div><div class="a">기계가 읽는 양은 정해져 있어 <b>범위가 좁을수록 depth가 깊어진다.</b> WGS는 전체 게놈 ~30x, WES는 엑손만 50~100x, Targeted는 특정 유전자 500x 이상이다. Targeted는 <b>비율이 낮은 변이</b>(암 조기진단)에 쓴다.</div></div>
+  <div class="qa"><div class="q">⑤ FASTQ 구조와 Phred 점수는?</div><div class="a">read 하나가 <b>4줄 — ID(@), 서열, +, 품질 점수.</b> 품질 점수는 <b>Q = −10log₁₀P</b>로, Q30은 에러 1/1,000 = 정확도 99.9%다. 보통 Q30을 QC 기준으로 쓴다.</div></div>
+  <div class="qa"><div class="q">⑥ 페어드엔드의 원리와 장점은?</div><div class="a">NGS는 한 번에 150~250글자만 읽으므로 조각 <b>양쪽 끝에서 각각 읽고 겹치는 부분으로 이어붙인다.</b> 장점은 <b>더 길게 읽고</b>, 뒤쪽 품질 저하를 <b>반대쪽 read가 보완</b>해 정확도가 오른다는 것이다. 2×150처럼 쓴다.</div></div>
+  <div class="qa"><div class="q">⑦ 얼라인먼트란? BWA가 빠른 이유는?</div><div class="a">짧은 read가 <b>레퍼런스 게놈의 어느 위치인지 맞추는 것</b>이며, 위치를 알아야 변이를 찾을 수 있다. BWA는 레퍼런스를 <b>미리 인덱싱</b>하고, read의 짧은 <b>seed</b>로 후보 위치를 찾은 뒤 <b>extend</b>하므로 BLAST보다 빠르다.</div></div>
+  <div class="qa"><div class="q">⑧ MarkDuplicates의 이유와 생략하는 경우는?</div><div class="a">PCR 증폭으로 같은 조각의 복사본이 생기면 <b>변이 비율이 부풀려져</b>(30%→80%) 잘못 판단한다. 무작위로 자른 DNA는 시작·끝이 같을 수 없으므로 <b>같은 위치 read를 중복으로 보고 제거</b>한다. 단 <b>amplicon(targeted)</b>은 원래 시작·끝이 같으므로 생략한다.</div></div>
+  <div class="qa"><div class="q">⑨ BQSR의 목적과 방법은?</div><div class="a">기계 품질 점수의 <b>bias를 보정해 에러를 변이로 오인하지 않게</b> 하는 단계다. <b>dbSNP 같은 알려진 변이 DB</b>를 기준으로 보정 테이블을 만들고(BaseRecalibrator) 점수를 다시 쓴다(ApplyBQSR). 결과는 분석 준비가 된 final BAM이다.</div></div>
+  <div class="qa"><div class="q">⑩ Variant calling에서 중요한 것은? (HaplotypeCaller)</div><div class="a">레퍼런스와 다른 곳 찾기(<b>틀린 그림 찾기</b>)는 쉽지만, 그중 <b>진짜 변이일 확률을 계산</b>하는 게 핵심이다. GATK HaplotypeCaller는 변이가 몰린 <b>active region</b>에서 <b>haplotype</b> 후보를 만들고 <b>PairHMM·베이지안</b>으로 확률을 계산해 확실한 변이만 VCF로 뽑는다.</div></div>
+</section>
+
+<section class="ch">
+  <span class="chno">10장</span>
+  <h2>예상문제 전체 — 먼저 답 가리고 풀기</h2>
+  <h3>단답형</h3>
+  <ol class="small">
+    <li>센트럴 도그마의 두 과정(DNA→RNA, RNA→단백질) 이름은?</li>
+    <li>아미노산 하나를 지정하는 염기 3개 단위는?</li>
+    <li>염기는 바뀌었지만 같은 아미노산을 만드는 돌연변이는?</li>
+    <li>사람 게놈은 약 몇 염기쌍인가?</li>
+    <li>NGS 핵심 원리 (영어 3단어)는?</li>
+    <li>FASTQ 한 read는 몇 줄이고 각 줄은?</li>
+    <li>Phred Q30의 정확도는?</li>
+    <li>보통 QC 통과 기준 점수는?</li>
+    <li>FASTQ 서열의 N은?</li>
+    <li>CIGAR 5M2I10M의 뜻은?</li>
+    <li>정렬된 BAM의 인덱스 파일 확장자는?</li>
+    <li>GATK의 풀네임과 만든 기관은?</li>
+    <li>VCF에서 GT가 0/0이면?</li>
+    <li>변이가 질병과 관련 있는지 보는 대표 DB는?</li>
+    <li>2×150의 뜻은?</li>
+    <li>BWA, SAM, BQSR, VCF의 풀네임은?</li>
+    <li>DNA 메틸화는 어떤 염기에 일어나나?</li>
+  </ol>
+  <h3>서술형</h3>
+  <ol class="small" start="18">
+    <li>NGS가 무엇인지 Sanger와 비교해 설명하시오.</li>
+    <li>Illumina가 시장을 차지한 이유를 설명하시오.</li>
+    <li>Depth와 coverage의 차이와 depth가 중요한 이유를 쓰시오.</li>
+    <li>FASTQ에서 VCF까지 파이프라인을 순서대로 쓰고 각 단계 목적을 설명하시오.</li>
+    <li>read 뒤쪽으로 갈수록 품질이 떨어지는 이유와 대처법을 쓰시오.</li>
+    <li>어댑터 트리밍이 필요한 이유를 쓰시오.</li>
+    <li>GVCF와 VCF의 차이를 쓰시오.</li>
+    <li>DNA 메틸화가 유전자 발현을 조절하는 원리와 암과의 관계를 쓰시오.</li>
+    <li>겸상 적혈구 빈혈증을 예로 미스센스 변이를 설명하시오.</li>
+    <li>WGS·WES·Targeted, 페어드엔드, MarkDuplicates, BQSR, HaplotypeCaller → 앞 페이지 필승 10문제</li>
+  </ol>
+</section>
+
+<section class="ch">
+  <span class="chno">10장</span>
+  <h2>모범 답안</h2>
+  <h3>단답형</h3>
+  <ol class="small">
+    <li><b>전사(transcription), 번역(translation)</b></li>
+    <li><b>코돈(codon)</b></li>
+    <li><b>침묵 돌연변이(silent mutation)</b></li>
+    <li><b>약 30억(3 billion)</b></li>
+    <li><b>Sequencing by Synthesis</b></li>
+    <li><b>4줄</b> — ID(@), 염기서열, +, 품질 점수</li>
+    <li><b>99.9%</b> (에러 1/1,000)</li>
+    <li><b>Q30</b></li>
+    <li>염기를 <b>판별하지 못한 자리</b></li>
+    <li>5개 매치, 2개 <b>삽입</b>, 10개 매치</li>
+    <li><b>.bai</b></li>
+    <li><b>Genome Analysis Toolkit, Broad Institute</b></li>
+    <li><b>변이 없음</b> (레퍼런스와 같음)</li>
+    <li><b>ClinVar</b></li>
+    <li>양쪽에서 <b>150bp씩</b> 읽는 <b>페어드엔드</b></li>
+    <li>Burrows-Wheeler Aligner / Sequence Alignment/Map / Base Quality Score Recalibration / Variant Call Format</li>
+    <li><b>사이토신(C)</b> — 주로 CpG 자리</li>
+  </ol>
+  <h3>서술형</h3>
+  <div class="qa"><div class="q">18. NGS vs Sanger</div><div class="a">DNA 시퀀싱은 ATGC 순서를 읽는 것이다. <b>Sanger</b>는 형광 염기가 붙으면 합성이 멈추게 해 길이가 다른 조각을 만들고, 관(캐필러리)에 흘려 짧은 것부터 읽는다. 관 하나에 한 종류라 동시에 몇십 개밖에 못 읽는다. <b>NGS</b>는 조각을 판에 먼저 고정(클러스터)하고 <b>합성하면서 동시에 형광을 찍어(SBS)</b> 약 10⁹개를 한꺼번에 읽는다. 그래서 비용이 30억 달러(13년)에서 약 200달러로 떨어졌다.</div></div>
+  <div class="qa"><div class="q">19. Illumina 승리 이유</div><div class="a">→ 필승 ②번 답</div></div>
+  <div class="qa"><div class="q">20. Depth vs Coverage</div><div class="a">→ 필승 ③번 답</div></div>
+  <div class="qa"><div class="q">21. 파이프라인 전체</div><div class="a">① NGS로 <b>FASTQ</b> 생성 → ② <b>QC</b>(FastQC, Q30 기준 품질 확인) → ③ <b>트리밍</b>(cutadapt로 어댑터·저품질 제거)·머지 → ④ <b>얼라인먼트</b>(BWA로 레퍼런스 위치 찾기) → SAM → <b>정렬된 BAM + 인덱스</b> → ⑤ <b>MarkDuplicates</b>(PCR 중복 제거) → ⑥ <b>BQSR</b>(알려진 SNP 기준 품질 재보정) → ⑦ <b>Variant calling</b>(GATK HaplotypeCaller로 진짜 변이 확률 계산) → <b>GVCF → VCF</b> → ⑧ <b>Annotation</b>(ANNOVAR로 변이 의미 연결). FASTQ→BAM은 전처리, BAM→VCF는 변이 발견이다. 단계마다 IGV와 coverage·depth로 확인한다.</div></div>
+  <div class="qa"><div class="q">22. 뒤쪽 품질 저하</div><div class="a">① 조각이 짧아도 기계는 150사이클까지 찍으므로 조각이 끝난 뒤엔 <b>어댑터·노이즈</b>를 읽는다. ② 사이클이 반복될수록 <b>형광 노이즈가 누적</b>된다. 대처는 <b>트리밍</b>과 <b>페어드엔드</b>(반대쪽 read로 보완)다.</div></div>
+  <div class="qa"><div class="q">23. 어댑터 트리밍 이유</div><div class="a">인서트가 read 길이보다 짧으면 <b>어댑터 서열까지 읽고 그 뒤는 노이즈</b>가 된다. 이 부분은 레퍼런스에 없는 서열이라 <b>얼라인먼트가 잘 안 되고 변이로 오인</b>될 수 있다. 트리밍한 데이터가 얼라인율이 훨씬 높다.</div></div>
+  <div class="qa"><div class="q">24. GVCF vs VCF</div><div class="a"><b>GVCF</b>는 판단할 수 없는 위치(<code>&lt;NON_REF&gt;</code>)까지 <b>모든 위치를 기록</b>하고, <b>VCF</b>는 <b>확실한 변이만</b> 기록한다. 보통 GVCF를 먼저 만들고 GenotypeGVCFs로 VCF를 추린다.</div></div>
+  <div class="qa"><div class="q">25. 메틸화와 암</div><div class="a">DNA 메틸화는 <b>사이토신(C)에 메틸기가 붙는 것</b>으로 서열은 바뀌지 않는다. CpG가 몰린 <b>CpG 아일랜드는 주로 프로모터</b>에 있는데, 여기가 메틸화되면 <b>전사인자가 못 붙어 유전자가 꺼진다.</b> 암에서는 <b>종양억제유전자 프로모터가 과메틸화</b>되어 꺼지고, 전체적으로는 저메틸화가 나타난다.</div></div>
+  <div class="qa"><div class="q">26. 겸상 적혈구 (미스센스)</div><div class="a">미스센스는 염기 하나가 바뀌어 <b>다른 아미노산</b>이 되는 점 돌연변이다. 헤모글로빈 유전자의 <b>GAG(글루탐산)가 GTG(발린)</b>로 바뀌어 적혈구가 낫 모양이 되고 산소 운반이 안 돼 빈혈이 생긴다. 센트럴 도그마의 한 지점이 어긋나면 질병이 된다는 예다.</div></div>
+</section>
+
+<!-- ============ 11. 시험장 ============ -->
+<section class="ch">
+  <span class="chno">11장</span>
+  <h2>시험장에서 — 마지막 1장</h2>
+  <div class="box tip"><span class="t">✍️ 서술형 쓰는 공식</span>
+    <p class="big">정의 → 왜(목적) → 예시·숫자</p>
+    <p class="small">예) "Depth는 한 자리를 몇 개 read가 읽었는지다(정의). 높을수록 에러와 진짜 변이를 구별할 수 있다(왜). WGS는 30x, 암 조기진단은 3000x까지 올린다(숫자)."</p>
+  </div>
+  <div class="box exam"><span class="t">🎯 시험지 받자마자</span>
+    <ol>
+      <li>여백에 <b>1장 파이프라인</b>을 먼저 그려 두기<br><span class="small">FASTQ → QC → 트리밍 → BWA → BAM → MarkDup → BQSR → HaplotypeCaller → VCF → ANNOVAR</span></li>
+      <li>약어 문제는 아는 것부터 빠르게</li>
+      <li>모르는 서술형도 <b>빈칸으로 두지 말고</b> 정의 한 줄 + "목적에 따라 판단한다" 같은 교수님 문장이라도 쓰기</li>
+    </ol>
+  </div>
+  <div class="box pro"><span class="t">🗣 어디에 붙여도 점수 되는 교수님 문장</span>
+    <ul>
+      <li>"틀린 그림 찾기는 쉽고, <b>진짜 변이인지 확률을 계산하는 게</b> 중요하다."</li>
+      <li>"<b>depth가 높을수록</b> 변이 판정이 정확하다."</li>
+      <li>"<b>목적에 따라</b> 파이프라인 단계를 선택한다."</li>
+      <li>"<b>기술 혁신은 비용과 연결된다.</b>"</li>
+      <li>"단계마다 <b>IGV와 coverage·depth로 확인</b>한다."</li>
+    </ul>
+  </div>
+  <div class="box gray small">
+    <b>헷갈리는 숫자 맞추는 법</b><br>
+    게놈 <b>30억</b> (3조 아님) · 휴먼게놈프로젝트 <b>30억 달러</b> · Q30은 <b>0이 3개</b> → 1/1000 · Illumina 1Gb <b>$7</b> · Roche 폐업 <b>2016</b>
+  </div>
+  <p style="text-align:center;margin-top:6mm" class="acc">할 수 있어요. 화이팅!</p>
+</section>
+
+</body>
+</html>

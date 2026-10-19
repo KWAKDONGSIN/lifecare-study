@@ -1,0 +1,152 @@
+<!-- 1장 큰 그림 — 설계도 책 오타 찾기 이야기로 FASTQ→BAM→VCF 파이프라인 ①~⑩을 중학생 눈높이로 설명 -->
+<h2>큰 그림 — 파이프라인</h2>
+<p class="lead">이 과목은 결국 "내 DNA에서 오타를 찾는 과정"이에요. 이 장에서는 그 과정을 ①~⑩ 열 단계로 보고, 왜 단계가 이렇게 많은지 이유까지 이해해요.</p>
+
+<h3>1-1. 이야기 하나로 보는 전체 그림</h3>
+<div class="box eg"><span class="t">비유</span>
+  <p>사람 몸에는 <b>설계도 책</b>이 있어요. 이 책이 바로 <b>DNA</b>예요. 글자는 A, T, G, C 네 가지뿐인데 <b>30억 글자</b>나 돼요.</p>
+  <p>이 책에 <b>오타</b>가 생기면 병이 될 수 있어요. 이 오타를 <b>변이(variant)</b>라고 불러요. 그래서 <b>내 책을 읽어서 표준 책과 비교하고, 오타를 찾는 것</b>이 이 과목의 목표예요.</p>
+  <p>표준 책은 <b>레퍼런스(reference)</b>라고 해요. 이미 정답이 정해진 사람 게놈이라서 "정답지"라고 생각하면 돼요.</p>
+</div>
+<p>문제는 책이 너무 길어서 통째로 못 읽는다는 거예요. 기계가 한 번에 읽는 길이는 약 150글자뿐이에요. 그래서 책을 잘게 찢어서 수억 장을 동시에 읽어요.</p>
+<p>다음은 퍼즐 맞추기예요. 찢어진 쪽지가 원래 책의 어디였는지 정답지에서 찾아 붙여요. 붙이고 나서 정답지와 다른 글자를 찾으면 그게 오타 후보예요.</p>
+<p>마지막으로 후보가 진짜 오타인지 계산하고, 그 오타가 무슨 뜻인지 사전에서 찾아요. 이것이 전체 이야기예요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b>변이(variant)</b>는 내 DNA 글자가 표준 책(레퍼런스)과 다른 자리예요. <b>파이프라인(pipeline)</b>은 읽기부터 변이 찾기까지 일을 순서대로 이어 놓은 작업 줄이에요. 공장의 컨베이어 벨트처럼 앞 단계의 결과가 다음 단계의 재료가 돼요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>이 분석의 목적은 개인의 시퀀싱 데이터를 레퍼런스와 비교해 변이(variant)를 찾고, 그 변이가 질병이나 형질과 어떤 관계인지 해석하는 것이다. 시퀀서는 DNA를 짧은 조각으로만 읽을 수 있으므로 조각을 레퍼런스에 정렬(alignment)하는 과정이 필요하다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 기계가 DNA를 통째로 읽지 않고 왜 잘게 찢어서 읽나요?</summary>
+  <p>기계가 한 번에 읽는 길이가 약 150글자인데, 사람 게놈은 약 30억 글자라서 통째로는 못 읽기 때문이에요.</p>
+</details>
+
+<h3>1-2. ①~⑩ 한눈에 보기</h3>
+<p>아래 그림이 교수님이 매 시간 "우리 지금 어디까지 왔냐면" 하고 보여 준 흐름이에요. 왼쪽이 단계 이름이고 오른쪽이 쉬운 비유예요. 지금은 모양만 훑어보고, 바로 뒤에서 한 단계씩 풀어요.</p>
+<div class="flow">
+    <div class="step c1"><span class="nm">① 피 뽑기 → DNA 꺼내기</span><span class="an">책 꺼내기</span></div><div class="arrow">▼</div>
+    <div class="step c1"><span class="nm">② DNA 잘게 자르기 (~150글자)</span><span class="an">책을 쪽지로 찢기</span></div><div class="arrow">▼</div>
+    <div class="step c1"><span class="nm">③ NGS 기계로 읽기 → <span class="red">FASTQ</span></span><span class="an">쪽지 수억 장 동시에 읽기</span></div><div class="arrow">▼</div>
+    <div class="step c2"><span class="nm">④ QC (FastQC)</span><span class="an">읽은 게 믿을 만한지 성적표</span></div><div class="arrow">▼</div>
+    <div class="step c2"><span class="nm">⑤ 트리밍 (cutadapt) · 머지 (PEAR)</span><span class="an">쓰레기 부분 잘라내고 이어붙이기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑥ 얼라인먼트 (BWA) → SAM → <span class="red">BAM</span></span><span class="an">쪽지를 표준 책 제자리에 붙이기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑦ MarkDuplicates (Picard)</span><span class="an">복사본 쪽지 빼기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑧ BQSR (GATK)</span><span class="an">기계 점수 영점 맞추기</span></div><div class="arrow">▼</div>
+    <div class="step c4"><span class="nm">⑨ Variant calling (HaplotypeCaller) → <span class="red">VCF</span></span><span class="an">진짜 오타만 골라내기</span></div><div class="arrow">▼</div>
+    <div class="step c5"><span class="nm">⑩ Annotation (ANNOVAR)</span><span class="an">그 오타 뜻을 사전에서 찾기</span></div>
+  </div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>파일 이름 세 개만 먼저 외우세요. <b>FASTQ → BAM → VCF</b> 순서예요.</p>
+  <p>FASTQ는 "읽은 결과", BAM은 "제자리에 붙인 결과", VCF는 "찾은 변이 목록"이에요.</p>
+</div>
+<figure class="slide"><img src="slides/v03.jpg"><figcaption>교수님 슬라이드 — Full process to analyze genomic data. 오른쪽 노란 상자들이 위 ④~⑨ 순서예요.</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ에서 VCF까지의 분석 순서는 QC, 트리밍과 머지, 얼라인먼트(BAM 생성), MarkDuplicates, BQSR, variant calling, annotation이다. 앞의 FASTQ에서 BAM까지를 pre-processing, BAM에서 VCF까지를 variant discovery라고 한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 파일 이름 세 개를 순서대로 말해 보세요.</summary>
+  <p>FASTQ(읽은 결과) → BAM(제자리에 붙인 결과) → VCF(찾은 변이 목록)예요.</p>
+</details>
+
+<h3>1-3. ①~③ 읽기 전 준비 — 책을 찢어서 기계에 넣기</h3>
+<p><b>① DNA 꺼내기</b>예요. DNA는 우리 몸 세포 속에 있어서 피나 조직에서 꺼내요. 이 과정을 DNA 추출이라고 하고, 사람의 DNA라서 genomic DNA라고 불러요.</p>
+<p><b>② 자르기</b>예요. 꺼낸 DNA를 아무 데나 랜덤하게 약 150글자 길이로 잘라요(fragmentation, 프래그멘테이션). 기계가 한 번에 읽는 길이에 맞추려는 거예요.</p>
+<p>자른 조각 양끝에는 <b>어댑터(adapter)</b>라는 연결 부품을 붙여요. 어댑터는 조각을 유리판에 걸어 주고 기계가 알아보게 하는 손잡이예요. 이렇게 준비한 조각 모음을 <b>라이브러리(library)</b>라고 불러요.</p>
+<p><b>③ NGS 기계로 읽기</b>예요. 기계는 조각마다 글자를 하나씩 읽으며 사진을 찍고, 그 사진을 A·T·G·C 글자로 바꿔요. 이 글자로 바꾸는 일을 <b>base calling(베이스 콜링)</b>이라고 하고, 결과 파일이 <b>FASTQ</b>예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>두꺼운 책 한 권을 수억 개의 작은 쪽지로 찢어서 운동장에 깔아 놓고, 드론이 위에서 쪽지의 글자를 한꺼번에 사진 찍는 모습이에요. 사진을 글자로 옮겨 적은 노트가 FASTQ예요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>혈액이나 조직에서 genomic DNA를 추출해 약 150bp로 랜덤하게 절단(fragmentation)하고 어댑터를 붙여 라이브러리를 만든다. 이를 NGS 기기로 시퀀싱하면 base calling을 거쳐 FASTQ 파일이 생성된다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — base calling은 무엇을 하는 일인가요?</summary>
+  <p>기계가 찍은 형광 사진을 A·T·G·C 글자로 바꾸는 일이에요. 그 결과 파일이 FASTQ예요.</p>
+</details>
+
+<h3>1-4. ④~⑤ 믿을 만한지 확인하고 다듬기</h3>
+<p><b>④ QC(Quality Control, 품질 관리)</b>예요. FASTQ를 받으면 먼저 "이 데이터를 믿어도 되나" 성적표를 봐요. 이때 쓰는 도구가 <b>FastQC</b>예요. 기준은 보통 Q30 이상이에요(Q30은 4장에서 자세히 배워요).</p>
+<p>이유는 간단해요. 정렬 도구는 글자의 품질까지 따져 주지 않아서, 나쁜 글자가 섞여 있으면 그대로 오타처럼 보일 수 있어요.</p>
+<p><b>⑤ 트리밍(trimming)과 머지(merge)</b>예요. 트리밍은 필요 없는 부분을 잘라 내는 일이고 도구는 <b>cutadapt</b>예요. 조각이 짧으면 기계가 끝까지 읽다가 손잡이(어댑터)나 잡음까지 읽어 버리기 때문이에요.</p>
+<p>머지는 두 방향으로 읽은 조각을 겹치는 부분에서 이어 붙여 더 길게 만드는 일이고 도구는 <b>PEAR</b>(Paired-End reAd mergeR)예요. 조각 하나를 양쪽 끝에서 읽는 방식을 paired-end라고 해요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>QC는 시험지를 채점하기 전에 "글씨가 알아볼 만한가" 보는 일이에요. 트리밍은 쪽지 끝에 묻은 얼룩과 손잡이를 가위로 잘라 내는 일이고, 머지는 반쪽씩 읽은 쪽지를 겹친 부분에 맞춰 풀로 붙이는 일이에요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FastQC로 염기 품질(Q30 기준)을 확인하고, cutadapt로 어댑터와 저품질 부분을 제거한다. paired-end 데이터는 PEAR로 R1과 R2를 겹치는 구간(overlap)에서 병합해 더 긴 read를 만든다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 트리밍을 하는 이유는 무엇인가요?</summary>
+  <p>조각이 짧으면 기계가 어댑터와 노이즈까지 읽기 때문에, 그 쓸모없는 부분을 잘라 내려고 해요.</p>
+</details>
+
+<h3>1-5. ⑥~⑧ 제자리에 붙이고 정리하기</h3>
+<p><b>⑥ 얼라인먼트(alignment, 정렬)</b>예요. 쪽지 수억 장이 정답지(레퍼런스)의 어디에서 왔는지 찾아 붙이는 일이에요. 교수님은 "퍼즐 조각 맞추기"라고 했어요.</p>
+<p>도구는 <b>BWA</b>(Burrows-Wheeler Aligner)예요. 결과는 먼저 글자 파일인 <b>SAM</b>(Sequence Alignment/Map)으로 나오고, 같은 내용을 컴퓨터가 빨리 읽게 압축한 것이 <b>BAM</b>이에요. 그다음 위치 순서로 줄을 세우고(sort) 찾아보기용 번호표(index, BAI)를 만들어요.</p>
+<p><b>⑦ MarkDuplicates(마크 듀플리케이츠)</b>예요. 도구는 <b>Picard</b>예요. 준비 과정에서 같은 조각이 PCR(Polymerase Chain Reaction, DNA 복사 기술)로 여러 번 복사될 수 있는데, 이 복사본이 변이 비율을 부풀려요. 그래서 복사본을 표시하고 빼요.</p>
+<p><b>⑧ BQSR</b>(Base Quality Score Recalibration, 염기 품질 점수 재보정)예요. 도구는 <b>GATK</b>(Genome Analysis Toolkit)예요. 기계가 붙인 품질 점수에는 습관적인 치우침이 있어서, 이미 알려진 변이 목록(SNP 데이터베이스)을 기준으로 점수를 다시 맞춰요. 기계의 읽기 실수를 변이로 착각하지 않으려는 거예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>정렬은 찢어진 쪽지를 표준 책 위에 올려 제자리에 붙이는 일이에요. MarkDuplicates는 같은 쪽지를 복사기로 여러 장 뽑았을 때 한 장만 남기는 일이에요. BQSR은 체중계가 늘 1kg 많게 나오면 영점을 다시 맞추는 일이에요.</p>
+</div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>⑥~⑧에서 도구 이름은 <b>BWA(붙이기) → Picard(복사본 빼기) → GATK(점수 보정)</b> 순서로 외우세요. 한 단계씩 "왜 하는지"를 같이 말할 수 있으면 돼요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>BWA로 read를 레퍼런스에 정렬해 SAM을 만들고 BAM으로 변환한 뒤 위치순으로 정렬하고 인덱스를 만든다. Picard MarkDuplicates로 PCR 중복 read를 제거하고, GATK BQSR로 염기 품질 점수를 재보정해 시퀀싱 에러가 변이로 오인되는 것을 막는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — MarkDuplicates는 왜 필요한가요?</summary>
+  <p>PCR로 복사된 같은 조각이 여러 번 세어지면 변이 비율이 부풀려지기 때문에, 중복 복사본을 빼려고 해요.</p>
+</details>
+
+<h3>1-6. ⑨~⑩ 진짜 오타만 고르고 뜻 찾기</h3>
+<p><b>⑨ Variant calling(변이 호출)</b>예요. 정답지와 다른 자리를 모두 찾는 건 쉬워요. 어려운 건 그중에서 <b>진짜 변이일 확률이 높은 것만</b> 골라내는 일이에요.</p>
+<p>도구는 GATK의 <b>HaplotypeCaller</b>예요. 한 자리를 여러 쪽지가 덮고 있어야 믿을 수 있어요. 100장 중 1장만 다르면 기계 실수로 보고 걸러요. 결과는 <b>VCF</b>(Variant Call Format, 변이 목록 파일)로 나와요.</p>
+<p><b>⑩ Annotation(주석 달기)</b>예요. 찾은 변이가 무슨 뜻인지 알려진 데이터베이스(예 ClinVar)와 연결해 설명을 붙여요. 도구는 <b>ANNOVAR</b>예요. 이 단계를 거쳐야 "이 변이가 어떤 병이나 특징과 관련 있나"를 알 수 있어요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>두 그림에서 다른 곳을 찾는 "틀린 그림 찾기"는 쉬워요. 하지만 그 다른 점이 진짜 틀린 것인지, 인쇄가 번진 것인지 가려내는 건 어려워요. 그다음에 사전을 펴서 그 틀린 부분이 무슨 뜻인지 찾아보는 것이 annotation이에요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>GATK HaplotypeCaller로 variant calling을 수행해 레퍼런스와 다른 위치 중 진짜 변이일 가능성이 높은 것만 VCF로 출력한다. 이후 ANNOVAR로 dbSNP, ClinVar 같은 데이터베이스와 연결해 변이의 질병 관련성과 의미를 해석한다(annotation).</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 변이 호출(variant calling)에서 어려운 점은 무엇인가요?</summary>
+  <p>다른 자리를 찾는 건 쉽지만, 그것이 진짜 변이인지 기계 에러인지 가려내야 한다는 점이에요.</p>
+</details>
+
+<h3>1-7. 큰 묶음 3개와 교수님이 반복한 문장</h3>
+<p>열 단계는 크게 세 묶음으로 불러요. 시험에는 이 묶음 이름이 자주 나와요.</p>
+<table>
+  <tr><th style="width:34%">묶음</th><th>입력 → 출력</th><th>뜻</th></tr>
+  <tr><td><b>Pre-processing</b> (전처리)</td><td>FASTQ → BAM</td><td>읽은 조각을 믿을 만하게 다듬어 제자리에 붙이기</td></tr>
+  <tr><td><b>Variant discovery</b> (변이 발견)</td><td>BAM → VCF</td><td>붙인 결과에서 진짜 변이 찾기</td></tr>
+  <tr><td><b>Refinement / Annotation</b></td><td>VCF → 해석</td><td>목적에 따라 질병 관련 변이만 볼지 전체를 볼지 정하기</td></tr>
+</table>
+<p>"FASTQ에서 BAM까지 다섯 줄이면 된다"는 말은 이미 만들어진 도구(bwa, samtools)가 있어서예요. 다섯 줄은 ① bwa index(레퍼런스 색인 만들기) ② bwa mem(정렬해서 SAM 만들기) ③ samtools view(SAM을 BAM으로 바꾸기) ④ samtools sort(위치순 정렬) ⑤ samtools index(번호표 만들기)예요. 지금은 이런 단계가 있다는 것만 알면 돼요.</p>
+<div class="box tip"><span class="t">교수님이 반복한 문장 4개</span>
+  <ul>
+    <li>"<b>틀린 그림 찾기는 쉽다. 중요한 건 그게 진짜 변이인지 계산하는 것.</b>"</li>
+    <li>"이 분야는 코딩을 잘해야 하는 게 아니라 <b>백그라운드를 이해하고 목적에 맞게 파이프라인 로직을 짜는 것</b>이 중요하다."</li>
+    <li>"<b>목적에 따라 판단한다.</b>" 어떤 단계는 상황에 따라 생략해요. 예를 들어 특정 유전자만 읽은 데이터(targeted)는 MarkDuplicates를 건너뛰고, 희귀 변이를 찾을 때는 hard filter를 건너뛰어요.</li>
+    <li>"툴은 이미 다 있다. FASTQ에서 BAM까지 다섯 줄이면 된다."</li>
+  </ul>
+</div>
+<p>정리하면 이 과목은 코딩 시험이 아니에요. 각 단계가 "왜 있는지"와 "무엇을 넣고 무엇이 나오는지"를 말로 설명하는 시험이에요. 단계마다 눈(IGV, Integrative Genomics Viewer)과 숫자(coverage, depth)로 잘 됐는지 확인한다는 점도 함께 기억하세요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ에서 VCF까지의 분석 과정과 각 단계의 목적은 다음과 같다.</p>
+  <ul>
+    <li>QC(FastQC) — 염기 품질이 Q30 이상으로 충분한지 확인한다.</li>
+    <li>트리밍(cutadapt)·머지(PEAR) — 어댑터와 저품질 부분을 제거하고 paired-end read를 병합한다.</li>
+    <li>얼라인먼트(BWA) — read를 레퍼런스에 정렬해 SAM/BAM을 만든다.</li>
+    <li>MarkDuplicates(Picard) — PCR 중복 read를 제거한다.</li>
+    <li>BQSR(GATK) — 염기 품질 점수를 재보정해 에러가 변이로 오인되지 않게 한다.</li>
+    <li>Variant calling(HaplotypeCaller) — 진짜 변이일 가능성이 높은 위치만 VCF로 출력한다.</li>
+    <li>Annotation(ANNOVAR) — 변이를 데이터베이스와 연결해 질병 관련 의미를 해석한다.</li>
+  </ul>
+</div>
+<details class="check"><summary>잠깐 확인 — Pre-processing과 Variant discovery는 각각 어디서 어디까지인가요?</summary>
+  <p>Pre-processing은 FASTQ에서 BAM까지이고, Variant discovery는 BAM에서 VCF까지예요.</p>
+</details>
+
+<div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>목적은 내 DNA를 표준 책(레퍼런스)과 비교해 변이(오타)를 찾고 그 뜻을 푸는 것이에요.</li>
+    <li>순서는 읽기(FASTQ) → 다듬어 제자리에 붙이기(BAM) → 진짜 변이 고르기(VCF) → 뜻 찾기(annotation)예요.</li>
+    <li>중요한 건 도구 사용법이 아니라 "각 단계가 왜 있는지"를 말로 설명하는 로직이에요.</li>
+  </ul>
+</div>

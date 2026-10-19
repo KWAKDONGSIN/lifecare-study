@@ -1,0 +1,1830 @@
+{
+ "glossary": [
+  {
+   "term": "세포",
+   "aka": [
+    "cell"
+   ],
+   "en": "Cell",
+   "easy": "생물의 몸을 이루는 가장 작은 기본 단위예요. 레고 블록 하나하나처럼, 사람 몸은 수십조 개의 세포가 모여 만들어져요."
+  },
+  {
+   "term": "핵",
+   "aka": [
+    "세포핵",
+    "nucleus"
+   ],
+   "en": "Nucleus",
+   "easy": "세포 안에서 DNA를 보관하는 작은 방이에요. 중요한 설계도를 넣어 두는 금고라고 생각하면 돼요."
+  },
+  {
+   "term": "염색체",
+   "aka": [
+    "chromosome"
+   ],
+   "en": "Chromosome",
+   "easy": "긴 DNA를 단백질에 돌돌 감아 차곡차곡 접어 놓은 덩어리예요. 사람은 보통 23쌍, 모두 46개를 가지고 있어요."
+  },
+  {
+   "term": "DNA",
+   "aka": [
+    "디엔에이",
+    "deoxyribonucleic acid"
+   ],
+   "en": "Deoxyribonucleic Acid",
+   "easy": "생물의 설계도가 적혀 있는 아주 긴 물질이에요. A, T, G, C 네 가지 글자가 길게 이어져 있어요."
+  },
+  {
+   "term": "RNA",
+   "aka": [
+    "알엔에이",
+    "ribonucleic acid"
+   ],
+   "en": "Ribonucleic Acid",
+   "easy": "DNA 설계도를 복사한 사본 같은 물질이에요. DNA와 달리 보통 한 가닥이고, T 대신 U라는 글자를 써요."
+  },
+  {
+   "term": "mRNA",
+   "aka": [
+    "메신저 RNA",
+    "messenger RNA",
+    "전령 RNA"
+   ],
+   "en": "messenger RNA",
+   "easy": "DNA에서 필요한 부분만 베껴서 단백질 공장으로 배달하는 복사본이에요. 이름 그대로 메시지를 전하는 심부름꾼이에요."
+  },
+  {
+   "term": "tRNA",
+   "aka": [
+    "transfer RNA",
+    "운반 RNA"
+   ],
+   "en": "transfer RNA",
+   "easy": "mRNA의 암호에 맞는 아미노산을 실어 나르는 작은 택배 기사예요. 암호 3글자마다 알맞은 아미노산을 가져다줘요."
+  },
+  {
+   "term": "리보솜",
+   "aka": [
+    "ribosome"
+   ],
+   "en": "Ribosome",
+   "easy": "mRNA를 읽어서 아미노산을 이어 붙여 단백질을 만드는 세포 안의 작은 공장이에요."
+  },
+  {
+   "term": "염기",
+   "aka": [
+    "base",
+    "nucleotide base"
+   ],
+   "en": "Base (Nucleobase)",
+   "easy": "DNA와 RNA를 이루는 글자 하나하나예요. DNA에는 A, T, G, C 네 종류가 있어요."
+  },
+  {
+   "term": "A/T/G/C/U",
+   "aka": [
+    "아데닌",
+    "티민",
+    "구아닌",
+    "우라실",
+    "adenine",
+    "thymine",
+    "guanine",
+    "uracil"
+   ],
+   "en": "Adenine / Thymine / Guanine / Cytosine / Uracil",
+   "easy": "DNA 글자 네 개는 A(아데닌), T(티민), G(구아닌), C(사이토신)이에요. RNA는 T 대신 U(우라실)를 써요. A는 T와, G는 C와 짝을 이뤄요."
+  },
+  {
+   "term": "염기쌍",
+   "aka": [
+    "base pair",
+    "bp",
+    "염기 쌍"
+   ],
+   "en": "Base pair (bp)",
+   "easy": "DNA 두 가닥에서 마주 보고 손잡은 글자 한 쌍이에요. A는 T와, G는 C와만 짝이 돼요. 게놈 크기를 셀 때 단위로도 써요."
+  },
+  {
+   "term": "이중나선",
+   "aka": [
+    "double helix",
+    "이중 나선"
+   ],
+   "en": "Double helix",
+   "easy": "DNA 두 가닥이 서로 꼬여서 비틀린 사다리 모양을 한 구조예요. 사다리의 가로대가 염기쌍이에요."
+  },
+  {
+   "term": "수소결합",
+   "aka": [
+    "hydrogen bond",
+    "수소 결합"
+   ],
+   "en": "Hydrogen bond",
+   "easy": "DNA 두 가닥을 약하게 붙들어 주는 힘이에요. 벨크로(찍찍이)처럼 붙었다 떨어졌다 할 수 있어서 DNA를 열어 읽거나 복사할 수 있어요. G-C는 3개, A-T는 2개의 수소결합으로 붙어요."
+  },
+  {
+   "term": "유전자",
+   "aka": [
+    "gene"
+   ],
+   "en": "Gene",
+   "easy": "DNA 설계도 중에서 단백질 하나를 만드는 방법이 적힌 한 부분이에요. 요리책의 레시피 하나라고 생각하면 돼요."
+  },
+  {
+   "term": "게놈(유전체)",
+   "aka": [
+    "게놈",
+    "유전체",
+    "genome",
+    "genomic"
+   ],
+   "en": "Genome",
+   "easy": "한 생물이 가진 DNA 전체예요. 사람의 게놈은 약 30억 개의 글자로 되어 있고, 백과사전 수천 권 분량이에요."
+  },
+  {
+   "term": "단백질",
+   "aka": [
+    "protein"
+   ],
+   "en": "Protein",
+   "easy": "아미노산이 길게 이어져 접힌 물질로, 우리 몸에서 실제로 일을 하는 일꾼이에요. 근육, 효소, 항체 등이 모두 단백질이에요."
+  },
+  {
+   "term": "아미노산",
+   "aka": [
+    "amino acid"
+   ],
+   "en": "Amino acid",
+   "easy": "단백질을 만드는 작은 블록이에요. 사람 몸에서는 20종류를 쓰고, 이것이 줄줄이 이어져 단백질이 돼요."
+  },
+  {
+   "term": "코돈",
+   "aka": [
+    "codon"
+   ],
+   "en": "Codon",
+   "easy": "mRNA 글자 3개를 한 묶음으로 읽은 것이에요. 코돈 하나가 아미노산 하나를 정해 줘요. 세 글자 단어 하나가 한 가지 뜻을 가지는 것과 비슷해요."
+  },
+  {
+   "term": "시작 코돈",
+   "aka": [
+    "start codon",
+    "AUG"
+   ],
+   "en": "Start codon",
+   "easy": "단백질 만들기를 시작하라는 신호예요. 보통 AUG이고, 아미노산 메싸이오닌을 뜻해요. 문장의 첫 글자 같은 역할이에요."
+  },
+  {
+   "term": "종결 코돈",
+   "aka": [
+    "stop codon",
+    "정지 코돈",
+    "UAA",
+    "UAG",
+    "UGA"
+   ],
+   "en": "Stop codon",
+   "easy": "여기서 단백질 만들기를 멈추라는 신호예요. UAA, UAG, UGA 세 가지가 있고 아미노산을 뜻하지 않아요. 문장 끝의 마침표와 같아요."
+  },
+  {
+   "term": "센트럴 도그마",
+   "aka": [
+    "central dogma",
+    "중심 원리",
+    "중심 가설"
+   ],
+   "en": "Central dogma",
+   "easy": "유전 정보가 DNA에서 RNA로, RNA에서 단백질로 흐른다는 생물학의 기본 원리예요. 설계도, 복사본, 완성품으로 이어지는 흐름이에요."
+  },
+  {
+   "term": "복제",
+   "aka": [
+    "replication",
+    "DNA 복제",
+    "DNA replication"
+   ],
+   "en": "Replication",
+   "easy": "세포가 나뉘기 전에 DNA를 똑같이 한 벌 더 만드는 일이에요. 설계도를 복사기로 한 부 더 뽑는 것과 비슷해요."
+  },
+  {
+   "term": "전사",
+   "aka": [
+    "transcription"
+   ],
+   "en": "Transcription",
+   "easy": "DNA에서 필요한 부분만 골라 RNA로 베껴 쓰는 과정이에요. 두꺼운 책에서 필요한 페이지만 공책에 옮겨 적는 일이에요."
+  },
+  {
+   "term": "번역",
+   "aka": [
+    "translation"
+   ],
+   "en": "Translation",
+   "easy": "mRNA의 암호를 읽어서 아미노산을 이어 단백질을 만드는 과정이에요. 암호를 우리가 아는 말로 옮기는 것과 비슷해서 번역이라고 불러요."
+  },
+  {
+   "term": "5'→3'",
+   "aka": [
+    "5' to 3'",
+    "5′→3′",
+    "5'-3'",
+    "5 prime 3 prime",
+    "5'→3' 방향"
+   ],
+   "en": "5' to 3' direction",
+   "easy": "DNA 가닥에는 방향이 있어서 한쪽 끝을 5', 반대쪽 끝을 3'라고 불러요. DNA를 만드는 효소는 항상 5'에서 3' 방향으로만 글자를 이어 붙여요. 일방통행 도로 같아요."
+  },
+  {
+   "term": "오카자키 절편",
+   "aka": [
+    "Okazaki fragment",
+    "오카자키 조각",
+    "Okazaki fragments"
+   ],
+   "en": "Okazaki fragment",
+   "easy": "DNA를 복제할 때 한쪽 가닥은 거꾸로 만들어야 해서 짧은 조각으로 끊어서 만들어요. 이 짧은 조각들이 오카자키 절편이고, 나중에 하나로 이어 붙여요."
+  },
+  {
+   "term": "반보존적 복제",
+   "aka": [
+    "semiconservative replication",
+    "반보존 복제"
+   ],
+   "en": "Semiconservative replication",
+   "easy": "DNA를 복제하면 새 DNA마다 옛 가닥 하나와 새 가닥 하나가 짝이 돼요. 옛것 절반을 보존한다고 해서 반보존적이라고 해요."
+  },
+  {
+   "term": "PCR",
+   "aka": [
+    "중합효소 연쇄 반응",
+    "polymerase chain reaction",
+    "피씨알"
+   ],
+   "en": "Polymerase Chain Reaction",
+   "easy": "원하는 DNA 조각을 시험관에서 수없이 복사해 늘리는 기술이에요. 한 번 할 때마다 2배가 되어서 n번 하면 2의 n제곱 배가 돼요. 코로나 검사에도 쓰였어요."
+  },
+  {
+   "term": "프라이머",
+   "aka": [
+    "primer"
+   ],
+   "en": "Primer",
+   "easy": "DNA를 복사할 때 어디서부터 시작할지 알려 주는 짧은 DNA 조각이에요. 달리기의 출발선 같은 역할이에요."
+  },
+  {
+   "term": "엑손",
+   "aka": [
+    "exon"
+   ],
+   "en": "Exon",
+   "easy": "유전자 중에서 실제로 단백질 정보를 담고 있어 최종 mRNA에 남는 부분이에요. 영화로 치면 최종 편집본에 들어가는 장면이에요."
+  },
+  {
+   "term": "인트론",
+   "aka": [
+    "intron"
+   ],
+   "en": "Intron",
+   "easy": "유전자 안에 있지만 단백질 정보가 없어서 RNA 가공 때 잘려 나가는 부분이에요. 영화 편집에서 잘려 나가는 장면과 비슷해요."
+  },
+  {
+   "term": "스플라이싱",
+   "aka": [
+    "splicing",
+    "RNA 스플라이싱"
+   ],
+   "en": "Splicing",
+   "easy": "처음 만든 RNA에서 인트론을 잘라 내고 엑손만 이어 붙이는 가공 과정이에요. 영상에서 필요한 장면만 이어 붙이는 편집이에요."
+  },
+  {
+   "term": "대체 스플라이싱",
+   "aka": [
+    "alternative splicing",
+    "선택적 스플라이싱"
+   ],
+   "en": "Alternative splicing",
+   "easy": "같은 RNA인데 엑손을 이어 붙이는 조합을 다르게 해서 여러 종류의 mRNA를 만드는 거예요. 그래서 유전자 하나로 여러 종류의 단백질을 만들 수 있어요."
+  },
+  {
+   "term": "후성유전",
+   "aka": [
+    "epigenetics",
+    "epigenetic",
+    "후성 유전",
+    "후성유전학"
+   ],
+   "en": "Epigenetics",
+   "easy": "DNA 글자는 그대로인데 유전자를 켜고 끄는 스위치가 달라지는 현상이에요. 같은 악보라도 연주할 부분을 다르게 고르는 것과 같아요."
+  },
+  {
+   "term": "히스톤",
+   "aka": [
+    "histone"
+   ],
+   "en": "Histone",
+   "easy": "DNA가 감겨 있는 실패 같은 단백질이에요. 히스톤이 변하면 DNA가 풀리거나 뭉쳐서 유전자가 켜지거나 꺼지기도 해요."
+  },
+  {
+   "term": "메틸화",
+   "aka": [
+    "methylation",
+    "DNA 메틸화",
+    "DNA methylation"
+   ],
+   "en": "Methylation",
+   "easy": "DNA의 C(사이토신)에 작은 꼬리표(메틸기)가 붙는 일이에요. 글자는 바뀌지 않고 유전자를 끄는 스위치 역할을 해요."
+  },
+  {
+   "term": "메틸기",
+   "aka": [
+    "methyl group",
+    "-CH3",
+    "CH3"
+   ],
+   "en": "Methyl group (-CH3)",
+   "easy": "탄소 하나에 수소 셋이 붙은 아주 작은 화학 조각이에요. DNA에 붙으면 유전자를 끄는 꼬리표가 돼요."
+  },
+  {
+   "term": "사이토신",
+   "aka": [
+    "시토신",
+    "cytosine"
+   ],
+   "en": "Cytosine",
+   "easy": "DNA 글자 중 하나인 C예요. G와 짝을 이루고, DNA 메틸화는 주로 이 C에서 일어나요."
+  },
+  {
+   "term": "CpG",
+   "aka": [
+    "CG",
+    "CpG 부위",
+    "CpG site"
+   ],
+   "en": "CpG (Cytosine-phosphate-Guanine)",
+   "easy": "DNA에서 C 다음에 G가 바로 이어진 자리예요. 메틸화가 주로 이 자리의 C에서 일어나서 유전자 스위치 위치로 중요해요."
+  },
+  {
+   "term": "CpG 아일랜드",
+   "aka": [
+    "CpG island",
+    "CpG 섬",
+    "CpG islands"
+   ],
+   "en": "CpG island",
+   "easy": "CpG가 섬처럼 빽빽하게 모여 있는 구간이에요. 주로 유전자 시작 부분(프로모터)에 있고, 여기가 메틸화되면 그 유전자가 꺼져요."
+  },
+  {
+   "term": "프로모터",
+   "aka": [
+    "promoter"
+   ],
+   "en": "Promoter",
+   "easy": "유전자 바로 앞에 있는 시작 스위치 자리예요. 전사인자가 여기에 붙어야 유전자를 읽기 시작해요."
+  },
+  {
+   "term": "전사인자",
+   "aka": [
+    "transcription factor",
+    "전사 인자"
+   ],
+   "en": "Transcription factor",
+   "easy": "프로모터에 붙어서 유전자를 켜도록 돕는 단백질이에요. 전등 스위치를 눌러 주는 손가락 같아요."
+  },
+  {
+   "term": "종양억제유전자",
+   "aka": [
+    "tumor suppressor gene",
+    "암억제유전자",
+    "종양 억제 유전자",
+    "tumor suppressor"
+   ],
+   "en": "Tumor suppressor gene",
+   "easy": "세포가 마구 늘어나 암이 되지 않게 막아 주는 브레이크 같은 유전자예요. 고장 나거나 꺼지면 암 위험이 올라가요."
+  },
+  {
+   "term": "돌연변이",
+   "aka": [
+    "mutation",
+    "변이체"
+   ],
+   "en": "Mutation",
+   "easy": "DNA 글자가 바뀌거나 빠지거나 끼어드는 등 설계도에 생긴 변화예요. 해로운 것도 있지만 아무 영향 없는 것도 많아요."
+  },
+  {
+   "term": "점 돌연변이",
+   "aka": [
+    "point mutation",
+    "점돌연변이"
+   ],
+   "en": "Point mutation",
+   "easy": "DNA 글자 딱 한 개가 다른 글자로 바뀐 돌연변이예요. 문장에서 오타 하나가 난 것과 같아요."
+  },
+  {
+   "term": "침묵 돌연변이",
+   "aka": [
+    "침묵",
+    "silent mutation",
+    "silent",
+    "침묵(silent)"
+   ],
+   "en": "Silent mutation",
+   "easy": "글자가 바뀌었지만 같은 아미노산이 만들어져서 결과가 달라지지 않는 돌연변이예요. 오타가 났는데 뜻은 그대로인 경우예요."
+  },
+  {
+   "term": "넌센스 돌연변이",
+   "aka": [
+    "넌센스",
+    "nonsense mutation",
+    "nonsense",
+    "넌센스(nonsense)"
+   ],
+   "en": "Nonsense mutation",
+   "easy": "글자가 바뀌어 갑자기 종결 코돈이 생기는 돌연변이예요. 문장 중간에 마침표가 찍혀 단백질이 중간에 끊겨 버려요."
+  },
+  {
+   "term": "미스센스 돌연변이",
+   "aka": [
+    "미스센스",
+    "missense mutation",
+    "missense",
+    "미스센스(missense)"
+   ],
+   "en": "Missense mutation",
+   "easy": "글자가 바뀌어 다른 아미노산이 들어가는 돌연변이예요. 단어 하나가 다른 단어로 바뀐 것이어서 단백질이 제 기능을 못 할 수도 있어요."
+  },
+  {
+   "term": "겸상 적혈구 빈혈증",
+   "aka": [
+    "낫 모양 적혈구",
+    "sickle cell anemia",
+    "sickle cell disease",
+    "겸상적혈구빈혈증"
+   ],
+   "en": "Sickle cell anemia",
+   "easy": "한 글자 변화(GAG가 GTG로)로 글루탐산이 발린으로 바뀌는 미스센스 돌연변이 때문에 생기는 병이에요. 적혈구가 낫(초승달) 모양으로 휘어서 산소를 잘 못 날라요."
+  },
+  {
+   "term": "구조 변이",
+   "aka": [
+    "structural variation",
+    "structural variant",
+    "SV"
+   ],
+   "en": "Structural variation",
+   "easy": "DNA 글자 한두 개가 아니라 큰 덩어리가 통째로 빠지거나, 늘어나거나, 뒤집히거나, 자리를 바꾸는 변화예요. 책에서 한 페이지가 통째로 사라지거나 순서가 바뀐 것과 같아요."
+  },
+  {
+   "term": "변이",
+   "aka": [
+    "variant",
+    "variation",
+    "genetic variant",
+    "변이체"
+   ],
+   "en": "Variant",
+   "easy": "기준이 되는 DNA(레퍼런스)와 다른 부분이에요. 사람마다 조금씩 다른 글자가 있는데 이런 차이를 변이라고 불러요."
+  },
+  {
+   "term": "SNP",
+   "aka": [
+    "single nucleotide polymorphism",
+    "스닙",
+    "SNPs"
+   ],
+   "en": "Single Nucleotide Polymorphism",
+   "easy": "사람들 사이에서 글자 한 개가 다른 자리 중에서 비교적 흔한 것을 말해요. 어떤 자리에서 어떤 사람은 A, 어떤 사람은 G인 식이에요."
+  },
+  {
+   "term": "SNV",
+   "aka": [
+    "single nucleotide variant",
+    "SNVs"
+   ],
+   "en": "Single Nucleotide Variant",
+   "easy": "DNA 글자 한 개가 다른 글자로 바뀐 변이예요. SNP와 거의 같은 말이고, 흔한지 아닌지와 상관없이 글자 하나 변화를 가리킬 때 써요."
+  },
+  {
+   "term": "Indel",
+   "aka": [
+    "indel",
+    "insertion/deletion",
+    "삽입결실",
+    "삽입/결실"
+   ],
+   "en": "Insertion / Deletion",
+   "easy": "글자가 끼어들어 오거나(Insertion) 빠져서 없어진(Deletion) 변이를 합쳐 부르는 말이에요. 문장에 글자가 끼거나 빠진 것과 같아요."
+  },
+  {
+   "term": "대립유전자(allele)",
+   "aka": [
+    "대립유전자",
+    "allele",
+    "alleles",
+    "대립 유전자",
+    "알렐"
+   ],
+   "en": "Allele",
+   "easy": "같은 자리에 있을 수 있는 서로 다른 버전이에요. 예를 들어 어떤 자리에 A 버전과 G 버전이 있으면 A 대립유전자, G 대립유전자라고 불러요."
+  },
+  {
+   "term": "BRCA",
+   "aka": [
+    "BRCA1",
+    "BRCA2",
+    "BRCA1/2"
+   ],
+   "en": "BREast CAncer gene",
+   "easy": "손상된 DNA를 고치는 일을 돕는 종양억제유전자예요. 여기에 변이가 있으면 유방암과 난소암 위험이 크게 올라가지만 반드시 암에 걸리는 것은 아니에요."
+  },
+  {
+   "term": "리퀴드 바이옵시",
+   "aka": [
+    "liquid biopsy",
+    "액체 생검",
+    "리퀴드바이옵시"
+   ],
+   "en": "Liquid biopsy",
+   "easy": "혈액 같은 체액만 뽑아서 암세포가 흘린 DNA를 찾는 검사예요. 조직을 떼어 내지 않아도 되어서 몸에 부담이 적어요."
+  },
+  {
+   "term": "시퀀싱",
+   "aka": [
+    "sequencing",
+    "염기서열 분석",
+    "DNA 시퀀싱"
+   ],
+   "en": "Sequencing",
+   "easy": "DNA의 A, T, G, C 글자가 어떤 순서로 이어져 있는지 읽어 내는 일이에요."
+  },
+  {
+   "term": "NGS",
+   "aka": [
+    "next generation sequencing",
+    "차세대 염기서열 분석",
+    "차세대 시퀀싱",
+    "Next-Generation Sequencing"
+   ],
+   "en": "Next Generation Sequencing",
+   "easy": "수억 개의 DNA 조각을 한꺼번에 동시에 읽는 새로운 시퀀싱 방법이에요. 한 줄씩 읽던 옛 방식과 달리 수억 명이 동시에 책을 읽는 것과 같아서 훨씬 싸고 빨라요."
+  },
+  {
+   "term": "Sanger",
+   "aka": [
+    "Sanger 시퀀싱",
+    "생어",
+    "생어 시퀀싱",
+    "Sanger sequencing"
+   ],
+   "en": "Sanger sequencing",
+   "easy": "형광이 붙으면 복사가 멈추게 해서 길이가 다른 조각들을 만들고, 짧은 조각부터 순서대로 읽는 예전 시퀀싱 방법이에요. 한 번에 한 종류만 읽어서 느리고 비쌌어요."
+  },
+  {
+   "term": "캐필러리",
+   "aka": [
+    "capillary",
+    "모세관",
+    "캐필러리 전기영동",
+    "capillary electrophoresis"
+   ],
+   "en": "Capillary",
+   "easy": "머리카락처럼 아주 가는 관이에요. Sanger 방식에서는 이 관에 DNA 조각을 흘려 짧은 것이 먼저 통과하는 순서대로 읽어요."
+  },
+  {
+   "term": "SBS",
+   "aka": [
+    "sequencing by synthesis"
+   ],
+   "en": "Sequencing by Synthesis",
+   "easy": "DNA를 새로 합성하면서 글자가 하나 붙을 때마다 형광으로 사진을 찍어 읽는 NGS의 핵심 원리예요. 만들면서 동시에 읽는 방식이에요."
+  },
+  {
+   "term": "클러스터",
+   "aka": [
+    "cluster",
+    "클러스터(cluster)"
+   ],
+   "en": "Cluster",
+   "easy": "같은 DNA 조각을 약 1,000개씩 모아 놓은 작은 무리예요. 한 가닥은 빛이 너무 약해서 안 보이니 모아서 밝게 만드는 거예요."
+  },
+  {
+   "term": "클론 증폭",
+   "aka": [
+    "clonal amplification",
+    "클론 증폭(clonal amplification)"
+   ],
+   "en": "Clonal amplification",
+   "easy": "DNA 한 가닥을 똑같이 복사해서 여러 개로 늘리는 일이에요. 신호를 크게 만들어 형광이 보이도록 하는 준비 과정이에요."
+  },
+  {
+   "term": "Emulsion PCR",
+   "aka": [
+    "emulsion PCR",
+    "에멀전 PCR",
+    "emPCR"
+   ],
+   "en": "Emulsion PCR",
+   "easy": "기름 속 작은 물방울 안에 DNA 하나와 구슬(비드)을 넣고 따로따로 복사하는 방법이에요. Roche가 썼어요. 물방울 하나가 작은 방이라서 서로 섞이지 않아요."
+  },
+  {
+   "term": "Bridge PCR",
+   "aka": [
+    "bridge PCR",
+    "브리지 PCR",
+    "bridge amplification"
+   ],
+   "en": "Bridge PCR",
+   "easy": "유리판 위에서 DNA가 다리처럼 휘어 근처 자리에 붙어 복사되는 방법이에요. Illumina가 쓰고, 한 자리에서 같은 DNA 무리(클러스터)가 만들어져요."
+  },
+  {
+   "term": "flow cell",
+   "aka": [
+    "flowcell",
+    "플로우셀",
+    "플로우 셀",
+    "Flow cell"
+   ],
+   "en": "Flow cell",
+   "easy": "시퀀싱할 때 DNA 조각을 올려놓는 유리판이에요. 시약이 위로 흐르고, 판 위의 수많은 점마다 DNA 무리가 붙어 있어요."
+  },
+  {
+   "term": "SNA",
+   "aka": [
+    "single nucleotide addition"
+   ],
+   "en": "Single Nucleotide Addition",
+   "easy": "사이클마다 A, T, G, C 시약을 하나씩 따로 흘려 보내고, 빛이 나는지 아닌지로 어떤 글자가 붙었는지 알아내는 방법이에요. Roche가 썼어요."
+  },
+  {
+   "term": "CRT",
+   "aka": [
+    "cyclic reversible termination"
+   ],
+   "en": "Cyclic Reversible Termination",
+   "easy": "A, T, G, C에 서로 다른 색 형광을 달아 한꺼번에 흘리고, 사진을 찍은 뒤 형광을 잘라내고 다음 글자로 넘어가는 방법이에요. 이 과정을 약 150번 반복해요. Illumina가 써요."
+  },
+  {
+   "term": "형광",
+   "aka": [
+    "fluorescence",
+    "fluorescent",
+    "형광 신호"
+   ],
+   "en": "Fluorescence",
+   "easy": "빛을 받으면 스스로 색깔 있는 빛을 내는 성질이에요. 시퀀싱에서는 글자마다 다른 색 형광을 달아 사진으로 어떤 글자인지 알아내요."
+  },
+  {
+   "term": "사이클",
+   "aka": [
+    "cycle",
+    "cycles",
+    "사이클 수"
+   ],
+   "en": "Cycle",
+   "easy": "글자 하나를 읽는 한 번의 반복(합성, 사진 촬영, 형광 제거)이에요. 150사이클을 돌리면 글자 150개를 읽어요."
+  },
+  {
+   "term": "Illumina",
+   "aka": [
+    "일루미나",
+    "illumina"
+   ],
+   "en": "Illumina",
+   "easy": "지금 세계 NGS 시장의 대부분을 차지한 미국 회사예요. 유리판과 Bridge PCR, CRT 방식을 쓰고, 1Gb당 약 7달러로 아주 싸서 시장을 차지했어요."
+  },
+  {
+   "term": "Roche",
+   "aka": [
+    "로슈",
+    "Roche 454",
+    "454",
+    "roche"
+   ],
+   "en": "Roche (454)",
+   "easy": "예전에 NGS를 팔던 회사예요. 읽는 길이는 길었지만 가격이 너무 비싸서 Illumina에 밀렸고 2016년에 사업을 접었어요."
+  },
+  {
+   "term": "read",
+   "aka": [
+    "리드",
+    "reads",
+    "Read"
+   ],
+   "en": "Read",
+   "easy": "시퀀싱 기계가 한 번에 읽어 낸 짧은 DNA 조각 하나예요. 책을 갈기갈기 찢은 종이 조각 하나가 read 한 개와 같아요."
+  },
+  {
+   "term": "read length",
+   "aka": [
+    "리드 길이",
+    "read 길이",
+    "Read length"
+   ],
+   "en": "Read length",
+   "easy": "read 하나가 몇 글자(염기)인지를 뜻해요. Illumina는 약 150, Roche는 약 700이에요."
+  },
+  {
+   "term": "throughput",
+   "aka": [
+    "처리량",
+    "Throughput"
+   ],
+   "en": "Throughput",
+   "easy": "기계가 한 번 돌릴 때 읽어 내는 데이터의 양이에요. 처리량이 클수록 한꺼번에 많이 읽어서 값이 싸져요."
+  },
+  {
+   "term": "Gb",
+   "aka": [
+    "기가베이스",
+    "GB",
+    "gigabase",
+    "Gb당"
+   ],
+   "en": "Gigabase",
+   "easy": "염기(글자) 10억 개를 뜻하는 단위예요. 1Gb는 글자 10억 개이고, 사람 게놈은 약 3Gb예요."
+  },
+  {
+   "term": "base calling",
+   "aka": [
+    "베이스 콜링",
+    "basecalling",
+    "base-calling"
+   ],
+   "en": "Base calling",
+   "easy": "시퀀싱 기계가 찍은 형광 사진을 보고 이 자리는 A, 저 자리는 G 하는 식으로 글자를 판정하는 일이에요."
+  },
+  {
+   "term": "FASTQ",
+   "aka": [
+    "fastq",
+    "FASTQ 파일"
+   ],
+   "en": "FASTQ",
+   "easy": "시퀀싱 결과를 담는 텍스트 파일이에요. read 하나가 4줄이고, 각각 이름표, 염기서열, 구분선(+), 품질 점수예요."
+  },
+  {
+   "term": "FASTA",
+   "aka": [
+    "fasta",
+    "FASTA 파일"
+   ],
+   "en": "FASTA",
+   "easy": "이름 줄(>로 시작)과 염기서열만 있는 간단한 파일이에요. 레퍼런스처럼 정답지를 담는 데 쓰고 품질 점수는 없어요."
+  },
+  {
+   "term": "Phred",
+   "aka": [
+    "phred",
+    "Phred score",
+    "Phred 점수",
+    "Phred quality score"
+   ],
+   "en": "Phred quality score",
+   "easy": "염기를 잘못 읽었을 확률을 점수로 나타낸 방식이에요. 점수가 높을수록 믿을 만해요. Q10은 90%, Q20은 99%, Q30은 99.9% 정확해요."
+  },
+  {
+   "term": "품질 점수",
+   "aka": [
+    "퀄리티 점수",
+    "quality score",
+    "Q score",
+    "Q 점수",
+    "base quality",
+    "퀄리티"
+   ],
+   "en": "Quality score",
+   "easy": "읽어 낸 글자 하나하나를 얼마나 믿어도 되는지 나타내는 점수예요. FASTQ의 네 번째 줄에 글자 하나로 바꿔서 적혀 있어요."
+  },
+  {
+   "term": "Q30",
+   "aka": [
+    "Q 30",
+    "q30"
+   ],
+   "en": "Q30",
+   "easy": "잘못 읽을 확률이 1/1,000이라는 뜻이에요. 정확도가 99.9%이고, 품질 검사를 통과하는 기준으로 자주 써요."
+  },
+  {
+   "term": "N(염기)",
+   "aka": [
+    "N 염기",
+    "degenerate base",
+    "N염기"
+   ],
+   "en": "N (unknown base)",
+   "easy": "어떤 글자인지 판단하지 못한 자리에 N이라고 적어요. 형광이 섞여서 A, T, G, C 중 무엇인지 모르는 경우예요."
+  },
+  {
+   "term": "레퍼런스",
+   "aka": [
+    "reference",
+    "레퍼런스 게놈",
+    "reference genome",
+    "참조 게놈",
+    "참조 서열"
+   ],
+   "en": "Reference genome",
+   "easy": "비교의 기준이 되는 정답지 DNA 서열이에요. 내 DNA 조각들이 이 정답지의 어디에 해당하는지 맞춰 보고 다른 곳을 찾아요."
+  },
+  {
+   "term": "hg19/hg38",
+   "aka": [
+    "hg19",
+    "hg38",
+    "GRCh37",
+    "GRCh38"
+   ],
+   "en": "Human genome build 19 / 38",
+   "easy": "사람 레퍼런스 게놈의 버전 이름이에요. hg19가 옛 버전이고 hg38이 더 새 버전이에요. 버전이 다르면 위치와 결과가 달라질 수 있어서 같은 버전을 써야 해요."
+  },
+  {
+   "term": "depth",
+   "aka": [
+    "깊이",
+    "시퀀싱 깊이",
+    "Depth",
+    "read depth",
+    "sequencing depth"
+   ],
+   "en": "Depth",
+   "easy": "한 위치를 read 몇 개가 겹쳐서 읽었는지를 뜻해요. 5개가 겹치면 5x예요. 같은 자리를 여러 사람이 확인한 횟수와 같아요."
+  },
+  {
+   "term": "coverage",
+   "aka": [
+    "커버리지",
+    "Coverage"
+   ],
+   "en": "Coverage",
+   "easy": "정답지(레퍼런스) 전체 중에서 한 번이라도 읽힌 부분의 비율이에요. 예를 들어 90%이면 10%는 한 번도 읽히지 않았다는 뜻이에요."
+  },
+  {
+   "term": "x(배)",
+   "aka": [
+    "30x",
+    "배수"
+   ],
+   "en": "Fold coverage (x)",
+   "easy": "depth를 말할 때 붙이는 단위예요. 30x는 평균 한 위치를 30번 겹쳐 읽었다는 뜻이에요."
+  },
+  {
+   "term": "WGS",
+   "aka": [
+    "whole genome sequencing",
+    "전장 유전체 시퀀싱",
+    "전체 게놈 시퀀싱",
+    "전장유전체"
+   ],
+   "en": "Whole Genome Sequencing",
+   "easy": "게놈 전체 30억 글자를 읽는 방법이에요. 보통 약 30x로 읽어요. 큰 그림을 보거나 처음 보는 변이를 찾을 때 좋지만 비용이 많이 들어요."
+  },
+  {
+   "term": "WES",
+   "aka": [
+    "whole exome sequencing",
+    "전장 엑솜 시퀀싱",
+    "엑솜 시퀀싱",
+    "엑솜"
+   ],
+   "en": "Whole Exome Sequencing",
+   "easy": "게놈 중에서 단백질을 만드는 엑손 부분만 골라 읽는 방법이에요. 보통 50~100x로 읽고, 게놈의 약 1~2%만 읽어서 비용을 아껴요."
+  },
+  {
+   "term": "Targeted panel",
+   "aka": [
+    "targeted sequencing",
+    "targeted gene panel",
+    "gene panel",
+    "타깃 패널",
+    "표적 시퀀싱",
+    "targeted"
+   ],
+   "en": "Targeted gene panel",
+   "easy": "궁금한 유전자 몇 개만 골라서 아주 깊게(500x 이상) 읽는 방법이에요. 범위가 좁은 만큼 깊게 읽을 수 있어서 암처럼 비율이 낮은 변이를 찾는 데 좋아요."
+  },
+  {
+   "term": "VAF",
+   "aka": [
+    "variant allele fraction",
+    "variant allele frequency",
+    "변이 대립유전자 비율"
+   ],
+   "en": "Variant Allele Fraction",
+   "easy": "어떤 자리를 읽은 read 중에서 변이 글자가 차지하는 비율이에요. 예를 들어 read 100개 중 5개가 변이이면 VAF는 5%예요. 암 초기에는 이 비율이 아주 낮아요."
+  },
+  {
+   "term": "de novo",
+   "aka": [
+    "데노보",
+    "새로 생긴 변이",
+    "de novo 변이",
+    "De novo"
+   ],
+   "en": "De novo",
+   "easy": "라틴어로 처음부터라는 뜻이에요. 부모에게는 없는데 아이에게 새로 생긴 변이를 가리키거나, 참고할 정답지 없이 처음부터 찾는 것을 말해요."
+  },
+  {
+   "term": "싱글엔드",
+   "aka": [
+    "single-end",
+    "single end",
+    "싱글 엔드"
+   ],
+   "en": "Single-end",
+   "easy": "DNA 조각의 한쪽 끝에서만 읽는 방식이에요. 한쪽에서만 읽으니 간단하지만 정보가 적어요."
+  },
+  {
+   "term": "페어드엔드",
+   "aka": [
+    "paired-end",
+    "paired end",
+    "페어드 엔드",
+    "paired-end sequencing"
+   ],
+   "en": "Paired-end",
+   "easy": "DNA 조각의 양쪽 끝에서 각각 읽는 방식이에요. 두 read가 짝이어서 더 긴 서열을 얻고, 한쪽의 약한 부분을 다른 쪽이 보완해 줘요. 2x150이면 양쪽에서 150씩 읽는다는 뜻이에요."
+  },
+  {
+   "term": "R1/R2",
+   "aka": [
+    "R1",
+    "R2",
+    "read 1",
+    "read 2",
+    "read1",
+    "read2"
+   ],
+   "en": "Read 1 / Read 2",
+   "easy": "페어드엔드에서 앞쪽 끝에서 읽은 read가 R1, 반대쪽 끝에서 읽은 read가 R2예요. 한 쌍의 파일로 따로 저장돼요."
+  },
+  {
+   "term": "라이브러리",
+   "aka": [
+    "library",
+    "시퀀싱 라이브러리",
+    "library prep",
+    "라이브러리 제작"
+   ],
+   "en": "Sequencing library",
+   "easy": "시퀀싱 기계에 넣을 수 있게 DNA를 알맞은 크기로 자르고 양 끝에 어댑터를 붙여 준비한 DNA 조각 모음이에요. 요리 재료를 손질해서 접시에 담은 상태와 같아요."
+  },
+  {
+   "term": "어댑터",
+   "aka": [
+    "adapter",
+    "adaptor",
+    "어댑터 서열",
+    "adapter sequence"
+   ],
+   "en": "Adapter",
+   "easy": "기계에 붙고 시퀀싱을 시작하기 위해 DNA 조각 양 끝에 붙인 짧은 인공 서열이에요. 분석할 때는 진짜 DNA가 아니므로 잘라 내야 해요."
+  },
+  {
+   "term": "바코드",
+   "aka": [
+    "barcode",
+    "샘플 바코드",
+    "index sequence",
+    "인덱스 서열"
+   ],
+   "en": "Barcode",
+   "easy": "여러 사람의 샘플을 섞어 한 번에 읽을 때 누구 것인지 구분하려고 붙이는 짧은 이름표 서열이에요. 이렇게 하면 비용이 샘플 수만큼 나뉘어 싸져요."
+  },
+  {
+   "term": "인서트",
+   "aka": [
+    "insert",
+    "insert size",
+    "인서트 크기"
+   ],
+   "en": "Insert",
+   "easy": "어댑터 사이에 끼워져 있는 진짜 분석 대상 DNA 부분이에요. 샌드위치로 치면 빵(어댑터) 사이에 들어간 속재료예요."
+  },
+  {
+   "term": "amplicon",
+   "aka": [
+    "앰플리콘",
+    "앰플리콘 시퀀싱",
+    "amplicon sequencing",
+    "Amplicon"
+   ],
+   "en": "Amplicon",
+   "easy": "PCR로 특정 부위만 골라 늘린 DNA 조각이에요. 모든 조각의 시작과 끝이 원래 같아서 중복 제거(MarkDuplicates)를 하지 않아요."
+  },
+  {
+   "term": "QC",
+   "aka": [
+    "품질 관리",
+    "quality control",
+    "품질 검사",
+    "품질검사"
+   ],
+   "en": "Quality Control",
+   "easy": "데이터를 분석하기 전에 품질이 쓸 만한지 점검하는 단계예요. 요리 전에 재료가 상하지 않았는지 확인하는 것과 같아요."
+  },
+  {
+   "term": "FastQC",
+   "aka": [
+    "fastqc",
+    "Fast QC"
+   ],
+   "en": "FastQC",
+   "easy": "FASTQ 파일의 품질을 그래프와 표로 한눈에 보여 주는 프로그램이에요. 예를 들어 read 위치별 품질 점수를 그려 줘서 뒤쪽이 나빠지는지 알 수 있어요."
+  },
+  {
+   "term": "트리밍",
+   "aka": [
+    "trimming",
+    "트리밍하다",
+    "trim"
+   ],
+   "en": "Trimming",
+   "easy": "read에서 쓸모없는 부분(어댑터, 품질이 낮은 끝부분)을 가위로 잘라 내는 일이에요. 과일의 상한 부분을 도려내는 것과 같아요."
+  },
+  {
+   "term": "cutadapt",
+   "aka": [
+    "Cutadapt",
+    "컷어답트"
+   ],
+   "en": "cutadapt",
+   "easy": "read에서 어댑터 서열만 정확히 찾아 잘라 주는 프로그램이에요. 무엇이 잘리는지 직접 조절하기 좋아서 교수님이 선호했어요."
+  },
+  {
+   "term": "Trim Galore",
+   "aka": [
+    "trim_galore",
+    "TrimGalore",
+    "Trim galore"
+   ],
+   "en": "Trim Galore",
+   "easy": "어댑터를 자동으로 찾아 자르고 품질 낮은 끝까지 알아서 정리해 주는 편리한 프로그램이에요. 안에서 cutadapt를 사용해요."
+  },
+  {
+   "term": "fastp",
+   "aka": [
+    "Fastp"
+   ],
+   "en": "fastp",
+   "easy": "어댑터 제거, 품질 필터, 품질 리포트를 한 번에 빠르게 해 주는 올인원 전처리 프로그램이에요."
+  },
+  {
+   "term": "PEAR",
+   "aka": [
+    "Paired-End reAd mergeR"
+   ],
+   "en": "Paired-End reAd mergeR",
+   "easy": "페어드엔드의 R1과 R2가 겹치는 부분을 찾아 하나의 긴 read로 합쳐 주는 프로그램이에요."
+  },
+  {
+   "term": "머지",
+   "aka": [
+    "merge",
+    "merging",
+    "머지하다",
+    "merged",
+    "read merge"
+   ],
+   "en": "Merge",
+   "easy": "겹치는 부분이 있는 R1과 R2를 이어 붙여 하나의 긴 read로 합치는 일이에요. 두 장의 지도를 겹치는 부분에서 이어 붙이는 것과 비슷해요."
+  },
+  {
+   "term": "얼라인먼트(매핑)",
+   "aka": [
+    "얼라인먼트",
+    "매핑",
+    "alignment",
+    "mapping",
+    "정렬(alignment)",
+    "align",
+    "aligned",
+    "얼라인"
+   ],
+   "en": "Alignment / Mapping",
+   "easy": "짧은 read들이 레퍼런스 게놈의 어느 위치에서 왔는지 찾아서 맞춰 붙이는 일이에요. 찢어진 책 조각을 원본 책의 맞는 자리에 올려놓는 것과 같아요."
+  },
+  {
+   "term": "global alignment",
+   "aka": [
+    "전역 정렬",
+    "Global alignment",
+    "글로벌 얼라인먼트"
+   ],
+   "en": "Global alignment",
+   "easy": "두 서열을 처음부터 끝까지 전체적으로 맞춰 보는 방법이에요. 숲 전체를 보는 큰 그림용이고, 예를 들어 어떤 식물이 어느 종인지 대략 보는 데 어울려요."
+  },
+  {
+   "term": "local alignment",
+   "aka": [
+    "국소 정렬",
+    "Local alignment",
+    "로컬 얼라인먼트"
+   ],
+   "en": "Local alignment",
+   "easy": "두 서열에서 가장 비슷한 일부 구간만 찾아 세밀하게 맞춰 보는 방법이에요. 나무 한 그루를 자세히 보는 것과 같아서 변이 찾기에 많이 써요."
+  },
+  {
+   "term": "BLAST",
+   "aka": [
+    "Basic Local Alignment Search Tool"
+   ],
+   "en": "Basic Local Alignment Search Tool",
+   "easy": "내 서열과 비슷한 서열을 데이터베이스에서 찾아 주는 대표적인 local alignment 도구예요. 웹에서 바로 쓸 수 있지만 NGS의 수억 개 read에는 너무 느려요."
+  },
+  {
+   "term": "BWA",
+   "aka": [
+    "BWA-MEM",
+    "bwa mem",
+    "Burrows-Wheeler Aligner"
+   ],
+   "en": "Burrows-Wheeler Aligner",
+   "easy": "NGS read를 레퍼런스에 아주 빠르게 맞춰 주는 프로그램이에요. 미리 만든 인덱스와 seed를 이용해서 BLAST보다 훨씬 빨라요."
+  },
+  {
+   "term": "인덱스",
+   "aka": [
+    "index",
+    "indexing",
+    "인덱싱"
+   ],
+   "en": "Index",
+   "easy": "책 뒤의 찾아보기처럼, 레퍼런스의 어느 부분이 어디에 있는지 미리 정리해 둔 목록이에요. 한 번만 만들어 두면 매번 처음부터 찾지 않아도 돼요."
+  },
+  {
+   "term": "seed-and-extend",
+   "aka": [
+    "seed and extend",
+    "seed",
+    "시드",
+    "seed extend",
+    "씨드"
+   ],
+   "en": "Seed-and-extend",
+   "easy": "read에서 짧은 조각(seed, 10~20글자)으로 먼저 후보 위치를 빠르게 찾고, 그 자리에서만 양옆으로 넓혀 가며(extend) 정확히 맞춰 보는 방법이에요. 전부 비교하지 않아서 빨라요."
+  },
+  {
+   "term": "SAM",
+   "aka": [
+    "SAM 파일",
+    "Sequence Alignment/Map"
+   ],
+   "en": "Sequence Alignment/Map",
+   "easy": "정렬 결과를 사람이 읽을 수 있는 글자로 적은 텍스트 파일이에요. read마다 한 줄이고 11개의 칸으로 되어 있는데 용량이 아주 커요."
+  },
+  {
+   "term": "BAM",
+   "aka": [
+    "BAM 파일",
+    "Binary Alignment/Map"
+   ],
+   "en": "Binary Alignment/Map",
+   "easy": "SAM을 컴퓨터가 읽기 좋은 이진 형태로 압축한 파일이에요. 내용은 같지만 용량이 훨씬 작고 빨리 읽어요."
+  },
+  {
+   "term": "BAI",
+   "aka": [
+    ".bai",
+    "BAM index",
+    "BAM 인덱스"
+   ],
+   "en": "BAM Index",
+   "easy": "BAM 파일의 찾아보기 파일이에요. 이게 있어야 BAM의 원하는 위치를 바로 찾아갈 수 있어서 IGV에도 BAM과 함께 올려요."
+  },
+  {
+   "term": "정렬(sort)",
+   "aka": [
+    "sort",
+    "sorting",
+    "samtools sort",
+    "SortSam"
+   ],
+   "en": "Sort",
+   "easy": "정렬 결과를 염색체와 위치 순서대로 줄 세우는 일이에요. 번호순으로 정리된 명단처럼 되어 있어야 다음 단계와 IGV가 제대로 동작해요."
+  },
+  {
+   "term": "FLAG",
+   "aka": [
+    "flag",
+    "플래그",
+    "SAM FLAG"
+   ],
+   "en": "FLAG",
+   "easy": "SAM 파일에서 read의 상태를 숫자 하나로 나타낸 칸이에요. 0은 정방향 매핑, 16은 반대 방향 매핑, 4는 매핑 안 됨이에요."
+  },
+  {
+   "term": "POS",
+   "aka": [
+    "POS 칸"
+   ],
+   "en": "POS (position)",
+   "easy": "SAM 파일에서 read가 레퍼런스의 몇 번째 글자부터 시작하는지 알려 주는 칸이에요."
+  },
+  {
+   "term": "MAPQ",
+   "aka": [
+    "mapq",
+    "mapping quality",
+    "매핑 품질"
+   ],
+   "en": "Mapping Quality",
+   "easy": "read가 그 위치에 제대로 붙었다고 얼마나 믿을 수 있는지 나타내는 점수예요. Phred 방식이라 60이면 아주 잘 붙은 거예요."
+  },
+  {
+   "term": "CIGAR",
+   "aka": [
+    "cigar",
+    "CIGAR 문자열",
+    "CIGAR string"
+   ],
+   "en": "Concise Idiosyncratic Gapped Alignment Report",
+   "easy": "read가 레퍼런스에 어떻게 붙었는지 숫자와 글자로 짧게 적은 암호예요. 예를 들어 5M2I10M은 5개 일치, 2개 삽입, 10개 일치라는 뜻이에요. M은 일치, I는 삽입, D는 결실, S는 soft clip이에요."
+  },
+  {
+   "term": "soft clip",
+   "aka": [
+    "soft clipping",
+    "soft-clip",
+    "소프트 클립",
+    "softclip",
+    "S(soft clip)"
+   ],
+   "en": "Soft clipping",
+   "easy": "read 양 끝에서 레퍼런스와 맞지 않아 정렬에 쓰지 않고 남겨 둔 부분이에요. CIGAR에서는 S로 표시해요. 맞지 않는 끝을 자르지는 않고 접어 놓은 것과 같아요."
+  },
+  {
+   "term": "MD/NM",
+   "aka": [
+    "MD",
+    "NM",
+    "MD tag",
+    "NM tag",
+    "MD:Z",
+    "NM:i"
+   ],
+   "en": "MD / NM tag",
+   "easy": "SAM 파일 맨 끝의 부가 정보예요. MD는 레퍼런스와 어디가 어떻게 다른지 보여 주고, NM은 다른 글자가 몇 개인지 알려 줘요. NM이 0이면 완전히 일치해요."
+  },
+  {
+   "term": "IGV",
+   "aka": [
+    "Integrative Genomics Viewer"
+   ],
+   "en": "Integrative Genomics Viewer",
+   "easy": "정렬된 BAM 파일을 화면으로 보여 주는 프로그램이에요. read가 쌓인 모습, depth를 나타내는 회색 막대, 틀린 글자를 색깔로 볼 수 있어요."
+  },
+  {
+   "term": "리눅스",
+   "aka": [
+    "Linux",
+    "유닉스",
+    "Unix"
+   ],
+   "en": "Linux",
+   "easy": "윈도우나 맥처럼 컴퓨터를 움직이는 운영체제 중 하나예요. 연구용 컴퓨터와 서버에서 많이 쓰고, 글자로 된 명령을 입력해서 다뤄요."
+  },
+  {
+   "term": "셸",
+   "aka": [
+    "shell",
+    "쉘",
+    "터미널",
+    "terminal"
+   ],
+   "en": "Shell",
+   "easy": "사람이 입력한 명령을 알아듣고 컴퓨터 안쪽(커널)에 전달해 주는 프로그램이에요. 이름 그대로 안쪽을 감싼 껍데기 역할이에요."
+  },
+  {
+   "term": "bash",
+   "aka": [
+    "Bash",
+    "배시",
+    "bash shell"
+   ],
+   "en": "Bourne Again SHell",
+   "easy": "가장 많이 쓰는 셸의 한 종류예요. 이 수업에서 명령을 입력할 때 쓰는 셸이에요."
+  },
+  {
+   "term": "conda(가상환경)",
+   "aka": [
+    "conda",
+    "가상환경",
+    "virtual environment",
+    "miniconda",
+    "콘다"
+   ],
+   "en": "conda environment",
+   "easy": "프로그램마다 필요한 버전이 달라서 서로 꼬이지 않게 목적별로 따로 만들어 두는 작은 방이에요. 방마다 필요한 도구만 설치해서 쓸 수 있어요."
+  },
+  {
+   "term": "파이프(|)",
+   "aka": [
+    "파이프",
+    "pipe",
+    "|"
+   ],
+   "en": "Pipe",
+   "easy": "앞 프로그램의 결과를 파일로 저장하지 않고 곧바로 뒤 프로그램에 넘겨주는 연결 방법이에요. 물이 호스를 타고 바로 다음 통으로 흘러가는 것과 같아요. 기호는 |예요."
+  },
+  {
+   "term": "MarkDuplicates",
+   "aka": [
+    "markduplicates",
+    "Mark Duplicates",
+    "중복 제거",
+    "MarkDuplicate"
+   ],
+   "en": "MarkDuplicates",
+   "easy": "PCR로 복사되어 생긴 똑같은 read를 찾아 표시하거나 제거하는 단계예요. 복사본이 많으면 변이 비율이 부풀려지기 때문이에요."
+  },
+  {
+   "term": "PCR duplicate",
+   "aka": [
+    "PCR 중복",
+    "PCR duplicates",
+    "PCR 복제본",
+    "중복 read",
+    "duplicate",
+    "duplicates",
+    "PCR 중복 read"
+   ],
+   "en": "PCR duplicate",
+   "easy": "한 DNA 조각이 PCR 과정에서 여러 번 복사되어 생긴 똑같은 read들이에요. 시작점과 끝점이 같으면 복사본으로 봐요. 방치하면 같은 증언을 여러 번 센 것처럼 결과가 부풀려져요."
+  },
+  {
+   "term": "Picard",
+   "aka": [
+    "picard",
+    "Picard tools"
+   ],
+   "en": "Picard",
+   "easy": "Broad Institute가 만든 BAM 파일 다루기용 도구 모음이에요. MarkDuplicates나 SortSam 같은 기능이 들어 있어요."
+  },
+  {
+   "term": "BQSR",
+   "aka": [
+    "Base Quality Score Recalibration",
+    "BQSR 보정",
+    "품질 점수 재보정",
+    "recalibration"
+   ],
+   "en": "Base Quality Score Recalibration",
+   "easy": "기계가 매긴 품질 점수에 있는 치우침(bias)을 알려진 SNP 목록을 참고해 바로잡는 단계예요. 채점 기준이 한쪽으로 쏠린 시험지를 다시 보정하는 것과 같아요."
+  },
+  {
+   "term": "bias",
+   "aka": [
+    "편향",
+    "bias(편향)",
+    "Bias",
+    "치우침"
+   ],
+   "en": "Bias",
+   "easy": "결과가 한쪽으로 치우치는 체계적인 오차예요. 저울이 항상 조금 무겁게 재는 것처럼, 기계가 품질 점수를 일정하게 높거나 낮게 매기는 경우를 말해요."
+  },
+  {
+   "term": "dbSNP",
+   "aka": [
+    "dbsnp",
+    "DB SNP",
+    "dbSNP database"
+   ],
+   "en": "Single Nucleotide Polymorphism Database",
+   "easy": "지금까지 알려진 SNP 같은 변이에 이름표(번호)를 붙여 모아 놓은 데이터베이스예요. BQSR에서는 알려진 변이 목록으로 쓰여요."
+  },
+  {
+   "term": "GATK",
+   "aka": [
+    "gatk",
+    "Genome Analysis Toolkit",
+    "GATK4"
+   ],
+   "en": "Genome Analysis Toolkit",
+   "easy": "변이를 찾기 위한 프로그램 모음이에요. 하버드와 MIT가 함께 만든 Broad Institute에서 개발했고, BQSR과 HaplotypeCaller가 여기에 들어 있어요."
+  },
+  {
+   "term": "Broad Institute",
+   "aka": [
+    "브로드 연구소",
+    "Broad",
+    "브로드 인스티튜트",
+    "broad institute"
+   ],
+   "en": "Broad Institute of MIT and Harvard",
+   "easy": "미국 보스턴 지역에 있는 하버드와 MIT 공동 유전체 연구소예요. GATK와 Picard를 만든 곳이에요."
+  },
+  {
+   "term": "HaplotypeCaller",
+   "aka": [
+    "haplotypecaller",
+    "Haplotype Caller",
+    "HC"
+   ],
+   "en": "HaplotypeCaller",
+   "easy": "GATK의 변이 찾기 프로그램이에요. 변이가 몰린 구역을 골라서 묶음(haplotype) 단위로 확률을 계산해 진짜 변이를 가려내요."
+  },
+  {
+   "term": "haplotype",
+   "aka": [
+    "Haplotype",
+    "하플로타입",
+    "반수체형"
+   ],
+   "en": "Haplotype",
+   "easy": "한 염색체 위에서 한 덩어리로 같이 물려받는 변이들의 조합이에요. 엄마에게 받은 염색체는 A-C-G, 아빠에게 받은 염색체는 G-T-G처럼 묶음으로 따라다녀요."
+  },
+  {
+   "term": "active region",
+   "aka": [
+    "Active region",
+    "활성 영역",
+    "활성 구역"
+   ],
+   "en": "Active region",
+   "easy": "HaplotypeCaller가 전체를 다 보면 너무 많으니 변이가 있을 것 같은 곳만 먼저 골라 집중해서 분석하는 구간이에요."
+  },
+  {
+   "term": "PairHMM",
+   "aka": [
+    "pairhmm",
+    "Pair HMM",
+    "pair-HMM"
+   ],
+   "en": "Pair Hidden Markov Model",
+   "easy": "read 하나가 특정 haplotype에서 나왔을 확률을 계산하는 수학적 방법이에요. 읽다가 생길 수 있는 실수(에러, 삽입, 결실)도 함께 고려해요."
+  },
+  {
+   "term": "베이지안",
+   "aka": [
+    "Bayesian",
+    "베이즈",
+    "베이지안 모델",
+    "Bayesian model"
+   ],
+   "en": "Bayesian",
+   "easy": "새로운 증거가 생길 때마다 처음 추측을 고쳐 가며 확률을 계산하는 방법이에요. 단서를 하나씩 모아 범인일 확률을 업데이트하는 탐정과 같아요."
+  },
+  {
+   "term": "ploidy",
+   "aka": [
+    "배수성",
+    "Ploidy",
+    "이배체",
+    "diploid",
+    "-ploidy"
+   ],
+   "en": "Ploidy",
+   "easy": "한 세포가 같은 염색체를 몇 벌 가지고 있는지를 뜻해요. 사람은 엄마와 아빠에게 한 벌씩 받아 2벌이어서 ploidy가 2예요."
+  },
+  {
+   "term": "variant calling",
+   "aka": [
+    "variant call",
+    "변이 호출",
+    "변이 찾기",
+    "Variant calling",
+    "variant discovery",
+    "변이 콜링"
+   ],
+   "en": "Variant calling",
+   "easy": "정렬된 read들을 레퍼런스와 비교해 진짜 변이가 어디에 있는지 찾아내는 과정이에요. 틀린 그림 찾기 같지만 시퀀싱 실수와 진짜 차이를 구분해야 해요."
+  },
+  {
+   "term": "VCF",
+   "aka": [
+    "Variant Call Format",
+    "VCF 파일"
+   ],
+   "en": "Variant Call Format",
+   "easy": "찾아낸 변이를 한 줄씩 정리해 둔 표 형식 파일이에요. 변이의 위치, 원래 글자, 바뀐 글자, 품질 등이 담겨 있어요."
+  },
+  {
+   "term": "GVCF",
+   "aka": [
+    "gvcf",
+    "g.vcf",
+    "genomic VCF"
+   ],
+   "en": "Genomic VCF",
+   "easy": "변이가 있는 곳뿐 아니라 변이 여부를 확신하기 어려운 구간까지 포함해 전체를 기록한 VCF예요. 나중에 다시 분석하기 좋아서 보통 먼저 만들어요."
+  },
+  {
+   "term": "NON_REF",
+   "aka": [
+    "<NON_REF>",
+    "non_ref",
+    "NON-REF",
+    "nonref"
+   ],
+   "en": "NON_REF",
+   "easy": "GVCF에서 레퍼런스가 아닌 어떤 다른 글자일 가능성도 있다는 뜻의 표시예요. 변이인지 아닌지 확신하기 어려운 자리에 붙어요."
+  },
+  {
+   "term": "GenotypeGVCFs",
+   "aka": [
+    "genotypegvcfs",
+    "Genotype GVCFs",
+    "GenotypeGVCF"
+   ],
+   "en": "GenotypeGVCFs",
+   "easy": "GVCF 파일에서 확실한 변이만 골라 정식 VCF로 뽑아 주는 GATK의 단계예요."
+  },
+  {
+   "term": "REF/ALT",
+   "aka": [
+    "REF",
+    "ALT",
+    "REF와 ALT"
+   ],
+   "en": "Reference / Alternate allele",
+   "easy": "VCF에서 REF는 레퍼런스에 원래 있던 글자이고, ALT는 내 샘플에서 바뀐 글자예요. 예를 들어 REF가 G, ALT가 A이면 G가 A로 바뀐 것이에요."
+  },
+  {
+   "term": "GT",
+   "aka": [
+    "Genotype",
+    "유전자형",
+    "GT 값"
+   ],
+   "en": "Genotype",
+   "easy": "VCF에서 두 염색체가 각각 어떤 글자를 가졌는지 나타내는 값이에요. 0은 레퍼런스와 같은 글자, 1은 바뀐 글자예요. 0/0이면 변이 없음, 0/1이나 1/1이면 변이 있음이에요."
+  },
+  {
+   "term": "DP",
+   "aka": [
+    "Depth (DP)",
+    "총 depth"
+   ],
+   "en": "Depth (DP)",
+   "easy": "VCF에서 그 자리를 덮은 read가 몇 개인지 알려 주는 값이에요. 값이 클수록 같은 자리를 많이 확인했다는 뜻이에요."
+  },
+  {
+   "term": "GQ",
+   "aka": [
+    "Genotype Quality"
+   ],
+   "en": "Genotype Quality",
+   "easy": "GT 판정을 얼마나 믿을 수 있는지를 Phred 방식 점수로 나타낸 값이에요. 높을수록 믿을 만해요."
+  },
+  {
+   "term": "AD",
+   "aka": [
+    "Allelic Depth",
+    "대립유전자별 depth"
+   ],
+   "en": "Allelic Depth",
+   "easy": "그 자리에서 레퍼런스 글자를 가진 read가 몇 개, 바뀐 글자를 가진 read가 몇 개인지 따로 세어 놓은 값이에요. 예를 들어 12,8이면 레퍼런스 12개, 바뀐 글자 8개예요."
+  },
+  {
+   "term": "FILTER/PASS",
+   "aka": [
+    "FILTER",
+    "PASS",
+    "필터"
+   ],
+   "en": "FILTER / PASS",
+   "easy": "VCF의 칸 하나로, 모든 필터 조건을 통과한 변이는 PASS라고 적혀요. 통과하지 못하면 걸린 필터 이름이 대신 적혀요."
+  },
+  {
+   "term": "hard filter",
+   "aka": [
+    "하드 필터",
+    "hard filtering",
+    "Hard filter",
+    "하드필터"
+   ],
+   "en": "Hard filter",
+   "easy": "품질이나 depth 같은 값에 기준선을 정해 놓고, 기준을 못 넘으면 곧바로 걸러 내는 단순한 필터링 방법이에요. 합격 점수 컷을 정하는 것과 같아요."
+  },
+  {
+   "term": "annotation",
+   "aka": [
+    "어노테이션",
+    "variant annotation",
+    "Annotation",
+    "주석",
+    "annotate"
+   ],
+   "en": "Annotation",
+   "easy": "찾아낸 변이가 유전자의 어디에 있는지, 질병과 관련 있는지 같은 의미를 데이터베이스에서 찾아 붙여 주는 단계예요. 위치만 적힌 주소에 건물 이름과 설명을 달아 주는 일이에요."
+  },
+  {
+   "term": "ANNOVAR",
+   "aka": [
+    "annovar",
+    "ANNOtate VARiation"
+   ],
+   "en": "ANNOtate VARiation",
+   "easy": "변이에 유전자 정보, 질병 정보 등을 붙여 주는 Perl로 만든 프로그램이에요. 여러 데이터베이스를 이용해 변이의 의미를 알려 줘요."
+  },
+  {
+   "term": "1000 Genomes",
+   "aka": [
+    "1000 Genomes Project",
+    "1000G",
+    "천인 게놈",
+    "1000 genomes",
+    "1000 게놈"
+   ],
+   "en": "1000 Genomes Project",
+   "easy": "전 세계 여러 지역 사람 천 명 이상의 게놈을 읽어 모은 데이터베이스예요. 어떤 변이가 일반인에게 얼마나 흔한지 알아볼 때 써요."
+  },
+  {
+   "term": "dbNSFP",
+   "aka": [
+    "dbnsfp",
+    "dbNSFP database"
+   ],
+   "en": "database of Non-Synonymous Functional Predictions",
+   "easy": "아미노산이 바뀌는 변이가 단백질 기능에 해로울지를 여러 프로그램이 예측한 점수를 모아 놓은 데이터베이스예요."
+  },
+  {
+   "term": "ClinVar",
+   "aka": [
+    "clinvar"
+   ],
+   "en": "Clinical Variation database (ClinVar)",
+   "easy": "변이가 질병과 관련 있는지(병원성인지, 무해한지)를 의사와 연구자들이 보고한 것을 모아 놓은 데이터베이스예요. 이 수업에서 가장 중요하게 보는 DB예요."
+  },
+  {
+   "term": "GWAS",
+   "aka": [
+    "Genome-Wide Association Study",
+    "Genome Wide Association Study",
+    "전장 유전체 연관 분석",
+    "유전체 연관 분석"
+   ],
+   "en": "Genome-Wide Association Study",
+   "easy": "병에 걸린 사람들과 건강한 사람들의 전체 게놈을 비교해서 그 병과 관련된 변이를 찾는 연구 방법이에요."
+  },
+  {
+   "term": "파이프라인",
+   "aka": [
+    "pipeline",
+    "분석 파이프라인",
+    "파이프 라인"
+   ],
+   "en": "Pipeline",
+   "easy": "여러 분석 단계를 순서대로 줄줄이 연결한 작업 흐름이에요. 공장 컨베이어 벨트처럼 앞 단계 결과가 뒤 단계로 넘어가요."
+  },
+  {
+   "term": "pre-processing",
+   "aka": [
+    "preprocessing",
+    "전처리",
+    "Pre-processing",
+    "pre processing",
+    "데이터 전처리"
+   ],
+   "en": "Pre-processing",
+   "easy": "FASTQ에서 분석 준비가 끝난 BAM까지 만드는 앞쪽 단계 전체예요. QC, 트리밍, 정렬, MarkDuplicates, BQSR가 여기에 속해요. 요리 전에 재료를 손질하는 과정이에요."
+  }
+ ],
+ "explain": {
+  "87fd1aa3": "DNA는 설계도 원본이라 금고(핵)에서 못 나와요. 그래서 필요한 부분만 RNA로 베껴 쓰는데, 이 베껴 쓰기가 전사예요.",
+  "38a68c74": "mRNA의 암호를 3글자(코돈)씩 읽고 맞는 아미노산을 이어서 단백질을 만드는 일이 번역이에요. 암호를 다른 말로 옮긴다고 생각하면 이름이 기억나요.",
+  "b6ab3793": "염기 3글자가 한 묶음이 되어 아미노산 하나를 정해 줘요. 이 3글자 묶음의 이름이 코돈이에요.",
+  "f8fe2675": "글자(염기)가 바뀌었지만 결국 같은 아미노산이 만들어지면 단백질이 달라지지 않아요. 오타가 났는데 뜻은 같은 경우라서 침묵 돌연변이예요.",
+  "57369dab": "바뀐 글자 때문에 갑자기 종결 코돈(멈춤 신호)이 생겨서 단백질이 중간에 끊겨요. 문장 한가운데 마침표가 찍힌 셈이라 넌센스예요. 미스센스는 아미노산만 바뀌는 경우라 달라요.",
+  "b194e272": "GAG가 GTG로 바뀌면서 글루탐산이 발린이라는 다른 아미노산으로 바뀌었어요. 아미노산이 다른 것으로 바뀌는 돌연변이가 미스센스예요. 단백질이 끊긴 것이 아니라서 넌센스는 아니에요.",
+  "c0698cee": "G-C는 수소결합(손잡는 힘)이 3개, A-T는 2개예요. 손을 3개 잡은 G-C가 더 튼튼하니 문장이 반대로 쓰여서 틀렸어요.",
+  "e6bbef6a": "메틸화는 C에 작은 꼬리표(메틸기)를 붙이는 것이라 DNA 글자는 그대로예요. 글자는 안 바꾸고 스위치만 끄고 켜는 것이라서 맞는 말이에요.",
+  "5783307c": "종양억제유전자는 암을 막는 브레이크예요. 그 유전자의 프로모터가 과메틸화되어 꺼지면 브레이크가 고장 나서 암이 생기기 쉬워져요. 저메틸화는 게놈 전체에서 나타나는 변화라서 이 문제의 답이 아니에요.",
+  "9e80a784": "사람 게놈은 약 30억 글자예요. 수업에서 3조라고 한 건 말실수니까 30억으로 외우세요.",
+  "3b12d5f3": "RNA에서는 T(티민) 대신 U(우라실)를 써서 A, U, G, C가 돼요. I(이노신)는 이 문제에서 헷갈리라고 넣은 보기예요.",
+  "bdacd96d": "NGS의 핵심은 DNA를 합성하면서 동시에 형광으로 읽는 거예요. 영어로 Sequencing by Synthesis, 줄여서 SBS예요.",
+  "a9f2a6e9": "Illumina는 1Gb당 약 7달러, Roche는 9,500달러라서 Illumina가 훨씬 쌌어요. 읽는 길이와 속도는 오히려 Roche가 나았지만, 연구자들은 가격이 싼 쪽을 골랐어요.",
+  "b1768eb1": "Illumina는 유리판 위에서 DNA가 다리(bridge)처럼 휘어 복사되는 Bridge PCR로 무리를 만들어요. Emulsion PCR은 Roche가 쓴 방법이라 헷갈리면 안 돼요.",
+  "f5ae1335": "슬라이드에 Roche 454가 2016년에 문을 닫았다고 적혀 있어요. 그래서 맞는 문장이에요.",
+  "04d549c1": "휴먼 게놈 프로젝트는 1990년부터 2003년까지 13년 동안 약 30억 달러를 들여 했어요. NGS가 나오기 전이라 느린 Sanger 방식으로 했어요.",
+  "dd18ea43": "FASTQ는 read 하나가 4줄이에요. 이름표(@), 염기서열, 구분선(+), 품질 점수 순서예요.",
+  "a2eaa747": "Q30은 잘못 읽을 확률이 1/1000이라서 정확도는 99.9%예요. 30의 앞자리 3은 0이 세 개라고 생각하면 외우기 쉬워요.",
+  "0ec68479": "N은 형광이 섞여서 A, T, G, C 중 무엇인지 알 수 없는 자리를 뜻해요. 모르는 글자를 물음표 대신 N으로 적은 거예요.",
+  "53ce38b4": "FASTA는 이름 줄(>)과 서열만 있는 정답지 파일이고, FASTQ는 4줄에 품질 점수까지 있는 내 시퀀싱 결과예요. 품질 점수가 있는 쪽은 FASTQ라서 첫 보기는 틀려요.",
+  "906e74af": "한 위치를 read 몇 개가 겹쳐서 읽었는지가 depth예요. coverage는 전체 중 한 번이라도 읽힌 부분의 비율이라서 뜻이 달라요.",
+  "5f631860": "암 초기처럼 변이 비율이 아주 낮으면 깊게 읽어야 찾아낼 수 있어요. 읽을 범위를 몇 개 유전자로 줄이면(Targeted) 500x 이상으로 깊게 읽을 수 있어요. WGS 30x는 얕아서 놓칠 수 있어요.",
+  "b4fb4973": "2x150은 DNA 조각의 양쪽 끝에서 각각 150글자씩 읽는다는 뜻이에요. 이런 방식이 페어드엔드이고, R1과 R2 두 개의 read가 나와요.",
+  "b91bf35e": "CIGAR는 숫자와 글자의 암호예요. 5M은 5개 일치, 2I는 2개 삽입, 10M은 10개 일치라서 5 일치, 2 삽입, 10 일치라고 읽어요.",
+  "dd8c4ffc": "BAM 파일의 찾아보기(인덱스) 파일은 확장자가 .bai예요. BAM Index의 줄임말이에요.",
+  "3e5d835d": "GATK는 Genome Analysis Toolkit의 줄임말이에요. 하버드와 MIT가 함께 만든 Broad Institute에서 만들었어요.",
+  "5c9ebda9": "VCF에서 0은 레퍼런스와 같은 글자, 1은 바뀐 글자예요. 0/0은 양쪽 모두 같다는 뜻이라 변이가 없어요. 0/1이나 1/1이어야 변이가 있어요.",
+  "5718b6cf": "질병과 관련이 있는지는 ClinVar에 물어봐야 해요. dbSNP는 변이의 이름표, 1000 Genomes는 일반인에게 흔한지 알려 주는 DB라서 질병 여부는 모르는 곳이에요.",
+  "dd0faf28": "DNA 메틸화는 사이토신(C)에 작은 꼬리표(메틸기)가 붙는 일이에요. 특히 C 다음에 G가 오는 CpG 자리에서 많이 일어나요.",
+  "adad1fa9": "DNA에서 필요한 부분만 RNA로 베껴 쓰는 것이 전사예요. 복제는 DNA를 통째로 한 벌 더 만드는 것, 번역은 RNA로 단백질을 만드는 것, 스플라이싱은 RNA에서 필요한 부분만 이어 붙이는 가공이라 달라요.",
+  "8ee8d816": "몸속 모든 세포는 같은 DNA를 가지고 있어요. 간세포와 뇌세포가 다른 이유는 글자가 달라서가 아니라 어느 유전자를 켜느냐(스위치)가 다르기 때문이에요. 그래서 이 문장은 틀려요.",
+  "17d8739c": "G-C는 수소결합이 3개, A-T는 2개라서 G-C가 더 단단해요. 염기쌍은 수소결합으로 붙고 공유결합이 아니에요. 그래서 첫 번째 보기가 맞아요.",
+  "0624c6fe": "대체 스플라이싱은 엑손을 이어 붙이는 조합을 바꿔서 같은 유전자로 여러 종류의 mRNA와 단백질을 만드는 거예요. 한 mRNA가 여러 단백질을 동시에 만드는 것은 아니라서 마지막 보기는 함정이에요.",
+  "e9ef735e": "프로모터는 유전자의 시작 스위치예요. 여기가 메틸화되면 결합 단백질이 자리를 막아서 전사인자가 붙지 못하고 유전자가 꺼져요. 메틸화는 글자를 바꾸지 않으므로 돌연변이가 아니에요.",
+  "0287635a": "글자가 바뀌어 종결 코돈(멈춤 신호)이 생기면 단백질 만들기가 중간에 끝나요. 이것이 넌센스예요. 침묵은 같은 아미노산, 미스센스는 다른 아미노산이 들어가는 경우예요.",
+  "88cb3caf": "글루탐산이 발린이라는 다른 아미노산으로 바뀌었으니 미스센스예요. 멈춤 신호가 생긴 것이 아니라서 넌센스는 아니에요.",
+  "9bcc1577": "SNP는 어떤 자리에서 사람마다 글자가 다른 현상이고, allele은 그 자리의 각각의 버전(A 버전, G 버전)이에요. 그래서 설명이 맞아요.",
+  "8850f6bd": "적혈구는 크기가 작아서 개수로는 압도적으로 많아요. 몸 세포의 80% 넘게 차지해요. 근육이나 피부 세포는 눈에 잘 띄지만 개수로는 훨씬 적어요.",
+  "6e8d1014": "BRCA1과 BRCA2는 암을 막아 주는 종양억제유전자라서 고장 나면 유방암 위험이 올라가요. 하지만 변이가 있다고 100% 암에 걸리는 것은 아니에요. 그래서 반드시 걸린다는 보기는 틀려요.",
+  "31064da2": "Sanger는 다 만들어서 흘려보냈지만, NGS는 DNA를 판에 먼저 고정하고 만들면서 바로 사진을 찍어요. 순서를 바꾼 덕분에 수많은 DNA를 동시에 읽을 수 있어요. 형광을 안 쓰는 것도, PCR을 없앤 것도 아니에요.",
+  "2a19b4a6": "Sanger에서는 형광 염기가 붙으면 복사가 멈춰서 길이가 다른 조각이 생겨요. 가는 관에서는 짧은 조각이 먼저 통과해요. 나오는 순서대로 형광 색을 읽으면 서열을 알 수 있어서 맞는 말이에요.",
+  "a018a3bc": "DNA 한 가닥이 내는 형광은 너무 약해서 사진에 안 찍혀요. 그래서 같은 DNA를 1,000가닥쯤 모아 밝게 만들어요. 에러를 평균 내려는 것이 아니에요.",
+  "e380f295": "Illumina는 유리판(flow cell) 위에서 DNA가 다리처럼 휘어 복사되는 Bridge PCR을 써요. 기름방울과 구슬을 쓰는 Emulsion PCR은 Roche의 방식이에요.",
+  "d4b40dfb": "A, T, G, C 시약을 하나씩 따로 흘려서 빛이 나는지로 판단하는 방식은 SNA예요. Illumina의 CRT는 네 가지 색 형광을 한꺼번에 흘리는 방식이라서 달라요.",
+  "2fc13c51": "Illumina의 CRT는 사진을 찍고, 형광을 잘라 내고, 다음 글자를 붙이는 과정을 약 150번 반복해요. 150번 하니까 읽은 길이가 150이 돼요. 그래서 맞는 말이에요.",
+  "72b93209": "핵심 이유는 비용이에요. Illumina는 1Gb당 7달러, Roche는 9,500달러였어요. 읽는 길이와 시간은 Roche가 더 좋았고 에러율은 부차적인 이유예요.",
+  "f51bac0b": "Illumina는 1Gb(글자 10억 개)를 읽는 데 약 7달러가 들어요. Roche는 9,500달러라서 1,000배도 넘게 비싸요.",
+  "7a13bcee": "슬라이드에는 13년 동안 약 30억 달러(US $3 billion)라고 적혀 있어요. 수업 중에 3조 달러라고 한 건 말실수예요.",
+  "8ebfb6d7": "Illumina는 read가 약 150 글자이고 에러율이 0.1%(주로 글자가 바뀌는 substitution)예요. 700글자와 에러 1% indel은 Roche의 특징이라서 섞이지 않게 조심하세요.",
+  "c060c88e": "PCR은 한 번 돌 때마다 DNA가 2배가 돼요. 2배씩 n번이면 2를 n번 곱한 2의 n제곱 배가 돼요. 예를 들어 10번이면 약 1,000배예요.",
+  "b4a5f07a": "FASTQ의 이름표는 판 위의 주소(레인, 타일, x, y 좌표)로 만들어져요. 점마다 주소가 다르니 이름표도 달라야 해요. 환자 이름이나 점수와는 관계가 없어요.",
+  "ed87d73e": "이름표는 판 위의 위치 주소라서 점마다 달라요. 같은 이름표가 두 번 나오면 오류예요. 그러니 정상이라는 말은 틀려요.",
+  "57092a2c": "확률 1/10,000은 10의 4제곱분의 1이라서 Q는 40이에요. 40이면 0이 4개라고 외우면 돼요. 정확도는 99.99%예요.",
+  "4baf0c56": "Q30은 에러가 1000번에 1번이라 정확도가 99.9%예요. 1/100이면 Q20이라서 헷갈리지 마세요. 보통 Q30 이상이면 품질 검사를 통과해요.",
+  "19b16085": "N은 형광이 뒤섞여 어떤 글자인지 판단하지 못한 자리를 뜻해요. 그래서 잘못 읽었을 가능성이 커요. 정상이나 삭제 표시가 아니에요.",
+  "81702d14": "품질 점수는 숫자를 그대로 쓰는 대신 글자 하나로 바꿔서 적어요. 그래야 염기 하나당 글자 하나로 서열과 길이가 딱 맞아요. 예를 들어 F는 37점이에요.",
+  "5ac32f0d": "FastQC 그래프에서 노란 박스는 품질값이 몰려 있는 25%에서 75% 구간이에요. 파란 선은 평균, 빨간 선은 중앙값이라서 박스와는 달라요.",
+  "c3097d46": "조각이 짧아도 기계는 정해진 횟수(150번)만큼 사진을 찍어요. 조각이 끝난 뒤에는 읽을 진짜 DNA가 없어서 노이즈만 찍히고 품질이 뚝 떨어져요. 그래서 맞는 말이에요.",
+  "6b059030": "한 위치를 덮은 read가 5개면 depth는 5x예요. %로 말하는 것은 coverage이니 헷갈리면 안 돼요.",
+  "e61cad86": "coverage는 읽힌 부분의 비율이에요. 10%가 한 번도 안 읽혔다면 90%는 읽힌 것이라서 90%예요. x가 붙는 단위는 depth에서 쓰는 거라 오답이에요.",
+  "2031b8b7": "같은 자리를 여러 번 읽으면 한 번 틀린 것은 다른 read들이 바로잡아 줘요. 100번 읽어 하나만 다르면 에러로 볼 수 있지만, 2번 읽어 하나가 다르면 판단이 안 돼요. 그래서 맞는 말이에요.",
+  "5cfc206e": "200M개를 양쪽 100글자씩 읽으니 글자가 모두 400억 개예요. 이것을 사람 게놈 32억 개로 나누면 12.5라서 사람 게놈을 평균 12.5번 읽은 셈이에요.",
+  "94557b15": "읽을 수 있는 양이 정해져 있어서 범위를 좁힐수록 깊게 읽을 수 있어요. 그래서 몇 개 유전자만 보는 Targeted panel이 500x 이상으로 가장 깊고, 낮은 비율의 변이(암)를 찾기에 좋아요. WGS는 약 30x, WES는 50~100x예요.",
+  "40f3b8ad": "사용자가 친 명령을 알아듣고 컴퓨터 안쪽(커널)에 전달하는 껍데기가 셸(shell)이에요. 이 수업에서는 bash를 써요. 하드웨어는 컴퓨터 부품이라서 오답이에요.",
+  "fb765e58": "읽기는 4, 쓰기는 2, 실행은 1이라서 모두 합치면 4+2+1=7이에요. chmod 777이면 모두에게 모든 권한을 주는 거예요.",
+  "a7ec6448": "NR은 줄 번호예요. FASTQ는 4줄이 한 세트라서 4로 나눈 나머지가 2인 줄이 두 번째 줄(염기서열)이에요. 나머지 1은 이름표, 0은 품질 점수 줄이에요.",
+  "8311db65": "vi는 처음 열면 명령 모드라서 바로 글자가 써지지 않아요. i를 눌러 입력 모드로 바꾸고, Esc로 돌아와 저장해요. 그러니 처음부터 입력 모드라는 말은 틀려요.",
+  "1bfe9e80": "read가 1,187개이고 read 하나가 4줄이니 1,187에 4를 곱한 4,748줄이에요. 계산기로 한 번만 해 보면 맞아요.",
+  "dc67266b": "병이 있는 사람들과 정상인의 게놈 전체를 비교해 병과 관련된 변이를 찾는 방법이 GWAS(Genome-Wide Association Study)예요.",
+  "6765a8eb": "FastQC에서 노란 박스는 품질값의 25%에서 75% 구간이에요. 박스 안의 파란 선은 평균, 빨간 선은 중앙값이니 구별해서 외우세요.",
+  "f00712ea": "조각(인서트)이 짧으면 기계는 그 뒤에 붙은 어댑터를 읽고, 그 뒤에는 읽을 게 없어서 노이즈를 읽어요. 어댑터는 진짜 DNA가 아니라서 잘라 내야 해요.",
+  "8838103c": "어댑터와 노이즈가 남아 있으면 레퍼런스에서 맞는 자리를 찾기 힘들어져요. 그래서 트리밍한 데이터가 얼라인 비율이 훨씬 높아요. 자르지 않은 것이 더 높다는 말은 틀려요.",
+  "e50b8911": "150과 150을 더하면 300이지만 겹치는 50은 두 번 센 거라 한 번만 세요. 그래서 300에서 50을 뺀 약 250bp가 돼요.",
+  "885c7e5b": "합쳐지지 않았다고 불량은 아니에요. 겹치는 부분이 짧거나 없을 뿐이라서 버리지 않고 따로 정렬해서 분석해요.",
+  "dffa8462": "BWA는 레퍼런스에 미리 찾아보기(인덱스)를 만들어 놓고, 짧은 조각(seed)으로 후보 위치를 찾은 다음 거기서만 넓혀 가며 맞춰요. 전부 한 글자씩 비교하는 것이 아니라서 훨씬 빨라요.",
+  "f6bf9e90": "global alignment는 숲을 보는 큰 그림용이라서 식물의 종을 대략 알아볼 때 어울려요. SNP나 indel처럼 세밀하게 봐야 하는 일은 나무를 보는 local alignment가 맞아요.",
+  "a4014af6": "변이를 찾으려면 레퍼런스와 어디가 어떻게 다른지 세밀하게 봐야 해요. 그래서 비슷한 부분을 정밀하게 맞추는 local alignment를 많이 써요.",
+  "c8b681fd": "BLAST는 Basic Local Alignment Search Tool의 줄임말이에요. 웹에서 쓰는 전통적인 도구인데 NGS 데이터에는 너무 느려서 BWA 같은 새 도구가 나왔어요.",
+  "018e1394": "hg19와 hg38처럼 레퍼런스 버전이 다르면 위치와 변이 정보가 달라질 수 있어요. 그래서 항상 같은 버전을 써야 하고, 결과가 항상 같다는 말은 틀려요.",
+  "5851b130": "FASTA에는 이름 줄과 염기서열만 있어요. 정답지라서 품질 점수가 필요 없어요. 품질 점수는 FASTQ의 네 번째 줄에 있어요.",
+  "9f3ce463": "coverage는 레퍼런스 중 한 번이라도 읽힌 비율이에요. 10%가 안 읽혔으니 90%가 읽힌 거예요. 10x나 90x는 depth에서 쓰는 단위라서 오답이에요.",
+  "607bc02c": "depth는 읽은 글자 수를 레퍼런스 길이로 나눈 거예요. 8,592,476개에 150을 곱해 64,444,167로 나누면 약 20이 나와요. 99는 coverage(%)라서 depth와 다른 값이에요.",
+  "931f9781": "100번 읽어서 하나만 다르면 에러로 걸러 낼 수 있어요. 하지만 2번 읽었는데 A 하나, T 하나면 누가 맞는지 판단할 수 없어요. 그래서 depth가 높을수록 변이 판정이 정확해져요.",
+  "6b3a4f02": "read의 길이는 M, I, S를 더한 값이에요. 5+2+10=17이에요. I는 read에는 있지만 레퍼런스에는 없는 글자라서 read 길이에는 포함돼요. 15는 레퍼런스에서 차지하는 길이예요.",
+  "750c44c0": "레퍼런스를 차지하는 칸은 M과 D만 세요. 3+3+1+5=12칸이에요. 5번에서 시작해서 12칸이면 16번에서 끝나요. I는 레퍼런스에 없는 글자라서 세지 않아요.",
+  "84a7baac": "레퍼런스를 차지하는 길이는 M과 D를 더해요. 8+2+11=21이에요. S는 레퍼런스에 놓이지 않고 read에만 남은 끝부분이라 세지 않아요. 30은 read 전체 길이예요.",
+  "11f8e769": "반대로 말했어요. D(deletion)는 레퍼런스에는 있는데 read에는 없는 글자예요. read에만 있는 글자는 I(insertion)예요.",
+  "c72aaf4a": "CIGAR에서 soft clipping은 S로 적어요. M은 일치, I는 삽입, D는 결실이에요.",
+  "ad11e0a7": "FLAG 0은 정방향, 16은 반대 방향(reverse)으로 붙었다는 뜻이에요. 4는 매핑이 안 된 read예요. 그래서 16은 reverse예요.",
+  "f05c11d9": "MAPQ도 Phred 점수와 같은 방식이에요. 60이면 잘못 붙었을 확률이 10의 마이너스 6제곱(백만분의 일)이라 아주 잘 붙은 거예요. 점수가 높을수록 믿을 만해요.",
+  "eae89181": "MD:Z:38은 38개가 연속으로 일치한다는 뜻이고, NM:i:0은 다른 글자가 0개라는 뜻이에요. 그래서 38개 모두 레퍼런스와 같아요.",
+  "e4976c54": "|(파이프)는 앞 프로그램의 결과를 저장하지 않고 바로 뒤 프로그램에 넘겨 주는 기호예요. 아주 큰 SAM 파일을 저장하고 지우는 수고를 덜어요.",
+  "91bfcd0b": ".bai는 BAM 파일의 찾아보기(인덱스) 파일이에요. 레퍼런스 FASTA의 인덱스는 .fai로 이름이 비슷해서 헷갈리기 쉬워요.",
+  "561e879c": "염색체와 위치 순서대로 줄 세워야 다음 단계(변이 찾기)와 IGV가 원하는 곳을 바로 찾아가요. sort는 정리용이 아니라 필수 작업이에요. 용량을 줄이는 것은 SAM을 BAM으로 바꾸는 일이에요.",
+  "36bf5ea2": "랜덤하게 자른 DNA는 시작점과 끝점이 우연히 같을 일이 거의 없어요. 그래서 위치와 CIGAR가 같은 read는 PCR로 복사된 같은 조각이라고 보고 하나만 남겨요.",
+  "c4dff02c": "amplicon은 PCR로 특정 부위만 늘린 것이라서 원래 모든 read의 시작과 끝이 같아요. 그래서 중복 제거를 하면 거의 다 사라져요. 이때는 MarkDuplicates를 건너뛰어요.",
+  "4b7ed174": "정렬 직후에는 아직 중복을 찾지 않아서 duplicates가 0이에요. MarkDuplicates를 하고 나면 중복으로 판정된 read 1,542개가 표시돼요. 그래서 맞는 말이에요.",
+  "1dc8adbf": "기계가 매긴 품질 점수에는 치우침(bias)이 있어요. BQSR은 알려진 SNP 목록(dbSNP)을 참고해서 품질 점수를 다시 보정해요. 그래서 에러를 진짜 변이로 착각하는 일이 줄어요.",
+  "ee644e7e": "BQSR은 Base Quality Score Recalibration의 줄임말이에요. 염기(Base)의 품질 점수(Quality Score)를 다시(Re) 보정(calibration)한다는 뜻이에요.",
+  "dd644d7b": "먼저 품질 검사와 트리밍을 하고, BWA로 정렬한 뒤 sort와 index를 해요. 그다음 MarkDuplicates, BQSR, HaplotypeCaller, 필터, ANNOVAR 순서예요. 다른 보기들은 순서가 뒤죽박죽이에요.",
+  "f1603a92": "VCF에서 0은 레퍼런스와 같은 글자, 1은 바뀐 글자예요. 0/0은 두 염색체 모두 같은 글자라서 변이가 없다는 뜻이에요.",
+  "fb8ec734": "0/1은 두 염색체 중 하나만, 1/1은 두 염색체 모두 바뀐 글자예요. 둘 다 변이가 있어요. 0/0은 변이가 없으니 제외해야 해요.",
+  "5bc8e0b7": "REF는 ACG인데 ALT는 A라서 글자가 줄었어요. CG가 사라진 deletion이에요. 글자 하나만 바뀌면 SNP, 글자가 늘면 insertion이에요.",
+  "31ff0d5b": "G가 A로 글자 하나만 바뀌었으니 SNP예요. 거의 같은 뜻으로 SNV도 인정돼요. 글자 수가 달라지면 insertion이나 deletion이에요.",
+  "1eb14f52": "GVCF는 확실한 변이뿐 아니라 판단이 어려운 자리까지 모두 적어요. 그런 애매한 자리에 NON_REF 표시가 붙는다고 수업에서 배웠어요. VCF는 확실한 변이만 담아요.",
+  "cd2c16ae": "GATK는 Genome Analysis Toolkit의 줄임말이에요. 하버드와 MIT가 함께 만든 Broad Institute에서 만든 변이 분석 도구 모음이에요.",
+  "62bd6559": "게놈 전체를 다 보기엔 너무 많아서 HaplotypeCaller는 변이가 있을 것 같은 구간(active region)부터 골라요. 그다음 그 안에서 확률을 계산해 변이를 찾아요. PCR 중복 제거나 점수 보정은 그 전 단계 일이에요.",
+  "904f09ad": "haplotype은 한 염색체 위에서 같이 물려받는 변이들의 묶음이에요. 예를 들어 엄마에게서는 A-C-G, 아빠에게서는 G-T-G처럼 묶음으로 따라다녀요. 묶음에 맞는 read는 진짜 변이, 어긋나면 에러일 가능성이 커요.",
+  "0ba0cf56": "PASS는 설정한 모든 필터 조건을 통과했다는 뜻이에요. 통과하지 못하면 걸린 필터 이름이 대신 적혀요. 예를 들어 MQ_filter는 매핑 품질 필터에서 떨어졌다는 표시예요.",
+  "733c7eb4": "필터는 확실한 호출만 필요할 때 써요. 하지만 희귀한 변이는 하나하나가 소중해서 필터로 버리면 안 될 수도 있어서 필터를 안 쓰기도 해요. 목적에 따라 분석 방법을 정해요.",
+  "607e4e9f": "ANNOVAR는 ANNOtate VARiation의 줄임말이에요. 찾은 변이가 무슨 의미인지 데이터베이스와 연결해 주는 프로그램이에요.",
+  "aeec88eb": "질병과 관련 있는지(pathogenic, benign)는 ClinVar에 있어요. dbSNP는 변이의 이름표, 1000 Genomes는 일반인에게 흔한지, dbNSFP는 단백질 기능에 영향을 주는지를 알려 줘요.",
+  "93cdd2a8": "Filter-based는 이 변이가 특정 데이터베이스에 있는지 확인하는 방식이에요. Gene-based는 단백질을 만드는 영역인지, Region-based는 전사인자 결합부위 같은 기능 구역인지 봐요.",
+  "e11a797e": "IGV는 Integrative Genomics Viewer의 줄임말이에요. 정렬된 BAM과 BAI를 올리면 read가 쌓인 모습, depth를 나타내는 회색 막대, 틀린 글자를 색깔로 볼 수 있어요."
+ },
+ "flag": {
+  "1eb14f52": "수업 슬라이드와 녹취 기준으로는 NON_REF를 판단 불가 위치로 보지만, 실제 GATK의 GVCF에서 <NON_REF>는 어떤 다른 대립유전자일 수도 있다는 상징 표시이고 변이가 없다고 확신하는 reference 구간도 이 표시와 함께 기록돼요. 시험은 수업 기준을 따르면 정답이 맞지만 실제 의미와 약간 달라요."
+ },
+ "essay_easy": {
+  "e00": "NGS는 아주 많은 DNA 조각을 한꺼번에 읽는 방법이에요. Sanger는 가는 관 하나에 DNA 한 종류만 흘려서 읽어서 동시에 많이 하기 어려웠어요. NGS는 DNA를 유리판에 먼저 붙여 놓고 글자를 하나씩 이어 붙이면서 그때마다 형광 사진을 찍어서 약 10억 개를 동시에 읽어요. 그 덕분에 사람 게놈을 읽는 비용이 30억 달러에서 약 200달러로 내려갔어요.",
+  "e01": "스펙으로는 Roche가 한 번에 읽는 길이도 길고 시간도 짧아서 더 좋아 보였어요. 하지만 Illumina는 한 번에 읽는 양이 1,000배나 많아서 같은 양을 읽는 데 드는 돈이 1,000배 넘게 쌌어요. 연구비로 연구하는 사람들은 싼 쪽을 골랐고 Roche는 2016년에 문을 닫았어요. 그래서 기술은 결국 가격이 중요하다는 결론이에요.",
+  "e02": "depth는 한 자리를 read 몇 개가 겹쳐서 읽었느냐이고, coverage는 정답지 전체 중 한 번이라도 읽힌 부분이 몇 %냐예요. 같은 자리를 여러 번 읽으면 한 번 실수한 것은 다른 read들이 바로잡아 줘서 진짜 변이와 시퀀싱 실수를 구별할 수 있어요. 100번 읽어서 하나만 다르면 실수지만, 2번 읽어서 하나가 다르면 누가 맞는지 몰라요. depth가 너무 낮으면 아예 안 읽히는 곳도 생겨서 coverage도 떨어져요.",
+  "e03": "기계가 읽을 수 있는 양은 정해져 있어서 넓게 읽으면 얕아지고 좁게 읽으면 깊어져요. WGS는 게놈 전체를 약 30x로 읽어서 큰 그림을 보거나 처음 보는 변이를 찾아요. WES는 단백질을 만드는 부분(엑손)만 50~100x로 읽어서 비용을 아껴요. Targeted는 몇 개 유전자만 500x 이상으로 깊게 읽어서 암처럼 비율이 아주 낮은 변이를 찾아요.",
+  "e04": "NGS는 한 방향으로는 150~250글자밖에 못 읽어요. 그래서 DNA 조각의 양쪽 끝에서 각각 읽어요(R1, R2). 두 read가 가운데에서 겹치면 이어 붙여서 더 긴 서열을 얻어요. 뒤쪽으로 갈수록 품질이 떨어지는데 반대쪽 read가 그 부분을 보완해 줘서 더 정확해져요. 2x150은 양쪽에서 150글자씩 읽었다는 표기예요.",
+  "e05": "원료인 FASTQ 파일에서 시작해 단계마다 정리하고 확인하는 과정이에요. 먼저 품질을 검사하고(QC), 쓸모없는 어댑터와 나쁜 끝부분을 자르고(트리밍), 두 read를 합쳐요(머지). 그다음 BWA로 정답지(레퍼런스)의 위치에 맞추고(얼라인먼트) 정렬된 BAM을 만들어요. PCR 복사본을 없애고(MarkDuplicates) 품질 점수를 보정한(BQSR) 뒤, HaplotypeCaller로 진짜 변이를 찾아 VCF를 만들어요. 마지막에는 ANNOVAR로 그 변이가 무슨 뜻인지 알아봐요.",
+  "e06": "이유는 두 가지예요. 첫째 DNA 조각이 짧아도 기계는 정해진 횟수만큼 읽어서, 조각이 끝난 뒤에는 어댑터와 쓸데없는 잡음을 읽게 돼요. 둘째 반복할수록 형광 잡음이 쌓여서 글자를 헷갈려요. 해결책은 어댑터와 나쁜 부분을 잘라 내는 트리밍과, 반대쪽 read로 보완하는 페어드엔드예요.",
+  "e07": "DNA 조각이 짧으면 기계가 진짜 DNA를 다 읽고도 길이가 남아서 인공으로 붙인 어댑터까지 읽어요. 어댑터는 정답지에 없는 서열이라 그대로 두면 위치를 맞추지 못하거나 변이로 착각해요. 그래서 먼저 잘라야 하고, 실제로 자른 데이터가 정답지에 훨씬 잘 붙어요.",
+  "e08": "얼라인먼트는 짧게 쪼개진 read들이 정답지 게놈의 어디서 왔는지 찾아 맞춰 붙이는 일이에요. 위치를 알아야 정답지와 다른 글자(변이)를 찾을 수 있어요. BWA가 빠른 이유는 정답지에 찾아보기(인덱스)를 미리 만들어 두고, read의 짧은 조각(seed)으로 후보 위치를 찾은 다음 거기서만 넓혀 가며 맞추기 때문이에요. 전부 비교하는 BLAST보다 훨씬 빨라요.",
+  "e09": "DNA가 부족하면 PCR로 늘리는데, 그러면 같은 조각이 여러 개 복사돼요. 무작위로 자른 DNA는 시작점과 끝점이 우연히 같을 수 없으니, 위치가 똑같은 read는 복사본으로 보고 없애요. 안 없애면 같은 증언을 여러 번 센 것처럼 변이 비율이 부풀려져요(예를 들어 30%가 80%로). 다만 특정 부위만 PCR로 늘린 amplicon 데이터는 원래 시작과 끝이 같아서 이 단계를 건너뛰어요.",
+  "e10": "기계가 매긴 품질 점수는 한쪽으로 치우친(bias) 경우가 있어서 실수를 진짜 변이로 착각할 수 있어요. BQSR은 이미 알려진 SNP 목록(dbSNP)을 정답지처럼 참고해서 점수가 실제 정확도와 얼마나 어긋나는지 표(재보정 테이블)로 만들어요(BaseRecalibrator). 그 표를 이용해 BAM의 품질 점수를 다시 써요(ApplyBQSR). 결과로 분석 준비가 끝난 final BAM이 나와요.",
+  "e11": "정답지와 다른 곳을 찾는 건 틀린 그림 찾기처럼 쉬워요. 하지만 그중에는 시퀀싱 실수도 섞여 있어서, 진짜 변이일 확률을 계산하는 것이 핵심이에요. HaplotypeCaller는 변이가 몰린 구간(active region)을 먼저 고르고, 같이 물려받는 변이 묶음(haplotype)을 만들어 read가 어느 묶음에서 나왔을 확률을 계산해요(PairHMM, 베이지안). 여러 변이가 묶음대로 함께 나타나면 진짜, 묶음에 안 맞으면 실수로 보고 확실한 변이만 VCF에 담아요.",
+  "e12": "GVCF는 변이인지 아닌지 알 수 없는 자리(NON_REF)까지 모든 위치를 적은 기록이에요. VCF는 확실한 변이만 적어요. 보통 GVCF를 먼저 만들고 GenotypeGVCFs로 확실한 변이만 뽑아 VCF를 만들어요.",
+  "e13": "메틸화는 DNA의 C에 작은 꼬리표(메틸기)가 붙는 일이에요. 글자는 그대로이고 스위치만 바뀌어요. 유전자 앞 프로모터에는 CpG가 빽빽한 CpG 아일랜드가 있는데, 여기가 메틸화되면 결합 단백질이 자리를 막아서 전사인자가 못 붙고 유전자가 꺼져요. 암에서는 암을 막는 종양억제유전자의 프로모터가 과메틸화되어 꺼지고, 게놈 전체로는 오히려 메틸화가 줄어든 모습이 나타나요.",
+  "e14": "미스센스는 글자 하나가 바뀌어서 다른 아미노산이 들어가는 돌연변이예요. 겸상 적혈구 빈혈증은 헤모글로빈 유전자의 GAG(글루탐산)가 GTG(발린)로 바뀌어서 생겨요. 그러면 적혈구가 낫(초승달) 모양으로 휘어서 산소를 잘 못 날라 빈혈이 생겨요. DNA에서 RNA, 단백질로 가는 흐름 중 한 곳이 어긋나면 병이 될 수 있다는 대표적인 예예요.",
+  "e15": "NGS는 유리판에 수억~수십억 개의 DNA 무리(클러스터)를 먼저 고정하고, 글자를 하나씩 붙이면서 그때마다 형광 사진을 찍어 한꺼번에 읽는 기술이에요. Sanger는 가는 관 하나에 DNA 한 종류만 흘려서 읽어요. NGS는 점이 아주 작아서 판 하나에서 약 10억 개를 동시에 읽고 시약도 적게 써서 한 종류당 비용이 확 줄어요. 한 가닥은 빛이 약해서 같은 DNA 약 1,000가닥을 모아 무리로 만들어요. 그 결과 사람 게놈 분석이 13년, 30억 달러에서 약 200달러로 내려와 개인 맞춤 분석이 가능해졌어요.",
+  "e16": "Roche는 기름방울과 구슬을 쓰는 Emulsion PCR로 무리를 만들고, 글자를 하나씩 따로 흘려 빛이 나는지로 읽어요. Illumina는 유리판 위의 Bridge PCR로 무리를 만들고, 4가지 색 형광을 한꺼번에 흘려 약 150번 반복해요. 읽는 길이와 시간은 Roche가 좋았지만, Illumina는 에러율이 낮고 한 번에 약 1,000배 많이 읽어요. 결정적인 건 가격이에요. 1Gb당 Roche는 9,500달러, Illumina는 7달러라서 연구자들이 Illumina를 골랐고 Roche는 2016년에 문을 닫았어요. 기술의 승부는 결국 가격이라는 결론이에요.",
+  "e17": "FASTQ는 시퀀싱 결과를 담은 파일이고 read 하나가 4줄이에요. 1줄은 판 위의 주소로 만든 이름표(같으면 오류), 2줄은 염기서열(못 읽은 곳은 N), 3줄은 구분선(+), 4줄은 글자마다 매긴 품질 점수예요. Phred 점수 Q는 틀리게 읽을 확률로 만든 점수예요. Q20은 100번에 1번(99%), Q30은 1,000번에 1번(99.9%), Q40은 10,000번에 1번(99.99%) 틀려요. 보통 Q30 이상이면 품질 검사를 통과하고, 그보다 낮은 게 많으면 버리거나 다시 읽어요.",
+  "e18": "FastQC 그래프는 가로가 read 위치, 세로가 품질 점수예요. 파란 선은 평균, 빨간 선은 중앙값, 노란 박스는 점수가 몰린 25~75% 구간이고 보통 30~40이면 쓸 만해요. 뒤로 갈수록 점수가 떨어지는 이유는 두 가지예요. 하나는 DNA 조각이 짧아도 기계는 150번 사진을 찍어서 조각이 끝나면 잡음만 찍히기 때문이에요. 또 하나는 반복할수록 형광 잡음이 쌓여서 색을 헷갈리기 때문이에요. 이 그래프를 보고 그대로 쓸지, 낮은 부분을 거를지, 버릴지 정해요.",
+  "e19": "depth는 한 자리를 read 몇 개가 겹쳐 읽었는지(예 30x)이고, coverage는 정답지 중 한 번이라도 읽힌 비율(예 90%)이에요. depth가 높으면 한 번 틀려도 다른 read가 바로잡아 줘서 진짜 변이와 실수를 구분하기 쉬워요. 낮으면 안 읽힌 곳이 생겨 coverage도 낮아져요. 기계가 읽을 양은 정해져 있어서 범위를 넓히면 얕아지고 좁히면 깊어져요. WGS는 약 30x로 전체를 보며 처음 보는 변이를 찾고, WES는 엑손만 50~100x로 비용을 아끼고, Targeted는 특정 유전자를 500x 이상으로 읽어 암처럼 비율이 낮은 변이를 찾아요.",
+  "e20": "후성유전은 DNA 글자는 그대로인데 어떤 유전자를 켜고 끄는지가 달라지는 일이에요. 모든 세포는 같은 설계도를 갖지만 켜진 스위치가 달라서 간세포와 뇌세포가 서로 다른 단백질을 만들어요. 대표적인 스위치가 C에 메틸기가 붙는 DNA 메틸화예요. 유전자 앞 프로모터의 CpG 아일랜드가 메틸화되면 결합 단백질이 자리를 막아 전사인자가 못 붙고 유전자가 꺼져요. 암에서는 종양억제유전자의 프로모터가 과메틸화되어 꺼지고 게놈 전체는 메틸화가 줄어, 글자가 같아도 메틸화 정도 차이로 암 신호를 찾을 수 있어요. DNA가 감긴 히스톤이 변하는 것도 같은 스위치 조절 방법이에요.",
+  "e21": "얼라인먼트는 짧은 read가 정답지(레퍼런스)의 어디서 왔는지 맞추는 일이고, 변이를 찾을 때는 비슷한 부분을 세밀하게 보는 local alignment를 써요. BLAST는 웹에서 쓰는 전통 도구인데 NGS의 수억 개 read를 돌리면 몇 달이 걸려요. BWA는 정답지에 찾아보기(인덱스)를 한 번만 만들어 두고, read에서 짧은 조각(seed 10~20글자)으로 후보 위치를 찾은 뒤 그 자리에서만 넓혀 가며 점수로 확정해요. 150글자를 30억 글자 전체와 비교하지 않고 인덱스가 알려 준 몇 곳만 자세히 보니까 빨라요. 실습에서는 bwa mem의 결과를 파이프로 samtools sort에 바로 넘겨 sorted BAM을 만들었어요.",
+  "e22": "FastQC는 FASTQ의 품질을 그래프로 보는 단계이고 Q30(정확도 99.9%)을 기준으로 삼아요. 정렬 프로그램은 품질을 따지지 않으니 정렬 전에 점검해야 해요. 조각이 짧으면 기계가 어댑터와 잡음까지 읽어 그래프 뒤쪽이 뚝 떨어지는데, cutadapt 같은 도구로 어댑터를 자르는 트리밍을 하면 정답지에 훨씬 잘 붙어요. 페어드엔드는 양쪽에서 150글자씩 읽고 약 50글자가 겹치게 합쳐(PEAR) 약 250글자를 만들어요. 더 길게 읽고 뒤쪽 품질 저하를 반대쪽 read가 보완해 줘요. 합쳐지지 않은 read는 버리지 않고 따로 정렬해요.",
+  "e23": "SAM은 read를 정답지에 맞춘 결과를 글자로 적은 파일이에요. read 하나마다 한 줄이고 탭으로 나눈 11개 칸(이름, FLAG, 위치 POS, 품질 MAPQ, CIGAR 등)이 있어요. CIGAR는 숫자와 글자로 붙은 모양을 적은 암호예요. M은 일치, I는 read에만 있는 글자, D는 정답지에만 있는 글자, S는 맞추지 않고 남긴 끝부분이에요. 예를 들어 POS 5에 3M1I3M1D5M이면 5번부터 3개 일치, 1개 삽입, 3개 일치, 1개 결실, 5개 일치로 붙고 read 길이는 12, 정답지의 5~16번을 차지해요. SAM은 글자 파일이라 31억 글자 규모에선 너무 커서 이진 파일 BAM으로 바꾸고, 염색체와 위치 순으로 정렬한 뒤 .bai 인덱스를 만들어야 변이 찾기와 IGV가 가능해요. 실무에서는 bwa mem과 samtools sort를 파이프로 이어 한 줄로 끝내요.",
+  "e24": "MarkDuplicates는 PCR로 복사되어 똑같아진 read를 없애는 단계예요. 무작위로 자른 DNA는 시작과 끝이 우연히 같을 수 없으니 위치와 CIGAR가 같으면 복사본이에요. 복사본을 두면 변이 비율이 부풀려져서 실제 30%가 80%로 보일 수 있어요. 실습에서는 duplicates가 0에서 1,542로 늘었어요. BQSR은 기계가 매긴 품질 점수가 치우쳐 있어서 실수를 진짜 변이로 착각하는 일을 막는 단계예요. 알려진 SNP(dbSNP)를 정답지로 참고해 보정 표를 만들고(BaseRecalibrator) 적용해요(ApplyBQSR). PCR로 특정 부위만 늘린 amplicon 데이터는 처음부터 시작과 끝이 같으므로 MarkDuplicates를 건너뛰어요.",
+  "e25": "variant calling은 읽은 결과를 정답지와 비교해서 다른 곳을 일단 변이 후보로 보고, 진짜일 확률을 계산해서 확실한 것만 뽑는 일이에요. 다른 곳 찾기는 쉽지만 시퀀싱 실수도 섞여 있어서 진짜를 가려내는 게 핵심이에요. HaplotypeCaller는 변이가 몰린 구간(active region)을 고르고, 같이 물려받는 변이 묶음(haplotype)을 기준으로 PairHMM과 베이지안으로 확률을 계산해 묶음에 맞는 read를 진짜 변이로 봐요. 결과는 모르는 자리(NON_REF)까지 담은 GVCF를 먼저 만들고, GenotypeGVCFs로 확실한 변이만 VCF로 추려요. VCF에서 GT가 0/0이면 변이 없음, 0/1이나 1/1이면 변이 있음이고, DP(depth)가 높을수록 GQ 같은 확신 점수가 올라가요.",
+  "e26": "annotation은 찾아낸 변이에 의미를 붙여 주는 단계예요. 변이 찾기까지는 위치와 글자 변화만 알려 주기 때문에, 유전자 어디에 있고 병과 관련 있는지는 데이터베이스(DB)가 필요해요. 대표 프로그램이 ANNOVAR예요. 방식은 세 가지로 Gene-based는 단백질을 만드는 영역의 변이인지, Region-based는 전사인자 결합부위 같은 기능 구역의 변이인지, Filter-based는 특정 DB에 있는 변이인지 확인해요. 대표 DB는 dbSNP(변이 이름표), 1000 Genomes(일반인에게 흔한지), dbNSFP(단백질 기능에 영향이 있는지), ClinVar(질병과 관련 있는지)예요. 그중 제일 중요하게 보는 건 ClinVar예요. 순서는 DB를 받고, VCF를 avinput으로 바꾼 다음, table_annovar.pl로 annotation하는 거예요."
+ }
+}

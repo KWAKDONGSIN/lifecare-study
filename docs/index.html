@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>홈 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>홈</a><a href="c0.html">공부</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<section class="hero">
+<span class="dday" id="dday">10/20(화) 12:30</span>
+<h1>라이프케어빅데이터분석<br>중간고사 공부</h1>
+<p>종이 시험 · 서술형과 단답형 · 범위는 <b>기본생물학 → NGS → FASTQ부터 variant calling까지</b>. 코딩 문제는 없어요.</p>
+<a class="go" href="c0.html">생물 처음이면 0장부터 시작</a>
+<p class="muted small" id="stat">밑줄 친 낱말을 누르면 쉬운 뜻이 나와요.</p>
+</section>
+<div class="box pro"><span class="t">교수님이 직접 말한 시험 힌트 (7주차)</span>
+<ul><li>"NGS가 뭔가" 같은 <b>개념 설명</b>을 많이 물어봐요</li><li>"GATK가 이니셜이 뭔가" — <b>약어 풀네임</b></li>
+<li>디테일은 빼고 <b>수업에 자주 나온 쉬운 개념</b> 위주</li><li>중요한 3가지 — 바이오 기초 · 파이프라인 순서와 이유 · NGS 개념</li></ul></div>
+<h2>순서대로 읽기</h2>
+<ol class="path"><li><a href="c0.html"><span class="no">0</span><span class="tt">왕초보 생명 기초<small>세포 · DNA · 유전자 · 단백질 — 생물 처음이면 여기부터</small></span><span class="ok" data-readmark="c0"></span></a></li><li><a href="c1.html"><span class="no">1</span><span class="tt">큰 그림 — 파이프라인<small>설계도 책에서 오타 찾기 이야기</small></span><span class="ok" data-readmark="c1"></span></a></li><li><a href="c2.html"><span class="no">2</span><span class="tt">바이오 기초<small>센트럴 도그마 · 코돈 · 메틸화 · 돌연변이</small></span><span class="ok" data-readmark="c2"></span></a></li><li><a href="c3.html"><span class="no">3</span><span class="tt">NGS<small>Sanger vs NGS · SBS · Illumina가 이긴 이유</small></span><span class="ok" data-readmark="c3"></span></a></li><li><a href="c4.html"><span class="no">4</span><span class="tt">FASTQ와 품질 점수<small>4줄 구조 · Phred Q30</small></span><span class="ok" data-readmark="c4"></span></a></li><li><a href="c5.html"><span class="no">5</span><span class="tt">Depth · 어디를 읽을까<small>depth/coverage · WGS/WES/Targeted · 페어드엔드</small></span><span class="ok" data-readmark="c5"></span></a></li><li><a href="c6.html"><span class="no">6</span><span class="tt">QC → 얼라인먼트 → BAM<small>FastQC · 트리밍 · BWA · SAM/CIGAR · IGV</small></span><span class="ok" data-readmark="c6"></span></a></li><li><a href="c7.html"><span class="no">7</span><span class="tt">진짜 변이 골라내기<small>MarkDuplicates · BQSR · HaplotypeCaller · VCF</small></span><span class="ok" data-readmark="c7"></span></a></li><li><a href="c8.html"><span class="no">8</span><span class="tt">Annotation<small>ANNOVAR · dbSNP · ClinVar</small></span><span class="ok" data-readmark="c8"></span></a></li><li><a href="c9.html"><span class="no">9</span><span class="tt">실습 따라가기<small>명령 하나하나가 파이프라인의 어디인지</small></span><span class="ok" data-readmark="c9"></span></a></li><li><a href="cheat.html"><span class="no">★</span><span class="tt">시험 전 1장<small>암기표 · 헷갈리는 숫자 · 시험장에서 할 일</small></span></a></li></ol>
+<h2 style="margin-top:28px">연습하기</h2>
+<div class="grid2">
+<a href="quiz.html">퀴즈<small>객관식·OX·단답 문제</small></a>
+<a href="essay.html">서술형<small>모범답안 + 쉬운 풀이</small></a>
+<a href="cards.html">암기카드<small>약어 풀네임 · 숫자</small></a>
+<a href="words.html">낱말사전<small>모르는 말 찾기</small></a>
+</div>
+<div class="box tip"><span class="t">오늘 공부 순서</span><ul>
+<li>0장 → 9장을 순서대로 읽고, 장마다 <b>"이 장 문제 풀기"</b></li>
+<li>저녁엔 서술형 10개를 <b>종이에 직접</b> 써 보기</li>
+<li>시험 날 아침엔 <b>암기카드 + 틀린 문제만 다시 + 시험 전 1장</b></li></ul></div>
+<p class="muted small">근거 — 1~7주차 수업 녹취, 교수님 강의자료(기본생물학 · NGS · DNA variant 분석), 실습자료. 진도는 이 폰 브라우저에만 저장돼요.</p>
+</main>
+<script src="assets/app.js"></script>
+</body>
+</html>

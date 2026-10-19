@@ -1,0 +1,109 @@
+<!-- 4장 FASTQ와 품질 점수 — FASTQ 4줄 구조, Phred 점수(0의 개수 세기), Q30 기준, FASTA와의 차이를 중학생 눈높이로 설명 -->
+<h2>FASTQ와 품질 점수</h2>
+<p class="lead">NGS 기계가 내놓는 결과 파일이 FASTQ예요. 이 파일이 4줄로 어떻게 생겼는지, 그리고 "이 글자를 얼마나 믿을 수 있나"를 나타내는 품질 점수(Phred, 프레드)를 배워요.</p>
+
+<h3>4-1. FASTQ는 어떤 파일인가</h3>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b>FASTQ</b>는 NGS 기계가 찍은 사진을 글자로 바꾼(base calling) 결과 파일이에요. <b>조각(read) 하나가 4줄</b>로 적혀요.</p>
+</div>
+<p>기계는 조각마다 형광 사진을 찍어요. 사진 속 색을 A·T·G·C 글자로 바꾸는 일이 base calling(베이스 콜링)이에요. FASTQ는 그 글자와 "이 글자를 얼마나 믿을 수 있는지" 점수를 함께 적은 노트예요.</p>
+<p>아래가 실제 모양이에요. 4줄이 한 세트이고, 한 세트가 조각 하나예요.</p>
+<div class="code"><span class="h">@M02595:107:...:1:1101:17207:1849 1:N:0:130</span>
+<span class="k">TGTGATGCCTATCCCCTGTGTGCCTGGCAGTC</span>
++
+<span class="q">BCCBBFFFFFFFGGGGGGGGGGHHHHHHHHHH</span></div>
+<table>
+  <tr><th style="width:15%">줄</th><th>뭐가 적혀 있나</th></tr>
+  <tr><td><b>1</b></td><td><b>ID</b> — <code>@</code>로 시작. 기계 판의 레인·타일·<b>x,y 좌표</b> = 조각의 주소. <b>주소라서 겹치면 안 돼요</b> (같으면 오류)</td></tr>
+  <tr><td><b>2</b></td><td><b>서열</b> — 읽은 ATGC. <b>N</b> = 색이 섞여서 <b>무슨 글자인지 못 읽은 자리</b></td></tr>
+  <tr><td><b>3</b></td><td><b>+</b> — 그냥 구분선</td></tr>
+  <tr><td><b>4</b></td><td><b>품질 점수</b> — 2번 줄 글자 하나하나를 <b>얼마나 믿을 수 있는지</b>, 문자 한 개로 표시</td></tr>
+</table>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>이름표 → 글자 → + → 점수</b> 순서로 외우세요.</p>
+</div>
+<p>1번 줄의 ID를 더 볼게요. 기계 속 유리판(flow cell)은 레인(길)으로 나뉘고, 레인은 타일(칸)로 나뉘고, 타일 안에는 점(클러스터)이 2~3만 개 있어요. 그래서 "몇 번 레인, 몇 번 타일, 가로 x, 세로 y"를 적으면 점 하나의 위치가 딱 정해져요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>ID는 택배 주소와 같아요. "○○시 ○○동 ○○번지"처럼 레인·타일·x·y로 점의 위치를 적어요. 같은 주소가 두 개면 안 되니까, 같은 ID가 나오면 오류예요.</p>
+</div>
+<p>2번 줄의 <b>N</b>은 여러 색이 섞여 글자를 알아보지 못한 자리예요. 시험 문제로 자주 나와요. 그 자리는 잘못 읽었을 가능성이 커요.</p>
+<p>4번 줄을 보면 2번 줄과 <b>글자 수가 항상 같아요</b>. 위 예시는 둘 다 32글자예요. 글자 하나에 점수 하나가 짝으로 붙어 있기 때문이에요.</p>
+<figure class="slide"><img src="slides/n24.jpg"><figcaption>교수님 슬라이드 — ID / Sequence / Q-score, 그리고 Phred 점수표</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ는 read 하나가 4줄로 구성된다. 1줄은 @로 시작하는 ID(레인·타일·x,y 좌표 기반의 고유값), 2줄은 염기서열(N은 염기를 판별하지 못한 자리), 3줄은 구분자 +, 4줄은 염기마다의 품질 점수이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — FASTQ의 첫 줄 ID가 같은 read가 두 개 있다면 어떤 상태인가요?</summary>
+  <p>오류예요. ID는 점의 위치 주소라서 read마다 달라야 하기 때문이에요.</p>
+</details>
+
+<h3>4-2. Phred 품질 점수 — 0의 개수만 세면 돼요</h3>
+<p>품질 점수는 "이 글자가 맞다는 자신감"이에요. 시험 점수처럼 <b>높을수록 좋아요</b>. 이 점수를 만드는 방법을 <b>Phred(프레드) 점수</b>라고 해요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p>Phred 품질 점수 <b>Q = −10 × log₁₀(P)</b>예요. P는 그 글자가 <b>틀렸을 확률</b>이에요.</p>
+</div>
+<p>식이 낯설어도 괜찮아요. log₁₀(로그)은 어려운 수학이 아니라, 1/10, 1/100, 1/1,000처럼 <b>1 뒤에 0이 몇 개 붙었나</b>를 세는 계산이라고 생각하면 돼요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>틀릴 확률이 1/1,000이면 "1,000번 읽으면 1번 틀린다"는 뜻이에요. 분모 1,000에는 0이 3개 있어요. 식의 −10×log는 "0의 개수에 10을 곱하라"는 뜻이라서, 0이 3개면 <b>3 × 10 = Q30</b>이에요.</p>
+</div>
+<table>
+  <tr><th>Q 점수</th><th>틀릴 확률</th><th>분모의 0 개수</th><th>맞을 확률</th></tr>
+  <tr><td>Q10</td><td>1/10</td><td>1개</td><td>90%</td></tr>
+  <tr><td>Q20</td><td>1/100</td><td>2개</td><td>99%</td></tr>
+  <tr><td class="red">Q30</td><td class="red">1/1,000</td><td class="red">3개</td><td class="red">99.9%</td></tr>
+  <tr><td>Q40</td><td>1/10,000</td><td>4개</td><td>99.99%</td></tr>
+</table>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>교수님 암기법은 <b>Q의 앞자리 숫자 = 0의 개수</b>예요. Q30은 앞자리가 3이니 1/1<b>000</b>이고 99.9%예요. Q40은 앞자리가 4이니 1/1<b>0000</b>이고 99.99%예요.</p>
+</div>
+<p>점수가 10 오를 때마다 틀릴 확률은 10배씩 줄어요. 맞을 확률은 100%에서 틀릴 확률을 빼면 돼요. 예를 들어 1/1,000이 틀리면 99.9%가 맞아요.</p>
+<p class="small">주의할 함정이 있어요. 3주차 수업 중 교수님이 한 번 "1/100이면 Q30"이라고 잘못 말했지만, 슬라이드 표는 1/100이 Q20(99%)이에요. 슬라이드 기준으로 외우세요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Phred 품질 점수는 Q = −10 log₁₀(P)로 정의되며 P는 염기를 잘못 읽을 확률이다. Q30은 에러 확률이 1/1,000으로 정확도가 99.9%이고, Q20은 1/100(99%), Q40은 1/10,000(99.99%)이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Q40이면 몇 글자 중 한 글자가 틀리나요? 정확도는요?</summary>
+  <p>10,000글자 중 1글자가 틀려요(앞자리 4 = 0이 4개). 정확도는 99.99%예요.</p>
+</details>
+
+<h3>4-3. 점수는 어떻게 적히고, 얼마면 합격일까</h3>
+<p>FASTQ의 4번 줄은 점수를 숫자로 적지 않고 <b>문자 하나</b>로 적어요. 숫자로 적으면 두 자리가 되어 2번 줄과 글자 수가 어긋나기 때문이에요. 문자 하나로 쓰면 글자 하나에 점수 하나를 딱 맞출 수 있어요.</p>
+<p>문자를 점수로 바꾸는 규칙은 간단해요. 컴퓨터가 문자마다 가진 번호(ASCII 번호)에서 <b>33을 빼면 점수</b>예요. Illumina 1.8 이후 방식(Phred+33)이고 점수는 <b>0~41</b> 범위예요. 교수님 예는 B가 약 33점, C가 약 34점이에요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>비밀 암호표예요. "B는 33점, C는 34점, F는 37점, H는 39점"처럼 문자 한 개가 점수 하나를 대신해요. 위 예시 줄의 <code>BCCBBFFFF…HHHH</code>는 거의 다 30점대라서 좋은 데이터예요.</p>
+</div>
+<p>보통 정상적으로 읽으면 <b>30~40점</b>이 나와요. QC(품질 관리)의 기준은 보통 <b>Q30 이상이면 합격</b>이에요. 이하면 다시 시퀀싱을 고려해요. 교수님은 "꼭 정답은 아니지만 대부분 그렇게 한다"고 덧붙였어요.</p>
+<p>한 가지 더 알아 두세요. 조각 안에서도 점수는 보통 <b>뒤로 갈수록 떨어져요</b>. 사이클이 쌓일수록 먼지와 형광 물질이 끼어 색을 헷갈리고, 조각이 짧으면 끝부분은 잡음만 찍기 때문이에요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ의 품질 점수는 문자로 인코딩되며 ASCII 값에서 33을 뺀 값이 Phred 점수이다(Illumina 범위 0~41). QC에서는 보통 Q30 이상을 기준으로 삼고, read 뒤쪽으로 갈수록 노이즈가 누적되어 품질이 떨어지는 경향이 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 품질 점수를 숫자가 아니라 문자 하나로 적는 이유는 무엇인가요?</summary>
+  <p>염기 하나에 점수 하나를 같은 글자 수로 맞춰 적기 위해서예요. 숫자는 두 자리가 되어 줄 길이가 어긋나요.</p>
+</details>
+
+<h3>4-4. FASTA와 FASTQ는 어떻게 다른가</h3>
+<p>이름이 비슷해서 헷갈려요. <b>FASTA</b>는 표준 책, 즉 <b>레퍼런스(정답지)</b>를 적는 파일이에요. <b>FASTQ</b>는 내가 읽은 <b>시퀀싱 결과</b>를 적는 파일이에요.</p>
+<table>
+  <tr><th></th><th>FASTA</th><th>FASTQ</th></tr>
+  <tr><td>뭐에 쓰나</td><td><b>레퍼런스(표준 정답지)</b></td><td><b>내 시퀀싱 결과</b></td></tr>
+  <tr><td>모양</td><td><code>&gt;</code>이름 + 서열 (2줄)</td><td><code>@</code>이름, 서열, +, 점수 (4줄)</td></tr>
+  <tr><td>품질 점수</td><td>없음</td><td><b>있음</b></td></tr>
+</table>
+<div class="box eg"><span class="t">비유</span>
+  <p>FASTA는 모범답안지예요. 정답이 이미 확정되어 있어서 "얼마나 믿을 수 있나" 점수가 필요 없어요. FASTQ는 학생이 풀어서 낸 답안이에요. 칸마다 "자신 있게 썼나" 점수를 같이 적어야 해요.</p>
+</div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>Q가 들어간 FASTQ에는 Quality(품질) 점수가 있다</b>고 기억하세요. 둘을 구별하면 점수 줄이 있는지로 가를 수 있어요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTA는 레퍼런스 서열을 &gt;ID와 서열의 2줄로 저장하며 품질 점수가 없다. FASTQ는 시퀀싱 결과를 @ID, 서열, +, 품질 점수의 4줄로 저장하며 염기별 품질 정보를 포함한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 품질 점수가 들어 있는 파일은 FASTA와 FASTQ 중 어느 쪽인가요?</summary>
+  <p>FASTQ예요. FASTA는 서열만 있고 품질 점수가 없어요.</p>
+</details>
+
+<div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>FASTQ는 조각 하나를 4줄(@ID 주소, 서열, +, 품질 점수)로 적은 NGS 결과 파일이에요. N은 읽지 못한 자리예요.</li>
+    <li>Phred Q = −10×log₁₀(P)이고 "분모의 0 개수 × 10"이에요. Q30은 1/1,000 오류, 정확도 99.9%이며 QC 기준이에요.</li>
+    <li>FASTA는 레퍼런스(2줄, 점수 없음), FASTQ는 내 결과(4줄, 점수 있음)예요.</li>
+  </ul>
+</div>

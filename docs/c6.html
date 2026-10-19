@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QC → 얼라인먼트 → BAM · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html">홈</a><a href="c0.html" class=on>공부</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="chhead"><span>6 / 9장</span><a href="index.html">목차</a></div><h2>QC → 얼라인먼트 → BAM</h2>
+<p class="lead">이 장에서 배울 것 — 기계가 읽어 낸 조각 파일(<a class="w" href="words.html#w78" data-w="78">FASTQ</a>)을 검사하고(<a class="w" href="words.html#w102" data-w="102">QC</a>), 쓸모없는 가장자리를 자르고(<a class="w" href="words.html#w104" data-w="104">트리밍</a>), 각 조각이 <a class="w" href="words.html#w14" data-w="14">게놈</a>의 어느 자리인지 찾아 붙이고(<a class="w" href="words.html#w110" data-w="110">얼라인먼트</a>), 그 결과를 <a class="w" href="words.html#w118" data-w="118">BAM 파일</a>로 정리하는 과정이에요. 시험에는 <a class="w" href="words.html#w124" data-w="124">CIGAR</a> 읽기가 거의 매번 나와요.</p>
+
+<div class="box def"><span class="t">이 장의 흐름 한 줄</span>
+  <p>FASTQ → <b>QC</b>(쓸 만한가?) → <b>트리밍</b>(가장자리 자르기) → <b>얼라인먼트</b>(제자리 찾기) → <a class="w" href="words.html#w117" data-w="117">SAM</a> → <b><a class="w" href="words.html#w120" data-w="120">정렬(sort)</a> + 색인(<a class="w" href="words.html#w119" data-w="119">.bai</a>)</b> → <b>sorted BAM</b> → <b><a class="w" href="words.html#w127" data-w="127">IGV</a></b>로 눈으로 확인</p>
+</div>
+
+<h3>1. 먼저 컴퓨터 상식 세 가지</h3>
+<p>뒤에 나오는 SAM·BAM·sort·<a class="w" href="words.html#w115" data-w="115">index</a>를 이해하려면 이 세 가지만 알면 돼요.</p>
+<ul>
+  <li><b>텍스트 파일</b> — 메모장으로 열면 글자가 그대로 보이는 파일이에요. 사람이 읽을 수 있지만 용량이 커요. 예) SAM, FASTQ.</li>
+  <li><b>압축·바이너리(binary) 파일</b> — 0과 1로 빽빽하게 줄여 저장한 컴퓨터 전용 파일이에요. 메모장으로 열면 깨진 글자만 보이고 전용 프로그램이 필요하지만 용량이 작아요. 예) BAM.</li>
+  <li><b>정렬(sort)과 색인(index)</b> — 정렬은 순서대로 줄 세우기, 색인은 "어디에 뭐가 있는지" 적어 둔 목차예요.</li>
+</ul>
+<div class="box eg"><span class="t">비유</span>
+  <p>텍스트 파일은 펼쳐 놓은 이불이고, 바이너리(압축) 파일은 <b>진공팩에 넣은 이불</b>이에요. 부피는 작지만 쓰려면 다시 펴야 해요(전용 프로그램).</p>
+  <p>정렬은 <b>출석부를 번호순으로 줄 세우는 것</b>이고, 색인은 책 맨 뒤의 <b>찾아보기(목차)</b>예요. 줄 세워 두고 목차까지 있으면 한 사람을 바로 찾을 수 있어요.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 용량이 작고 메모장으로 읽을 수 없는 쪽은 텍스트 파일일까요, 바이너리 파일일까요?</summary><p>바이너리(압축) 파일이에요. 0과 1로 줄여 저장해서 작지만 사람이 바로 읽을 수는 없어요.</p></details>
+
+<h3>2. QC — FastQC로 성적표 확인하기</h3>
+<div class="box def"><span class="t">QC (Quality Control, 품질 검사)</span>
+  <p>기계가 읽은 데이터가 <b>분석에 쓸 만한지</b> 확인하는 일이에요. 도구는 <b><a class="w" href="words.html#w103" data-w="103">FastQC</a></b>이고, 결과는 그래프가 가득한 성적표(HTML 파일)로 나와요.</p>
+</div>
+<p>QC는 얼라인먼트(정렬) 앞에서 해야 해요. 얼라인먼트 도구는 글자만 맞춰 볼 뿐 <b><a class="w" href="words.html#w8" data-w="8">염기</a>마다 붙은 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>는 보지 않기</b> 때문이에요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p><a class="w" href="words.html#w23" data-w="23">번역</a>기는 흐릿하게 찍힌 사진 속 글자도 그대로 믿고 번역해요. 그래서 번역 전에 사진이 선명한지 사람이 먼저 확인해야 해요.</p>
+</div>
+<p>가장 중요한 그래프는 <b>Per base sequence quality(위치별 염기 품질)</b>예요.</p>
+<ul>
+  <li>가로 = 글자 위치(1~150번째), 세로 = 품질 점수(Q)</li>
+  <li>파란 선은 평균, 빨간 선은 중앙값, 노란 박스는 대부분(25~75%)이 모여 있는 범위예요.</li>
+  <li>점수가 높을수록 그 글자를 올바르게 읽었을 확률이 높아요. 예를 들어 <a class="w" href="words.html#w82" data-w="82">Q30</a>은 1000번 중 약 1번만 틀린다는 뜻이고, 보통 Q30 이상이면 쓸 만하다고 봐요.</li>
+</ul>
+<p>교수님이 보여 주신 예에서는 대부분의 <a class="w" href="words.html#w73" data-w="73">read</a> 평균 점수가 28~38이었어요.</p>
+<figure class="slide"><img src="slides/n39.jpg"><figcaption>교수님 슬라이드 — FastQC: 대부분 read의 평균 점수가 28~38</figcaption></figure>
+<p>또 하나, <b>ATGC 비율 그래프</b>(Per base sequence content)가 있어요. 이건 "좋고 나쁨"이 아니라 <b>목적에 따라 판단</b>하는 그래프예요.</p>
+<ul>
+  <li><b><a class="w" href="words.html#w89" data-w="89">WGS</a></b> — 게놈을 무작위로 잘랐으니 어디서나 A·T·G·C가 <b>고르게</b> 섞여 나와야 정상이에요.</li>
+  <li><b><a class="w" href="words.html#w91" data-w="91">Targeted</a></b> — 특정 <a class="w" href="words.html#w13" data-w="13">유전자</a>만 골라 읽었으니 글자가 <b>고르지 않은 게 정상</b>이에요.</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>QC는 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 데이터(FASTQ)가 분석에 쓸 만한지 <b>FastQC</b>로 확인하는 단계이며, per base sequence quality 그래프로 위치별 품질을 본다. ATGC 비율은 WGS는 고르게, targeted는 고르지 않은 것이 정상이므로 <b>목적에 따라 판단</b>한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Targeted sequencing 데이터에서 A·T·G·C 비율이 고르지 않아요. 문제일까요?</summary><p>문제가 아니에요. 특정 유전자만 읽었으니 그 서열의 글자 구성대로 치우치는 게 정상이에요. 그래서 "목적에 따라 판단"해요.</p></details>
+
+<h3>3. 뒤로 갈수록 품질이 떨어지는 이유 (서술형 단골)</h3>
+<p>FastQC 그래프를 보면 오른쪽(뒤쪽 글자)으로 갈수록 점수가 내려가는 모양이 많아요. 교수님이 이유를 두 가지로 설명하셨어요.</p>
+<ol>
+  <li><b>짧은 조각도 기계는 150번째까지 찍어요.</b> 조각이 50글자뿐이면 앞 50개는 진짜 <a class="w" href="words.html#w3" data-w="3">DNA</a>를 읽지만, 그 뒤로는 <b><a class="w" href="words.html#w98" data-w="98">어댑터</a></b>를 읽고, 그다음엔 <b>신호 없는 노이즈</b>를 읽어요.</li>
+  <li><b><a class="w" href="words.html#w70" data-w="70">사이클</a>을 반복할수록 <a class="w" href="words.html#w69" data-w="69">형광</a> 노이즈가 쌓여요.</b> 기계는 글자를 한 글자씩 형광빛 사진으로 읽는데, 횟수가 쌓일수록 번짐이 늘어나 점점 흐려져요.</li>
+</ol>
+<div class="box eg"><span class="t">비유</span>
+  <p>교수님 비유대로, <b>50쪽짜리 얇은 책에게 150쪽을 읽으라고 하면</b> 51쪽부터는 뒷표지와 빈 종이를 읽는 셈이에요. 읽을 내용이 없으니 점수가 떨어질 수밖에요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>뒤로 갈수록 품질이 떨어지는 이유는 ① <a class="w" href="words.html#w100" data-w="100">인서트</a>가 짧아도 정해진 길이(150)까지 읽어 <b>어댑터와 노이즈</b>를 읽게 되기 때문이고, ② 사이클이 반복될수록 <b>형광 노이즈가 누적</b>되기 때문이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 이유 두 가지를 한 줄씩 말해 보세요.</summary><p>① 조각이 짧아도 150번째까지 읽어서 뒷부분은 어댑터·노이즈예요. ② 사이클이 쌓일수록 형광 노이즈가 누적돼요.</p></details>
+
+<h3>4. 트리밍 — 쓸모없는 가장자리 잘라내기</h3>
+<div class="box def"><span class="t">트리밍 (trimming)</span>
+  <p>read에서 <b>어댑터와 품질 낮은 부분을 잘라내는 일</b>이에요. 어댑터를 잘라내는 걸 adapter trimming이라고 불러요.</p>
+</div>
+<div class="paper"><svg viewBox="0 0 380 66">
+  <text x="0" y="12" font-size="10" fill="#5d6b80">기계가 읽은 150글자</text>
+  <rect x="0" y="18" width="200" height="18" fill="#16a34a"/><text x="100" y="31" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">진짜 DNA (100)</text>
+  <rect x="200" y="18" width="70" height="18" fill="#94a3b8"/><text x="235" y="31" font-size="9" text-anchor="middle" fill="#fff">어댑터</text>
+  <rect x="270" y="18" width="110" height="18" fill="#fecaca"/><text x="325" y="31" font-size="9" text-anchor="middle" fill="#b91c1c">노이즈</text>
+  <line x1="200" y1="12" x2="200" y2="44" stroke="#d6264a" stroke-width="2" stroke-dasharray="3,2"/><text x="204" y="58" font-size="10" fill="#d6264a" font-weight="bold">✂ 여기서 자르기 = 트리밍</text>
+</svg></div>
+<div class="box eg"><span class="t">비유</span>
+  <p>사진을 찍었는데 <b>액자 테두리(어댑터)와 뒤쪽 벽(노이즈)</b>까지 같이 찍혔어요. 테두리부터 잘라내야 다음 단계에서 사진 속 장소를 제대로 찾아요. 실제로 <b>트리밍한 데이터가 얼라인율(제자리를 찾은 비율)이 훨씬 높다</b>는 비교 논문(2012)이 있어요.</p>
+</div>
+<p>트리밍 도구는 두 가지를 알아 두세요.</p>
+<ul>
+  <li><b><a class="w" href="words.html#w105" data-w="105">cutadapt</a></b> — 내가 지정한 어댑터만 정확히 잘라요. 교수님이 선호하세요. 어떤 read가 날아갈지 내가 통제할 수 있기 때문이에요.</li>
+  <li><b><a class="w" href="words.html#w106" data-w="106">Trim Galore</a></b> — 어댑터를 자르면서 품질이 낮은 부분까지 <b>자동으로</b> 걸러 줘서 편해요.</li>
+</ul>
+<p>실습 스크립트에서는 <a class="w" href="words.html#w107" data-w="107">fastp</a>라는 다른 도구도 썼어요. 도구마다 옵션이 달라서 시험에서는 도구 이름보다 "어댑터를 자르는 단계"라는 목적이 더 중요해요.</p>
+<figure class="slide"><img src="slides/v21.jpg"><figcaption>교수님 슬라이드 — Quality trimming + Adaptor trimming</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>인서트가 짧으면 시퀀싱이 어댑터와 노이즈까지 읽으므로 <b>adapter trimming</b>으로 제거해야 한다. 트리밍한 데이터는 얼라인율이 높아진다. 어댑터만 정확히 자르는 도구가 <b>cutadapt</b>, 품질 <a class="w" href="words.html#w157" data-w="157">필터</a>까지 자동으로 하는 도구가 <b>Trim Galore</b>이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — FastQC 그래프의 뒷부분이 급락했어요. 어떤 단계를 해야 할까요?</summary><p>어댑터를 의심하고 트리밍(adapter trimming)을 해요. 어댑터와 그 뒤 노이즈를 잘라내면 품질이 회복돼요.</p></details>
+
+<h3>5. 머지 — 페어드엔드 조각 이어붙이기 (PEAR)</h3>
+<p>5장에서 배운 <a class="w" href="words.html#w95" data-w="95">페어드엔드</a>는 <a class="w" href="words.html#w96" data-w="96">R1</a>과 R2 두 파일로 나와요. 이걸 가운데 겹치는 부분(overlap)으로 <b>한 줄로 이어붙이는 것</b>을 <a class="w" href="words.html#w109" data-w="109">머지</a>(merge)라고 해요. 도구 이름은 <b><a class="w" href="words.html#w108" data-w="108">PEAR</a></b>예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>두 장의 사진을 겹친 부분에 맞춰 이어 붙여 <b>파노라마 사진</b>을 만드는 것과 같아요.</p>
+</div>
+<ul>
+  <li>실습에서는 약 <b>70%</b>가 붙었어요(assembled).</li>
+  <li>안 붙은 조각은 겹침이 너무 짧거나 아예 없는 경우예요. 이런 <b>not assembled read도 버리지 않고 따로 얼라인</b>해서 써요.</li>
+  <li>머지하지 않고 R1·R2 쌍 그대로 얼라인하는 방법도 있어요. 이때 짝 정보는 SAM 파일의 짝 칸(RNEXT·PNEXT·TLEN)에 담겨요.</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><b>PEAR</b>는 페어드엔드의 R1과 R2를 <b>overlap 구간으로 이어붙이는(머지) 도구</b>이며, 합쳐지지 않은 read도 버리지 않고 따로 얼라인한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 겹치는 부분이 없는 R1·R2는 PEAR로 합쳐질까요?</summary><p>합쳐지지 않아요. 이어붙일 겹침이 없기 때문이에요. 이런 read는 버리지 않고 따로 얼라인해서 써요.</p></details>
+
+<h3>6. 얼라인먼트 — 조각을 제자리에 놓기</h3>
+<div class="box def"><span class="t">얼라인먼트 (alignment, 매핑)</span>
+  <p>짧은 조각(read)들이 <b><a class="w" href="words.html#w84" data-w="84">레퍼런스</a>(표준 게놈, 정답지)의 몇 번째 자리인지 찾아 맞추는 일</b>이에요. 자리를 알아야 "원래 G인데 여기는 A네" 하고 <a class="w" href="words.html#w50" data-w="50">변이</a>를 찾을 수 있어요.</p>
+</div>
+<div class="box eg"><span class="t">비유</span>
+  <p>퍼즐 상자 뚜껑에는 <b>완성 그림(레퍼런스)</b>이 있어요. <b>수억 개의 퍼즐 조각(read)</b>을 그 그림을 보면서 제자리에 하나하나 놓는 일이 얼라인먼트예요.</p>
+</div>
+<p>얼라인 방식은 두 종류가 있어요.</p>
+<div class="tw"><table>
+  <tr><th></th><th>Global (전체)</th><th>Local (부분)</th></tr>
+  <tr><td>방법</td><td>두 서열을 <b>처음부터 끝까지</b> 비교</td><td><b>가장 비슷한 부분</b>만 찾아 비교</td></tr>
+  <tr><td>비유</td><td>숲 보기 — 무슨 종인지</td><td>나무 보기 — 어디가 다른지</td></tr>
+  <tr><td><a class="w" href="words.html#w147" data-w="147">변이 찾기</a></td><td>잘 안 써요</td><td>이걸 써요</td></tr>
+</table></div>
+<p>산에서 캔 식물이 무슨 종인지 알고 싶을 때는 여러 종의 DNA와 통째로 비교하는 global이 알맞아요. 반면 변이 하나가 중요한 우리 분석은 가장 비슷한 부분을 세밀하게 보는 <b>local</b>을 써요.</p>
+<figure class="slide"><img src="slides/v26.jpg"><figcaption>교수님 슬라이드 — Global vs Local Alignment</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>얼라인먼트는 read가 레퍼런스의 <b>어느 위치</b>에 해당하는지 찾아 맞추는 과정으로, 그 위치를 알아야 변이를 찾을 수 있다. <a class="w" href="words.html#w111" data-w="111">global alignment</a>는 서열 전체를, <a class="w" href="words.html#w112" data-w="112">local alignment</a>는 가장 유사한 부분을 비교하며 변이 탐색에는 <b>local</b>을 쓴다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 변이를 찾는 분석에는 global과 local 중 어느 쪽을 쓸까요?</summary><p>local이에요. 변이는 전체가 아니라 비슷한 부분 안의 작은 차이를 찾는 일이라서요.</p></details>
+
+<h3>7. BLAST에서 BWA로 — 왜 더 빠를까</h3>
+<p><b><a class="w" href="words.html#w113" data-w="113">BLAST</a></b>(Basic Local Alignment Search Tool)는 옛날부터 쓰던 웹 검색 도구예요. 조각 몇 개를 찾기엔 좋지만, <a class="w" href="words.html#w58" data-w="58">NGS</a>의 <b>수억 개 조각</b>을 처리하기엔 너무 느려요.</p>
+<p>그래서 빠른 aligner(얼라인 프로그램)가 아주 많이 나왔고, 대표가 <b><a class="w" href="words.html#w114" data-w="114">BWA</a></b>(Burrows-Wheeler Aligner)예요.</p>
+<div class="box eg"><span class="t">비유 — 포스트잇 색인</span>
+  <p>교수님 비유예요. 두꺼운 레퍼런스 책에 <b>미리 포스트잇을 붙여 두면</b>, 책을 처음부터 넘기지 않고 포스트잇으로 바로 찾아갈 수 있어요. 지도 앱에서 주소를 치면 그 위치로 바로 이동하는 것과 비슷해요.</p>
+</div>
+<p>BWA의 원리는 <b>색인 + 씨앗 찾고 늘리기(<a class="w" href="words.html#w116" data-w="116">seed-and-extend</a>)</b> 세 단계예요.</p>
+<ol>
+  <li><b>색인(index) 만들기</b> — 레퍼런스에 포스트잇을 미리 붙여요. 한 번만 하면 돼요. (<code>bwa index</code>)</li>
+  <li><b>씨앗(seed) 찾기</b> — 조각에서 짧은 <b>10~20글자</b>만 떼어, 포스트잇으로 후보 위치를 빠르게 찾아요.</li>
+  <li><b>늘리기(extend)</b> — 후보 자리에서 양옆으로 늘려 가며 맞춰 보고, 점수로 최종 위치를 정해요.</li>
+</ol>
+<p>이유는 간단해요. 책 전체를 처음부터 다 비교하지 않고 <b>후보 몇 곳만 정밀하게</b> 보기 때문이에요.</p>
+<figure class="slide"><img src="slides/v54.jpg"><figcaption>교수님 슬라이드 — Read alignment with seed-and-extend (10~20bp seed)</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>BWA는 레퍼런스를 미리 <b>인덱싱</b>해 두고, read의 짧은 <b>seed(10~20bp)</b>로 후보 위치를 찾은 뒤 그 자리에서 <b>extend</b>하며 점수로 위치를 확정한다. 전체를 처음부터 비교하지 않기 때문에 BLAST보다 훨씬 빠르다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — BWA의 "포스트잇"은 무엇을 가리키는 말일까요?</summary><p>레퍼런스에 미리 만들어 둔 색인(index)이에요. 이것 덕분에 후보 위치를 바로 찾아가서 빨라요.</p></details>
+
+<h3>8. 레퍼런스 버전 — hg19와 hg38</h3>
+<p>레퍼런스(정답지)도 계속 고쳐져서 버전이 있어요. 대표적인 사람 레퍼런스가 <b><a class="w" href="words.html#w85" data-w="85">hg19</a></b>와 <b>hg38</b>이에요.</p>
+<p>어떤 버전을 쓰느냐에 따라 같은 변이도 <b>위치 번호와 결과가 달라질 수 있어요.</b> 그래서 한 분석 안에서는 처음부터 끝까지 같은 버전으로 맞춰야 해요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>같은 도시라도 2010년판 지도와 2024년판 지도는 길 번호가 달라요. 서로 다른 지도를 섞어 쓰면 엉뚱한 곳으로 가요.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — hg19로 얼라인한 결과에 hg38 기준 정보를 섞어 써도 될까요?</summary><p>안 돼요. 버전에 따라 변이의 위치와 결과가 달라질 수 있어서, 한 분석 안에서는 같은 버전을 써야 해요.</p></details>
+
+<h3>9. SAM과 BAM, 그리고 sort · index</h3>
+<p>얼라인먼트 결과는 먼저 <b>SAM</b> 파일로 나와요. 이걸 줄인 것이 <b>BAM</b>이에요.</p>
+<div class="tw"><table>
+  <tr><th></th><th>SAM</th><th>BAM</th></tr>
+  <tr><td>풀네임</td><td>Sequence Alignment/Map</td><td>Binary (Alignment/Map)</td></tr>
+  <tr><td>모양</td><td><b>텍스트 파일</b> (사람이 읽을 수 있음)</td><td><b>압축된 바이너리 파일</b> (컴퓨터용)</td></tr>
+  <tr><td>크기</td><td>큼</td><td>작음</td></tr>
+</table></div>
+<p>BWA가 처음 내놓는 SAM은 FASTQ에 있던 순서 그대로라서 <b>위치가 뒤죽박죽</b>이에요(18번 자리, 2번 자리, 3번 자리, 1번 자리…).</p>
+<ul>
+  <li><b>sort(정렬)</b> — 조각들을 <a class="w" href="words.html#w2" data-w="2">염색체</a>와 <b>위치 순서대로</b> 줄 세워요. 정리용이 아니라 다음 단계(변이 찾기)와 IGV에 <b>꼭 필요한 필수 단계</b>예요.</li>
+  <li><b>index(색인)</b> — 정렬된 BAM의 목차 파일 <b>.bai</b>를 만들어요. 목차가 있어야 원하는 위치를 바로 찾아가요.</li>
+</ul>
+<p>실무에서는 용량이 큰 SAM을 따로 저장하지 않고 <b><a class="w" href="words.html#w132" data-w="132">파이프</a>(<code>|</code>)</b>로 바로 sorted BAM을 만들어요. 파이프는 앞 프로그램의 결과를 저장하지 않고 곧장 뒤 프로그램에 넘기는 컨베이어 벨트예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>공장에서 부품이 만들어지자마자 컨베이어 벨트를 타고 다음 기계로 가는 것과 같아요. 중간에 창고에 쌓아 둘 필요가 없어서 빨라요. 교수님은 이 한 줄(<code>bwa mem ... | samtools sort</code>)이 "얼라인의 전부"라고 하셨어요.</p>
+</div>
+<p>한 가지 규칙이 더 있어요. 어떤 단계에서 BAM을 수정했으면 <b>항상 다시 정렬</b>해야 해요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>SAM은 얼라인 결과를 담은 텍스트 파일이고, BAM은 이를 바이너리로 압축해 용량을 줄인 파일이다. BAM은 위치 순서로 <b>sort</b>해야 다음 분석과 시각화를 할 수 있고, <b>index(.bai)</b>를 만들어 원하는 위치를 빠르게 찾는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 정렬된 BAM의 목차 파일 확장자는 무엇일까요?</summary><p>.bai (BAM index)예요. samtools index로 만들어요.</p></details>
+
+<h3>10. SAM 한 줄에 적힌 것 — 11칸</h3>
+<p>SAM 파일에서 <b>조각 하나는 한 줄</b>이고, 그 줄은 11칸으로 이루어져 있어요. 다 외울 필요는 없고 굵은 글씨만 기억하세요.</p>
+<div class="tw"><table>
+  <tr><th style="width:26%">칸</th><th>뜻</th></tr>
+  <tr><td>1. QNAME</td><td>조각 이름</td></tr>
+  <tr><td>2. <b><a class="w" href="words.html#w121" data-w="121">FLAG</a></b></td><td>상태 번호. <b>0 = 정방향(forward)으로 붙음, 16 = 역방향(reverse)으로 붙음, 4 = 못 붙음(unmapped)</b></td></tr>
+  <tr><td>3. RNAME</td><td>어느 레퍼런스(염색체)에 붙었나</td></tr>
+  <tr><td>4. <b><a class="w" href="words.html#w122" data-w="122">POS</a></b></td><td><b>몇 번째 자리부터</b> 붙었나 (시작 위치)</td></tr>
+  <tr><td>5. <b><a class="w" href="words.html#w123" data-w="123">MAPQ</a></b></td><td><b>제자리 확신도</b>. <b>60 = 잘 붙음(확실)</b></td></tr>
+  <tr><td>6. <b>CIGAR</b></td><td><b>어떻게 붙었나</b> (다음 소단원)</td></tr>
+  <tr><td>7~9. RNEXT · PNEXT · TLEN</td><td>짝꿍 조각 정보(페어드엔드)</td></tr>
+  <tr><td>10. SEQ</td><td>조각의 글자(서열)</td></tr>
+  <tr><td>11. QUAL</td><td>글자별 품질 점수</td></tr>
+</table></div>
+<p>아래는 설명용으로 만든 한 줄 예시예요. 짝이 없는 조각은 7~9칸을 <code>* 0 0</code>으로 적어요.</p>
+<div class="code">read1  0  chr1  5  60  3M1I3M1D5M  *  0  0  ACTAGAATGGCT  IIIIIIIIIIII</div>
+<p>읽는 법은 이래요. "read1은 정방향(0)으로 chr1의 5번 자리부터 붙었고, 확신도 60, 붙은 모양은 3M1I3M1D5M이다."</p>
+<p>MAPQ 60은 위치가 틀렸을 확률이 약 10의 -6승(백만 번에 한 번)이라는 뜻이에요. 점수가 높을수록 믿을 만해요.</p>
+<p>FLAG는 숫자 하나에 여러 정보를 더해서 담아서 147 같은 큰 값도 나와요. 시험에서는 <b>0, 16, 4</b>만 알면 돼요.</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>FLAG 0 = 앞으로(정방향) · 16 = 뒤집어서(역방향) · 4 = 못 붙음. POS = 시작 번호, MAPQ = 60이면 OK.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — FLAG가 4인 조각은 어떤 상태일까요?</summary><p>레퍼런스에 붙지 못한 조각(unmapped)이에요. 0은 정방향, 16은 역방향으로 붙은 경우예요.</p></details>
+
+<h3>11. CIGAR — 어떻게 붙었는지 한 줄로 쓰기 (매 시간 반복)</h3>
+<div class="box def"><span class="t">CIGAR</span>
+  <p>조각이 레퍼런스에 <b>어떻게 붙었는지</b>를 <b>숫자 + 글자</b>로 이어서 쓴 것이에요. 읽을 때는 길 안내처럼 앞에서부터 하나씩 읽어요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th style="width:18%">글자</th><th style="width:28%">이름</th><th>쉬운 뜻</th></tr>
+  <tr><td><b>M</b></td><td>match (맞춤)</td><td>레퍼런스와 같은 자리에 <b>나란히 놓임</b></td></tr>
+  <tr><td><b>I</b></td><td>insertion (삽입)</td><td>조각에는 있는데 레퍼런스에는 <b>없는 글자가 끼어듦</b></td></tr>
+  <tr><td><b>D</b></td><td>deletion (결실)</td><td>레퍼런스에는 있는데 조각에는 <b>빠진 글자</b></td></tr>
+  <tr><td><b>S</b></td><td><a class="w" href="words.html#w125" data-w="125">soft clip</a> (소프트 클립)</td><td>조각의 끝이 안 맞아 <b>정렬하지 않고 남겨 둔 부분</b></td></tr>
+</table></div>
+<p>CIGAR의 풀네임은 Compact Idiosyncratic Gapped Alignment Report예요. 풀네임은 알아 두기만 하세요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>지도 앱 길 안내처럼 "3칸 직진(3M), 1칸 끼어들기(1I), 3칸 직진(3M), 1칸 건너뛰기(1D), 5칸 직진(5M)"로 읽으면 돼요.</p>
+</div>
+<p>글자 수 계산에는 공식 두 개가 있어요.</p>
+<ul>
+  <li><b>조각 길이 = M + I + S</b> (조각에 실제로 있는 글자)</li>
+  <li><b>레퍼런스에서 차지하는 칸 수 = M + D</b> (정답지에서 덮는 자리)</li>
+</ul>
+<p><b>예 1</b> — <code>151M</code>은 151글자 전부가 쭉 맞춘 거예요. 조각 길이 151, 레퍼런스 151칸이에요.</p>
+<p><b>예 2</b> — POS 5, <code>3M1I3M1D5M</code> (교수님 슬라이드 예시)를 그림으로 볼게요.</p>
+<div class="tw"><table class="seq">
+  <tr><td class="lb">자리</td><td class="n">5</td><td class="n">6</td><td class="n">7</td><td class="n"></td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td><td class="n">13</td><td class="n">14</td><td class="n">15</td><td class="n">16</td></tr>
+  <tr><td class="lb">정답지</td><td class="r">A</td><td class="r">C</td><td class="r">T</td><td class="n">-</td><td class="r">G</td><td class="r">A</td><td class="r">A</td><td class="r">C</td><td class="r">T</td><td class="r">G</td><td class="r">A</td><td class="r">C</td><td class="r">T</td></tr>
+  <tr><td class="lb">내 조각</td><td class="m">A</td><td class="m">C</td><td class="m">T</td><td class="g">A</td><td class="m">G</td><td class="m">A</td><td class="m">A</td><td class="x">-</td><td class="m">T</td><td class="m">G</td><td class="e">G</td><td class="m">C</td><td class="m">T</td></tr>
+  <tr><td class="lb">CIGAR</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d" style="color:var(--grn)">I</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="z">D</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d">M</td></tr>
+</table></div>
+<p>앞에서부터 읽어 보세요. <b>3M</b>(5~7번 자리 맞춤) → <b>1I</b>(조각에만 A가 끼어듦) → <b>3M</b>(8~10번 맞춤) → <b>1D</b>(11번 자리 C가 조각에서 빠짐) → <b>5M</b>(12~16번 맞춤)이에요.</p>
+<p>조각 길이는 3+1+3+5 = 12글자, 레퍼런스 칸은 3+3+1+5 = 12칸(5번~16번)이라 공식과 딱 맞아요.</p>
+<p>그림의 14번 자리처럼 정답은 A인데 조각은 G로 글자가 달라도 <b>M으로 써요.</b> 다른 글자 정보는 따로 <a class="w" href="words.html#w126" data-w="126">MD</a>·NM 태그에 적어요.</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>POS + CIGAR만 있으면 조각이 어디에 어떻게 붙었는지 그릴 수 있다.</b> I는 조각 쪽에서 늘어나고, D는 정답지 쪽에서 늘어난다고 기억하세요.</p>
+</div>
+<figure class="slide"><img src="slides/v45.jpg"><figcaption>교수님 슬라이드 — POS 5, CIGAR 3M1I3M1D5M</figcaption></figure>
+<p><b>예 3</b> — 시험에 나온 형태예요. <code>5M2I10M</code>은 <b>5글자 맞춤, 2글자 삽입, 10글자 맞춤</b>이에요. 조각 길이는 5+2+10 = 17, 레퍼런스 칸은 5+10 = 15칸이에요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>CIGAR는 read가 레퍼런스에 정렬된 모양을 <b>숫자와 문자</b>로 나타낸 것으로, <b>M은 정렬됨(match), I는 삽입(insertion), D는 결실(deletion), S는 soft clip</b>이다. 예를 들어 <code>5M2I10M</code>은 5개 정렬, 2개 삽입, 10개 정렬을 뜻한다.</p>
+</div>
+<p>이제 직접 풀어 보세요.</p>
+<details class="check"><summary>직접 풀기 1 — CIGAR 5M2I10M의 뜻을 말해 보세요. 조각 길이는 몇 글자일까요?</summary><p>5글자 맞춤, 2글자 삽입, 10글자 맞춤이에요. 조각 길이는 M+I+S이니까 5+2+10 = 17글자예요.</p></details>
+<details class="check"><summary>직접 풀기 2 — POS 10, CIGAR 4M2D6M이면 레퍼런스의 몇 번 자리부터 몇 번 자리까지 덮을까요?</summary><p>레퍼런스 칸은 M+D = 4+2+6 = 12칸이니 10번부터 21번까지예요. 조각 글자는 M+I+S = 4+6 = 10글자예요.</p></details>
+<details class="check"><summary>직접 풀기 3 — POS 1, CIGAR 2M1D3M. 정답지가 A C G T A C라면 조각은 어떤 글자일까요?</summary><p>2M은 A C, 1D는 G가 빠짐, 3M은 T A C예요. 조각은 A C T A C (5글자)이고 빠진 글자는 G예요.</p></details>
+<details class="check"><summary>직접 풀기 4 — CIGAR 2S8M은 조각 길이가 몇 글자이고 레퍼런스를 몇 칸 덮을까요?</summary><p>조각 길이는 S+M = 2+8 = 10글자이고, 레퍼런스는 M만 덮으니 8칸이에요. S 2글자는 정렬하지 않고 남겨 둔 끝부분이에요.</p></details>
+
+<h3>12. IGV — 눈으로 확인하기</h3>
+<p><b>IGV</b>(Integrative Genomics Viewer)는 얼라인 결과를 <b>지도 앱처럼 확대·축소하며 보는 프로그램</b>이에요. 숫자만 보지 않고 눈으로 확인하려고 써요.</p>
+<ul>
+  <li>올리는 파일 — 레퍼런스(<a class="w" href="words.html#w79" data-w="79">FASTA</a> + <b>.fai</b>)와 내 결과(sorted BAM + <b>.bai</b>)</li>
+  <li>위쪽 <b>회색 막대</b> = 자리별 조각 수(<a class="w" href="words.html#w86" data-w="86">depth</a>)</li>
+  <li><b>화살표 막대</b> = 조각 하나(방향도 보여요). 빨강·파랑은 정방향·역방향이에요.</li>
+  <li><b>색칠된 글자</b> = 레퍼런스와 다른 글자(변이 후보)</li>
+</ul>
+<figure class="slide"><img src="slides/v57.jpg"><figcaption>교수님 슬라이드 — IGV로 본 BAM. 빨강·파랑 = 정방향·역방향 조각</figcaption></figure>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>교수님의 로직은 "단계마다 <b>눈(IGV)</b>과 <b>통계(<a class="w" href="words.html#w87" data-w="87">coverage</a>·depth)</b>로 잘 됐는지 확인한다"예요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>IGV는 레퍼런스(FASTA와 fai)와 정렬된 BAM(sorted BAM과 bai)을 올려 read의 위치, depth(회색 막대), 미스매치(색칠된 염기)를 <b>눈으로 확인</b>하는 시각화 도구이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — IGV에서 위쪽 회색 막대가 높을수록 무슨 뜻일까요?</summary><p>그 자리를 읽은 조각이 많다는 뜻, 즉 depth가 높다는 뜻이에요.</p></details>
+
+<h3>13. 리눅스 — 딱 이것만</h3>
+<p>교수님이 "명령어 세부는 디테일이라 안 본다"고 하셨어요. 개념만 알면 돼요.</p>
+<div class="box def"><span class="t">왜 리눅스?</span>
+  <p>생물정보 분석 도구들이 수십 년간 <b>오픈소스(무료·공개)인 <a class="w" href="words.html#w128" data-w="128">리눅스</a></b> 위에서 만들어져 쌓였기 때문이에요. 교수님 표현으로 "선택이 아니라 하려면 리눅스에서 할 수밖에 없는" 상황이에요.</p>
+</div>
+<ul>
+  <li><b>커널(kernel)</b> = 운영체제의 핵심으로 메모리 같은 하드웨어를 관리해요. <b>셸(<a class="w" href="words.html#w129" data-w="129">shell</a>)</b> = 껍데기, 우리가 친 명령어를 해석해 커널에 전달해요. 이 수업은 셸 중 <b><a class="w" href="words.html#w130" data-w="130">bash</a></b>를 써요.</li>
+  <li><b>셸 스크립트</b> = 명령어를 여러 줄 모아 둔 파일이에요. 첫 줄에 <code>#!/bin/bash</code>를 적어요.</li>
+  <li><b><a class="w" href="words.html#w131" data-w="131">가상환경</a>(conda)</b> = 도구마다 필요한 버전이 달라 서로 꼬이니까, 목적별로 <b>작은 방</b>을 따로 만들고 필요한 도구만 깔아 두는 것이에요.</li>
+</ul>
+<div class="box eg"><span class="t">비유</span>
+  <p>식당에서 주방이 커널이라면, 주문을 받아 주방에 전달하는 홀 직원이 셸이에요. 손님(우리)은 직원에게만 말하면 돼요. 가상환경은 요리마다 쓰는 <b>전용 주방 칸</b>이라고 생각하세요.</p>
+</div>
+<p><b>파일 권한</b>은 읽기·쓰기·실행을 숫자로 적어요. <b>r(읽기)=4, w(쓰기)=2, x(실행)=1</b>이에요.</p>
+<ul>
+  <li><code>ls -al</code>로 보면 <code>-rw-r--r--</code>처럼 나와요. 맨 앞 글자는 파일(<code>-</code>)인지 폴더(<code>d</code>)인지이고, 나머지 9글자는 <b>user(주인) / group(모둠) / other(남들)</b> 세 칸씩이에요.</li>
+  <li><code>rw-</code> = 4+2 = 6, <code>r--</code> = 4이니 <code>-rw-r--r--</code>는 <b>644</b>예요.</li>
+  <li><code>chmod 755</code> = 나는 전부(4+2+1=7), 나머지는 읽기와 실행(4+1=5). <code>777</code> = 모두에게 전부 허용.</li>
+</ul>
+<p>그 밖에 두 가지만 더 알아 두세요.</p>
+<ul>
+  <li><b>리다이렉션</b> — 결과를 화면 대신 파일에 저장해요. <code>&gt;</code>는 덮어쓰기, <code>&gt;&gt;</code>는 이어쓰기, <code>2&gt;</code>는 에러만 저장이에요.</li>
+  <li><b>파이프 <code>|</code></b> — 앞 명령의 출력을 뒤 명령의 입력으로 넘겨요(앞에서 본 컨베이어 벨트).</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>생물정보 분석 도구는 오픈소스인 <b>리눅스</b> 환경에서 수십 년간 발전해 왔기 때문에 리눅스 사용이 필수다. 도구마다 버전이 달라 충돌하므로 <b>가상환경(conda)</b>을 만들어 목적별로 분리하고, 파일 권한은 r=4, w=2, x=1의 합으로 나타낸다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 권한 rwxr-xr-x를 숫자로 쓰면?</summary><p>755예요. rwx = 4+2+1 = 7, r-x = 4+1 = 5, r-x = 5이기 때문이에요.</p></details>
+
+<div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>흐름은 FASTQ → QC(FastQC, 뒤로 갈수록 품질이 떨어지는 이유 2개) → 트리밍(cutadapt·Trim Galore, 필요하면 PEAR 머지) → 얼라인먼트(BWA의 인덱스 + seed-and-extend, local) → sorted BAM + .bai → IGV 확인이에요.</li>
+    <li>SAM(텍스트, 큼)은 BAM(바이너리, 작음)으로 줄이고, sort는 필수 단계, 색인은 .bai예요. SAM 11칸 중 FLAG(0/16/4), POS, MAPQ 60, CIGAR를 기억하세요.</li>
+    <li>CIGAR는 M 맞춤·I 삽입·D 결실·S soft clip이에요. 3M1I3M1D5M(POS 5), 5M2I10M처럼 읽고, 조각 길이는 M+I+S, 레퍼런스 칸은 M+D예요.</li>
+  </ul>
+</div>
+<div class="done"><button class="go ghost" id="markread" data-ch="c6" type="button">다 읽었어요 ✓</button><a class="go" href="quiz.html#c6">이 장 문제 풀기</a><div class="pn"><a href="c5.html"><b>← 이전</b>Depth · 어디를 읽을까</a><a class="next" href="c7.html"><b>다음 →</b>진짜 변이 골라내기</a></div></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

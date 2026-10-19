@@ -1,0 +1,982 @@
+{
+ "concepts": [
+  {
+   "ch": "qc",
+   "title": "QC를 정렬 전에 하는 이유 — 정렬 도구는 글자만 맞춰 보고 품질은 안 본다",
+   "body": "슬라이드 19쪽은 FastQC를 쓰는 이유를 두 줄로 적었다. 낮은 품질의 서열은 걸러내야 하고, <b>정렬 도구는 정렬할 때 염기 품질 점수를 고려하지 않는다</b>는 것이다. 쉽게 말해 정렬 도구는 번역기처럼 글자를 그대로 믿고 맞춘다. 사진이 흐려서 잘못 읽힌 글자도 똑같이 믿어 버린다. 그래서 정렬 전에 FastQC로 품질을 보고, 문제가 있으면 트리밍으로 걸러 낸다. 그래프는 가로가 read 위치, 세로가 Q 점수, <b>노란 박스는 25~75%, 파란 선은 평균, 빨간 선은 중앙값</b>이다. 교수는 2012년 비교 논문 그림으로 같은 말을 했다. 트리밍을 한 데이터가 안 한 데이터보다 얼라인 퍼센트가 훨씬 좋았다는 것이다.",
+   "src": "7주차 슬라이드 19쪽, 6주차 녹취 약 1:19~1:21 (2012 BioData Mining 비교 논문)"
+  },
+  {
+   "ch": "qc",
+   "title": "인서트가 짧으면 read가 어댑터까지 읽는다 (교수의 50bp 예시)",
+   "body": "교수는 인서트(분석 대상 조각)가 <b>50bp밖에 안 되는</b> 경우를 예로 들었다. 기계는 150번 이미징하는데, 처음 50개는 정상으로 읽히다가 그 뒤로는 반대쪽 어댑터 서열을 읽는다. 어댑터까지 다 읽고도 길이가 남으면 이번에는 신호가 없는 노이즈를 읽는다. 짧은 책 한 권을 150쪽 읽으라고 하면 뒤쪽은 뒷표지와 빈 종이를 읽는 것과 같다. 그래서 FASTQ에는 앞부분(원하는 서열), 어댑터, 품질 낮은 이상한 서열이 차례로 남는다. FastQC 그래프 뒤쪽이 크게 떨어지면 어댑터를 의심하고, 어댑터 이후는 쓸모없으니 자르는데 이것이 adapter trimming(어댑터 클리닝)이다. 자른 뒤 다시 FastQC를 돌리면 Q30 이상으로 회복된다.",
+   "src": "6주차 녹취 약 35:33~38:30, 7주차 슬라이드 17~21쪽"
+  },
+  {
+   "ch": "qc",
+   "title": "트리밍 도구 3종 — cutadapt, Trim Galore, fastp",
+   "body": "<b>cutadapt</b>는 내가 지정한 어댑터만 정확히 잘라 준다. 교수는 자동 필터를 쓰면 어떤 read가 날아갈지 모르기 때문에 cutadapt로 자르고 품질 필터는 직접 하는 편이라고 했다. <b>Trim Galore</b>는 어댑터를 자르면서 품질 점수 기반 필터까지 자동으로 해 주어 편하다. 실습 PDF 14쪽의 페어드엔드 명령은 -a(R1 어댑터), -A(R2 어댑터), -m 20(트리밍 뒤 너무 짧아진 read 버림), -q 20(끝의 저품질 제거), -o/-p(R1/R2 출력 파일)이다. 그런데 변이 분석 실습 스크립트 02번은 <b>fastp</b>(-i, -I, -o, -O)를 썼다. 슬라이드 22쪽은 도구마다 옵션이 다르니 원리를 이해하고 골라 쓰라고 한다. 시험에서는 도구 이름보다 '어댑터를 자르는 단계'라는 목적이 중요하다.",
+   "src": "6주차 녹취 약 38:30~39:31, 1:02:31~1:03:29, 실습 PDF 13·14·26쪽, 7주차 슬라이드 21·22쪽"
+  },
+  {
+   "ch": "qc",
+   "title": "라이브러리 구조와 바코드 — 한 번에 섞어 돌리고 비용은 n빵",
+   "body": "시퀀싱 라이브러리는 바깥에서 안쪽으로 <b>어댑터 → 샘플 바코드 → 프라이머 결합부 → 인서트(분석 대상)</b> 순서다. 어댑터는 flow cell 유리판에 붙는 부분이고, 페어드엔드로 양쪽을 읽으려고 양 끝에 있다. 바코드는 샘플마다 다른 염기서열 이름표다. NGS는 처리량이 10의 9승 read 정도로 커서 고객 한 명만 돌리면 대부분이 비어 버린다. 그래서 여러 고객의 샘플을 바코드로 구분해 모아서 한 번에 돌리고, 비용은 샘플 수만큼 n분의 1로 나눈다. 프라이머 결합부는 sequencing by synthesis가 시작되는 자리다. 슬라이드 6쪽 그림은 P5 어댑터 - 바코드 - Read1 - 갭(Gap) - Read2 - 바코드 - P7 어댑터 순으로 그렸고, 어댑터는 플랫폼마다 다르다고 적었다. RNA 라이브러리는 RNA를 cDNA로 바꾸는 단계 하나만 앞에 더해지고 나머지는 같다.",
+   "src": "6주차 녹취 약 13:39~18:07, 7주차 슬라이드 6쪽"
+  },
+  {
+   "ch": "qc",
+   "title": "페어드엔드의 두 가지 쓰임 — 합치기(PEAR)와 짝으로 정렬(BWA)",
+   "body": "페어드엔드는 한 조각의 양쪽(R1 forward, R2 reverse)을 따로 읽는다. 2×150이고 겹침(overlap)이 약 50bp면 합친 길이는 약 250bp이다. <b>방법 A</b>는 PEAR로 overlap을 맞춰 한 줄로 합치는 것이다. <b>방법 B</b>는 합치지 않고 R1·R2 쌍 그대로 정렬하는 것이고, 이때 짝 정보가 SAM의 RNEXT·PNEXT·TLEN 컬럼에 담긴다. 실습에서 PEAR는 for_merge 데이터로 따로 연습했고, variant_call 스크립트(02·03번)는 머지 없이 R1·R2 두 파일을 그대로 정렬했다. 교수는 머지해서 하나만 쓸 거면 하나만 넣어도 된다고 했다. overlap이 너무 짧거나 조각이 너무 길어 overlap이 없으면 합쳐지지 않는데, 이 not assembled read는 버리지 않고 따로 정렬해서 추가 분석한다. 슬라이드 8쪽은 페어드엔드의 장점을 '더 길게 읽는다'와 '교정(proof-reading) 역할'로 적었다.",
+   "src": "6주차 녹취 약 18:07~21:08, 1:10:16~1:11:19, 1:36:36, 실습 PDF 18·26·27쪽, 7주차 슬라이드 8쪽"
+  },
+  {
+   "ch": "qc",
+   "title": "목적별 depth 표에 슬라이드가 덧붙인 것 (정확도·시간·비용)",
+   "body": "슬라이드 11쪽은 depth만이 아니라 정확도·시간·비용까지 비교한다. <b>Genome</b>은 모든 유전자와 비코딩 DNA를 보지만 depth가 30x 이상으로 얕아 정확도는 낮고, 시간이 가장 오래 걸리고 가장 비싸다. <b>Exome</b>(20~25k 유전자)은 50~100x로 정확도가 좋고 비용 효율적이다. <b>Targeted gene panel</b>(10~500개 유전자)은 500x 이상으로 정확도가 높고 며칠이면 되며 가장 비용 효율적이다. 교수는 WGS가 30억 염기를 다 읽어야 하니 depth를 30x로 낮췄고 그래서 빈 곳이 생길 수 있다고 했다. 빈 곳을 없애려면 돈을 더 써서 depth를 올려야 한다. 조기 암은 암세포 DNA가 약 1%라 targeted로 약 3000x까지 올린다. 슬라이드 13쪽은 FASTQ 크기를 WGS 약 150GB, exome 약 8GB로 적었다.",
+   "src": "7주차 슬라이드 11·13쪽, 6주차 녹취 약 28:06~32:15"
+  },
+  {
+   "ch": "align",
+   "title": "Depth·Coverage 계산 연습 — 실습 숫자로 해 보기",
+   "body": "식은 <b>depth = 매핑된 read 수 × 평균 read 길이 ÷ 레퍼런스 길이</b>, <b>coverage(breadth) = 읽힌 크기 ÷ 타깃 크기</b>이다. 실습 PDF 28쪽의 NA12878 chr20 결과로 계산해 보자. 매핑된 read가 8,592,476개, read 길이가 약 150bp, chr20 길이가 64,444,167bp이므로 8,592,476 × 150 ÷ 64,444,167 ≈ 20.0이다. samtools coverage가 낸 meandepth 19.9649와 거의 같다. coverage는 읽힌 염기 63,942,150 ÷ 64,444,167 = 99.22%이고 표에도 99.221로 찍혀 있다. 교수는 임의로 만든 데이터라 coverage가 이렇게 높다고 했고, 실제로 이만큼 높이려면 depth를 크게 올려야 한다고 했다. IGV에서 한 위치의 read를 세어 보니 약 20개였다. 교수는 '얼라인 결과에서 궁금한 건 결국 coverage와 depth 두 지표'라고 정리했다.",
+   "src": "실습 PDF 28쪽, 7주차 녹취 약 51:06~53:26, 7주차 슬라이드 10쪽 (계산은 직접 한 것)"
+  },
+  {
+   "ch": "align",
+   "title": "BWA가 빠른 이유 — 포스트잇 인덱스와 seed-and-extend 3단계",
+   "body": "교수 비유는 '레퍼런스에 포스트잇으로 챕터를 표시해 두는 것'이다. <b>1단계 인덱싱</b>은 레퍼런스를 한 번만 미리 정리하는 일이다(bwa index). 슬라이드 54쪽 그림처럼 짧은 seed마다 '이 조각은 2번, 15번, 156번에 있다'는 목록을 만든다. <b>2단계 seed 찾기</b>에서는 read도 10~20bp의 짧은 seed로 쪼개 목록에서 후보 위치를 찾는다. 그림에서는 AAA가 2·15·156, CAC가 20, TTA가 27·234에 있는데, read 안의 seed 간격과 맞는 15·20·27 쪽이 정답 위치가 된다. <b>3단계 extend</b>에서는 그 위치로 가서 좌우로 늘리며 local alignment 점수(예: 매치 +1, 미스매치·갭 -1)를 매겨 최종 위치를 확정한다. 레퍼런스를 처음부터 다 비교하지 않고 후보 몇 곳만 정밀하게 보므로 BLAST보다 훨씬 빠르다. 점수 계산 세부는 외우지 않아도 된다.",
+   "src": "6주차 녹취 약 1:34:29~1:41:47, 7주차 슬라이드 28·51~55쪽"
+  },
+  {
+   "ch": "align",
+   "title": "Global vs Local, 그리고 BLAST 실습이 보여 준 것",
+   "body": "교수 예시는 이렇다. 산에서 캔 식물이 어떤 종인지 알고 싶을 때는 그 식물의 DNA를 여러 종의 레퍼런스에 던져 어디와 가장 비슷한지 <b>큰 그림(global)</b>으로 본다. 긴 서열과 반복 서열이 많아서다. 반면 변이 하나가 중요한 우리 분석은 <b>가장 비슷한 부분을 세밀하게(local)</b> 보므로 local alignment를 많이 쓴다. BLAST 실습(웹)에서는 33bp짜리 query를 넣었더니 여러 바이러스에 100% 매치가 나왔다. 서열이 너무 짧아서 여러 레퍼런스에 다 맞은 것이다. 이 query는 일루미나 어댑터 계열 서열로 보이며, cutadapt 실습 PDF 14쪽의 -a 어댑터와 거의 같다. 실제 데이터는 이보다 길어서 미스매치나 indel이 섞이고, 결과에서는 몇 % 매치인지·점수·갭 수를 본다.",
+   "src": "6주차 녹취 약 1:12:17~1:18:27, 실습 PDF 3~5쪽, 7주차 슬라이드 26쪽"
+  },
+  {
+   "ch": "align",
+   "title": "레퍼런스 버전(hg19·hg38)은 처음부터 끝까지 맞춘다",
+   "body": "교수는 인간 레퍼런스가 계속 업데이트되고, 가장 최신 버전을 쓰는 게 보통이지만 <b>어떤 버전을 쓰느냐에 따라 변이 정보가 달라질 수 있으니 유의</b>하라고 했다. 그런데 슬라이드 예시 명령은 버전이 섞여 있다. bwa 예시는 hg19_reference.fa, HaplotypeCaller 예시는 Homo_sapiens_assembly38, ANNOVAR 예시는 -buildver hg19이고, 웹 IGV는 hg38을 썼다. 시험에 나올 부분은 예시 파일명이 아니라 '버전에 따라 결과가 달라진다'는 사실이다. 실무에서는 정렬, BQSR용 DB, 변이 호출, annotation까지 한 분석 안에서 같은 버전으로 맞춘다. 이것은 교수 경고에서 따라 나오는 원칙이다. 레퍼런스 FASTA는 ID 줄과 서열만 있고 품질 점수가 없다. 정답지라 품질 표시가 필요 없기 때문이다.",
+   "src": "6주차 녹취 약 1:21:46~1:22:49, 7주차 슬라이드 50·73·89·91쪽"
+  },
+  {
+   "ch": "sam",
+   "title": "FLAG — 숫자 하나에 여러 정보를 담는 비트 코딩",
+   "body": "FLAG는 read가 어떻게 매핑됐는지를 숫자 하나로 적은 컬럼이다. 교수가 짚은 값은 <b>0 = forward로 매핑, 16 = reverse로 매핑, 4 = 매핑 안 됨</b> 세 가지다. 보통 이 정도만 보면 된다고 했다. 숫자가 여러 정보의 합이라서 값이 더 커지기도 한다. 비트별로 1은 페어드, 2는 짝과 함께 잘 붙음, 4는 매핑 안 됨, 16은 reverse, 64는 첫째 read, 128은 둘째 read를 뜻한다. 슬라이드 44쪽 CIGAR 예시의 FLAG 147은 1+2+16+128이므로 '짝으로 잘 붙은 reverse 방향의 둘째(R2) read'로 읽는다. 이 147 풀이는 슬라이드의 값을 직접 분해한 것이고 교수가 따로 설명하지는 않았다. IGV에서 화살표 방향이 forward와 reverse로 나뉘는 것도 R1과 R2가 반대 방향으로 읽혔기 때문이다.",
+   "src": "6주차 녹취 약 1:24:57~1:25:53, 7주차 녹취 약 53:26, 7주차 슬라이드 37~39·44쪽"
+  },
+  {
+   "ch": "sam",
+   "title": "CIGAR 글자 뜻과 길이 계산 공식",
+   "body": "CIGAR는 '숫자 + 문자'를 이어 붙여 read가 레퍼런스에 어떻게 붙었는지 적은 것이다. <b>M</b>은 정렬됨(슬라이드에는 염기가 같거나 다를 수 있다고 되어 있고 미스매치는 MD/NM에서 확인), <b>I</b>는 read에만 있는 염기(삽입), <b>D</b>는 레퍼런스에만 있고 read에는 없는 염기(결실), <b>S</b>는 정렬은 안 됐지만 SEQ에는 남은 끝부분(soft clipping), H는 SEQ에서도 잘려 나간 끝부분(hard clipping)이다. 계산 공식 두 개만 알면 된다. <b>read 길이 = M + I + S</b>, <b>레퍼런스에서 차지하는 길이 = M + D</b>이다. 슬라이드 44쪽 표의 'consumes query/reference' 열이 바로 이 규칙이다. 151M은 151염기가 모두 정렬됐다는 뜻이다. POS(시작 위치)와 CIGAR만 있으면 어디에 어떻게 붙었는지 그릴 수 있다는 것이 교수의 설명이다.",
+   "src": "6주차 녹취 약 1:27:19~1:30:33, 7주차 슬라이드 43~45쪽"
+  },
+  {
+   "ch": "sam",
+   "title": "수업 CIGAR 예제 두 개 풀이",
+   "body": "<b>예제 1 (6주차 녹취·슬라이드 45쪽)</b>은 POS 5, CIGAR 3M1I3M1D5M이다. read는 ACTAGAATGGCT 12염기이고 3+1+3+5=12로 맞는다. 레퍼런스에서는 3+3+1+5=12칸을 차지해 5번부터 16번까지 놓인다. <b>예제 2 (슬라이드 44쪽)</b>은 5S8M2D11M6S이다. read 길이는 5+8+11+6=30, 레퍼런스에서는 8+2+11=21칸을 차지한다. 주의할 점이 있다. 그림은 윗줄을 '시퀀싱 리드', 아랫줄을 '표준 서열'로 적었는데, 이름대로라면 윗줄의 CA는 삽입이 된다. CIGAR의 2D와 길이 30에 맞는 쪽은 아랫줄(30염기)이 read이고 윗줄이 레퍼런스인 경우이므로, 그림의 줄 이름은 서로 바뀌어 있는 것으로 보인다.",
+   "src": "6주차 녹취 약 1:28:11~1:30:33, 7주차 슬라이드 44·45쪽 (줄 이름 문제는 직접 대조한 것)"
+  },
+  {
+   "ch": "sam",
+   "title": "Phred 스케일은 어디에나 나온다 — Q, MAPQ, GQ, QUAL",
+   "body": "수업에는 점수가 여러 번 나오지만 대부분 같은 식 <b>Q = -10 × log10(P)</b>(P는 틀릴 확률)를 쓴다. 점수가 10 오를 때마다 틀릴 확률이 10분의 1로 줄어서 Q10은 10%, Q20은 1%, Q30은 0.1%, Q40은 0.01%, Q60은 10의 -6승(0.0001%)이다. 어디에 쓰이는지만 구분하면 된다. <b>염기 품질 점수(Q)</b>는 FASTQ의 그 염기가 틀렸을 확률이다. <b>MAPQ</b>는 SAM에서 read의 위치가 틀렸을 확률이고 60이면 잘 붙은 것이다. <b>GQ</b>는 VCF에서 그 유전자형이 맞는다는 확신 수준이다. VCF의 QUAL 칼럼도 같은 방식의 확신 점수지만 수업에서 따로 풀지는 않았다. 참고로 6주차 녹취에서 교수는 MAPQ 60을 '10의 60분의 1'로 말했는데, 식대로면 10의 -6승이 맞고 7주차 녹취도 10의 -6승이라고 했다.",
+   "src": "7주차 슬라이드 15·37·76쪽, 6주차 녹취 약 1:26:11~1:27:19, 7주차 녹취 약 1:45:44~1:46:00"
+  },
+  {
+   "ch": "sam",
+   "title": "MD와 NM — CIGAR 뒤에 붙는 미스매치 정보",
+   "body": "CIGAR는 삽입·결실 같은 '모양'을 알려 주지만 어떤 염기가 틀렸는지는 말해 주지 않는다. 그 정보는 SAM 끝쪽 태그인 <b>MD(Mismatch info)</b>와 <b>NM(Number of mismatch)</b>에 있다. 슬라이드 46쪽 예시 MD:Z:3C30T3, NM:i:2를 읽어 보자. 3개 일치, 레퍼런스가 C인 자리에서 미스매치, 30개 일치, 레퍼런스가 T인 자리에서 미스매치, 3개 일치이다. 합계 38염기이고 미스매치는 2개이므로 NM은 2이다. MD:Z:38, NM:i:0이면 38염기가 모두 일치한다는 뜻이다. 교수는 MD를 CIGAR와 비슷하게 미스매치 기준으로 만든 것이라고 설명했고, IGV에서 read를 클릭하면 CIGAR(150M 등)와 미스매치 정보가 같이 나온다.",
+   "src": "6주차 녹취 약 1:31:09~1:33:23, 7주차 녹취 약 44:07~45:05, 7주차 슬라이드 46쪽"
+  },
+  {
+   "ch": "sam",
+   "title": "정렬(sort)과 인덱스 — 필수 단계이고, 수정하면 다시 정렬한다",
+   "body": "bwa가 내놓는 SAM은 FASTQ 순서대로 나오기 때문에 위치가 뒤죽박죽이다(18번 위치, 2번, 3번, 1번…). <b>samtools sort</b>는 이것을 염색체와 위치 순으로 줄 세운다(슬라이드 56쪽). 교수는 이것이 정리용이 아니라 다음 단계(변이 호출)를 위한 <b>필수 작업</b>이라고 했고, 정렬된 BAM이어야 IGV에서도 깔끔하게 보인다. 정렬 뒤에는 <b>samtools index</b>로 .bai 파일을 만든다. 교수는 뒷단 작업을 위해 필요하다고 했고, IGV에는 BAM과 BAI를 같이 올린다. 7주차에서는 한 가지 규칙을 더 강조했다. 어떤 단계에서 BAM을 수정했으면 항상 다시 정렬한다. 그래서 MarkDuplicates 뒤에 SortSam을 붙였다(슬라이드 64쪽).",
+   "src": "6주차 녹취 약 1:41:47~1:43:49, 7주차 녹취 약 50:05, 1:02:31, 7주차 슬라이드 55·56·64쪽"
+  },
+  {
+   "ch": "sam",
+   "title": "파이프(|) — SAM 파일을 저장하지 않고 바로 sorted BAM으로",
+   "body": "6주차에는 bwa mem으로 SAM을 만들고, samtools view로 BAM을 만들고, samtools sort로 정렬하는 식으로 단계별로 설명했다. 그러나 실제 실습 스크립트는 <b>bwa-mem2 mem ... | samtools sort -o sorted.bam -</b> 한 줄이다. 가운데 세로선 | 이 파이프이고, 앞 프로그램의 결과를 저장하지 않고 곧바로 뒤 프로그램의 입력으로 넘기는 컨베이어 벨트 같은 것이다. SAM은 용량이 아주 커서 하드에 저장했다가 지울 필요가 없고, 메모리도 효율적으로 쓸 수 있다. 이어서 samtools index로 .bai를 만들고 flagstat, coverage로 요약 통계를 낸다. 교수는 이 한 줄이 '얼라인이 되는 것의 전부'라고 말했다. 슬라이드 50쪽의 단계별 명령과 실습 스크립트의 한 줄 명령은 결과가 같다.",
+   "src": "6주차 녹취 약 1:58:28~1:59:37, 7주차 녹취 약 48:57~50:05, 실습 PDF 27쪽, 7주차 슬라이드 50·55·56쪽"
+  },
+  {
+   "ch": "post",
+   "title": "MarkDuplicates를 설문조사 비유로, 그리고 실습 숫자 0에서 1,542로",
+   "body": "교수 설명은 이렇다. 시료가 부족해서 어댑터 서열 기준으로 PCR 증폭한 뒤 읽으면 같은 조각의 복제본이 여러 개 생긴다. 랜덤 fragmentation한 gDNA에서는 시작점과 끝점이 우연히 똑같을 수 없으므로, <b>Chr·Position·CIGAR가 같으면 PCR 중복</b>으로 보고 하나만 남긴다. 설문조사에서 한 사람이 같은 답을 열 번 제출한 것을 한 표로 세는 것과 같다(이 비유는 보충). 이걸 안 하면 실제 30%인 변이가 80%로 보여 '말기'로 오판하고, 제거하면 약 30%라 '중기 정도'로 바르게 판단한다. 단 PCR로 특정 부위만 뽑은 amplicon은 원래 시작·끝이 모두 같으니 이 단계를 생략한다. 실습에서는 flagstat의 duplicates가 정렬 직후 0이었고 MarkDuplicates 뒤에는 1,542로 올랐다. 전체 8,592,478개의 약 0.018%이다.",
+   "src": "7주차 녹취 약 56:19~59:26, 1:13:36~1:14:34, 실습 PDF 32쪽, 7주차 슬라이드 63·64쪽"
+  },
+  {
+   "ch": "post",
+   "title": "BQSR 3단계와 '정답지를 살짝 본다'는 교수 설명",
+   "body": "IGV에서 본 색칠된 염기가 진짜 변이인지 NGS 에러인지 알 수 없는데, 이걸 전부 SNP로 부르면 SNP가 엄청 많아진다. BQSR는 이 문제를 줄이려고 시퀀싱이 매긴 품질 점수의 bias를 보정한다. 슬라이드 65쪽의 3단계는 <b>① 참고 DB 다운로드(dbSNP 등) → ② 품질 점수 재보정 테이블 생성 → ③ 테이블로 재보정</b>이다. 교수 표현은 '이미 알려진 SNP 목록(정답지)을 살짝 본다'이다. 알려진 변이 자리에 속하면 진짜 변이일 가능성이 있고, 거기에 속하지 않으면 오류일 확률이 더 높다는 것을 참고한다. 명령은 둘이다. gatk BaseRecalibrator(--known-sites)가 테이블을 만들고 gatk ApplyBQSR가 BAM의 품질 점수를 다시 쓴다. 결과 BAM은 슬라이드에서 final.bam, 실습 스크립트에서 recal.bam이라 부르는데 이름 관례일 뿐이다.",
+   "src": "7주차 녹취 약 1:03:34~1:07:17, 7주차 슬라이드 62·65·66쪽, 실습 PDF 33쪽"
+  },
+  {
+   "ch": "variant",
+   "title": "HaplotypeCaller의 사전 확률과 사후 확률 (베이지안 쉽게)",
+   "body": "HaplotypeCaller는 먼저 변이가 몰린 <b>active region</b>만 고른다. 전부 보기엔 너무 많으니 전략적으로 집중하는 것이고 나머지는 NGS 에러로 보고 넘어간다. 그다음 haplotype(한 염색체에서 함께 유전되는 변이 조합, 예 엄마 A-C-G, 아빠 G-T-G)을 기준으로 삼는다. 1번 위치가 A면 100번은 거의 C, 233번은 거의 G처럼 변이들이 엮여 다니기 때문이다. 이 묶음 패턴을 따르는 read가 많으면 진짜 변이이고, 패턴이 어긋나는 read는 NGS 오류일 가능성이 높다. PairHMM은 '이 read가 이 haplotype에서 나왔을 확률'을 계산하는 도구다. 교수는 이것이 <b>사전 확률</b>이고, 베이지안 모델로 이 값을 반복(iteration)해서 고쳐 <b>사후 확률</b>을 올려 확실한 것만 남긴다고 했다. 쉽게 말해 처음 추측을 증거(read)로 계속 고쳐 확신을 키우는 것이다.",
+   "src": "7주차 녹취 약 1:16:42~1:21:19, 7주차 슬라이드 71쪽"
+  },
+  {
+   "ch": "variant",
+   "title": "GT·AC·AF·AN을 이어서 읽기",
+   "body": "사람은 염색체가 두 벌이라(diploid) 한 위치에 allele가 2개이므로 <b>AN(전체 allele 수)은 보통 2</b>이다. GT의 숫자 0은 레퍼런스 염기, 1은 ALT 염기이고 숫자 두 개가 두 염색체를 나타낸다. 0/0이면 변이 없음이다. 0/1은 한 염색체만 ALT이고 1/1은 두 염색체 모두 ALT이며, 이 둘이 '변이 있음'이다(각각 이형접합·동형접합이라 부르는 것은 참고). 그러면 AC(ALT allele 개수)와 AF(ALT 빈도, AC÷AN)가 따라온다. 1/1이면 AC=2, AF=1.00이고 0/1이면 AC=1, AF=0.5이다. 슬라이드 78쪽의 AC=2, AF=1.00과 실습 VCF 화면의 AC=1, AF=0.500이 이 경우다. DP는 그 위치를 덮은 read 수이고, 교수는 depth가 높아야 정확도가 올라간다는 점이 핵심 메시지라고 했다.",
+   "src": "7주차 녹취 약 1:29:57~1:33:18, 7주차 슬라이드 76~78쪽, 실습 PDF 36쪽"
+  },
+  {
+   "ch": "variant",
+   "title": "REF와 ALT만 보고 변이 종류 알아맞히기",
+   "body": "VCF에서는 레퍼런스(REF)와 내 데이터(ALT, alteration)를 나란히 놓고 차이만 보면 변이 종류를 알 수 있다. <b>길이가 같고 한 글자만 다르면</b> SNP(C→T). <b>ALT가 REF보다 짧으면</b> deletion이다. 교수 예시는 ACG→A로 뒤의 CG가 결실된 것이다. <b>ALT가 REF보다 길면</b> insertion이다. 예는 C→CT로 T가 삽입된 것이다. 여러 형태가 섞이면 complex event이고, DEL 같은 기호가 적히면 큰 구간이 달라진 large structural variation이다.",
+   "src": "7주차 녹취 약 1:22:33~1:29:57, 7주차 슬라이드 74·75쪽"
+  },
+  {
+   "ch": "variant",
+   "title": "GVCF에서 VCF까지 — 실습 순서와 NON_REF",
+   "body": "교수는 처음부터 VCF를 만들어도 되지만 <b>GVCF를 먼저 뽑고 거기서 VCF를 추리는 방식</b>을 권했다. GVCF를 갖고 있으면 나중에 다시 추적할 때 쓸모가 있기 때문이다. 실습 06번 스크립트는 정확히 이 순서다. ① HaplotypeCaller를 -ERC GVCF로 돌려 GVCF를 만들고, ② GenotypeGVCFs로 최종 genotype을 붙여 VCF를 만든다. GVCF의 NON_REF는 coverage가 낮거나 read 품질이 낮아 변이인지 판단할 수 없다는 표시이고, 한 줄이 END 값까지의 구간을 묶어서 적는다. 교수가 한 옵션 설명도 알아 두자. 변이만 출력하는 --output-mode EMIT_VARIANTS_ONLY는 VCF에서만 쓸 수 있고, 모르는 위치까지 다 내는 GVCF에서는 쓸 수 없다. -ERC는 '변이가 아닌 위치를 어떻게 다룰지'를 정하는 옵션이다.",
+   "src": "7주차 녹취 약 1:22:33~1:25:43, 1:42:14~1:43:19, 7주차 슬라이드 73·74·81·82쪽, 실습 PDF 34쪽"
+  },
+  {
+   "ch": "variant",
+   "title": "HaplotypeCaller 옵션과 GATK bundle — 읽을 수만 있으면 된다",
+   "body": "교수는 코드는 심플하고 개념만 알면 된다고 했다. 슬라이드 81쪽의 옵션을 쉬운 말로 옮기면 다음과 같다. --reference는 정답지 FASTA, --input은 분석할 BAM, <b>-ERC</b>는 변이가 아닌 위치를 어떻게 적을지, <b>-L</b>은 분석 영역, --output은 결과 파일이다. --standard-min-confidence-threshold-for-calling 30은 확신 점수 30 이상일 때만 변이로 부르라는 뜻이고, <b>-ploidy 2</b>는 사람이 이배체라는 뜻이다. -L을 주지 않으면 모든 영역에서 de novo(새로운) 변이를 찾느라 오래 걸리고, 임상 암 진단은 알려진 위치만 보면 되니 영역을 한정한다. <b>GATK bundle</b>은 GATK가 무료로 주는 자료 묶음이다. ① 레퍼런스 게놈, ② 변이 DB(dbSNP, 1000 Genomes, ExAC), ③ 기능 annotation(GENCODE 등), ④ BQSR처럼 도구 전용 자료 4종이다.",
+   "src": "7주차 녹취 약 1:25:43~1:26:46, 1:39:57~1:42:14, 7주차 슬라이드 72·73·81쪽"
+  },
+  {
+   "ch": "variant",
+   "title": "하드 필터와 FILTER 칼럼 — 기준값, PASS, 그리고 점수들의 구분",
+   "body": "하드 필터는 점수가 기준에 못 미치는 변이를 버리는 방법이다. 실습 07번 스크립트는 먼저 SelectVariants로 SNP와 INDEL을 나눈 뒤 GATK Best Practices 권장값을 적용했다. 기준은 <b>QD 2.0 미만, FS 60 초과, MQ 40 미만, MQRankSum -12.5 미만, ReadPosRankSum -8 미만, SOR 3 초과</b>이다. QD는 QUAL을 depth로 나눠 보정한 값, FS와 SOR은 변이가 forward 또는 reverse 한쪽 read에만 치우쳤는지(strand bias), MQ는 매핑 품질 요약이다. 통과하면 FILTER 칼럼이 <b>PASS</b>이고, 못 통과하면 걸린 필터 이름이 찍힌다. 실습 PDF 36쪽 화면에는 MQ_filter가 보이는데 MQ가 21점이었기 때문이고 다른 변이는 60점이었다. 외울 것은 'QD 2.0 미만 제거'와 'PASS의 뜻' 정도다. 교수는 희귀 변이를 찾을 때는 필터를 안 쓰기도 한다고 했다.",
+   "src": "7주차 녹취 약 1:43:19~1:47:44, 실습 PDF 35·36쪽, 7주차 슬라이드 78쪽"
+  },
+  {
+   "ch": "annot",
+   "title": "ANNOVAR 입력부터 결과까지 — 명령 한 줄에 DB 이름 나열하기",
+   "body": "annotation은 '찾은 변이가 무슨 의미인지 DB와 연결'하는 일이고, 교수는 이 부분을 오래 걸려 이론으로만 다뤘다. 순서는 ① 쓸 DB를 먼저 다운로드(annotate_variation.pl -downdb), ② VCF를 avinput(탭으로 구분한 텍스트)으로 변환(convert2annovar.pl), ③ table_annovar.pl로 annotation이다(슬라이드 91쪽과 실습 PDF 38쪽처럼 --vcfinput으로 VCF를 바로 넣기도 한다). 슬라이드 91쪽 명령은 -protocol에 DB를 쉼표로 나열하고 -operation에 g, r, f를 같은 순서로 쓴다. refGene은 g(gene-based), cytoBand는 r(region-based), 나머지는 f(filter-based)이다. 결과 해석은 refGene에서 위치가 exonic, intronic, intergenic 중 어디인지, ClinVar에서 benign인지 pathogenic인지를 본다. 슬라이드 88쪽은 DB를 질문으로 정리했다. cosmic70은 암에서 발견된 적이 있나, nci60은 암 세포주에서 발견되나를 묻는다. 도구는 Perl 기반이지만 언어를 알 필요는 없다.",
+   "src": "7주차 녹취 약 1:47:44~1:56:26, 7주차 슬라이드 86~93쪽, 실습 PDF 38쪽"
+  },
+  {
+   "ch": "practice",
+   "title": "실습 결과 숫자 모음 (출처 표시)",
+   "body": "시험에서 숫자 하나를 물어도 출처를 알면 안 헷갈린다. <b>cutadapt</b>(실습 PDF 15쪽, 50 read 가짜 데이터)는 32 read(64.0%)에 어댑터가 있었고 4,225bp가 3,230bp(76.4%)로 줄었다. <b>PEAR</b>는 6주차 수업에서 학생들이 약 70% assembled, 30% not assembled라고 답했고, 실습 PDF 18쪽 예시는 48,277/51,122(94.435%) assembled, 2,845(5.565%) not assembled이다. <b>정렬(NA12878 chr20)</b>은 전체 8,592,478개, 매핑 100%, 제대로 짝지어짐 100%, singleton 2개, coverage 99.221%, mean depth 19.9649, 평균 염기 품질 23, 평균 매핑 품질 57.8이다(실습 PDF 28쪽). <b>MarkDuplicates</b>는 duplicates가 0에서 1,542로 늘었다(32쪽). <b>하드 필터</b>는 MQ 60과 21이 보였다(36쪽). 교수 말로는 coverage 99%, mean depth 약 20x이고, 정렬 스크립트는 5분 이상 걸렸다.",
+   "src": "실습 PDF 15·18·28·32·36쪽, 6주차 녹취 1:09:15, 1:53:49, 7주차 녹취 약 51:06~52:14"
+  },
+  {
+   "ch": "practice",
+   "title": "실습이 돌아간 길 — ssh부터 07번 스크립트까지",
+   "body": "실습은 모두 리눅스 서버에서 했다. 순서는 <b>ssh 접속 → conda activate wgs-practice(가상환경, 도구가 여기에 설치) → 본인 폴더(이니셜+학번)로 이동</b>이다. 6주차에는 trim 폴더(cutadapt)와 merge 폴더(pear)에서 도구 하나씩 연습했다. 이어서 variant_call 폴더를 만들고 setup_student.sh로 폴더와 데이터를 세팅한 뒤 code 폴더에서 스크립트를 차례로 돌렸다. 02 QC·트리밍(fastp), 03 정렬(bwa-mem2 | samtools sort), 04 후처리(MarkDuplicates), 05 BQSR, 06 변이 호출(HaplotypeCaller, GenotypeGVCFs), 07 하드 필터이다. 결과는 result 폴더 아래 번호 붙은 폴더(02_alignment 등)에 쌓인다. 결과 BAM·BAI는 WinSCP로 내 PC에 옮겨 웹 IGV에 올렸다. 교수는 개념을 모르면 실습할 때 지금 무슨 스텝인지 모른다고 여러 번 말했다.",
+   "src": "실습 PDF 7~10·21·22·26~35·38·39쪽, 6주차 녹취 약 40:49~54:35, 1:47:16~1:50:00, 7주차 녹취 약 21:12~25:34"
+  },
+  {
+   "ch": "etc",
+   "title": "파일 확장자 지도 — 어느 단계에서 어떤 파일이 나오나",
+   "body": "단계별로 파일 이름이 바뀌는 것만 알아도 파이프라인이 머릿속에 그려진다. 시퀀서가 내놓는 <b>FASTQ(.fastq, .fq.gz)</b>는 R1·R2 두 개이다. 트리밍을 거친 FASTQ가 bwa에 들어가면 <b>SAM</b>(텍스트)이 나오고, 이것이 <b>BAM</b>(이진)과 <b>sorted BAM + .bai</b>가 된다. 레퍼런스 쪽은 FASTA(.fa)와 그 인덱스 .fai이다(슬라이드 51쪽은 .fai가 bwa index 단계에서 생기는 것처럼 적었으나 .fai는 samtools faidx 산출물이다). MarkDuplicates는 dedup.bam과 metrics 파일을, BQSR는 recal_data.table과 최종 BAM(final 또는 recal)을 만든다. HaplotypeCaller가 .g.vcf(GVCF)를, GenotypeGVCFs가 .vcf를 내고, 하드 필터를 거치면 FILTER 칼럼이 채워진다. ANNOVAR는 .avinput을 거쳐 annotation 표를 낸다. 교수는 분석 준비가 끝난 지점을 '.bam까지 오면 이후 결과 확장자는 VCF'라고 정리했다.",
+   "src": "7주차 녹취 약 1:14:34~1:15:41, 7주차 슬라이드 50·51·64·66·74·90쪽, 실습 PDF 27·31·33~35쪽"
+  },
+  {
+   "ch": "etc",
+   "title": "SNP·SNV·indel을 어원으로 기억하기",
+   "body": "6주차 시작 때 교수는 정렬의 목적을 다시 짚었다. 레퍼런스에 맞춘 뒤 레퍼런스와 다른 곳을 찾는 것이고, 이것이 SNV, insertion, deletion으로 나온다. <b>SNP(Single Nucleotide Polymorphism)</b>의 polymorphism은 poly(많은) + morph(형태)라서 '염기 하나에 따라 형태가 여러 가지'라는 뜻이다. 머리색이 갈색이냐 검정이냐, 눈동자가 갈색이냐 파랑이냐처럼 겉으로 드러나는 차이로 이어지는 변이다. 반면 <b>SNV(Single Nucleotide Variation)</b>는 겉으로 나타나지 않아도 레퍼런스와 그냥 '다르다'는 것 자체를 가리키는 더 넓은 말이다. 교수는 이런 차이가 질병의 단서가 되거나 몸에서 만들어지는 단백질 형태의 차이가 될 수 있다고 했다. 시험에는 SNP와 SNV를 구분하라는 문제가 나올 수 있으니 이 어원을 같이 외우자.",
+   "src": "6주차 녹취 약 05:15~07:28"
+  }
+ ],
+ "pipeline": [
+  {
+   "step": "0. 환경 준비",
+   "tool": "ssh 접속 → conda activate wgs-practice → mkdir/cd → bash setup_student.sh",
+   "in": "(없음) 서버 계정, 실습 데이터",
+   "out": "내 폴더, variant_call/code 스크립트, 데이터 복사본",
+   "why": "분석 도구가 깔린 가상환경과 내 작업 폴더를 준비한다. 가상환경에 안 들어가면 도구가 없다는 오류가 난다."
+  },
+  {
+   "step": "1. Base calling (시퀀서)",
+   "tool": "NGS 기기(Illumina 등)",
+   "in": "라이브러리를 올린 flow cell의 형광 이미지",
+   "out": "FASTQ (R1, R2)",
+   "why": "형광 이미지를 ATGC 글자와 품질 점수로 바꾼다."
+  },
+  {
+   "step": "2. 품질 검사 (QC)",
+   "tool": "fastqc 파일명",
+   "in": "FASTQ",
+   "out": "HTML 리포트 (Per base quality 그래프 등)",
+   "why": "데이터가 쓸 만한지(Q30 기준) 보고, 뒤쪽이 떨어지면 어댑터를 의심한다."
+  },
+  {
+   "step": "3. 어댑터 트리밍",
+   "tool": "cutadapt -a 어댑터 -o 출력 입력 (PE는 -A, -p, -m 20, -q 20) / 변이 실습 스크립트 02번은 fastp -i -I -o -O",
+   "in": "FASTQ (R1, R2)",
+   "out": "트리밍된 FASTQ (fastp는 html·json 리포트도 생성)",
+   "why": "인서트가 짧아 read에 섞인 어댑터와 뒤쪽 노이즈를 잘라 낸다."
+  },
+  {
+   "step": "4. 페어드엔드 머지 (연습용)",
+   "tool": "pear -f R1 -r R2 -o 이름",
+   "in": "R1 FASTQ + R2 FASTQ",
+   "out": "이름.assembled.fastq, unassembled.forward/reverse.fastq, discarded.fastq",
+   "why": "overlap으로 R1·R2를 한 줄 긴 read로 합친다. 합쳐지지 않은 read는 따로 정렬한다. variant_call 스크립트에는 들어 있지 않다."
+  },
+  {
+   "step": "5. BLAST (웹 시연)",
+   "tool": "NCBI Nucleotide BLAST 웹페이지",
+   "in": "짧은 서열 하나 (실습은 33bp)",
+   "out": "일치하는 레퍼런스 목록, 매치 %, 점수, 갭 (화면)",
+   "why": "local alignment가 어떤 모습인지 눈으로 본다. NGS 대량 데이터에는 너무 느리다."
+  },
+  {
+   "step": "6. 레퍼런스 인덱싱",
+   "tool": "bwa index ref.fa (한 번만)",
+   "in": "레퍼런스 FASTA (.fa)",
+   "out": "bwa 인덱스 파일 여러 개",
+   "why": "레퍼런스에 포스트잇을 붙여 두어 이후 정렬이 빨라지게 한다. 실습에서는 교수가 미리 해 두었다."
+  },
+  {
+   "step": "7. 얼라인먼트",
+   "tool": "bwa mem ref.fa R1 R2 (실습은 bwa-mem2 mem ... | samtools sort)",
+   "in": "트리밍된 FASTQ (R1, R2) + 인덱싱된 레퍼런스",
+   "out": "SAM (파이프를 쓰면 저장 없이 곧바로 다음 단계로)",
+   "why": "짧은 read들이 레퍼런스의 어느 위치인지 맞춘다 (seed-and-extend)."
+  },
+  {
+   "step": "8. SAM을 BAM으로",
+   "tool": "samtools view -b",
+   "in": "SAM (텍스트, 용량 큼)",
+   "out": "BAM (이진, 용량 작음)",
+   "why": "인간 유전체는 31억 염기라 SAM이 너무 커서 압축 형태로 바꾼다. 실습에서는 sort 단계에 합쳐졌다."
+  },
+  {
+   "step": "9. 정렬(sort)",
+   "tool": "samtools sort -o 출력",
+   "in": "SAM 또는 BAM",
+   "out": "sorted BAM (염색체·위치 순)",
+   "why": "뒤죽박죽 순서를 위치순으로 정리한다. 다음 단계와 IGV를 위해 필수다."
+  },
+  {
+   "step": "10. 인덱스",
+   "tool": "samtools index",
+   "in": "sorted BAM",
+   "out": ".bai 파일",
+   "why": "BAM을 위치로 빠르게 찾게 해 준다. IGV와 뒷단 작업에 필요하다."
+  },
+  {
+   "step": "11. 통계 확인",
+   "tool": "samtools flagstat / samtools coverage",
+   "in": "sorted BAM",
+   "out": "flagstat.txt, coverage.txt",
+   "why": "매핑된 read 수, duplicates, coverage, mean depth를 숫자로 확인한다 (실습: coverage 99%, depth 약 20x)."
+  },
+  {
+   "step": "12. 눈으로 확인 (IGV)",
+   "tool": "IGV 웹앱 igv.org/app (WinSCP로 파일을 내 PC에 먼저 옮김)",
+   "in": "sorted BAM + BAI (필요하면 FASTA + fai)",
+   "out": "화면 (read가 쌓인 모습, 미스매치 색깔)",
+   "why": "정렬이 잘 됐는지, 어디가 레퍼런스와 다른지 눈으로 점검한다."
+  },
+  {
+   "step": "13. PCR 중복 제거",
+   "tool": "picard MarkDuplicates I= O= M= (이후 SortSam)",
+   "in": "sorted BAM",
+   "out": "dedup BAM + metrics 파일 (flagstat duplicates 0에서 1,542로)",
+   "why": "PCR 복제본이 변이 비율을 부풀리는 것을 막는다. amplicon 데이터는 생략한다."
+  },
+  {
+   "step": "14. BQSR (1) 재보정 테이블",
+   "tool": "gatk BaseRecalibrator -I -R --known-sites dbSNP -O",
+   "in": "dedup BAM + 레퍼런스 + 알려진 SNP VCF(dbSNP)",
+   "out": "recal_data.table",
+   "why": "알려진 SNP를 정답지로 삼아 품질 점수의 bias를 계산한다."
+  },
+  {
+   "step": "15. BQSR (2) 재보정 적용",
+   "tool": "gatk ApplyBQSR --bqsr-recal-file",
+   "in": "dedup BAM + recal_data.table",
+   "out": "final BAM (실습 이름 recal.bam) = analysis-ready",
+   "why": "품질 점수를 다시 써서 에러를 변이로 오인하는 일을 줄인다."
+  },
+  {
+   "step": "16. 변이 호출",
+   "tool": "gatk HaplotypeCaller -R -I -L -ERC GVCF -O",
+   "in": "final BAM + 레퍼런스 + 분석 영역(-L)",
+   "out": "GVCF (.g.vcf)",
+   "why": "active region과 haplotype 확률로 진짜 변이일 가능성이 높은 것을 찾는다 (모르는 위치도 NON_REF로 기록)."
+  },
+  {
+   "step": "17. Genotype 부여",
+   "tool": "gatk GenotypeGVCFs -V -R -O",
+   "in": "GVCF",
+   "out": "VCF (확실한 변이만, raw)",
+   "why": "GVCF에서 최종 genotype(GT)을 붙여 변이만 추린다."
+  },
+  {
+   "step": "18. SNP와 INDEL 분리",
+   "tool": "gatk SelectVariants --select-type-to-include SNP / INDEL",
+   "in": "raw VCF",
+   "out": "SNP VCF, INDEL VCF",
+   "why": "종류별로 다른 필터를 적용하려고 나눈다."
+  },
+  {
+   "step": "19. 하드 필터",
+   "tool": "gatk VariantFiltration (QD, FS, MQ, MQRankSum, ReadPosRankSum, SOR) + bcftools view -f PASS",
+   "in": "SNP VCF",
+   "out": "FILTER 칼럼이 채워진 VCF, PASS만 모은 VCF + tabix 인덱스",
+   "why": "기준 미달 변이를 버린다. 통과하면 PASS, 못 통과하면 걸린 필터 이름이 찍힌다. 희귀 변이 탐색에서는 생략하기도 한다."
+  },
+  {
+   "step": "20. DB 다운로드 (annotation 준비)",
+   "tool": "annotate_variation.pl -downdb ... refGene clinvar humandb",
+   "in": "(없음) 인터넷의 ANNOVAR DB",
+   "out": "humandb 폴더의 DB 파일",
+   "why": "쓸 DB를 먼저 내려받아 두어야 annotation을 할 수 있다."
+  },
+  {
+   "step": "21. VCF를 avinput으로 변환",
+   "tool": "convert2annovar.pl -format vcf4",
+   "in": "VCF",
+   "out": ".avinput (탭 구분 텍스트)",
+   "why": "ANNOVAR가 읽기 쉬운 형식으로 바꾼다. --vcfinput으로 VCF를 바로 넣을 수도 있다."
+  },
+  {
+   "step": "22. Annotation",
+   "tool": "table_annovar.pl -protocol DB목록 -operation g,r,f",
+   "in": "VCF(또는 avinput) + humandb",
+   "out": "annotation 표 (refGene 위치, ClinVar 등)",
+   "why": "찾은 변이가 무슨 의미인지 DB와 연결한다. 실습에서는 시간이 오래 걸려 이론만 다뤘다."
+  }
+ ],
+ "quiz": [
+  {
+   "ch": "qc",
+   "type": "mc",
+   "q": "FastQC의 Per base sequence quality 그래프에서 노란 박스가 나타내는 것은?",
+   "choices": [
+    "Q 값의 중앙값",
+    "Q 값의 최솟값과 최댓값",
+    "Q 값의 25%에서 75%까지 구간",
+    "Q 값의 평균"
+   ],
+   "answer": 2,
+   "explain": "노란 박스는 25~75% 구간이고, 박스 안의 파란 선은 평균, 빨간 선은 중앙값이다.",
+   "src": "7주차 슬라이드 19쪽"
+  },
+  {
+   "ch": "qc",
+   "type": "mc",
+   "q": "인서트가 50bp로 짧은데 150사이클을 읽으면 read의 뒷부분에는 무엇이 나타나는가?",
+   "choices": [
+    "같은 서열의 PCR 복제본",
+    "샘플 바코드만 길게 반복",
+    "레퍼런스의 다음 위치 서열",
+    "어댑터 서열과 그 뒤의 노이즈"
+   ],
+   "answer": 3,
+   "explain": "인서트가 끝나면 기계는 어댑터를 읽고, 어댑터 뒤에도 길이가 남으면 노이즈를 읽는다. 그래서 어댑터 트리밍이 필요하다.",
+   "src": "6주차 녹취 약 35:33~38:30"
+  },
+  {
+   "ch": "qc",
+   "type": "ox",
+   "q": "어댑터를 자르지 않고 그대로 정렬한 데이터가 트리밍한 데이터보다 얼라인 비율이 더 높다.",
+   "answer": false,
+   "explain": "2012년 비교 논문에서 트리밍한 데이터의 얼라인 퍼센트가 훨씬 좋았다. 어댑터와 노이즈가 레퍼런스를 찾아가는 데 방해가 된다.",
+   "src": "6주차 녹취 약 1:19:34~1:20:41"
+  },
+  {
+   "ch": "qc",
+   "type": "mc",
+   "q": "2×150 페어드엔드로 읽고 R1과 R2가 약 50bp 겹칠 때, 합친 read의 대략적인 길이는?",
+   "choices": [
+    "약 150bp",
+    "약 300bp",
+    "약 250bp",
+    "약 350bp"
+   ],
+   "answer": 2,
+   "explain": "150 + 150에서 겹친 50을 한 번만 세어 약 250bp가 된다. 단순히 더한 300bp가 아니다.",
+   "src": "6주차 녹취 약 18:07~20:12"
+  },
+  {
+   "ch": "qc",
+   "type": "ox",
+   "q": "PEAR로 합쳐지지 않은(not assembled) read는 불량이므로 버려야 한다.",
+   "answer": false,
+   "explain": "overlap이 짧거나 조각이 너무 길어 합쳐지지 않은 read는 버리지 않고 따로 정렬해 추가 분석한다.",
+   "src": "6주차 녹취 약 1:10:16~1:11:19"
+  },
+  {
+   "ch": "align",
+   "type": "mc",
+   "q": "BWA가 BLAST보다 NGS 데이터를 훨씬 빠르게 정렬할 수 있는 핵심 이유는?",
+   "choices": [
+    "레퍼런스를 미리 인덱싱하고, seed로 후보 위치를 찾은 뒤 그 자리에서만 확장하기 때문",
+    "read 전체를 레퍼런스의 모든 위치와 한 글자씩 비교하기 때문",
+    "SAM 대신 FASTA를 바로 출력하기 때문",
+    "품질이 낮은 read를 모두 버리기 때문"
+   ],
+   "answer": 0,
+   "explain": "레퍼런스에 포스트잇(인덱스)을 붙여 두고, 짧은 seed로 후보 위치만 찾아 그 자리에서 extend하며 local alignment 점수로 확정한다.",
+   "src": "6주차 녹취 약 1:35:36~1:40:42, 7주차 슬라이드 54쪽"
+  },
+  {
+   "ch": "align",
+   "type": "mc",
+   "q": "다음 중 global alignment가 더 어울리는 상황은?",
+   "choices": [
+    "환자 DNA에서 SNP 한 개를 찾기",
+    "산에서 캔 식물이 어느 종인지 큰 그림으로 찾기",
+    "150bp read가 레퍼런스의 어느 위치인지 세밀히 확인하기",
+    "indel의 정확한 위치 찾기"
+   ],
+   "answer": 1,
+   "explain": "global은 숲(큰 그림), local은 나무(세밀한 부분)다. 교수가 든 예가 식물 종 판별이었다.",
+   "src": "6주차 녹취 약 1:13:29~1:14:30"
+  },
+  {
+   "ch": "align",
+   "type": "ox",
+   "q": "변이(SNP 등)를 찾는 분석에서는 주로 local alignment를 사용한다.",
+   "answer": true,
+   "explain": "특정 부분이 레퍼런스와 어떻게 다른지 세밀하게 보는 분석이라 local alignment를 많이 쓴다.",
+   "src": "6주차 녹취 약 1:13:29~1:14:30"
+  },
+  {
+   "ch": "align",
+   "type": "short",
+   "q": "BLAST의 풀네임을 영어로 쓰시오.",
+   "answer": "Basic Local Alignment Search Tool",
+   "alts": [
+    "basic local alignment search tool"
+   ],
+   "explain": "BLAST는 웹에서 바로 쓸 수 있는 전통적인 local alignment 도구다. NGS 데이터에는 너무 느려 BWA 같은 aligner가 나왔다.",
+   "src": "7주차 슬라이드 27쪽, 6주차 녹취 약 1:15:39"
+  },
+  {
+   "ch": "align",
+   "type": "ox",
+   "q": "인간 레퍼런스의 버전(hg19, hg38 등)이 달라도 변이 분석 결과는 항상 같다.",
+   "answer": false,
+   "explain": "어떤 레퍼런스 버전을 쓰느냐에 따라 변이 정보가 달라질 수 있어 유의해야 한다고 교수가 말했다.",
+   "src": "6주차 녹취 약 1:21:46"
+  },
+  {
+   "ch": "align",
+   "type": "mc",
+   "q": "레퍼런스 게놈을 담는 FASTA 파일에 들어 있지 않은 것은?",
+   "choices": [
+    "ID 줄",
+    "염기 서열",
+    "염기별 품질 점수",
+    "염색체별로 나뉜 서열"
+   ],
+   "answer": 2,
+   "explain": "FASTA는 ID와 서열만 있다. 레퍼런스는 이미 정리된 정답지라 품질 점수가 필요 없다. 품질 점수는 FASTQ의 네 번째 줄에 있다.",
+   "src": "6주차 녹취 약 1:21:46~1:22:49, 7주차 슬라이드 32쪽"
+  },
+  {
+   "ch": "align",
+   "type": "mc",
+   "q": "레퍼런스의 10%가 한 번도 읽히지 않았다면 이 데이터의 coverage는?",
+   "choices": [
+    "10%",
+    "90%",
+    "10x",
+    "90x"
+   ],
+   "answer": 1,
+   "explain": "coverage는 레퍼런스 중 한 번이라도 읽힌 비율이므로 90%다. x 단위는 depth에 쓴다.",
+   "src": "6주차 녹취 약 26:36, 7주차 슬라이드 10쪽"
+  },
+  {
+   "ch": "align",
+   "type": "mc",
+   "q": "실습 결과에서 매핑된 read가 8,592,476개, read 길이가 약 150bp, chr20 길이가 64,444,167bp일 때 평균 depth는 대략 얼마인가?",
+   "choices": [
+    "약 2x",
+    "약 20x",
+    "약 200x",
+    "약 99x"
+   ],
+   "answer": 1,
+   "explain": "depth = read 수 × read 길이 ÷ 레퍼런스 길이 = 8,592,476 × 150 ÷ 64,444,167 ≈ 20이고, 실제 coverage 파일의 meandepth는 19.96이었다. 99는 coverage(%)다.",
+   "src": "실습 PDF 28쪽, 7주차 슬라이드 10쪽"
+  },
+  {
+   "ch": "align",
+   "type": "ox",
+   "q": "depth가 높을수록 한 read의 시퀀싱 에러를 다른 read들이 보완해 주어 변이 판정이 더 정확해진다.",
+   "answer": true,
+   "explain": "100x에서 하나만 다르면 에러로 걸러 내지만, 2x에서 A 하나 T 하나면 판단할 수 없다. 교수가 반복한 핵심 메시지다.",
+   "src": "6주차 녹취 약 24:28~25:34, 7주차 녹취 약 1:32:00"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "CIGAR가 5M2I10M인 read의 길이는?",
+   "choices": [
+    "15",
+    "17",
+    "12",
+    "10"
+   ],
+   "answer": 1,
+   "explain": "read 길이 = M + I + S = 5 + 2 + 10 = 17이다. I는 read에만 있는 염기라 read 길이에 포함된다. 레퍼런스에서 차지하는 길이(M + D)는 15다.",
+   "src": "7주차 슬라이드 44쪽, 6주차 녹취 약 1:27:19~1:30:33"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "POS가 5이고 CIGAR가 3M1I3M1D5M인 read가 레퍼런스에서 마지막으로 놓이는 위치는?",
+   "choices": [
+    "15번",
+    "16번",
+    "17번",
+    "12번"
+   ],
+   "answer": 1,
+   "explain": "레퍼런스를 차지하는 길이는 M + D = 3 + 3 + 1 + 5 = 12칸이다. 5번부터 12칸이면 16번에서 끝난다. I는 레퍼런스에 없으므로 세지 않는다.",
+   "src": "7주차 슬라이드 45쪽, 6주차 녹취 약 1:29:19~1:30:33"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "CIGAR가 5S8M2D11M6S일 때 레퍼런스에서 차지하는 염기 수는?",
+   "choices": [
+    "30",
+    "21",
+    "19",
+    "27"
+   ],
+   "answer": 1,
+   "explain": "M + D = 8 + 2 + 11 = 21이다. S는 레퍼런스에 놓이지 않고 SEQ에만 남는 끝부분이다. 30은 read 길이(5+8+11+6)다.",
+   "src": "7주차 슬라이드 44쪽"
+  },
+  {
+   "ch": "sam",
+   "type": "ox",
+   "q": "CIGAR의 D(deletion)는 read에는 있고 레퍼런스에는 없는 염기를 뜻한다.",
+   "answer": false,
+   "explain": "반대다. D는 레퍼런스에는 있는데 read에는 없는 염기이고, read에만 있는 염기는 I(insertion)다.",
+   "src": "7주차 슬라이드 44쪽, 6주차 녹취 약 1:28:11"
+  },
+  {
+   "ch": "sam",
+   "type": "short",
+   "q": "CIGAR에서 soft clipping을 나타내는 문자 하나를 쓰시오.",
+   "answer": "S",
+   "alts": [
+    "s"
+   ],
+   "explain": "M은 정렬됨, I는 삽입, D는 결실, S는 soft clipping이다.",
+   "src": "6주차 녹취 약 1:28:11, 7주차 슬라이드 44쪽"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "SAM 파일의 FLAG가 16이면 무엇을 뜻하는가?",
+   "choices": [
+    "매핑되지 않음",
+    "PCR 중복으로 판정됨",
+    "forward 방향으로 매핑됨",
+    "reverse 방향으로 매핑됨"
+   ],
+   "answer": 3,
+   "explain": "FLAG 0은 forward 매핑, 16은 reverse 매핑, 4는 매핑 안 됨이다.",
+   "src": "6주차 녹취 약 1:24:57~1:25:53, 7주차 슬라이드 37~39쪽"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "SAM의 MAPQ가 60이라는 것은 무슨 뜻인가?",
+   "choices": [
+    "매핑이 틀렸을 확률이 약 10의 -6승이라 매우 잘 붙은 것",
+    "read의 60%만 레퍼런스와 일치",
+    "미스매치가 60개 있음",
+    "60번째 염색체에 매핑됨"
+   ],
+   "answer": 0,
+   "explain": "MAPQ도 Phred 스케일(-10 log10 P)이라 60이면 매핑이 틀렸을 확률이 10의 -6승이다. 점수가 높을수록 잘 붙은 것이다.",
+   "src": "7주차 녹취 약 1:45:44~1:46:00, 7주차 슬라이드 37쪽"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "SAM 태그가 MD:Z:38, NM:i:0이면 무엇을 뜻하는가?",
+   "choices": [
+    "MAPQ가 38이고 NM이 0",
+    "38염기 중 미스매치 0개, 전부 일치",
+    "38염기 중 미스매치 38개",
+    "38번 위치에서 deletion 발생"
+   ],
+   "answer": 1,
+   "explain": "MD는 미스매치 위치와 염기를, NM은 미스매치 개수를 알려 준다. 38은 연속 일치 38개, NM 0은 미스매치 없음이다.",
+   "src": "6주차 녹취 약 1:31:09~1:33:23, 7주차 슬라이드 46쪽"
+  },
+  {
+   "ch": "sam",
+   "type": "short",
+   "q": "'bwa mem ... | samtools sort' 에서 앞 프로그램의 결과를 저장하지 않고 곧바로 뒤 프로그램에 넘겨 주는 기호(명령어 연결 방식)의 이름은?",
+   "answer": "파이프",
+   "alts": [
+    "pipe",
+    "|",
+    "파이프(|)",
+    "파이프 (|)"
+   ],
+   "explain": "파이프로 SAM을 디스크에 저장하지 않고 바로 sorted BAM을 만든다. SAM이 매우 커서 저장하고 지우는 일을 피하고 메모리도 효율적으로 쓴다.",
+   "src": "6주차 녹취 약 1:58:28~1:59:37, 실습 PDF 27쪽"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "정렬된 BAM 파일 옆에 samtools index로 만드는 .bai 파일의 역할은?",
+   "choices": [
+    "VCF 파일의 인덱스",
+    "SAM 헤더의 백업",
+    "BAM 파일의 인덱스",
+    "레퍼런스 FASTA의 인덱스"
+   ],
+   "answer": 2,
+   "explain": ".bai는 BAM의 인덱스이고, 레퍼런스 FASTA의 인덱스는 .fai다. IGV에는 BAM과 BAI를 함께 올린다.",
+   "src": "7주차 녹취 약 25:34, 50:05, 실습 PDF 29쪽"
+  },
+  {
+   "ch": "sam",
+   "type": "mc",
+   "q": "SAM/BAM을 samtools sort로 정렬하는 이유로 가장 알맞은 것은?",
+   "choices": [
+    "품질 점수를 올리려고",
+    "어댑터를 제거하려고",
+    "파일 용량을 줄이려고",
+    "염색체·위치 순으로 줄 세워야 다음 단계(변이 호출)와 IGV가 제대로 동작하기 때문"
+   ],
+   "answer": 3,
+   "explain": "교수는 sort가 정리용이 아니라 다음 단계를 위한 필수 작업이라고 했다. 용량을 줄이는 것은 SAM에서 BAM으로 바꾸는 일이다.",
+   "src": "6주차 녹취 약 1:41:47~1:43:49, 7주차 슬라이드 56쪽"
+  },
+  {
+   "ch": "post",
+   "type": "mc",
+   "q": "MarkDuplicates에서 PCR 중복 read로 판정하는 기준은?",
+   "choices": [
+    "Chr·Position·CIGAR 정보가 일치한다 (시작점과 끝점이 같다)",
+    "MAPQ가 0이다",
+    "품질 점수가 Q30 미만이다",
+    "read 이름이 같다"
+   ],
+   "answer": 0,
+   "explain": "랜덤하게 자른 gDNA에서 시작점과 끝점이 우연히 같을 수는 없으므로 같은 것은 PCR 복제본으로 보고 하나만 남긴다.",
+   "src": "7주차 슬라이드 64쪽, 7주차 녹취 약 57:20"
+  },
+  {
+   "ch": "post",
+   "type": "mc",
+   "q": "MarkDuplicates 단계를 생략해도 되는 경우는?",
+   "choices": [
+    "depth가 30x 이상일 때",
+    "PCR로 특정 부위만 증폭한 amplicon(targeted) 데이터일 때",
+    "페어드엔드로 읽었을 때",
+    "레퍼런스가 hg38일 때"
+   ],
+   "answer": 1,
+   "explain": "amplicon은 원래 모든 read의 시작과 끝이 같으므로 중복 제거를 하면 거의 다 날아간다. 랜덤 fragmentation한 gDNA를 분석할 때 필요한 단계다.",
+   "src": "7주차 녹취 약 59:26~1:00:25"
+  },
+  {
+   "ch": "post",
+   "type": "ox",
+   "q": "실습에서 flagstat의 duplicates는 정렬 직후에는 0이었고, MarkDuplicates 뒤에는 1,542로 올라갔다.",
+   "answer": true,
+   "explain": "정렬 직후에는 아직 중복 판정 전이라 0이고, MarkDuplicates 뒤에 duplicates로 판정된 read 수가 나타난다.",
+   "src": "실습 PDF 32쪽, 7주차 녹취 약 1:13:36~1:14:34"
+  },
+  {
+   "ch": "post",
+   "type": "mc",
+   "q": "BQSR의 목적으로 가장 알맞은 것은?",
+   "choices": [
+    "변이의 질병 관련성을 DB로 찾는다",
+    "PCR 복제본을 제거한다",
+    "알려진 SNP DB를 참고해 품질 점수의 bias를 보정해, 에러를 진짜 변이로 오인하는 것을 줄인다",
+    "어댑터를 자른다"
+   ],
+   "answer": 2,
+   "explain": "BQSR는 dbSNP 같은 알려진 SNP를 정답지로 참고해 재보정 테이블을 만들고, 이를 적용해 BAM의 품질 점수를 다시 쓴다.",
+   "src": "7주차 슬라이드 65·66쪽, 7주차 녹취 약 1:03:34~1:06:27"
+  },
+  {
+   "ch": "post",
+   "type": "short",
+   "q": "BQSR의 풀네임을 영어로 쓰시오.",
+   "answer": "Base Quality Score Recalibration",
+   "alts": [
+    "base quality score recalibration"
+   ],
+   "explain": "염기(Base) 품질 점수(Quality Score)를 재보정(Recalibration)한다는 뜻이다.",
+   "src": "7주차 슬라이드 65·66쪽"
+  },
+  {
+   "ch": "post",
+   "type": "mc",
+   "q": "수업에서 설명한 분석 순서로 올바른 것은?",
+   "choices": [
+    "FASTQ → BWA 정렬 → HaplotypeCaller → BQSR → MarkDuplicates → ANNOVAR",
+    "FASTQ → MarkDuplicates → BWA 정렬 → QC → BQSR → HaplotypeCaller",
+    "FASTQ → ANNOVAR → HaplotypeCaller → BWA 정렬 → BQSR",
+    "FASTQ → QC → 트리밍 → BWA 정렬 → sort·index → MarkDuplicates → BQSR → HaplotypeCaller → 필터 → ANNOVAR"
+   ],
+   "answer": 3,
+   "explain": "FASTQ에서 BAM까지가 pre-processing, BAM에서 VCF까지가 variant discovery, 그 뒤가 annotation이다.",
+   "src": "7주차 녹취 약 54:59~55:59, 7주차 슬라이드 49·61·69쪽"
+  },
+  {
+   "ch": "variant",
+   "type": "mc",
+   "q": "VCF의 FORMAT 필드에서 GT가 0/0이면 무슨 뜻인가?",
+   "choices": [
+    "변이 없음 (레퍼런스와 같음)",
+    "두 염색체 모두 변이",
+    "한 염색체에만 변이",
+    "변이 호출 실패"
+   ],
+   "answer": 0,
+   "explain": "0은 레퍼런스 염기, 1은 ALT 염기를 뜻한다. 0/0은 변이 없음이고 0/1, 1/1이 변이 있음이다.",
+   "src": "7주차 녹취 약 1:29:57, 7주차 슬라이드 76·77쪽"
+  },
+  {
+   "ch": "variant",
+   "type": "mc",
+   "q": "다음 중 '변이가 있다'고 해석하는 GT를 모두 포함한 것은?",
+   "choices": [
+    "0/0과 0/1",
+    "0/1과 1/1",
+    "0/0과 1/1",
+    "0/0만"
+   ],
+   "answer": 1,
+   "explain": "0/1은 한 염색체만 ALT, 1/1은 두 염색체 모두 ALT이므로 둘 다 변이가 있다. 0/0은 변이가 없다.",
+   "src": "7주차 슬라이드 76·77쪽"
+  },
+  {
+   "ch": "variant",
+   "type": "mc",
+   "q": "VCF에서 REF가 ACG이고 ALT가 A인 변이의 종류는?",
+   "choices": [
+    "SNP",
+    "insertion",
+    "deletion (CG가 결실)",
+    "large structural variation"
+   ],
+   "answer": 2,
+   "explain": "ALT가 REF보다 짧으면 deletion이다. C→T는 SNP, C→CT는 insertion이다.",
+   "src": "7주차 녹취 약 1:28:54, 7주차 슬라이드 75쪽"
+  },
+  {
+   "ch": "variant",
+   "type": "short",
+   "q": "REF가 G이고 ALT가 A처럼 염기 하나가 바뀐 변이를 영문 약어 세 글자로 쓰시오.",
+   "answer": "SNP",
+   "alts": [
+    "SNV",
+    "snp",
+    "snv"
+   ],
+   "explain": "염기 하나가 다른 치환은 SNP(또는 SNV)다. 길이가 달라지면 insertion이나 deletion이다.",
+   "src": "7주차 녹취 약 1:28:54"
+  },
+  {
+   "ch": "variant",
+   "type": "mc",
+   "q": "GVCF 파일에서 NON_REF로 표시된 위치는 무슨 뜻인가?",
+   "choices": [
+    "확실한 변이가 있는 위치",
+    "레퍼런스와 완전히 같다고 확정된 위치",
+    "구조 변이가 있는 위치",
+    "coverage가 낮거나 read 품질이 낮아 변이인지 판단할 수 없는 위치"
+   ],
+   "answer": 3,
+   "explain": "GVCF는 모르는 위치까지 솔직하게 내뱉고, VCF는 확실한 변이만 낸다. 보통 GVCF를 먼저 만들고 GenotypeGVCFs로 VCF를 추린다.",
+   "src": "7주차 녹취 약 1:23:43~1:24:41, 7주차 슬라이드 74쪽"
+  },
+  {
+   "ch": "variant",
+   "type": "short",
+   "q": "GATK의 풀네임을 영어로 쓰시오.",
+   "answer": "Genome Analysis Toolkit",
+   "alts": [
+    "Genome Analysis Tool Kit",
+    "genome analysis toolkit"
+   ],
+   "explain": "GATK는 하버드와 MIT가 공동으로 만든 Broad Institute에서 개발한 변이 분석 도구 모음이다.",
+   "src": "7주차 슬라이드 71쪽, 7주차 녹취 약 1:16:42"
+  },
+  {
+   "ch": "variant",
+   "type": "mc",
+   "q": "GATK HaplotypeCaller가 가장 먼저 하는 일은?",
+   "choices": [
+    "변이가 몰린 active region을 설정한다",
+    "PCR 중복을 제거한다",
+    "품질 점수를 재보정한다",
+    "ClinVar로 질병 관련성을 찾는다"
+   ],
+   "answer": 0,
+   "explain": "전부 보기엔 너무 많으니 변이가 나올 것 같은 active region만 고르고, 그 안에서 PairHMM과 베이지안 모델로 높은 확률의 변이를 호출한다.",
+   "src": "7주차 슬라이드 71쪽, 7주차 녹취 약 1:16:42~1:17:50"
+  },
+  {
+   "ch": "variant",
+   "type": "ox",
+   "q": "Haplotype은 한 염색체 위에서 함께 유전되는 여러 변이(allele)의 조합이다.",
+   "answer": true,
+   "explain": "예를 들어 엄마 염색체는 A-C-G, 아빠 염색체는 G-T-G처럼 묶여 다닌다. 이 묶음 패턴에 맞는 read는 진짜 변이, 어긋나면 에러일 가능성이 높다.",
+   "src": "7주차 슬라이드 71쪽, 7주차 녹취 약 1:18:52~1:20:07"
+  },
+  {
+   "ch": "variant",
+   "type": "mc",
+   "q": "하드 필터를 적용한 VCF에서 FILTER 칼럼이 PASS인 변이는?",
+   "choices": [
+    "annotation이 끝난 변이",
+    "설정한 모든 필터 조건을 통과한 변이",
+    "매핑 품질(MQ)이 낮아 탈락한 변이",
+    "레퍼런스와 같은 위치"
+   ],
+   "answer": 1,
+   "explain": "통과하면 PASS이고, 못 통과하면 걸린 필터 이름이 찍힌다. 실습 화면의 MQ_filter는 MQ가 낮아 MQ 필터만 통과하지 못한 변이다.",
+   "src": "실습 PDF 36쪽, 7주차 녹취 약 1:44:47~1:45:44"
+  },
+  {
+   "ch": "variant",
+   "type": "ox",
+   "q": "진짜 희귀 변이를 찾을 때는 하드 필터를 쓰지 않고 분석하기도 한다.",
+   "answer": true,
+   "explain": "필터는 정확한 호출만 필요할 때 쓰고, 하나하나가 소중한 희귀 변이 탐색에서는 안 쓰기도 한다. 목적에 따라 파이프라인을 정하는 것이 바이오인포의 포인트다.",
+   "src": "7주차 녹취 약 1:43:40~1:44:47"
+  },
+  {
+   "ch": "annot",
+   "type": "short",
+   "q": "ANNOVAR의 풀네임을 영어로 쓰시오.",
+   "answer": "ANNOtate VARiation",
+   "alts": [
+    "annotate variation",
+    "Annotate Variation"
+   ],
+   "explain": "찾은 변이가 무슨 의미인지 DB와 연결해 주는 Perl 기반 프로그램이다.",
+   "src": "7주차 슬라이드 86쪽, 7주차 녹취 약 1:48:00"
+  },
+  {
+   "ch": "annot",
+   "type": "mc",
+   "q": "찾은 변이가 질병과 관련 있다고 알려졌는지(pathogenic, benign) 볼 때 쓰는 DB는?",
+   "choices": [
+    "1000 Genomes",
+    "dbNSFP",
+    "ClinVar",
+    "dbSNP"
+   ],
+   "answer": 2,
+   "explain": "dbSNP는 변이 이름, 1000 Genomes는 일반인에게 흔한지, dbNSFP는 단백질 기능에 영향을 주는지를 묻는 DB다. 교수는 우리가 관심 있는 건 ClinVar라고 했다.",
+   "src": "7주차 슬라이드 88쪽, 7주차 녹취 약 1:50:47~1:51:53"
+  },
+  {
+   "ch": "annot",
+   "type": "mc",
+   "q": "ANNOVAR의 annotation 방식 중 '특정 DB에 존재하는 변이인지' 확인하는 방식은?",
+   "choices": [
+    "Gene-based",
+    "Region-based",
+    "Allele-based",
+    "Filter-based"
+   ],
+   "answer": 3,
+   "explain": "Gene-based는 단백질 코딩 영역인지, Region-based는 전사인자 결합부위 같은 기능 영역인지, Filter-based는 특정 DB에 있는지를 본다.",
+   "src": "7주차 슬라이드 87쪽, 7주차 녹취 약 1:48:47~1:49:45"
+  },
+  {
+   "ch": "practice",
+   "type": "short",
+   "q": "정렬 결과(BAM)를 눈으로 확인하는 프로그램 IGV의 풀네임을 영어로 쓰시오.",
+   "answer": "Integrative Genomics Viewer",
+   "alts": [
+    "integrative genomics viewer"
+   ],
+   "explain": "sorted BAM과 BAI를 함께 올리면 read가 쌓인 모습, 회색 막대(depth), forward·reverse 화살표, 색칠된 미스매치를 볼 수 있다.",
+   "src": "7주차 슬라이드 57쪽, 실습 PDF 29·30쪽"
+  }
+ ],
+ "essay": [
+  {
+   "ch": "align",
+   "q": "BWA가 NGS read를 빠르게 정렬하는 원리를 BLAST와 비교해 설명하시오.",
+   "a": "얼라인먼트는 짧은 read가 레퍼런스(정답지)의 어느 위치에서 왔는지 맞추는 일이고, 변이 탐색에는 가장 비슷한 부분을 세밀하게 보는 local alignment를 쓴다. BLAST는 웹에서 쓰는 전통적인 local 도구이지만 NGS의 수억 개 read를 돌리면 몇 달이 걸려서, NGS가 등장한 2007년 이후 aligner가 100개 가까이 새로 나왔다. BWA는 레퍼런스를 책에 포스트잇을 붙이듯 미리 인덱싱해 두고(한 번만), read를 10~20bp의 짧은 seed로 쪼개 후보 위치를 찾은 뒤 그 자리에서만 확장(extend)하며 local alignment 점수로 최종 위치를 정한다. 150bp read를 30억 염기 전체와 비교하는 대신 인덱스가 알려 준 몇 곳만 세밀하게 보므로 빠르다. 실습에서는 bwa mem 결과를 samtools sort로 바로 넘겨(파이프) sorted BAM을 만들었다.",
+   "keys": [
+    "인덱싱(포스트잇)",
+    "seed-and-extend",
+    "local alignment",
+    "BLAST는 느림",
+    "레퍼런스 위치 맞추기"
+   ]
+  },
+  {
+   "ch": "qc",
+   "q": "FASTQ의 품질 확인(FastQC)부터 트리밍·페어드엔드 머지까지 각 단계를 하는 이유를 설명하시오.",
+   "a": "FastQC는 FASTQ의 염기 품질을 그래프로 보는 단계이며 Q30(정확도 99.9%)을 기준으로 삼는다. 정렬 도구는 염기 품질을 고려하지 않으므로 정렬 전에 점검해야 한다. 인서트가 read 길이보다 짧으면 기계가 어댑터와 그 뒤 노이즈까지 읽어 그래프 뒷부분이 급락하는데, 이때 cutadapt 같은 도구로 어댑터를 자르는 트리밍을 하고, 트리밍한 데이터가 얼라인율이 훨씬 높다는 2012년 비교 결과가 있다. 페어드엔드는 양쪽에서 150bp씩 읽고 약 50bp의 overlap으로 합쳐 약 250bp를 만들며(PEAR 머지), 더 길게 읽고 뒤쪽의 품질 저하를 반대쪽 read가 보완한다. 실습의 cutadapt 예에서는 50 read 중 32개(64%)에 어댑터가 있었고, 합쳐지지 않은 read는 버리지 않고 따로 정렬했다.",
+   "keys": [
+    "Q30 기준",
+    "어댑터 read-through와 노이즈",
+    "트리밍으로 얼라인율 상승",
+    "overlap으로 머지(2×150에서 약 250bp)",
+    "not assembled는 따로 정렬"
+   ]
+  },
+  {
+   "ch": "sam",
+   "q": "SAM/BAM 파일이 무엇인지 설명하고, CIGAR 문자열을 읽는 방법과 SAM을 BAM으로 바꿔 정렬하는 이유를 쓰시오.",
+   "a": "SAM은 FASTQ read를 레퍼런스에 정렬한 결과를 담은 파일로, 헤더 아래에 read마다 탭으로 구분된 11개 컬럼(QNAME, FLAG, RNAME, POS, MAPQ, CIGAR 등)이 한 줄씩 있다. CIGAR는 '숫자+문자'로 정렬 형태를 적은 것으로 M은 정렬됨, I는 read에만 있는 삽입, D는 레퍼런스에만 있는 결실, S는 soft clipping이다. POS가 5이고 CIGAR가 3M1I3M1D5M이면 레퍼런스 5번부터 3매치, 1삽입, 3매치, 1결실, 5매치로 붙었고 read 길이는 12, 레퍼런스 5~16번을 차지한다. SAM은 ASCII 텍스트라 31억 염기 규모에서는 용량이 매우 커서 이진 형태의 BAM으로 바꾸고, 염색체·위치순으로 정렬(sort)한 뒤 .bai 인덱스를 만들어야 변이 호출과 IGV 시각화가 가능하다. 실무에서는 bwa mem | samtools sort 한 줄로 SAM 저장 없이 sorted BAM을 만든다.",
+   "keys": [
+    "11개 컬럼",
+    "CIGAR의 M·I·D·S",
+    "POS와 CIGAR로 위치 해석",
+    "SAM은 텍스트(크다), BAM은 이진",
+    "sort와 index(.bai)"
+   ]
+  },
+  {
+   "ch": "post",
+   "q": "MarkDuplicates와 BQSR가 각각 왜 필요한지 설명하고, MarkDuplicates를 생략해도 되는 경우를 쓰시오.",
+   "a": "MarkDuplicates는 PCR 증폭으로 생긴 같은 조각의 복제본을 제거하는 단계로, 랜덤하게 자른 gDNA에서는 시작점과 끝점이 우연히 같을 수 없으므로 Chr·Position·CIGAR가 같으면 복제본으로 본다. 복제본을 두면 변이 비율이 부풀려져 실제 30%인 변이가 80%로 보여 말기로 오판할 수 있다. 실습에서는 flagstat의 duplicates가 0에서 1,542로 올라갔다. BQSR는 시퀀싱이 매긴 품질 점수의 bias 때문에 NGS 에러를 진짜 변이로 오인해 SNP가 너무 많아지는 문제를 막는 단계로, dbSNP 같은 알려진 SNP를 정답지로 참고해 재보정 테이블을 만들고(BaseRecalibrator) 적용한다(ApplyBQSR). PCR로 특정 부위만 증폭한 amplicon(targeted) 데이터는 원래 모든 read의 시작과 끝이 같으므로 MarkDuplicates를 생략한다.",
+   "keys": [
+    "PCR 복제본 제거",
+    "변이 비율 부풀림(30%가 80%)",
+    "amplicon은 생략",
+    "BQSR는 품질 점수 bias 보정",
+    "알려진 SNP DB(dbSNP)를 정답지로"
+   ]
+  },
+  {
+   "ch": "variant",
+   "q": "variant calling이 단순히 '레퍼런스와 다른 곳 찾기'가 아니라는 점을 HaplotypeCaller의 원리와 VCF의 GVCF·GT·depth 개념을 들어 설명하시오.",
+   "a": "Variant calling은 시퀀싱 결과를 레퍼런스와 비교해 다른 곳을 우선 변이로 가정한 뒤, 실제 변이일 확률을 계산해 확실한 것만 뽑는 과정이다. 다른 곳을 찾는 틀린 그림 찾기는 쉽지만 그중에는 NGS 에러가 섞여 있어서, 진짜 변이인지 가려내는 것이 핵심이다. GATK HaplotypeCaller는 변이가 몰린 active region을 정하고, 한 염색체에서 함께 유전되는 변이 조합인 haplotype을 기준으로 PairHMM과 베이지안 모델로 확률을 계산해 묶음에 맞는 read를 진짜 변이로 본다. 결과는 모르는 위치(NON_REF)까지 담은 GVCF를 먼저 만들고 GenotypeGVCFs로 확실한 변이만 담은 VCF를 추린다. VCF에서 GT가 0/0이면 변이 없음, 0/1이나 1/1이면 변이 있음이고, DP(depth)가 높을수록 GQ 같은 확신 수준이 올라가 정확도가 높아진다.",
+   "keys": [
+    "진짜 변이일 확률 계산",
+    "active region과 haplotype",
+    "PairHMM·베이지안",
+    "GVCF와 VCF의 차이",
+    "GT 0/0·0/1·1/1, DP"
+   ]
+  },
+  {
+   "ch": "annot",
+   "q": "variant annotation이 무엇이며 ANNOVAR가 변이를 해석하는 세 가지 방식과 대표 DB를 설명하시오.",
+   "a": "Annotation은 variant calling으로 찾은 변이가 어떤 의미를 가지는지 DB와 연결해 주는 단계이고, ANNOVAR(ANNOtate VARiation)가 대표 도구다. 변이 호출까지는 위치와 염기 변화만 알려 주므로, 그 변이가 유전자의 어디에 있고 질병과 관련 있는지 알려면 DB가 필요하다. 방식은 세 가지로, Gene-based는 단백질 코딩 영역의 변이인지, Region-based는 전사인자 결합부위 같은 특정 기능 영역의 변이인지, Filter-based는 특정 DB에 존재하는 변이인지 확인한다. 대표 DB는 dbSNP(변이 이름), 1000 Genomes(일반인에게 흔한가), dbNSFP(단백질 기능 영향), ClinVar(질병 관련, pathogenic 또는 benign)이며, 우리가 가장 관심 있는 것은 ClinVar다. 순서는 DB를 내려받고 VCF를 avinput으로 변환한 뒤 table_annovar.pl로 annotation하는 것이다.",
+   "keys": [
+    "변이의 의미를 DB와 연결",
+    "Gene·Region·Filter-based",
+    "dbSNP·1000 Genomes",
+    "ClinVar(질병 관련)",
+    "avinput 변환 후 table_annovar"
+   ]
+  }
+ ]
+}

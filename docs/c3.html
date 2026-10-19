@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NGS · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html">홈</a><a href="c0.html" class=on>공부</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="chhead"><span>3 / 9장</span><a href="index.html">목차</a></div><h2>NGS — 수억 조각을 동시에 읽는 기계</h2>
+<p class="lead">교수님이 시험 예시로 직접 말한 "<a class="w" href="words.html#w58" data-w="58">NGS</a>가 뭔가"가 바로 이 장이에요. NGS가 무엇인지, 옛날 방법과 무엇이 다른지, 왜 <a class="w" href="words.html#w71" data-w="71">Illumina</a>가 이겼는지를 배워요.</p>
+
+<h3>3-1. 시퀀싱이란, 그리고 왜 원리를 배우나</h3>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b><a class="w" href="words.html#w57" data-w="57">DNA 시퀀싱</a>(sequencing)</b>은 <a class="w" href="words.html#w3" data-w="3">DNA</a>의 A·T·G·C 글자가 어떤 순서로 이어져 있는지 읽어 내는 일이에요. 사람 <a class="w" href="words.html#w14" data-w="14">게놈</a>은 이런 글자가 약 30억 개예요.</p>
+</div>
+<p>교수님은 이 장을 "어디 가서 배우기 힘든 내용"이라고 했어요. 데이터가 어떻게 만들어지는지 알아야 분석이 쉽기 때문이에요.</p>
+<p>이상한 값이 나왔을 때 "왜 이러지" 하고 멈추지 않고, "만들어진 원리상 이건 기계 오류겠구나" 하고 판단할 수 있어요. 그래서 시험에도 원리가 나와요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>시퀀싱은 책의 글자를 한 글자씩 읽어 노트에 옮겨 적는 일과 같아요. 그런데 책이 30억 글자라서, 어떻게 빨리 읽느냐가 핵심 문제예요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>DNA 시퀀싱은 DNA를 구성하는 <a class="w" href="words.html#w8" data-w="8">염기</a>(A, T, G, C)의 서열을 읽어 내는 기술이다. 사람 게놈은 약 30억 <a class="w" href="words.html#w10" data-w="10">염기쌍</a>이며, 데이터가 생성되는 원리를 알아야 분석 결과의 오류를 판단할 수 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 시퀀싱이란 한 문장으로 무엇인가요?</summary>
+  <p>DNA의 A·T·G·C 글자 순서를 읽는 것이에요.</p>
+</details>
+
+<h3>3-2. NGS의 정의 — 이 문장을 외우세요</h3>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b>NGS(Next Generation Sequencing, 차세대 염기서열 분석)</b>는 DNA 조각들을 <b>유리판 위에 먼저 고정</b>해 놓고, 글자를 <b>하나씩 붙이면서(합성) 동시에 <a class="w" href="words.html#w69" data-w="69">형광</a> 사진을 찍어</b>(<a class="w" href="words.html#w61" data-w="61">Sequencing by Synthesis</a>, SBS) <b>수억~수십억 개 조각을 한꺼번에(병렬로)</b> 읽는 기술이에요. 그 덕분에 <b>비용이 확 떨어졌어요.</b></p>
+</div>
+<p>문장이 길어서 조각으로 나눠 볼게요. 핵심 단어는 네 개예요.</p>
+<ul>
+  <li><b>유리판에 고정</b> — 조각을 판 위에 먼저 박아 둬요.</li>
+  <li><b>합성(synthesis)하며 사진</b> — 글자를 하나씩 붙이는 동안 빛을 사진으로 찍어요.</li>
+  <li><b>병렬(parallel)</b> — 수억 조각을 동시에 읽어요. 줄을 서서 한 명씩 읽는 게 아니라 모두 한꺼번에 읽는 거예요.</li>
+  <li><b>비용 하락</b> — 한꺼번에 많이 읽으니 한 조각당 값이 크게 내려가요.</li>
+</ul>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>"<b>고정 → 합성하며 사진 → 동시에 수억 개 → 싸졌다</b>" 네 마디로 외우면 문장이 풀려요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>NGS(Next Generation Sequencing)는 유리 기판 위에 DNA <a class="w" href="words.html#w62" data-w="62">클러스터</a>를 먼저 고정하고, 염기를 하나씩 합성하면서 동시에 형광을 이미징하는 SBS 방식으로 수억~수십억 개의 DNA 조각을 병렬로 읽는 기술이다. 이로 인해 시퀀싱 비용이 크게 감소하였다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — NGS에서 "병렬"이란 무슨 뜻인가요?</summary>
+  <p>수억 개의 조각을 한 번에 동시에 읽는다는 뜻이에요.</p>
+</details>
+
+<h3>3-3. 옛날 방식(Sanger)과 NGS의 차이</h3>
+<p>NGS 이전에 쓰던 방법은 <b><a class="w" href="words.html#w59" data-w="59">Sanger</a>(생어) 시퀀싱</b>이에요. 먼저 Sanger가 어떻게 읽는지 쉬운 말로 볼게요. 세 단계예요.</p>
+<ul>
+  <li><b>증폭(Amplification)</b> — 읽을 DNA를 <a class="w" href="words.html#w27" data-w="27">PCR</a>(Polymerase Chain Reaction)로 많이 복사해요. PCR은 DNA용 복사기예요.</li>
+  <li><b>늘리기(Extension)</b> — 글자를 붙여 DNA를 늘려요. 형광이 달린 글자가 붙는 순간 멈춰서, 길이가 제각각인 조각이 많이 생겨요.</li>
+  <li><b>읽기(Detection)</b> — 가는 관(<a class="w" href="words.html#w60" data-w="60">캐필러리</a>)에 흘리면 짧은 조각이 먼저 지나가요. 끝 글자의 형광 색을 순서대로 읽으면 서열이 나와요.</li>
+</ul>
+<p>한 관에는 DNA 한 종류만 읽을 수 있어서 동시에 많이 읽기 어려워요. 관이 20개면 동시에 20종류가 한계예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p><b>Sanger</b>는 한 사람이 책을 한 줄씩 베껴 쓰는 것과 같아요. 관 하나에 한 종류만이라 동시에 약 20개예요.</p>
+  <p><b>NGS</b>는 책을 잘게 찢어 운동장에 수억 장 깔아 놓고, 드론이 위에서 한 글자씩 동시에 사진을 찍는 것과 같아요. 동시에 약 <b>10억(10⁹)개</b>예요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th style="width:22%"></th><th>Sanger</th><th>NGS</th></tr>
+  <tr><td>순서</td><td>늘리기(Extend) → 관에 정렬(Arrange) → 읽기(Detect)</td><td><b>먼저 판에 고정(Arrange)</b> → <b>늘리기와 읽기를 동시에</b></td></tr>
+  <tr><td>한 칸 크기</td><td>관 지름 약 1cm</td><td>점 하나 약 <b>7μm</b></td></tr>
+  <tr><td>동시에</td><td>관 1개당 1종류 (약 20개)</td><td>판 하나에 <b>약 10⁹개</b></td></tr>
+</table></div>
+<p>크기 차이도 놀라워요. 1cm는 10,000μm(마이크로미터)라서, 한 칸이 1,000배 넘게 작아요. 작으니까 한 판에 수억 개를 깔 수 있는 거예요.</p>
+<p class="small">참고로 교수님이 말로는 점 크기를 약 1μm라고도 했지만, 슬라이드 숫자인 7μm로 외우세요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p>NGS가 Sanger와 다른 핵심은 <b>순서를 바꾼 것</b>이에요. 다 만들어서 흘려보내는 대신, <b>판에 먼저 박아 놓고(Arrange) 그 자리에서 늘리면서(Extend) 동시에 사진(Detect)</b>을 찍어요.</p>
+</div>
+<figure class="slide"><img src="slides/n08.jpg"><figcaption>교수님 슬라이드 — Sanger(1 read/capillary) vs NGS(10⁹ reads/array)</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Sanger는 증폭, extension, 캐필러리를 통한 detection 순으로 진행되며 관 하나당 한 종류의 DNA만 읽어 병렬화가 어렵다. NGS는 기판에 DNA를 먼저 고정(arrangement)한 뒤 extension과 detection을 동시에 수행하며, 스팟이 μm 단위로 작아 약 10⁹개를 동시에 분석한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Sanger는 왜 많은 DNA를 한꺼번에 읽기 어려운가요?</summary>
+  <p>관 하나에 DNA 한 종류만 넣어 읽을 수 있고, 관의 크기도 약 1cm로 커서 많이 늘어놓을 수 없기 때문이에요.</p>
+</details>
+
+<h3>3-4. 비용이 얼마나 떨어졌나</h3>
+<p>사람 게놈 하나를 처음 읽은 일이 <b>휴먼 게놈 프로젝트(Human Genome Project, HGP)</b>예요. Sanger 방식으로 <b>1990년에 시작해 2003년에 끝났고, 13년과 30억 달러</b>가 들었어요.</p>
+<p>지금은 NGS로 한 사람의 게놈을 <b>약 200달러</b>에 읽어요. 30억 달러가 200달러가 됐으니 값이 약 1,500만 분의 1로 떨어진 거예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>나라 예산을 써서 13년 걸리던 일을, 이제는 개인이 몇십만 원 정도로 맡길 수 있게 된 거예요. 그래서 개인 맞춤형 분석이 가능해졌어요.</p>
+</div>
+<p>2007년쯤부터 게놈 하나를 읽는 비용이 컴퓨터 칩 발전 속도(무어의 법칙)보다 훨씬 가파르게 떨어졌어요. 교수님은 "스마트폰 발전보다 빠르다"고 표현했어요. 이 급락을 만든 기술이 Sanger에서 NGS로의 전환이에요.</p>
+<div class="tw"><table>
+  <tr><th style="width:22%">연도</th><th>사건</th></tr>
+  <tr><td>1977</td><td>Sanger 시퀀싱 등장</td></tr>
+  <tr><td>1990</td><td>휴먼 게놈 프로젝트 시작</td></tr>
+  <tr><td>2003</td><td>휴먼 게놈 프로젝트 완료 (13년, 30억 달러)</td></tr>
+  <tr><td>2005</td><td>시장 최초의 NGS 장비 GS20 (<a class="w" href="words.html#w72" data-w="72">454</a> Life Sciences)</td></tr>
+  <tr><td>2007경</td><td>NGS가 본격적으로 활발해짐, 여러 회사가 경쟁</td></tr>
+</table></div>
+<p class="small">※ 녹취에서 "3조"라고 말한 부분이 있는데 말실수예요. 강의 자료 기준 <b>30억 달러</b>가 맞아요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>휴먼 게놈 프로젝트는 1990년부터 2003년까지 13년간 약 30억 달러를 들여 Sanger 방식으로 수행되었다. NGS의 등장으로 현재는 개인 게놈을 약 200달러 수준에 분석할 수 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 휴먼 게놈 프로젝트의 기간과 비용은 얼마인가요?</summary>
+  <p>1990~2003년, 13년 동안 30억 달러가 들었어요(지금은 약 200달러).</p>
+</details>
+
+<h3>3-5. NGS가 읽는 원리 — SBS (Sequencing by Synthesis)</h3>
+<p>SBS는 "합성하면서 읽는다"는 뜻이에요. 두 단계로 기억하세요.</p>
+<p><b>첫째, <a class="w" href="words.html#w63" data-w="63">클론 증폭(Clonal amplification)</a></b>이에요. DNA 한 가닥이 내는 빛은 너무 약해서 사진에 안 잡혀요. 그래서 <b>같은 조각을 약 1,000개로 복사해 한 점에 모아</b> 빛을 키워요. 이 한 점을 <b>클러스터(cluster)</b>라고 해요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>혼자 손전등을 켜면 멀리서 안 보여요. 그래서 같은 반 친구 1,000명이 한곳에 모여 동시에 켜는 거예요.</p>
+</div>
+<p><b>둘째, 글자 붙이며 감지(Sensing)</b>예요. 한 <a class="w" href="words.html#w70" data-w="70">사이클</a>(한 바퀴)마다 글자 하나를 붙이고 <b>형광 사진</b>을 한 장 찍어요. 글자마다 빛 색이 달라서 색을 보면 무슨 글자인지 알아요. 이 바퀴를 약 150번 돌려요.</p>
+<p>같은 점의 색을 사진마다 이어서 읽으면 그 조각의 글자 순서가 나와요. 아래 표에서 점 ①은 1회 A, 2회 C, 3회 G, 4회 T라서 ACGT…로 읽혀요.</p>
+<p class="small" style="text-align:center"><b>사이클마다 사진 한 장 → 같은 점의 색을 이어 읽으면 서열</b></p>
+<div class="tw"><table class="seq">
+    <tr><td class="lb"></td><td class="lb">1회</td><td class="lb">2회</td><td class="lb">3회</td><td class="lb">4회</td><td class="lb"> </td><td class="lb">읽은 결과</td></tr>
+    <tr><td class="lb">점 ①</td><td class="g">A</td><td class="x">C</td><td class="m">G</td><td class="e">T</td><td></td><td class="lb" style="text-align:left"><b>ACGT…</b></td></tr>
+    <tr><td class="lb">점 ②</td><td class="m">G</td><td class="m">G</td><td class="g">A</td><td class="x">C</td><td></td><td class="lb" style="text-align:left"><b>GGAC…</b></td></tr>
+    <tr><td class="lb">점 ③</td><td class="e">T</td><td class="g">A</td><td class="g">A</td><td class="m">G</td><td></td><td class="lb" style="text-align:left"><b>TAAG…</b></td></tr>
+  </table></div>
+<p class="small" style="text-align:center">글자마다 형광 색이 달라서 사진 색으로 글자를 알아요 (색은 설명용)</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>운동장의 수억 개 전구가 한 번 켜질 때마다 색이 달라요. 드론이 매번 사진을 찍어 두면, 전구마다 "빨강, 초록, 파랑…" 하는 색 순서가 곧 그 조각의 글자 순서예요.</p>
+</div>
+<p>왜 150번쯤에서 멈출까요. 사이클을 반복할수록 먼지나 형광 물질이 끼어 점이 지저분해지고, 색을 헷갈리는 잡음이 쌓이기 때문이에요. 그래서 한 번에 읽는 길이가 짧아요.</p>
+<figure class="slide"><img src="slides/n11.jpg"><figcaption>교수님 슬라이드 — Sequencing by synthesis: 1.Arrange 2.Extend 3.Detect, Cycle 1·2·3</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>SBS는 두 단계로 이루어진다. 먼저 클론 증폭으로 같은 DNA 약 1,000개를 한 클러스터에 모아 형광 신호를 키운다. 이후 사이클마다 염기 하나를 합성하며 형광을 이미징하고, 이를 약 150회 반복해 각 클러스터의 염기서열을 얻는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 같은 조각을 약 1,000개로 복사해 한 점에 모으는 이유는 무엇인가요?</summary>
+  <p>DNA 한 가닥의 형광은 너무 약해서, 같은 조각을 모아 신호를 키워야 사진에 잡히기 때문이에요.</p>
+</details>
+
+<h3>3-6. 용어 두 개 — read length와 throughput</h3>
+<p><b><a class="w" href="words.html#w73" data-w="73">Read</a>(리드)</b>는 기계가 한 번에 읽은 조각 하나예요. <b><a class="w" href="words.html#w74" data-w="74">Read length</a></b>는 그 조각의 길이이고, Illumina는 약 150, Roche는 약 700이에요.</p>
+<p><b><a class="w" href="words.html#w75" data-w="75">Throughput</a>(처리량)</b>은 한 번 돌릴 때 읽는 DNA의 총량이에요. 판 위에 박아 둔 점이 많을수록 커요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>read length는 한 번에 외우는 문장의 길이이고, throughput은 하루에 외우는 문장의 총 개수예요. 문장이 짧아도 훨씬 많이 외우는 사람이 총량으로는 이겨요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>read length는 한 번에 읽는 염기서열의 길이이고, throughput은 한 번의 실행에서 생산하는 총 염기서열 양이다. Illumina는 read length가 약 150으로 짧지만 throughput이 매우 크다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Illumina는 read length와 throughput 중 어느 쪽이 강점인가요?</summary>
+  <p>throughput(처리량)이에요. 짧게 읽는 대신 아주 많이 읽어요.</p>
+</details>
+
+<h3>3-7. Roche vs Illumina — 왜 Illumina가 이겼나</h3>
+<p>NGS 초기에는 여러 회사가 경쟁했어요. 그중 처음 시장에 나온 Roche(454)와 지금 시장을 차지한 Illumina를 비교해요. 두 회사의 차이는 "복사하는 방법"과 "읽는 방법"이에요.</p>
+<div class="tw"><table>
+  <tr><th style="width:24%"></th><th>Roche (454)</th><th>Illumina</th></tr>
+  <tr><td>복사 방법</td><td><b><a class="w" href="words.html#w64" data-w="64">Emulsion PCR</a></b><br><span class="small">기름 속 물방울 안 구슬에서 복사</span></td><td><b><a class="w" href="words.html#w65" data-w="65">Bridge PCR</a></b><br><span class="small">유리판 위에서 다리처럼 휘어 복사</span></td></tr>
+  <tr><td>읽는 방법</td><td><b><a class="w" href="words.html#w67" data-w="67">SNA</a></b><br><span class="small">글자를 한 종류씩 흘려보내고 빛 ON/OFF</span></td><td><b><a class="w" href="words.html#w68" data-w="68">CRT</a></b><br><span class="small">4글자에 다른 색 붙여 한 번에 흘리고, 찍고, 색 잘라내고 반복</span></td></tr>
+  <tr><td>한 번에 읽는 길이</td><td><b>~700</b> (더 김)</td><td>~150</td></tr>
+  <tr><td>에러</td><td>1%</td><td><b>0.1%</b></td></tr>
+  <tr><td>처리량</td><td>~100만 reads</td><td><b>~30억 reads</b></td></tr>
+  <tr><td>1Gb당 비용</td><td class="red">$9,500</td><td class="grn">$7</td></tr>
+</table></div>
+<p>복사 방법부터 볼게요. 복사본이 서로 섞이면 색이 뒤엉켜 읽을 수 없으니 점끼리 분리하는 게 중요해요. Roche는 <b>기름 속 물방울</b> 하나에 구슬 하나와 DNA 하나를 넣어 복사하고(Emulsion PCR), Illumina는 <b>유리판에서 DNA가 다리(bridge)처럼 휘어</b> 가까운 곳에서만 복사해요(Bridge PCR).</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>기름 방울 = Emulsion(Roche), 다리 = Bridge(Illumina)</b>로 연결하세요.</p>
+</div>
+<p>읽는 방법도 달라요. <b>SNA</b>(Single Nucleotide Addition)는 A만, 다음엔 T만 하는 식으로 글자를 한 종류씩 흘려보내고 빛이 켜지는지만 봐요. <b>CRT</b>(Cyclic Reversible Termination)는 4글자에 서로 다른 색을 달아 한 번에 흘리고, 사진을 찍은 뒤 색을 잘라 내고 다음 바퀴를 돌려요.</p>
+<p>교수님은 두 이름까지 외울 필요는 없고 원리만 알면 된다고 했어요. "한 종류씩 흘려 빛을 본다"와 "한꺼번에 흘리고 색으로 구분한다"를 구별하면 돼요. 참고로 Roche의 주된 에러는 글자가 빠지거나 끼는 삽입·결실(<a class="w" href="words.html#w53" data-w="53">indel</a>)이고, Illumina는 글자가 바뀌는 치환(substitution)이에요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Roche(454)는 Emulsion PCR로 클론을 만들고 SNA 방식으로 염기별 빛의 ON/OFF를 검출한다. Illumina는 <a class="w" href="words.html#w66" data-w="66">flow cell</a>에서 Bridge PCR로 클러스터를 만들고, 서로 다른 형광을 단 4종 염기를 CRT 방식으로 붙여 이미징한 뒤 형광을 절단하는 과정을 약 150회 반복한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Emulsion PCR과 Bridge PCR 중 유리판 위에서 하는 것은 어느 쪽인가요?</summary>
+  <p>Bridge PCR(Illumina)이에요. Emulsion PCR(Roche)은 기름 속 물방울 안에서 해요.</p>
+</details>
+
+<h3>3-8. 승부를 가른 것은 비용</h3>
+<p>표를 보면 읽는 길이와 속도는 Roche가 더 좋아요. 그런데도 Illumina가 이긴 이유가 시험 단골 질문이에요.</p>
+<p>정답은 <b>비용</b>이에요. 처리량이 약 100만 reads 대 30억 reads로 압도적으로 커서, 1Gb(<a class="w" href="words.html#w76" data-w="76">기가베이스</a>, 글자 10억 개)당 값이 Roche는 $9,500, Illumina는 $7로 <b>1,000배 이상</b> 차이가 났어요.</p>
+<div class="paper"><svg viewBox="0 0 380 70">
+    <text x="0" y="20" font-size="12" fill="#1b2333">Roche</text><rect x="58" y="8" width="300" height="16" rx="3" fill="#d6264a"/><text x="350" y="21" font-size="11" text-anchor="end" fill="#fff" font-weight="bold">$9,500</text>
+    <text x="0" y="52" font-size="12" fill="#1b2333">Illumina</text><rect x="58" y="40" width="2" height="16" fill="#0f7a4f"/><text x="66" y="53" font-size="11" fill="#0f7a4f" font-weight="bold">$7  ← 1,000배 이상 쌈</text>
+  </svg></div>
+<div class="box eg"><span class="t">비유</span>
+  <p>교수님 논리는 이래요. 연구자는 국가 연구비로 연구하니까, 시퀀싱이 1,000만 원이냐 100만 원이냐 앞에서는 3일이 걸리고 150글자밖에 못 읽어도 100만 원짜리를 골라요. 에러가 적은 것도 좋은 점이지만 핵심은 아니었어요.</p>
+</div>
+<p>그 결과 Roche는 <b>2016년에 문을 닫았고</b>, Illumina는 시장 점유율 약 70%를 차지해요. 교수님의 결론은 한 문장이에요.</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>"기술 혁신은 결국 비용과 연결된다."</b> Illumina는 매년 새 기기를 내며 처리량을 올리고 가격을 낮춰요.</p>
+</div>
+<figure class="slide"><img src="slides/n20.jpg"><figcaption>교수님 슬라이드 — Roche "Shut down in 2016", Cost per Gb $9,500 vs $7</figcaption></figure>
+<figure class="slide"><img src="slides/n15.jpg"><figcaption>교수님 슬라이드 — Bridge PCR: 유리판(flow cell) 위 클러스터 만들기</figcaption></figure>
+<figure class="slide"><img src="slides/n18.jpg"><figcaption>교수님 슬라이드 — CRT: ①글자 붙이기 ②사진 찍기 ③형광 잘라내기 → 반복</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Illumina가 시장을 차지한 가장 큰 이유는 비용이다. Roche(454)는 read length(약 700 대 150)가 길었지만, Illumina는 처리량이 약 3B reads로 압도적이어서 Cost per Gb가 $7로 Roche의 $9,500보다 1,000배 이상 낮았다. Roche는 2016년 문을 닫았고, 이는 기술 혁신이 비용과 연결됨을 보여 준다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Roche가 읽는 길이는 더 길었는데 왜 졌나요?</summary>
+  <p>Illumina가 한 번에 훨씬 많이 읽어서 1Gb당 값이 $7로 Roche($9,500)보다 1,000배 이상 쌌기 때문이에요.</p>
+</details>
+
+<div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>NGS는 DNA 조각을 판에 고정해 놓고 글자를 붙이며 동시에 사진을 찍어(SBS) 수억 개를 한꺼번에 읽는 기술이에요.</li>
+    <li>Sanger는 관 하나에 한 종류(약 20개)였고, NGS는 약 10⁹개를 동시에 읽어 게놈 비용이 30억 달러에서 약 200달러로 떨어졌어요.</li>
+    <li>Illumina(Bridge PCR, CRT)가 Roche(Emulsion PCR, SNA)를 이긴 이유는 비용($7 대 $9,500)이고, 결론은 "기술 혁신은 비용과 연결된다"예요.</li>
+  </ul>
+</div>
+<div class="done"><button class="go ghost" id="markread" data-ch="c3" type="button">다 읽었어요 ✓</button><a class="go" href="quiz.html#c3">이 장 문제 풀기</a><div class="pn"><a href="c2.html"><b>← 이전</b>바이오 기초</a><a class="next" href="c4.html"><b>다음 →</b>FASTQ와 품질 점수</a></div></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
