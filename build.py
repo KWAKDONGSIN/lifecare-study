@@ -4,6 +4,9 @@ import hashlib, html, json, os, re, shutil
 HERE = os.path.dirname(os.path.abspath(__file__))
 C = os.path.join(HERE, "content")
 OUT = os.path.join(HERE, "docs")
+# 폰 브라우저가 예전 CSS/JS를 붙잡지 않게, 파일 내용이 바뀌면 주소 뒤 버전도 바뀐다
+VER = hashlib.md5(b"".join(open(os.path.join(HERE, "assets", f), "rb").read() for f in ("style.css", "app.js"))
+                  + open(os.path.join(HERE, "content", "easy", "easy_data.json"), "rb").read()).hexdigest()[:8]
 
 CHS = [  # (id, 제목, 한 줄 설명, 문제 그룹, 자료 출처 — 바탕화면 '라이프케어' 폴더 파일 이름 기준)
     ("c0", "왕초보 생명 기초", "세포 · DNA · 유전자 · 단백질 — 생물 처음이면 여기부터", ["basic"], "2주차 · 2. 기본생물학.pdf · 라이프02"),
@@ -18,7 +21,7 @@ CHS = [  # (id, 제목, 한 줄 설명, 문제 그룹, 자료 출처 — 바탕�
     ("c9", "실습 따라가기", "명령 하나하나가 파이프라인의 어디인지", ["practice"], "3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf"),
 ]
 GROUPS = {g for c in CHS for g in c[3]}
-NAV = [("index.html", "보드"), ("quiz.html", "퀴즈"), ("essay.html", "서술형"),
+NAV = [("index.html", "보드"), ("bplus.html", "B+코스"), ("quiz.html", "퀴즈"), ("essay.html", "서술형"),
        ("cards.html", "암기카드"), ("words.html", "낱말사전"), ("cheat.html", "시험 전 1장")]
 VOID = {"br", "img", "meta", "link", "hr", "input", "source", "wbr", "col", "area", "base", "embed", "param", "track"}
 SKIP = {"svg", "code", "h1", "h2", "h3", "summary", "figcaption", "a", "button", "script", "style", "th"}
@@ -37,7 +40,7 @@ def page(fname, title, body, active, scripts=""):
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{html.escape(title)} · 라이프케어 시험공부</title>
 <meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v={VER}">
 </head>
 <body>
 <header class="top"><div class="top-in">
@@ -47,7 +50,7 @@ def page(fname, title, body, active, scripts=""):
 <main>
 {body}
 </main>
-{scripts}<script src="assets/app.js"></script>
+{scripts}<script src="assets/app.js?v={VER}"></script>
 </body>
 </html>
 """
@@ -187,7 +190,7 @@ def main():
     open(os.path.join(OUT, ".nojekyll"), "w").close()
     wjs = json.dumps([{"term": w["term"], "en": w.get("en", ""), "easy": w["easy"]} for w in words], ensure_ascii=False)
     open(os.path.join(OUT, "assets", "words.js"), "w", encoding="utf-8").write("window.WORDS=" + wjs + ";\n")
-    wscript = '<script src="assets/words.js"></script>\n'
+    wscript = f'<script src="assets/words.js?v={VER}"></script>\n'
 
     def write(fname, title, body, active, scripts=""):
         open(os.path.join(OUT, fname), "w", encoding="utf-8").write(page(fname, title, body, active, scripts))
@@ -246,6 +249,7 @@ def main():
     start = f"""<section class="col kS" id="start"><div class="colhead"><b>시작하기</b><small>먼저 이 칸부터</small></div>
 <div class="post note"><b>10/20(화) 12:30 중간고사</b><span id="dday">종이 시험 · 서술형+단답형</span><span>범위: 기본생물학 → NGS → FASTQ부터 variant calling까지. 코딩 문제 없음.</span></div>
 <div class="post note"><b>쓰는 법</b><span>① 카드를 누르면 크게 열려요 ② 밑줄 친 낱말을 누르면 쉬운 뜻 ③ 옆으로 밀면 다음 장 칸 ④ 장 끝에서 "문제 풀기"</span></div>
+<a class="post bplus" href="bplus.html"><b>★ 시간 없으면 여기만: B+ 최단 코스</b><span>약 2시간 · 핵심 카드 21장 · 약어 15 · 서술형 6 · 핵심 문제</span></a>
 <a class="post go2" href="c0-01.html"><b>▶ 0장 첫 카드부터 시작</b><span>생물 처음이면 여기부터 순서대로</span></a>
 <details class="post note"><summary><b>교수님 시험 힌트 (7주차)</b></summary><ul><li>"NGS가 뭔가" 같은 개념 설명</li><li>"GATK가 이니셜이 뭔가" — 약어 풀네임</li><li>디테일은 빼고 자주 나온 쉬운 개념</li><li>바이오 기초 · 파이프라인 순서와 이유 · NGS 개념</li></ul></details>
 <details class="post note"><summary><b>자료 확인 — 바탕화면 파일과 주차</b></summary><p class="small">바탕화면 '라이프케어' 폴더 18개 파일이 이 사이트에 쓴 자료와 내용까지 같아요. 녹취 번호는 03 다음부터 하나씩 밀려 있어요.</p><div class="tw"><table><tr><th>파일</th><th>실제</th><th>같이 본 자료</th></tr>{ftab}</table></div><p class="small muted">1주차(오리엔테이션) 녹취는 이 폴더엔 없어요. 수업계획서는 평가 비율(중간 25%)만 썼어요.</p></details>
@@ -275,10 +279,14 @@ def main():
         if q["id"] not in seen:
             seen.add(q["id"]); uq.append(q)
     keep = ("id", "ch", "type", "q", "choices", "answer", "alts", "explain", "src")
+    core_kw = ["NGS", "Sanger", "Illumina", "Roche", "Phred", "Q30", "FASTQ", "depth", "Depth", "coverage", "WGS", "WES", "Targeted",
+               "페어드", "CIGAR", "MarkDuplicates", "BQSR", "GT", "VCF", "GATK", "HaplotypeCaller", "전사", "번역", "침묵", "넌센스",
+               "미스센스", "메틸화", "풀네임", "ClinVar", "얼라인", "BWA", "트리밍", "어댑터", "Sequencing by Synthesis"]
+    core = [q["id"] for q in uq if any(k in q["q"] for k in core_kw)]
     qjs = json.dumps([{k: q[k] for k in keep if k in q} for q in uq], ensure_ascii=False).replace("</", "<\\/")
     cjs = json.dumps([{"id": c[0], "title": c[1], "groups": c[3]} for c in CHS], ensure_ascii=False)
     write("quiz.html", "퀴즈", '<h1>퀴즈</h1><div id="quiz"><noscript><p>퀴즈는 자바스크립트가 필요해요. 서술형·암기카드 페이지는 없이도 돼요.</p></noscript></div>',
-          "quiz.html", f"<script>window.QUIZ={qjs};window.CHS={cjs};</script>\n")
+          "quiz.html", f"<script>window.QUIZ={qjs};window.CHS={cjs};window.CORE={json.dumps(core)};</script>\n")
 
     # 서술형
     essays = list(base["essay"])
@@ -312,7 +320,12 @@ def main():
     cheat = link_words(webify(pdf_section(9)) + '<h2 style="margin-top:30px">헷갈리는 숫자</h2>' + memo + webify(pdf_section(11)), rx, idx)
     write("cheat.html", "시험 전 1장", cheat, "cheat.html", wscript)
 
-    print(f"장 {len(CHS)} · 문제 {len(uq)} · 서술형 {len(essays)} · 낱말 {len(words)} · 약어 {len(base['abbr'])} → {OUT}")
+    # B+ 최단 코스
+    bp = open(os.path.join(C, "bplus.html"), encoding="utf-8").read()
+    bp = link_words(webify(re.sub(r"^\s*<!--.*?-->\s*", "", bp, flags=re.S)), rx, idx)
+    write("bplus.html", "B+ 최단 코스", bp, "bplus.html", wscript)
+
+    print(f"장 {len(CHS)} · 핵심문제 {len(core)} · 문제 {len(uq)} · 서술형 {len(essays)} · 낱말 {len(words)} · 약어 {len(base['abbr'])} → {OUT}")
 
 
 if __name__ == "__main__":

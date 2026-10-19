@@ -133,5 +133,6 @@
   }
   var h = location.hash.slice(1);
   var hc = window.CHS.filter(function (c) { return c.id === h; })[0];
-  if (hc) start(shuffle(window.QUIZ.filter(function (q) { return inCh(q, hc.id); })), hc.title + ' 문제'); else menu();
+  if (h === 'core' && window.CORE) start(shuffle(window.QUIZ.filter(function (q) { return window.CORE.indexOf(q.id) >= 0; })).slice(0, 30), 'B+ 핵심 문제');
+  else if (hc) start(shuffle(window.QUIZ.filter(function (q) { return inCh(q, hc.id); })), hc.title + ' 문제'); else menu();
 })();

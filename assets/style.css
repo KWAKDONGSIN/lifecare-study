@@ -193,3 +193,12 @@ details.post table{font-size:12.5px}
 .crumb a{font-weight:700;text-decoration:none;color:var(--ink)}
 .crumb span{color:var(--muted);text-align:right}
 @media (min-width:900px){.board{margin:0;padding:4px 0 24px}.col{flex-basis:300px}}
+
+/* B+ 최단 코스 */
+.post.bplus{background:var(--T);color:#fff}
+.post.bplus span{color:#fff;opacity:.92}
+ol.must{padding-left:24px}
+ol.must li{margin:7px 0;font-size:16.5px}
+ol.must a{font-weight:700;color:var(--ink)}
+ol.must i{font-style:normal;font-size:12px;font-weight:800;color:#fff;background:var(--T);border-radius:999px;padding:1px 8px;margin-left:4px}
+h2 .small{font-weight:600}

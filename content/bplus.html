@@ -1,0 +1,105 @@
+<!-- B+ 최단 코스 — 남은 시간이 적을 때 시험에 나올 것만 골라 순서대로 공부하는 페이지 -->
+<h1>B+ 최단 코스</h1>
+<p class="lead">시간이 없을 때 이것만 하세요. 교수님이 말한 "개념 설명 · 약어 풀네임 · 파이프라인 로직"만 골랐어요. <b>전부 해도 약 2시간</b>이고, 위에서부터 순서대로 하면 돼요.</p>
+
+<div class="box exam"><span class="t">B+ 전략 한 줄</span>
+<p>단답형(약어·숫자)은 <b>다 맞히고</b>, 서술형은 <b>"정의 → 왜 → 숫자" 3문장</b>으로 빈칸 없이 쓴다. 이 둘이면 B+ 충분해요.</p></div>
+
+<h2>① 파이프라인 한 줄 외우기 <span class="muted small">15분</span></h2>
+<p>시험지 받으면 여백에 이걸 먼저 써요. 서술형 절반이 여기서 나와요.</p>
+<div class="box tip"><span class="t">그대로 외우기</span>
+<p class="big">FASTQ → QC → 트리밍 → 얼라인먼트(BWA) → BAM → MarkDuplicates → BQSR → Variant calling(HaplotypeCaller) → VCF → Annotation(ANNOVAR)</p></div>
+<div class="tw"><table>
+<tr><th>단계</th><th>왜 하나 (한 줄)</th></tr>
+<tr><td>QC (FastQC)</td><td>읽은 데이터가 쓸 만한지 확인 (Q30 기준)</td></tr>
+<tr><td>트리밍 (cutadapt)</td><td>어댑터·저품질 부분을 잘라낸다</td></tr>
+<tr><td>얼라인먼트 (BWA)</td><td>짧은 조각을 레퍼런스의 제자리에 맞춘다</td></tr>
+<tr><td>MarkDuplicates</td><td>PCR 복사본을 빼서 변이 비율이 부풀지 않게</td></tr>
+<tr><td>BQSR</td><td>기계 품질 점수의 치우침을 바로잡아 에러를 변이로 착각하지 않게</td></tr>
+<tr><td>Variant calling</td><td>다른 곳 중 <b>진짜 변이일 확률이 높은 것만</b> 고른다</td></tr>
+<tr><td>Annotation</td><td>찾은 변이가 무슨 뜻인지 DB(ClinVar 등)와 연결</td></tr>
+</table></div>
+<p class="small muted">FASTQ→BAM = 전처리, BAM→VCF = 변이 발견. 교수님 문장 — "틀린 그림 찾기는 쉽다. 진짜 변이인지 계산하는 게 중요하다."</p>
+
+<h2>② 핵심 카드만 읽기 <span class="muted small">45분</span></h2>
+<p>아래 카드만 순서대로 누르세요. 각 카드의 빨간 <b>"시험엔 이렇게 써요"</b> 칸을 꼭 소리 내어 읽으세요.</p>
+<ol class="must">
+<li><a href="c3-02.html">NGS의 정의 — 이 문장을 외우세요</a> <i>1순위</i></li>
+<li><a href="c3-03.html">Sanger와 NGS의 차이</a></li>
+<li><a href="c3-07.html">Roche vs Illumina — 왜 Illumina가 이겼나</a> <i>단골</i></li>
+<li><a href="c4-01.html">FASTQ는 어떤 파일인가 (4줄)</a></li>
+<li><a href="c4-02.html">Phred 품질 점수 — Q30 = 99.9%</a></li>
+<li><a href="c5-01.html">depth · coverage 용어</a> <i>매 시간 반복</i></li>
+<li><a href="c5-03.html">왜 depth가 높아야 할까</a></li>
+<li><a href="c5-05.html">WGS · WES · Targeted</a></li>
+<li><a href="c5-06.html">싱글엔드 vs 페어드엔드</a></li>
+<li><a href="c6-03.html">뒤로 갈수록 품질이 떨어지는 이유</a> <i>서술형 단골</i></li>
+<li><a href="c6-06.html">얼라인먼트란</a></li>
+<li><a href="c6-11.html">CIGAR 읽기 (M·I·D·S)</a> <i>매 시간 반복</i></li>
+<li><a href="c7-02.html">MarkDuplicates — 왜 빼나</a></li>
+<li><a href="c7-03.html">BQSR — 왜 하나</a></li>
+<li><a href="c7-04.html">Variant calling — 진짜 변이 고르기</a></li>
+<li><a href="c7-06.html">GVCF vs VCF</a></li>
+<li><a href="c7-08.html">VCF의 GT 0/0 · 0/1 · 1/1</a></li>
+<li><a href="c2-02.html">센트럴 도그마 (전사 · 번역)</a></li>
+<li><a href="c2-07.html">점 돌연변이 3종 (침묵 · 넌센스 · 미스센스)</a> <i>단골</i></li>
+<li><a href="c2-06.html">후성유전 · DNA 메틸화</a></li>
+<li><a href="c8-02.html">ClinVar 등 DB 5개</a></li>
+</ol>
+<p class="small muted">생물이 너무 낯설면 18번(센트럴 도그마)을 맨 먼저 읽어도 돼요.</p>
+
+<h2>③ 약어 풀네임 15개 <span class="muted small">15분</span></h2>
+<p>교수님이 "GATK가 이니셜이 뭔가"를 예로 들었어요. 이 15개는 철자까지 외우세요.</p>
+<div class="tw"><table>
+<tr><th>약어</th><th>풀네임</th></tr>
+<tr><td><b>NGS</b></td><td>Next Generation Sequencing</td></tr>
+<tr><td><b>SBS</b></td><td>Sequencing by Synthesis</td></tr>
+<tr><td><b>PCR</b></td><td>Polymerase Chain Reaction</td></tr>
+<tr><td><b>SNP</b></td><td>Single Nucleotide Polymorphism</td></tr>
+<tr><td><b>SNV</b></td><td>Single Nucleotide Variant</td></tr>
+<tr><td><b>WGS / WES</b></td><td>Whole Genome / Whole Exome Sequencing</td></tr>
+<tr><td><b>QC</b></td><td>Quality Control</td></tr>
+<tr><td><b>BWA</b></td><td>Burrows-Wheeler Aligner</td></tr>
+<tr><td><b>SAM / BAM</b></td><td>Sequence Alignment/Map · Binary Alignment/Map</td></tr>
+<tr><td><b>CIGAR</b></td><td>Compact Idiosyncratic Gapped Alignment Report</td></tr>
+<tr><td><b>IGV</b></td><td>Integrative Genomics Viewer</td></tr>
+<tr><td><b>BQSR</b></td><td>Base Quality Score Recalibration</td></tr>
+<tr><td><b>GATK</b></td><td>Genome Analysis Toolkit (Broad Institute)</td></tr>
+<tr><td><b>VCF</b></td><td>Variant Call Format</td></tr>
+<tr><td><b>ANNOVAR</b></td><td>ANNOtate VARiation</td></tr>
+</table></div>
+<div class="box tip"><span class="t">외울 숫자 6개</span>
+<p>게놈 <b>30억</b> 염기쌍 · 휴먼게놈프로젝트 <b>13년 30억 달러</b> → 지금 <b>약 200달러</b> · <b>Q30 = 99.9%</b> · Illumina <b>$7</b> vs Roche <b>$9,500</b> (1Gb당, Roche 2016 폐업) · depth <b>WGS 30x / WES 50~100x / Targeted 500x+</b> · 사람끼리 DNA 차이 <b>0.1%</b></p></div>
+
+<h2>④ 서술형 6개 — 짧은 답 <span class="muted small">30분</span></h2>
+<p>하나씩 <b>종이에 손으로 한 번</b> 써 보세요. 아래 답을 가리고 쓰고, 맞춰 보면 돼요.</p>
+<details class="card"><summary>1. NGS란 무엇인가? (Sanger와 비교)</summary><div class="in"><div class="model"><p>NGS는 DNA 조각을 판 위에 고정하고 염기를 합성하면서 동시에 형광으로 읽는(Sequencing by Synthesis) 기술로, 수억 개 조각을 한꺼번에 병렬로 읽는다. Sanger는 관 하나에 한 종류만 읽어 동시에 수십 개밖에 못 읽는다. 그 결과 사람 게놈 분석 비용이 30억 달러(13년)에서 약 200달러로 떨어졌다.</p></div></div></details>
+<details class="card"><summary>2. Illumina가 Roche를 이긴 이유는?</summary><div class="in"><div class="model"><p>읽는 길이는 Roche(약 700)가 Illumina(약 150)보다 길었다. 하지만 Illumina는 처리량이 훨씬 커서 1Gb당 비용이 $7로 Roche($9,500)보다 1,000배 이상 쌌고 에러율도 0.1%로 낮았다. 결국 비용 때문에 Illumina가 시장을 차지했고 Roche는 2016년 문을 닫았다(기술 혁신은 비용과 연결된다).</p></div></div></details>
+<details class="card"><summary>3. Depth와 coverage의 차이, depth가 중요한 이유</summary><div class="in"><div class="model"><p>Depth는 한 위치를 몇 개의 read가 겹쳐 읽었는지(예 30x), coverage는 레퍼런스 전체 중 한 번이라도 읽힌 비율(예 99%)이다. Depth가 높을수록 한 read의 에러를 다른 read가 보완해 진짜 변이와 시퀀싱 에러를 구별할 수 있다. 예를 들어 100x 중 1개만 다르면 에러지만, 2x에서 1개가 다르면 판단할 수 없다.</p></div></div></details>
+<details class="card"><summary>4. FASTQ에서 VCF까지 분석 순서와 각 단계의 목적</summary><div class="in"><div class="model"><p>FASTQ → QC(품질 확인, Q30) → 트리밍(어댑터·저품질 제거) → BWA 얼라인먼트(레퍼런스 위치 찾기) → 정렬된 BAM → MarkDuplicates(PCR 중복 제거) → BQSR(품질 점수 보정) → HaplotypeCaller(진짜 변이일 확률 계산) → VCF → ANNOVAR(변이 의미 연결). FASTQ→BAM은 전처리, BAM→VCF는 변이 발견 단계이며, 단계마다 IGV와 coverage·depth로 확인한다.</p></div></div></details>
+<details class="card"><summary>5. MarkDuplicates와 BQSR은 왜 하나?</summary><div class="in"><div class="model"><p>MarkDuplicates는 PCR 증폭으로 생긴 같은 조각의 복사본(시작·끝 위치가 같은 read)을 빼서 변이 비율이 부풀려지는 것을 막는다(단, amplicon 데이터는 생략). BQSR은 dbSNP 같은 알려진 변이 정보를 기준으로 기계 품질 점수의 치우침(bias)을 보정해, 시퀀싱 에러를 진짜 변이로 착각하지 않게 한다. 둘 다 정확한 variant calling을 위한 준비 단계다.</p></div></div></details>
+<details class="card"><summary>6. Variant calling에서 중요한 것은? (틀린 그림 찾기)</summary><div class="in"><div class="model"><p>레퍼런스와 다른 곳을 찾는 것(틀린 그림 찾기)은 쉽지만, 그중에는 시퀀싱 에러가 섞여 있다. 그래서 핵심은 진짜 변이일 확률을 계산하는 것이다. GATK HaplotypeCaller는 변이가 몰린 active region에서 haplotype(함께 유전되는 변이 묶음)을 기준으로 확률을 계산해 확실한 변이만 VCF로 뽑는다.</p></div></div></details>
+<p class="small muted">시간이 남으면 <a href="essay.html">서술형 27개 전체</a>에서 "점 돌연변이 3종", "메틸화와 암", "WGS·WES·Targeted"도 보세요.</p>
+
+<h2>⑤ 핵심 문제 풀기 <span class="muted small">20분</span></h2>
+<p>위 내용에서만 뽑은 문제예요. 틀린 건 해설만 읽고 넘어가요.</p>
+<a class="go" href="quiz.html#core">핵심 문제 풀기</a>
+
+<h2>안 봐도 되는 것 (시간 아끼기)</h2>
+<ul class="small">
+<li>리눅스 명령어와 옵션 (교수님 — "디테일은 뺀다")</li>
+<li>실습 23단계의 세부 명령, ANNOVAR 명령 이름</li>
+<li>SAM FLAG 비트 계산, MD·NM 태그, PairHMM 수식</li>
+<li>구조 변이 5종 세부, BRCA 발병률 숫자, 아미노산 구조</li>
+<li>4주차 회사 조사, 5주차 학생 발표, 6장 암 조기진단 자료 (수업에서 안 나감)</li>
+</ul>
+
+<h2>내일 아침 (시험 전 30분)</h2>
+<ol>
+<li><a href="quiz.html">퀴즈</a> → <b>"틀린 문제만 다시"</b> (10분)</li>
+<li>위 ③ 약어 15개 + 숫자 6개 한 번 훑기 (10분)</li>
+<li>① 파이프라인 한 줄을 <b>종이에 한 번 써 보기</b> (5분)</li>
+<li><a href="cheat.html">시험 전 1장</a>의 "시험장에서" 부분 (5분)</li>
+</ol>
+<div class="box pro"><span class="t">시험장에서</span>
+<p>여백에 파이프라인 먼저 → 약어 문제 빠르게 → 서술형은 모르면 <b>정의 한 줄 + "목적에 따라 판단한다" + 아는 숫자 하나</b>라도 써서 빈칸 없이.</p></div>
