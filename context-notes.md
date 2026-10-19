@@ -9,3 +9,4 @@
 - 본문은 10/19에 15세 눈높이로 새로 쓴 `content/easy/c0~c9.html`을 그대로 쓴다. 예전 "더 깊이 보기" 원문 개념은 뺐다(쉬운 본문에 시험 사실이 다 들어가 있음).
 - 공개 저장소라 교수님 슬라이드 27장도 공개된다 — 사용자가 "공개돼도 상관없다"고 함.
 - 다시 만들기: `python build.py` → `docs/` 커밋·푸시하면 Pages가 갱신된다.
+- 배포 2026-10-19 — https://kwakdongsin.github.io/lifecare-study/ (공개 저장소 KWAKDONGSIN/lifecare-study, Pages=main/docs). 실제 주소에서 폰 너비·낱말 창·이미지 확인, 카카오톡(나에게)으로 주소 전송.

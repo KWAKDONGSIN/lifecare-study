@@ -5,6 +5,6 @@
 - [x] `assets/style.css`, `assets/app.js`, `build.py` 작성
 - [x] 빌드 → 16쪽 HTML 구조 검사 통과
 - [x] 폰 너비(375px) — 홈, 장 페이지, 낱말 뜻 창, 퀴즈 채점 확인
-- [ ] 공개 GitHub 저장소 + Pages 켜기
-- [ ] 실제 github.io 주소 응답 확인
-- [ ] 카카오톡으로 새 주소 보내기
+- [x] 공개 GitHub 저장소 + Pages 켜기
+- [x] 실제 github.io 주소 응답 확인
+- [x] 카카오톡으로 새 주소 보내기
