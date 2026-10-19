@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>이 장 3줄 요약 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k7"><a href="index.html#c7">← 보드</a><span>7장 진짜 변이 골라내기 · 9/9</span></div><h1>이 장 3줄 요약</h1><div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>틀린 그림 찾기는 쉽고 진짜 <a class="w" href="words.html#w50" data-w="50">변이</a>인지 계산하는 게 중요해요. 그래서 <a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a>(<a class="w" href="words.html#w27" data-w="27">PCR</a> 복사본 제거, <a class="w" href="words.html#w101" data-w="101">amplicon</a>은 생략)와 <a class="w" href="words.html#w136" data-w="136">BQSR</a>(알려진 <a class="w" href="words.html#w51" data-w="51">SNP</a>를 참고해 <a class="w" href="words.html#w81" data-w="81">품질 점수</a> 영점 맞추기)로 <a class="w" href="words.html#w118" data-w="118">BAM</a>을 먼저 다듬어요.</li>
+    <li><a class="w" href="words.html#w139" data-w="139">GATK</a>(Genome Analysis Toolkit, <a class="w" href="words.html#w140" data-w="140">Broad Institute</a>)의 <a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a>는 <a class="w" href="words.html#w143" data-w="143">active region</a>과 <a class="w" href="words.html#w142" data-w="142">haplotype</a> 묶음, <a class="w" href="words.html#w144" data-w="144">PairHMM</a>, <a class="w" href="words.html#w145" data-w="145">베이지안 모델</a>로 진짜 변이일 확률이 높은 것만 불러요. 결과는 <a class="w" href="words.html#w149" data-w="149">GVCF</a>(전체 위치)를 먼저 만들고 <a class="w" href="words.html#w151" data-w="151">GenotypeGVCFs</a>로 <a class="w" href="words.html#w148" data-w="148">VCF</a>(확실한 변이만)를 추려요.</li>
+    <li>VCF는 <a class="w" href="words.html#w152" data-w="152">REF/ALT</a>로 SNP·삽입·결실을 읽고, <a class="w" href="words.html#w157" data-w="157">FILTER</a> PASS는 기준 통과, <a class="w" href="words.html#w153" data-w="153">GT</a> 0/0은 변이 없음, 0/1·1/1은 변이 있음, <a class="w" href="words.html#w154" data-w="154">DP</a>·<a class="w" href="words.html#w155" data-w="155">GQ</a>·<a class="w" href="words.html#w156" data-w="156">AD</a>는 <a class="w" href="words.html#w86" data-w="86">depth</a>·확신도·글자별 조각 수예요.</li>
+  </ul>
+</div>
+<div class="done"><a class="go" href="c8-01.html">다음 카드 → 8장 Annotation 시작</a><div class="pn"><a href="c7-08.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c7"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

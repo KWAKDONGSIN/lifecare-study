@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLAST에서 BWA로 — 왜 더 빠를까 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 7/14</span></div><h1>BLAST에서 BWA로 — 왜 더 빠를까</h1>
+<p><b><a class="w" href="words.html#w113" data-w="113">BLAST</a></b>(Basic Local Alignment Search Tool)는 옛날부터 쓰던 웹 검색 도구예요. 조각 몇 개를 찾기엔 좋지만, <a class="w" href="words.html#w58" data-w="58">NGS</a>의 <b>수억 개 조각</b>을 처리하기엔 너무 느려요.</p>
+<p>그래서 빠른 aligner(<a class="w" href="words.html#w110" data-w="110">얼라인</a> 프로그램)가 아주 많이 나왔고, 대표가 <b><a class="w" href="words.html#w114" data-w="114">BWA</a></b>(Burrows-Wheeler Aligner)예요.</p>
+<div class="box eg"><span class="t">비유 — 포스트잇 색인</span>
+  <p>교수님 비유예요. 두꺼운 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 책에 <b>미리 포스트잇을 붙여 두면</b>, 책을 처음부터 넘기지 않고 포스트잇으로 바로 찾아갈 수 있어요. 지도 앱에서 주소를 치면 그 위치로 바로 이동하는 것과 비슷해요.</p>
+</div>
+<p>BWA의 원리는 <b>색인 + 씨앗 찾고 늘리기(<a class="w" href="words.html#w116" data-w="116">seed-and-extend</a>)</b> 세 단계예요.</p>
+<ol>
+  <li><b>색인(<a class="w" href="words.html#w115" data-w="115">index</a>) 만들기</b> — 레퍼런스에 포스트잇을 미리 붙여요. 한 번만 하면 돼요. (<code>bwa index</code>)</li>
+  <li><b>씨앗(seed) 찾기</b> — 조각에서 짧은 <b>10~20글자</b>만 떼어, 포스트잇으로 후보 위치를 빠르게 찾아요.</li>
+  <li><b>늘리기(extend)</b> — 후보 자리에서 양옆으로 늘려 가며 맞춰 보고, 점수로 최종 위치를 정해요.</li>
+</ol>
+<p>이유는 간단해요. 책 전체를 처음부터 다 비교하지 않고 <b>후보 몇 곳만 정밀하게</b> 보기 때문이에요.</p>
+<figure class="slide"><img src="slides/v54.jpg"><figcaption>교수님 슬라이드 — Read alignment with seed-and-extend (10~20bp seed)</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>BWA는 레퍼런스를 미리 <b>인덱싱</b>해 두고, <a class="w" href="words.html#w73" data-w="73">read</a>의 짧은 <b>seed(10~20bp)</b>로 후보 위치를 찾은 뒤 그 자리에서 <b>extend</b>하며 점수로 위치를 확정한다. 전체를 처음부터 비교하지 않기 때문에 BLAST보다 훨씬 빠르다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — BWA의 "포스트잇"은 무엇을 가리키는 말일까요?</summary><p>레퍼런스에 미리 만들어 둔 색인(index)이에요. 이것 덕분에 후보 위치를 바로 찾아가서 빨라요.</p></details>
+
+<div class="done"><a class="go" href="c6-08.html">다음 카드 → 레퍼런스 버전 — hg19와 hg38</a><div class="pn"><a href="c6-06.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

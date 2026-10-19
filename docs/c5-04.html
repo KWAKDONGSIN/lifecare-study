@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>depth 계산식 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k5"><a href="index.html#c5">← 보드</a><span>5장 Depth · 어디를 읽을까 · 4/8</span></div><h1>depth 계산식</h1>
+<p><a class="w" href="words.html#w86" data-w="86">depth</a>는 "읽은 글자를 전부 더한 양"을 "<a class="w" href="words.html#w14" data-w="14">게놈</a> 전체 글자 수"로 나눈 값이에요. 전체 벽 넓이에 비해 페인트를 몇 겹 칠했느냐와 같은 생각이에요.</p>
+<div class="box def"><span class="t">depth 계산식</span>
+  <p><b>depth = <a class="w" href="words.html#w110" data-w="110">매핑</a>된 <a class="w" href="words.html#w73" data-w="73">read</a> 수 × 평균 <a class="w" href="words.html#w74" data-w="74">read 길이</a> ÷ <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 전체 길이</b></p>
+  <p>예) read 6억 개 × 150글자 ÷ 30억 글자 = <b><a class="w" href="words.html#w88" data-w="88">30x</a></b></p>
+</div>
+<p>6억 × 150은 읽은 글자 총합(900억 글자)이고, 이를 사람 게놈 30억 글자로 나누면 평균 30번씩 읽었다는 뜻이에요.</p>
+<p>7주차 실습 결과는 <b><a class="w" href="words.html#w87" data-w="87">coverage</a> 99%, 평균 depth 약 20x</b>였어요. 교수님이 "얼라인 결과에서 궁금한 건 결국 coverage와 depth 두 가지"라고 정리하셨어요.</p>
+<details class="check"><summary>잠깐 확인 — read 3억 개, 길이 150, 게놈 30억 글자이면 depth는?</summary><p>3억 × 150 ÷ 30억 = 15x예요. 읽은 글자 450억 개를 30억으로 나눈 값이에요.</p></details>
+
+<div class="done"><a class="go" href="c5-05.html">다음 카드 → WGS · WES · Targeted — 어디를 읽을까</a><div class="pn"><a href="c5-03.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c5"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6주차 · 3. NGS · 5. DNA variant 분석 · 라이프03·07</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

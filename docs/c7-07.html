@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VCF 읽는 법 (1) — REF와 ALT로 변이 종류 맞히기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k7"><a href="index.html#c7">← 보드</a><span>7장 진짜 변이 골라내기 · 7/9</span></div><h1>VCF 읽는 법 (1) — REF와 ALT로 변이 종류 맞히기</h1>
+<p><a class="w" href="words.html#w148" data-w="148">VCF</a>는 표처럼 생긴 텍스트 파일이에요. 한 줄이 <a class="w" href="words.html#w50" data-w="50">변이</a> 하나이고, 칸마다 의미가 달라요. 처음 칸들은 이렇게 읽어요.</p>
+<ul>
+  <li><b>CHROM</b> <a class="w" href="words.html#w2" data-w="2">염색체</a>, <b><a class="w" href="words.html#w122" data-w="122">POS</a></b> 위치, <b>ID</b> 변이 이름(없으면 점)</li>
+  <li><b><a class="w" href="words.html#w152" data-w="152">REF</a></b> 정답지(<a class="w" href="words.html#w84" data-w="84">레퍼런스</a>)의 글자, <b>ALT</b> 내 글자(alteration, 바뀐 글자)</li>
+  <li><b>QUAL</b> 변이 확신 점수, <b><a class="w" href="words.html#w157" data-w="157">FILTER</a></b> 필터 통과 결과, <b>INFO·FORMAT</b> 부가 정보</li>
+</ul>
+<div class="code"><span class="c">#CHROM POS ID  REF ALT QUAL FILTER</span>
+chr1   100 .   <span class="h">C</span>   <span class="q">T</span>   50   PASS   <span class="c">← SNP (글자 바뀜)</span>
+chr1   200 .   <span class="h">ACG</span> <span class="q">A</span>   50   PASS   <span class="c">← 결실 (CG 빠짐)</span>
+chr1   300 .   <span class="h">C</span>   <span class="q">CT</span>  50   PASS   <span class="c">← 삽입 (T 끼어듦)</span></div>
+<p>REF와 ALT를 나란히 놓고 비교하면 변이 종류를 알 수 있어요. 방법은 아주 간단해요.</p>
+<div class="tw"><table>
+  <tr><th>REF와 ALT를 비교하면</th><th>변이 종류</th><th>예</th></tr>
+  <tr><td>길이가 같고 한 글자만 다름</td><td><b><a class="w" href="words.html#w51" data-w="51">SNP</a></b>(글자 하나 바뀜)</td><td>C → T</td></tr>
+  <tr><td>ALT가 REF보다 짧음</td><td><b>Deletion</b>(결실, 빠짐)</td><td>ACG → A (뒤의 <a class="w" href="words.html#w38" data-w="38">CG</a>가 빠짐)</td></tr>
+  <tr><td>ALT가 REF보다 긺</td><td><b>Insertion</b>(삽입, 끼어듦)</td><td>C → CT (T가 끼어듦)</td></tr>
+</table></div>
+<p>여러 형태가 섞이면 complex event라고 해요. <code>&lt;DEL&gt;</code> 같은 기호가 적혀 있으면 큰 구간이 달라진 large <a class="w" href="words.html#w49" data-w="49">structural variation</a>(큰 구조 변이)이에요.</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>SNP와 <a class="w" href="words.html#w52" data-w="52">SNV</a> 구분</b> SNP(Single Nucleotide Polymorphism)의 polymorphism은 poly(많은)+morph(형태)라서 "<a class="w" href="words.html#w8" data-w="8">염기</a> 하나에 따라 형태가 여럿"이라는 뜻이에요. 머리색이나 눈동자색처럼 겉으로 드러나는 차이와 이어지는 변이예요.</p>
+  <p>SNV(Single Nucleotide Variation)는 겉으로 안 드러나도 레퍼런스와 다르기만 하면 부르는 더 넓은 말이에요.</p>
+</div>
+<figure class="slide"><img src="slides/v75.jpg"><figcaption>교수님 슬라이드 — VCF 해석: SNP / Insertion / Deletion / Large SV</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>VCF의 REF는 레퍼런스 염기, ALT는 샘플의 염기이며 둘을 비교하면 변이 종류를 알 수 있다. 길이가 같고 한 염기만 다르면 SNP(C→T), ALT가 짧으면 deletion(ACG→A), ALT가 길면 insertion(C→CT)이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — REF가 ACG이고 ALT가 A이면 어떤 변이인가요?</summary>
+  <p>Deletion(결실)이에요. ALT가 REF보다 짧고, 뒤의 CG가 빠졌어요.</p>
+</details>
+
+<div class="done"><a class="go" href="c7-08.html">다음 카드 → VCF 읽는 법 (2) — FILTER와 GT·DP·GQ·AD</a><div class="pn"><a href="c7-06.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c7"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

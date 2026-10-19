@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>①~⑩ 한눈에 보기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k1"><a href="index.html#c1">← 보드</a><span>1장 큰 그림 — 파이프라인 · 2/8</span></div><h1>①~⑩ 한눈에 보기</h1>
+<p>아래 그림이 교수님이 매 시간 "우리 지금 어디까지 왔냐면" 하고 보여 준 흐름이에요. 왼쪽이 단계 이름이고 오른쪽이 쉬운 비유예요. 지금은 모양만 훑어보고, 바로 뒤에서 한 단계씩 풀어요.</p>
+<div class="flow">
+    <div class="step c1"><span class="nm">① 피 뽑기 → DNA 꺼내기</span><span class="an">책 꺼내기</span></div><div class="arrow">▼</div>
+    <div class="step c1"><span class="nm">② DNA 잘게 자르기 (~150글자)</span><span class="an">책을 쪽지로 찢기</span></div><div class="arrow">▼</div>
+    <div class="step c1"><span class="nm">③ NGS 기계로 읽기 → <span class="red">FASTQ</span></span><span class="an">쪽지 수억 장 동시에 읽기</span></div><div class="arrow">▼</div>
+    <div class="step c2"><span class="nm">④ QC (FastQC)</span><span class="an">읽은 게 믿을 만한지 성적표</span></div><div class="arrow">▼</div>
+    <div class="step c2"><span class="nm">⑤ 트리밍 (cutadapt) · 머지 (PEAR)</span><span class="an">쓰레기 부분 잘라내고 이어붙이기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑥ 얼라인먼트 (BWA) → SAM → <span class="red">BAM</span></span><span class="an">쪽지를 표준 책 제자리에 붙이기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑦ MarkDuplicates (Picard)</span><span class="an">복사본 쪽지 빼기</span></div><div class="arrow">▼</div>
+    <div class="step c3"><span class="nm">⑧ BQSR (GATK)</span><span class="an">기계 점수 영점 맞추기</span></div><div class="arrow">▼</div>
+    <div class="step c4"><span class="nm">⑨ Variant calling (HaplotypeCaller) → <span class="red">VCF</span></span><span class="an">진짜 오타만 골라내기</span></div><div class="arrow">▼</div>
+    <div class="step c5"><span class="nm">⑩ Annotation (ANNOVAR)</span><span class="an">그 오타 뜻을 사전에서 찾기</span></div>
+  </div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>파일 이름 세 개만 먼저 외우세요. <b><a class="w" href="words.html#w78" data-w="78">FASTQ</a> → <a class="w" href="words.html#w118" data-w="118">BAM</a> → <a class="w" href="words.html#w148" data-w="148">VCF</a></b> 순서예요.</p>
+  <p>FASTQ는 "읽은 결과", BAM은 "제자리에 붙인 결과", VCF는 "찾은 <a class="w" href="words.html#w50" data-w="50">변이</a> 목록"이에요.</p>
+</div>
+<figure class="slide"><img src="slides/v03.jpg"><figcaption>교수님 슬라이드 — Full process to analyze genomic data. 오른쪽 노란 상자들이 위 ④~⑨ 순서예요.</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ에서 VCF까지의 분석 순서는 <a class="w" href="words.html#w102" data-w="102">QC</a>, <a class="w" href="words.html#w104" data-w="104">트리밍</a>과 <a class="w" href="words.html#w109" data-w="109">머지</a>, <a class="w" href="words.html#w110" data-w="110">얼라인먼트</a>(BAM 생성), <a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a>, <a class="w" href="words.html#w136" data-w="136">BQSR</a>, <a class="w" href="words.html#w147" data-w="147">variant calling</a>, <a class="w" href="words.html#w159" data-w="159">annotation</a>이다. 앞의 FASTQ에서 BAM까지를 <a class="w" href="words.html#w166" data-w="166">pre-processing</a>, BAM에서 VCF까지를 variant discovery라고 한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 파일 이름 세 개를 순서대로 말해 보세요.</summary>
+  <p>FASTQ(읽은 결과) → BAM(제자리에 붙인 결과) → VCF(찾은 변이 목록)예요.</p>
+</details>
+
+<div class="done"><a class="go" href="c1-03.html">다음 카드 → ①~③ 읽기 전 준비 — 책을 찢어서 기계에 넣기</a><div class="pn"><a href="c1-01.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c1"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

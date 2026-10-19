@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAM 한 줄에 적힌 것 — 11칸 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 10/14</span></div><h1>SAM 한 줄에 적힌 것 — 11칸</h1>
+<p><a class="w" href="words.html#w117" data-w="117">SAM 파일</a>에서 <b>조각 하나는 한 줄</b>이고, 그 줄은 11칸으로 이루어져 있어요. 다 외울 필요는 없고 굵은 글씨만 기억하세요.</p>
+<div class="tw"><table>
+  <tr><th style="width:26%">칸</th><th>뜻</th></tr>
+  <tr><td>1. QNAME</td><td>조각 이름</td></tr>
+  <tr><td>2. <b><a class="w" href="words.html#w121" data-w="121">FLAG</a></b></td><td>상태 번호. <b>0 = 정방향(forward)으로 붙음, 16 = 역방향(reverse)으로 붙음, 4 = 못 붙음(unmapped)</b></td></tr>
+  <tr><td>3. RNAME</td><td>어느 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a>(<a class="w" href="words.html#w2" data-w="2">염색체</a>)에 붙었나</td></tr>
+  <tr><td>4. <b><a class="w" href="words.html#w122" data-w="122">POS</a></b></td><td><b>몇 번째 자리부터</b> 붙었나 (시작 위치)</td></tr>
+  <tr><td>5. <b><a class="w" href="words.html#w123" data-w="123">MAPQ</a></b></td><td><b>제자리 확신도</b>. <b>60 = 잘 붙음(확실)</b></td></tr>
+  <tr><td>6. <b><a class="w" href="words.html#w124" data-w="124">CIGAR</a></b></td><td><b>어떻게 붙었나</b> (다음 소단원)</td></tr>
+  <tr><td>7~9. RNEXT · PNEXT · TLEN</td><td>짝꿍 조각 정보(<a class="w" href="words.html#w95" data-w="95">페어드엔드</a>)</td></tr>
+  <tr><td>10. SEQ</td><td>조각의 글자(서열)</td></tr>
+  <tr><td>11. QUAL</td><td>글자별 <a class="w" href="words.html#w81" data-w="81">품질 점수</a></td></tr>
+</table></div>
+<p>아래는 설명용으로 만든 한 줄 예시예요. 짝이 없는 조각은 7~9칸을 <code>* 0 0</code>으로 적어요.</p>
+<div class="code">read1  0  chr1  5  60  3M1I3M1D5M  *  0  0  ACTAGAATGGCT  IIIIIIIIIIII</div>
+<p>읽는 법은 이래요. "<a class="w" href="words.html#w96" data-w="96">read1</a>은 정방향(0)으로 chr1의 5번 자리부터 붙었고, 확신도 60, 붙은 모양은 3M1I3M1D5M이다."</p>
+<p>MAPQ 60은 위치가 틀렸을 확률이 약 10의 -6승(백만 번에 한 번)이라는 뜻이에요. 점수가 높을수록 믿을 만해요.</p>
+<p>FLAG는 숫자 하나에 여러 정보를 더해서 담아서 147 같은 큰 값도 나와요. 시험에서는 <b>0, 16, 4</b>만 알면 돼요.</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>FLAG 0 = 앞으로(정방향) · 16 = 뒤집어서(역방향) · 4 = 못 붙음. POS = 시작 번호, MAPQ = 60이면 OK.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — FLAG가 4인 조각은 어떤 상태일까요?</summary><p>레퍼런스에 붙지 못한 조각(unmapped)이에요. 0은 정방향, 16은 역방향으로 붙은 경우예요.</p></details>
+
+<div class="done"><a class="go" href="c6-11.html">다음 카드 → CIGAR — 어떻게 붙었는지 한 줄로 쓰기 (매 시간 반복)</a><div class="pn"><a href="c6-09.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

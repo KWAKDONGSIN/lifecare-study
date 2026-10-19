@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ANNOVAR의 방식 3가지 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k8"><a href="index.html#c8">← 보드</a><span>8장 Annotation · 3/6</span></div><h1>ANNOVAR의 방식 3가지</h1>
+<p><a class="w" href="words.html#w160" data-w="160">ANNOVAR</a>가 <a class="w" href="words.html#w50" data-w="50">변이</a>에 의미를 붙이는 방법은 세 가지예요. 모두 "이 변이가 어디에 있나?" 또는 "이미 알려져 있나?"를 묻는 방식이에요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>택배 주소를 찾는 세 가지 방법이에요. <b><a class="w" href="words.html#w13" data-w="13">Gene</a>-based</b>는 "어느 건물(유전자) 안인가", <b>Region-based</b>는 "어느 구역(기능 영역)인가", <b><a class="w" href="words.html#w157" data-w="157">Filter</a>-based</b>는 "이미 주소록(특정 DB)에 있는가"예요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th>방식</th><th>묻는 질문</th><th>예</th></tr>
+  <tr><td><b>Gene-based</b></td><td>유전자 안에 있나? (<a class="w" href="words.html#w15" data-w="15">단백질</a> 코딩 영역인가)</td><td>refGene</td></tr>
+  <tr><td><b>Region-based</b></td><td>기능이 있는 영역인가? (<a class="w" href="words.html#w41" data-w="41">전사인자</a> 결합부위 등)</td><td>cytoBand</td></tr>
+  <tr><td><b>Filter-based</b></td><td>특정 DB에 들어 있나?</td><td><a class="w" href="words.html#w163" data-w="163">ClinVar</a>, <a class="w" href="words.html#w161" data-w="161">1000 Genomes</a> 등</td></tr>
+</table></div>
+<p>Gene-based 결과는 변이의 위치를 세 가지 중 하나로 알려 줘요. <b>exonic</b>(<a class="w" href="words.html#w29" data-w="29">엑손</a> 안, 단백질이 되는 부분), <b>intronic</b>(<a class="w" href="words.html#w30" data-w="30">인트론</a> 안, 잘려 나가는 부분), <b>intergenic</b>(유전자와 유전자 사이)예요.</p>
+<p>실행할 때는 명령 한 줄에 DB를 쉼표로 쭉 나열해요. 그리고 방식도 같은 순서로 <code>g</code>(gene-based), <code>r</code>(region-based), <code>f</code>(filter-based)로 적어요. 위 표의 refGene은 g, cytoBand는 r, 나<a class="w" href="words.html#w109" data-w="109">머지</a>는 f예요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>ANNOVAR의 <a class="w" href="words.html#w159" data-w="159">annotation</a> 방식은 세 가지이다. Gene-based는 변이가 유전자(단백질 코딩 영역) 안에 있는지, Region-based는 전사인자 결합부위 같은 기능 영역에 있는지, Filter-based는 변이가 특정 DB에 존재하는지를 확인한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — "이 변이가 ClinVar에 들어 있나?"는 어느 방식인가요?</summary>
+  <p>Filter-based예요. 특정 DB에 있는지 확인하는 방식이고, 명령에서는 f로 적어요.</p>
+</details>
+
+<div class="done"><a class="go" href="c8-04.html">다음 카드 → 실행 순서 — VCF에서 결과 표까지</a><div class="pn"><a href="c8-02.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c8"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

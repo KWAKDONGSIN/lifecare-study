@@ -5,20 +5,20 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 C = os.path.join(HERE, "content")
 OUT = os.path.join(HERE, "docs")
 
-CHS = [  # (id, 제목, 한 줄 설명, 문제 그룹)
-    ("c0", "왕초보 생명 기초", "세포 · DNA · 유전자 · 단백질 — 생물 처음이면 여기부터", ["basic"]),
-    ("c1", "큰 그림 — 파이프라인", "설계도 책에서 오타 찾기 이야기", ["big", "etc"]),
-    ("c2", "바이오 기초", "센트럴 도그마 · 코돈 · 메틸화 · 돌연변이", ["bio"]),
-    ("c3", "NGS", "Sanger vs NGS · SBS · Illumina가 이긴 이유", ["ngs"]),
-    ("c4", "FASTQ와 품질 점수", "4줄 구조 · Phred Q30", ["fastq"]),
-    ("c5", "Depth · 어디를 읽을까", "depth/coverage · WGS/WES/Targeted · 페어드엔드", ["depth"]),
-    ("c6", "QC → 얼라인먼트 → BAM", "FastQC · 트리밍 · BWA · SAM/CIGAR · IGV", ["qc", "align", "sam", "linux"]),
-    ("c7", "진짜 변이 골라내기", "MarkDuplicates · BQSR · HaplotypeCaller · VCF", ["post", "variant"]),
-    ("c8", "Annotation", "ANNOVAR · dbSNP · ClinVar", ["annot"]),
-    ("c9", "실습 따라가기", "명령 하나하나가 파이프라인의 어디인지", ["practice"]),
+CHS = [  # (id, 제목, 한 줄 설명, 문제 그룹, 자료 출처 — 바탕화면 '라이프케어' 폴더 파일 이름 기준)
+    ("c0", "왕초보 생명 기초", "세포 · DNA · 유전자 · 단백질 — 생물 처음이면 여기부터", ["basic"], "2주차 · 2. 기본생물학.pdf · 라이프02"),
+    ("c1", "큰 그림 — 파이프라인", "설계도 책에서 오타 찾기 이야기", ["big", "etc"], "4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08"),
+    ("c2", "바이오 기초", "센트럴 도그마 · 코돈 · 메틸화 · 돌연변이", ["bio"], "2주차 · 2. 기본생물학.pdf · 라이프02"),
+    ("c3", "NGS", "Sanger vs NGS · SBS · Illumina가 이긴 이유", ["ngs"], "3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03"),
+    ("c4", "FASTQ와 품질 점수", "4줄 구조 · Phred Q30", ["fastq"], "3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03"),
+    ("c5", "Depth · 어디를 읽을까", "depth/coverage · WGS/WES/Targeted · 페어드엔드", ["depth"], "3·6주차 · 3. NGS · 5. DNA variant 분석 · 라이프03·07"),
+    ("c6", "QC → 얼라인먼트 → BAM", "FastQC · 트리밍 · BWA · SAM/CIGAR · IGV", ["qc", "align", "sam", "linux"], "4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08"),
+    ("c7", "진짜 변이 골라내기", "MarkDuplicates · BQSR · HaplotypeCaller · VCF", ["post", "variant"], "7주차 · 5. DNA variant 분석_수정.pdf · 라이프08"),
+    ("c8", "Annotation", "ANNOVAR · dbSNP · ClinVar", ["annot"], "7주차 · 5. DNA variant 분석_수정.pdf · 라이프08"),
+    ("c9", "실습 따라가기", "명령 하나하나가 파이프라인의 어디인지", ["practice"], "3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf"),
 ]
 GROUPS = {g for c in CHS for g in c[3]}
-NAV = [("index.html", "홈"), ("c0.html", "공부"), ("quiz.html", "퀴즈"), ("essay.html", "서술형"),
+NAV = [("index.html", "보드"), ("quiz.html", "퀴즈"), ("essay.html", "서술형"),
        ("cards.html", "암기카드"), ("words.html", "낱말사전"), ("cheat.html", "시험 전 1장")]
 VOID = {"br", "img", "meta", "link", "hr", "input", "source", "wbr", "col", "area", "base", "embed", "param", "track"}
 SKIP = {"svg", "code", "h1", "h2", "h3", "summary", "figcaption", "a", "button", "script", "style", "th"}
@@ -123,6 +123,44 @@ def pdf_section(no):
     raise KeyError(no)
 
 
+def plain(h, n=70):
+    t = html.unescape(re.sub(r"<[^>]+>", "", h)).strip()
+    t = re.sub(r"\s+", " ", t)
+    return t if len(t) <= n else t[:n].rstrip() + "…"
+
+
+def split_posts(body):
+    """장 본문을 소단원(h3)마다 카드 한 장으로 자른다. 맨 끝 '이 장 3줄 요약'도 따로 한 장."""
+    summ = ""
+    m = re.search(r'<div class="box tip"><span class="t">이 장 3줄 요약</span>.*?</div>\s*$', body, re.S)
+    if m:
+        summ, body = m.group(0), body[:m.start()]
+    parts = re.split(r"<h3>(.*?)</h3>", body, flags=re.S)
+    posts = []
+    for i in range(1, len(parts), 2):
+        title = re.sub(r"^\s*(\d+-)?\d+\.\s*", "", html.unescape(re.sub(r"<[^>]+>", "", parts[i]))).strip()
+        posts.append((title, parts[i + 1]))
+    if summ:
+        posts.append(("이 장 3줄 요약", summ))
+    return parts[0], posts
+
+
+def preview(h):
+    m = re.search(r'<div class="box def">.*?<p>(.*?)</p>', h, re.S) or re.search(r"<p>(.*?)</p>", h, re.S)
+    return plain(m.group(1)) if m else ""
+
+
+def tags(h):
+    out = []
+    if 'class="box exam"' in h:
+        out.append("✍ 시험 문장")
+    if 'class="slide"' in h or "<svg" in h or 'class="seq"' in h:
+        out.append("그림")
+    if '<details class="check"' in h:
+        out.append("확인 문제")
+    return out
+
+
 def qid(q):
     return hashlib.md5(re.sub(r"\s+", "", q["q"]).encode()).hexdigest()[:8]
 
@@ -155,7 +193,7 @@ def main():
         open(os.path.join(OUT, fname), "w", encoding="utf-8").write(page(fname, title, body, active, scripts))
 
     # 장 페이지
-    for n, (cid, title, sub, groups) in enumerate(CHS):
+    for n, (cid, title, sub, groups, srcs) in enumerate(CHS):
         body = open(os.path.join(C, "easy", cid + ".html"), encoding="utf-8").read()
         body = re.sub(r"^\s*<!--.*?-->\s*", "", body, flags=re.S)
         body = link_words(webify(body), rx, idx)
@@ -166,34 +204,62 @@ def main():
                 f'<a class="go" href="quiz.html#{cid}">이 장 문제 풀기</a><div class="pn">{prev}{nxt}</div></div>')
         write(f"{cid}.html", title, head + body + foot, "c0.html", wscript)
 
-    # 홈
-    path = "".join(f'<li><a href="{c}.html"><span class="no">{i}</span><span class="tt">{html.escape(t)}<small>{html.escape(s)}</small></span>'
-                   f'<span class="ok" data-readmark="{c}"></span></a></li>' for i, (c, t, s, g) in enumerate(CHS))
-    home = f"""<section class="hero">
-<span class="dday" id="dday">10/20(화) 12:30</span>
-<h1>라이프케어빅데이터분석<br>중간고사 공부</h1>
-<p>종이 시험 · 서술형과 단답형 · 범위는 <b>기본생물학 → NGS → FASTQ부터 variant calling까지</b>. 코딩 문제는 없어요.</p>
-<a class="go" href="c0.html">생물 처음이면 0장부터 시작</a>
-<p class="muted small" id="stat">밑줄 친 낱말을 누르면 쉬운 뜻이 나와요.</p>
-</section>
-<div class="box pro"><span class="t">교수님이 직접 말한 시험 힌트 (7주차)</span>
-<ul><li>"NGS가 뭔가" 같은 <b>개념 설명</b>을 많이 물어봐요</li><li>"GATK가 이니셜이 뭔가" — <b>약어 풀네임</b></li>
-<li>디테일은 빼고 <b>수업에 자주 나온 쉬운 개념</b> 위주</li><li>중요한 3가지 — 바이오 기초 · 파이프라인 순서와 이유 · NGS 개념</li></ul></div>
-<h2>순서대로 읽기</h2>
-<ol class="path">{path}<li><a href="cheat.html"><span class="no">★</span><span class="tt">시험 전 1장<small>암기표 · 헷갈리는 숫자 · 시험장에서 할 일</small></span></a></li></ol>
-<h2 style="margin-top:28px">연습하기</h2>
-<div class="grid2">
-<a href="quiz.html">퀴즈<small>객관식·OX·단답 문제</small></a>
-<a href="essay.html">서술형<small>모범답안 + 쉬운 풀이</small></a>
-<a href="cards.html">암기카드<small>약어 풀네임 · 숫자</small></a>
-<a href="words.html">낱말사전<small>모르는 말 찾기</small></a>
-</div>
-<div class="box tip"><span class="t">오늘 공부 순서</span><ul>
-<li>0장 → 9장을 순서대로 읽고, 장마다 <b>"이 장 문제 풀기"</b></li>
-<li>저녁엔 서술형 10개를 <b>종이에 직접</b> 써 보기</li>
-<li>시험 날 아침엔 <b>암기카드 + 틀린 문제만 다시 + 시험 전 1장</b></li></ul></div>
-<p class="muted small">근거 — 1~7주차 수업 녹취, 교수님 강의자료(기본생물학 · NGS · DNA variant 분석), 실습자료. 진도는 이 폰 브라우저에만 저장돼요.</p>"""
-    write("index.html", "홈", home, "index.html")
+    # 카드 페이지 + 보드 (패들렛처럼: 장마다 세로 칸, 소단원마다 카드)
+    cols = []
+    for n, (cid, title, sub, groups, srcs) in enumerate(CHS):
+        body = open(os.path.join(C, "easy", cid + ".html"), encoding="utf-8").read()
+        body = webify(re.sub(r"^\s*<!--.*?-->\s*", "", body, flags=re.S))
+        intro, posts = split_posts(body)
+        cards = []
+        for k, (pt, ph) in enumerate(posts):
+            fname = f"{cid}-{k + 1:02d}.html"
+            prev = f"{cid}-{k:02d}.html" if k else "index.html#" + cid
+            if k + 1 < len(posts):
+                nxt, nxt_t = f"{cid}-{k + 2:02d}.html", posts[k + 1][0]
+            elif n + 1 < len(CHS):
+                nxt, nxt_t = f"{CHS[n + 1][0]}-01.html", f"{n + 1}장 {CHS[n + 1][1]} 시작"
+            else:
+                nxt, nxt_t = "cheat.html", "시험 전 1장"
+            head = (f'<div class="crumb k{n}"><a href="index.html#{cid}">← 보드</a><span>{n}장 {html.escape(title)} · {k + 1}/{len(posts)}</span></div>'
+                    f'<h1>{html.escape(pt)}</h1>')
+            foot = (f'<div class="done"><a class="go" href="{nxt}">다음 카드 → {html.escape(nxt_t)}</a>'
+                    f'<div class="pn"><a href="{prev}"><b>← 이전</b>{"이전 카드" if k else "보드로"}</a>'
+                    f'<a class="next" href="quiz.html#{cid}"><b>연습</b>이 장 문제 풀기</a></div>'
+                    f'<p class="muted small">자료: {html.escape(srcs)}</p></div>')
+            write(fname, pt, head + link_words(ph, rx, idx) + foot, "index.html", wscript)
+            img = re.search(r'<img src="(slides/[^"]+)"', ph)
+            cards.append(f'<a class="post" href="{fname}">' + (f'<img src="{img.group(1)}" alt="" loading="lazy">' if img else "")
+                         + f'<b>{html.escape(pt)}</b><span>{html.escape(preview(ph))}</span>'
+                         + "".join(f"<i>{t}</i>" for t in tags(ph)) + "</a>")
+        cols.append(f'<section class="col k{n}" id="{cid}"><div class="colhead"><b>{n}장 · {html.escape(title)}</b>'
+                    f'<small>{html.escape(srcs)}</small><span class="cnt">카드 {len(posts)}장</span></div>'
+                    + "".join(cards)
+                    + f'<a class="post quiz" href="quiz.html#{cid}"><b>✓ 이 장 문제 풀기</b><span>읽은 다음 바로 확인</span></a></section>')
+
+    files = [("라이프02.txt", "2주차", "2. 기본생물학.pdf"),
+             ("라이프03.txt", "3주차", "3. NGS 기술소개_리눅스환경.pdf, read_fastq.ipynb, S1_S13 fastq 2개"),
+             ("라이프05.txt", "4주차", "4. 팀별조사발표 안내 (시험 범위 아님) + 리눅스 실습"),
+             ("라이프06.txt", "5주차", "학생 회사 발표 (시험 범위 아님)"),
+             ("라이프07.txt", "6주차", "5. DNA variant 분석.pdf, 5. DNA variant_실습.pdf"),
+             ("라이프08.txt", "7주차", "5. DNA variant 분석_수정.pdf, 실습_수정.pdf, 6. 암 조기진단(수업에서 안 나감)")]
+    ftab = "".join(f"<tr><td>{a}</td><td><b>{b}</b></td><td>{c}</td></tr>" for a, b, c in files)
+    start = f"""<section class="col kS" id="start"><div class="colhead"><b>시작하기</b><small>먼저 이 칸부터</small></div>
+<div class="post note"><b>10/20(화) 12:30 중간고사</b><span id="dday">종이 시험 · 서술형+단답형</span><span>범위: 기본생물학 → NGS → FASTQ부터 variant calling까지. 코딩 문제 없음.</span></div>
+<div class="post note"><b>쓰는 법</b><span>① 카드를 누르면 크게 열려요 ② 밑줄 친 낱말을 누르면 쉬운 뜻 ③ 옆으로 밀면 다음 장 칸 ④ 장 끝에서 "문제 풀기"</span></div>
+<a class="post go2" href="c0-01.html"><b>▶ 0장 첫 카드부터 시작</b><span>생물 처음이면 여기부터 순서대로</span></a>
+<details class="post note"><summary><b>교수님 시험 힌트 (7주차)</b></summary><ul><li>"NGS가 뭔가" 같은 개념 설명</li><li>"GATK가 이니셜이 뭔가" — 약어 풀네임</li><li>디테일은 빼고 자주 나온 쉬운 개념</li><li>바이오 기초 · 파이프라인 순서와 이유 · NGS 개념</li></ul></details>
+<details class="post note"><summary><b>자료 확인 — 바탕화면 파일과 주차</b></summary><p class="small">바탕화면 '라이프케어' 폴더 18개 파일이 이 사이트에 쓴 자료와 내용까지 같아요. 녹취 번호는 03 다음부터 하나씩 밀려 있어요.</p><div class="tw"><table><tr><th>파일</th><th>실제</th><th>같이 본 자료</th></tr>{ftab}</table></div><p class="small muted">1주차(오리엔테이션) 녹취는 이 폴더엔 없어요. 수업계획서는 평가 비율(중간 25%)만 썼어요.</p></details>
+<p class="swipe">옆으로 밀면 0장 →</p></section>"""
+    practice = """<section class="col kP" id="practice"><div class="colhead"><b>연습하기</b><small>읽고 나서 여기서 확인</small></div>
+<a class="post" href="quiz.html"><b>퀴즈</b><span>객관식·OX·단답 114문제, 틀린 것만 다시</span></a>
+<a class="post" href="essay.html"><b>서술형 27</b><span>쉬운 풀이 + 시험지에 쓸 모범답안</span></a>
+<a class="post" href="cards.html"><b>암기카드</b><span>약어 풀네임 31 · 외울 숫자 20</span></a>
+<a class="post" href="words.html"><b>낱말사전 167</b><span>모르는 말 찾기</span></a>
+<a class="post go2" href="cheat.html"><b>시험 전 1장</b><span>암기표 · 헷갈리는 숫자 · 시험장에서 할 일</span></a></section>"""
+    jump = "".join(f'<a href="#{c[0]}">{i}장</a>' for i, c in enumerate(CHS))
+    home = (f'<div class="jump"><a href="#start">시작</a>{jump}<a href="#practice">연습</a></div>'
+            f'<div class="board">{start}{"".join(cols)}{practice}</div>')
+    write("index.html", "보드", home, "index.html")
 
     # 퀴즈
     quiz = list(base["quiz"])

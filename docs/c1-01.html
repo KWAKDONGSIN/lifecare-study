@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>이야기 하나로 보는 전체 그림 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k1"><a href="index.html#c1">← 보드</a><span>1장 큰 그림 — 파이프라인 · 1/8</span></div><h1>이야기 하나로 보는 전체 그림</h1>
+<div class="box eg"><span class="t">비유</span>
+  <p>사람 몸에는 <b>설계도 책</b>이 있어요. 이 책이 바로 <b><a class="w" href="words.html#w3" data-w="3">DNA</a></b>예요. 글자는 A, T, G, C 네 가지뿐인데 <b>30억 글자</b>나 돼요.</p>
+  <p>이 책에 <b>오타</b>가 생기면 병이 될 수 있어요. 이 오타를 <b><a class="w" href="words.html#w50" data-w="50">변이</a>(variant)</b>라고 불러요. 그래서 <b>내 책을 읽어서 표준 책과 비교하고, 오타를 찾는 것</b>이 이 과목의 목표예요.</p>
+  <p>표준 책은 <b><a class="w" href="words.html#w84" data-w="84">레퍼런스</a>(reference)</b>라고 해요. 이미 정답이 정해진 사람 <a class="w" href="words.html#w14" data-w="14">게놈</a>이라서 "정답지"라고 생각하면 돼요.</p>
+</div>
+<p>문제는 책이 너무 길어서 통째로 못 읽는다는 거예요. 기계가 한 번에 읽는 길이는 약 150글자뿐이에요. 그래서 책을 잘게 찢어서 수억 장을 동시에 읽어요.</p>
+<p>다음은 퍼즐 맞추기예요. 찢어진 쪽지가 원래 책의 어디였는지 정답지에서 찾아 붙여요. 붙이고 나서 정답지와 다른 글자를 찾으면 그게 오타 후보예요.</p>
+<p>마지막으로 후보가 진짜 오타인지 계산하고, 그 오타가 무슨 뜻인지 사전에서 찾아요. 이것이 전체 이야기예요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b>변이(variant)</b>는 내 DNA 글자가 표준 책(레퍼런스)과 다른 자리예요. <b><a class="w" href="words.html#w165" data-w="165">파이프라인</a>(pipeline)</b>은 읽기부터 <a class="w" href="words.html#w147" data-w="147">변이 찾기</a>까지 일을 순서대로 이어 놓은 작업 줄이에요. 공장의 컨베이어 벨트처럼 앞 단계의 결과가 다음 단계의 재료가 돼요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>이 분석의 목적은 개인의 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 데이터를 레퍼런스와 비교해 변이(variant)를 찾고, 그 변이가 질병이나 형질과 어떤 관계인지 해석하는 것이다. 시퀀서는 DNA를 짧은 조각으로만 읽을 수 있으므로 조각을 레퍼런스에 <a class="w" href="words.html#w110" data-w="110">정렬(alignment)</a>하는 과정이 필요하다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 기계가 DNA를 통째로 읽지 않고 왜 잘게 찢어서 읽나요?</summary>
+  <p>기계가 한 번에 읽는 길이가 약 150글자인데, 사람 게놈은 약 30억 글자라서 통째로는 못 읽기 때문이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c1-02.html">다음 카드 → ①~⑩ 한눈에 보기</a><div class="pn"><a href="index.html#c1"><b>← 이전</b>보드로</a><a class="next" href="quiz.html#c1"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

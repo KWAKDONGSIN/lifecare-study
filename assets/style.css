@@ -160,3 +160,36 @@ details.card .abbr{font-family:var(--mono);color:var(--accent);font-size:18px}
 .fb .src{font-size:13px;color:var(--muted)}
 .score{font-family:var(--mono);font-size:52px;font-weight:800;color:var(--accent);text-align:center}
 noscript p{background:var(--tip);border-radius:12px;padding:12px}
+
+/* ---------- 패들렛식 보드 ---------- */
+/* 장마다 세로 칸(색깔 다름), 칸 안에 포스트잇 카드. 폰에선 한 칸씩 옆으로 밀어 넘긴다 */
+.jump{display:flex;gap:6px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;text-decoration:none;font-size:13.5px;font-weight:700;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 11px}
+.board{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;margin:0 -16px;padding:4px 16px 24px;align-items:flex-start}
+.col{flex:0 0 86%;max-width:330px;scroll-snap-align:center;border-radius:18px;padding:12px;display:flex;flex-direction:column;gap:10px;border-top:6px solid var(--tint)}
+.colhead b{display:block;font-size:17px;line-height:1.4}
+.colhead small{display:block;font-size:12.5px;color:var(--muted);line-height:1.45;margin-top:2px}
+.colhead .cnt{display:inline-block;font-size:12px;font-weight:700;margin-top:6px;background:var(--surface);border-radius:999px;padding:1px 9px}
+.post{display:block;text-decoration:none;color:var(--ink);background:var(--surface);border-radius:14px;padding:12px 13px;box-shadow:0 1px 2px rgba(20,30,50,.08),0 2px 8px rgba(20,30,50,.06)}
+.post img{display:block;width:calc(100% + 26px);max-width:none;margin:-12px -13px 10px;border-radius:14px 14px 0 0;aspect-ratio:16/9;object-fit:cover;background:#fff}
+.post b{display:block;font-size:16px;line-height:1.45}
+.post span{display:block;font-size:14px;color:var(--muted);line-height:1.55;margin-top:4px}
+.post i{display:inline-block;font-style:normal;font-size:11.5px;font-weight:700;background:var(--gray);border-radius:999px;padding:1px 8px;margin:8px 4px 0 0}
+.post.note span{color:var(--ink)}
+.post.go2{background:var(--accent);color:var(--accent-ink)}
+.post.go2 span{color:var(--accent-ink);opacity:.9}
+.post.quiz{border:2px dashed var(--tint);background:transparent;box-shadow:none}
+details.post summary{cursor:pointer;list-style:none}
+details.post ul{padding-left:20px;margin:8px 0 0;font-size:14.5px}
+details.post table{font-size:12.5px}
+.swipe{text-align:right;color:var(--muted);font-size:13px;margin:0}
+.k0{--tint:#e8b400;background:#fff6cf}.k1{--tint:#ef7d55;background:#ffe6dc}.k2{--tint:#2f9e5b;background:#e0f4e6}
+.k3{--tint:#2d63cc;background:#dfeafe}.k4{--tint:#7c5cd6;background:#ece5ff}.k5{--tint:#d64b8a;background:#ffe5f0}
+.k6{--tint:#159a9c;background:#daf3f3}.k7{--tint:#d9822b;background:#fde7cf}.k8{--tint:#6b8e23;background:#e9f0d8}
+.k9{--tint:#55607a;background:#e7e9f0}.kS{--tint:#16233a;background:#eef1f6}.kP{--tint:#0d7a64;background:#ddf1ea}
+@media (prefers-color-scheme: dark){.col{background:#19212c}.post.quiz{background:transparent}}
+.crumb{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:13.5px;border-top:6px solid var(--tint);background:var(--surface);border-radius:12px;padding:8px 12px;margin-bottom:6px}
+.crumb a{font-weight:700;text-decoration:none;color:var(--ink)}
+.crumb span{color:var(--muted);text-align:right}
+@media (min-width:900px){.board{margin:0;padding:4px 0 24px}.col{flex-basis:300px}}

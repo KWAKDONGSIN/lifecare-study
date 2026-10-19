@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>구간 C — 후처리 (13~15단계) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 4/10</span></div><h1>구간 C — 후처리 (13~15단계)</h1>
+<p>7장에서 배운 두 가지 다듬기예요. 실습에서는 04번과 05번 스크립트예요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>13. <a class="w" href="words.html#w134" data-w="134">PCR 중복</a> 제거</td><td><code>picard MarkDuplicates</code> (이후 <a class="w" href="words.html#w120" data-w="120">SortSam</a>)</td><td>sorted <a class="w" href="words.html#w118" data-w="118">BAM</a> → dedup BAM + metrics 파일</td><td><a class="w" href="words.html#w27" data-w="27">PCR</a> 복사본이 <a class="w" href="words.html#w50" data-w="50">변이</a> 비율을 부풀리는 걸 막아요. <a class="w" href="words.html#w101" data-w="101">amplicon</a> 데이터는 생략해요.</td></tr>
+  <tr><td>14. <a class="w" href="words.html#w136" data-w="136">BQSR</a> (1) 보정표 만들기</td><td><code>gatk BaseRecalibrator</code></td><td>dedup BAM + <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> + 알려진 <a class="w" href="words.html#w51" data-w="51">SNP</a>(<a class="w" href="words.html#w138" data-w="138">dbSNP</a>) → recal_data.table</td><td>알려진 SNP를 정답지로 삼아 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>의 버릇을 계산해요.</td></tr>
+  <tr><td>15. BQSR (2) 보정 적용</td><td><code>gatk ApplyBQSR</code></td><td>dedup BAM + 보정표 → final BAM(실습 이름 recal.bam)</td><td>품질 점수를 다시 써서 에러를 변이로 착각하는 일을 줄여요. 분석 준비 완료(analysis-ready)예요.</td></tr>
+</table></div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>정렬된 BAM에서 <a class="w" href="words.html#w135" data-w="135">Picard</a> <a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a>로 PCR 중복을 제거하고 다시 정렬한 뒤, dbSNP를 정답지로 BaseRecalibrator가 재보정 테이블을 만들고 ApplyBQSR가 품질 점수를 다시 써서 final BAM을 만든다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 후처리가 끝나면 어떤 BAM이 나오나요?</summary>
+  <p>분석 준비 완료 BAM(analysis-ready BAM, final BAM)이에요. 실습 스크립트에서는 recal.bam이라고 불러요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-05.html">다음 카드 → 구간 D — 변이 호출과 필터 (16~19단계)</a><div class="pn"><a href="c9-03.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

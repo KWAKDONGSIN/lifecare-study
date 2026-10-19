@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>⑨~⑩ 진짜 오타만 고르고 뜻 찾기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k1"><a href="index.html#c1">← 보드</a><span>1장 큰 그림 — 파이프라인 · 6/8</span></div><h1>⑨~⑩ 진짜 오타만 고르고 뜻 찾기</h1>
+<p><b>⑨ <a class="w" href="words.html#w147" data-w="147">Variant calling</a>(변이 호출)</b>예요. 정답지와 다른 자리를 모두 찾는 건 쉬워요. 어려운 건 그중에서 <b>진짜 <a class="w" href="words.html#w50" data-w="50">변이</a>일 확률이 높은 것만</b> 골라내는 일이에요.</p>
+<p>도구는 <a class="w" href="words.html#w139" data-w="139">GATK</a>의 <b><a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a></b>예요. 한 자리를 여러 쪽지가 덮고 있어야 믿을 수 있어요. 100장 중 1장만 다르면 기계 실수로 보고 걸러요. 결과는 <b><a class="w" href="words.html#w148" data-w="148">VCF</a></b>(Variant Call Format, 변이 목록 파일)로 나와요.</p>
+<p><b>⑩ <a class="w" href="words.html#w159" data-w="159">Annotation</a>(주석 달기)</b>예요. 찾은 변이가 무슨 뜻인지 알려진 데이터베이스(예 <a class="w" href="words.html#w163" data-w="163">ClinVar</a>)와 연결해 설명을 붙여요. 도구는 <b><a class="w" href="words.html#w160" data-w="160">ANNOVAR</a></b>예요. 이 단계를 거쳐야 "이 변이가 어떤 병이나 특징과 관련 있나"를 알 수 있어요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>두 그림에서 다른 곳을 찾는 "틀린 그림 찾기"는 쉬워요. 하지만 그 다른 점이 진짜 틀린 것인지, 인쇄가 번진 것인지 가려내는 건 어려워요. 그다음에 사전을 펴서 그 틀린 부분이 무슨 뜻인지 찾아보는 것이 annotation이에요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>GATK HaplotypeCaller로 variant calling을 수행해 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a>와 다른 위치 중 진짜 변이일 가능성이 높은 것만 VCF로 출력한다. 이후 ANNOVAR로 <a class="w" href="words.html#w138" data-w="138">dbSNP</a>, ClinVar 같은 데이터베이스와 연결해 변이의 질병 관련성과 의미를 해석한다(annotation).</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 변이 호출(variant calling)에서 어려운 점은 무엇인가요?</summary>
+  <p>다른 자리를 찾는 건 쉽지만, 그것이 진짜 변이인지 기계 에러인지 가려내야 한다는 점이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c1-07.html">다음 카드 → 큰 묶음 3개와 교수님이 반복한 문장</a><div class="pn"><a href="c1-05.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c1"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>큰 묶음 3개와 교수님이 반복한 문장 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k1"><a href="index.html#c1">← 보드</a><span>1장 큰 그림 — 파이프라인 · 7/8</span></div><h1>큰 묶음 3개와 교수님이 반복한 문장</h1>
+<p>열 단계는 크게 세 묶음으로 불러요. 시험에는 이 묶음 이름이 자주 나와요.</p>
+<div class="tw"><table>
+  <tr><th style="width:34%">묶음</th><th>입력 → 출력</th><th>뜻</th></tr>
+  <tr><td><b><a class="w" href="words.html#w166" data-w="166">Pre-processing</a></b> (전처리)</td><td><a class="w" href="words.html#w78" data-w="78">FASTQ</a> → <a class="w" href="words.html#w118" data-w="118">BAM</a></td><td>읽은 조각을 믿을 만하게 다듬어 제자리에 붙이기</td></tr>
+  <tr><td><b><a class="w" href="words.html#w147" data-w="147">Variant discovery</a></b> (<a class="w" href="words.html#w50" data-w="50">변이</a> 발견)</td><td>BAM → <a class="w" href="words.html#w148" data-w="148">VCF</a></td><td>붙인 결과에서 진짜 변이 찾기</td></tr>
+  <tr><td><b>Refinement / <a class="w" href="words.html#w159" data-w="159">Annotation</a></b></td><td>VCF → 해석</td><td>목적에 따라 질병 관련 변이만 볼지 전체를 볼지 정하기</td></tr>
+</table></div>
+<p>"FASTQ에서 BAM까지 다섯 줄이면 된다"는 말은 이미 만들어진 도구(<a class="w" href="words.html#w114" data-w="114">bwa</a>, samtools)가 있어서예요. 다섯 줄은 ① bwa <a class="w" href="words.html#w115" data-w="115">index</a>(<a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 색인 만들기) ② bwa mem(정렬해서 <a class="w" href="words.html#w117" data-w="117">SAM</a> 만들기) ③ samtools view(SAM을 BAM으로 바꾸기) ④ <a class="w" href="words.html#w120" data-w="120">samtools sort</a>(위치순 정렬) ⑤ samtools index(번호표 만들기)예요. 지금은 이런 단계가 있다는 것만 알면 돼요.</p>
+<div class="box tip"><span class="t">교수님이 반복한 문장 4개</span>
+  <ul>
+    <li>"<b>틀린 그림 찾기는 쉽다. 중요한 건 그게 진짜 변이인지 계산하는 것.</b>"</li>
+    <li>"이 분야는 코딩을 잘해야 하는 게 아니라 <b>백그라운드를 이해하고 목적에 맞게 <a class="w" href="words.html#w165" data-w="165">파이프라인</a> 로직을 짜는 것</b>이 중요하다."</li>
+    <li>"<b>목적에 따라 판단한다.</b>" 어떤 단계는 상황에 따라 생략해요. 예를 들어 특정 <a class="w" href="words.html#w13" data-w="13">유전자</a>만 읽은 데이터(<a class="w" href="words.html#w91" data-w="91">targeted</a>)는 <a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a>를 건너뛰고, 희귀 변이를 찾을 때는 <a class="w" href="words.html#w158" data-w="158">hard filter</a>를 건너뛰어요.</li>
+    <li>"툴은 이미 다 있다. FASTQ에서 BAM까지 다섯 줄이면 된다."</li>
+  </ul>
+</div>
+<p>정리하면 이 과목은 코딩 시험이 아니에요. 각 단계가 "왜 있는지"와 "무엇을 넣고 무엇이 나오는지"를 말로 설명하는 시험이에요. 단계마다 눈(<a class="w" href="words.html#w127" data-w="127">IGV</a>, Integrative Genomics Viewer)과 숫자(<a class="w" href="words.html#w87" data-w="87">coverage</a>, <a class="w" href="words.html#w86" data-w="86">depth</a>)로 잘 됐는지 확인한다는 점도 함께 기억하세요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ에서 VCF까지의 분석 과정과 각 단계의 목적은 다음과 같다.</p>
+  <ul>
+    <li><a class="w" href="words.html#w102" data-w="102">QC</a>(<a class="w" href="words.html#w103" data-w="103">FastQC</a>) — <a class="w" href="words.html#w8" data-w="8">염기</a> 품질이 <a class="w" href="words.html#w82" data-w="82">Q30</a> 이상으로 충분한지 확인한다.</li>
+    <li><a class="w" href="words.html#w104" data-w="104">트리밍</a>(<a class="w" href="words.html#w105" data-w="105">cutadapt</a>)·<a class="w" href="words.html#w109" data-w="109">머지</a>(<a class="w" href="words.html#w108" data-w="108">PEAR</a>) — <a class="w" href="words.html#w98" data-w="98">어댑터</a>와 저품질 부분을 제거하고 <a class="w" href="words.html#w95" data-w="95">paired-end</a> <a class="w" href="words.html#w73" data-w="73">read</a>를 병합한다.</li>
+    <li><a class="w" href="words.html#w110" data-w="110">얼라인먼트</a>(BWA) — read를 레퍼런스에 정렬해 SAM/BAM을 만든다.</li>
+    <li>MarkDuplicates(<a class="w" href="words.html#w135" data-w="135">Picard</a>) — <a class="w" href="words.html#w134" data-w="134">PCR 중복 read</a>를 제거한다.</li>
+    <li><a class="w" href="words.html#w136" data-w="136">BQSR</a>(<a class="w" href="words.html#w139" data-w="139">GATK</a>) — 염기 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>를 재보정해 에러가 변이로 오인되지 않게 한다.</li>
+    <li>Variant calling(<a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a>) — 진짜 변이일 가능성이 높은 위치만 VCF로 출력한다.</li>
+    <li>Annotation(<a class="w" href="words.html#w160" data-w="160">ANNOVAR</a>) — 변이를 데이터베이스와 연결해 질병 관련 의미를 해석한다.</li>
+  </ul>
+</div>
+<details class="check"><summary>잠깐 확인 — Pre-processing과 Variant discovery는 각각 어디서 어디까지인가요?</summary>
+  <p>Pre-processing은 FASTQ에서 BAM까지이고, Variant discovery는 BAM에서 VCF까지예요.</p>
+</details>
+
+<div class="done"><a class="go" href="c1-08.html">다음 카드 → 이 장 3줄 요약</a><div class="pn"><a href="c1-06.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c1"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

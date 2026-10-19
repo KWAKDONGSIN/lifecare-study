@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAM과 BAM, 그리고 sort · index · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 9/14</span></div><h1>SAM과 BAM, 그리고 sort · index</h1>
+<p><a class="w" href="words.html#w110" data-w="110">얼라인먼트</a> 결과는 먼저 <b><a class="w" href="words.html#w117" data-w="117">SAM</a></b> 파일로 나와요. 이걸 줄인 것이 <b><a class="w" href="words.html#w118" data-w="118">BAM</a></b>이에요.</p>
+<div class="tw"><table>
+  <tr><th></th><th>SAM</th><th>BAM</th></tr>
+  <tr><td>풀네임</td><td>Sequence Alignment/Map</td><td>Binary (Alignment/Map)</td></tr>
+  <tr><td>모양</td><td><b>텍스트 파일</b> (사람이 읽을 수 있음)</td><td><b>압축된 바이너리 파일</b> (컴퓨터용)</td></tr>
+  <tr><td>크기</td><td>큼</td><td>작음</td></tr>
+</table></div>
+<p><a class="w" href="words.html#w114" data-w="114">BWA</a>가 처음 내놓는 SAM은 <a class="w" href="words.html#w78" data-w="78">FASTQ</a>에 있던 순서 그대로라서 <b>위치가 뒤죽박죽</b>이에요(18번 자리, 2번 자리, 3번 자리, 1번 자리…).</p>
+<ul>
+  <li><b><a class="w" href="words.html#w120" data-w="120">sort</a>(정렬)</b> — 조각들을 <a class="w" href="words.html#w2" data-w="2">염색체</a>와 <b>위치 순서대로</b> 줄 세워요. 정리용이 아니라 다음 단계(<a class="w" href="words.html#w147" data-w="147">변이 찾기</a>)와 <a class="w" href="words.html#w127" data-w="127">IGV</a>에 <b>꼭 필요한 필수 단계</b>예요.</li>
+  <li><b><a class="w" href="words.html#w115" data-w="115">index</a>(색인)</b> — 정렬된 BAM의 목차 파일 <b><a class="w" href="words.html#w119" data-w="119">.bai</a></b>를 만들어요. 목차가 있어야 원하는 위치를 바로 찾아가요.</li>
+</ul>
+<p>실무에서는 용량이 큰 SAM을 따로 저장하지 않고 <b><a class="w" href="words.html#w132" data-w="132">파이프</a>(<code>|</code>)</b>로 바로 sorted BAM을 만들어요. 파이프는 앞 프로그램의 결과를 저장하지 않고 곧장 뒤 프로그램에 넘기는 컨베이어 벨트예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>공장에서 부품이 만들어지자마자 컨베이어 벨트를 타고 다음 기계로 가는 것과 같아요. 중간에 창고에 쌓아 둘 필요가 없어서 빨라요. 교수님은 이 한 줄(<code>bwa mem ... | samtools sort</code>)이 "얼라인의 전부"라고 하셨어요.</p>
+</div>
+<p>한 가지 규칙이 더 있어요. 어떤 단계에서 BAM을 수정했으면 <b>항상 다시 정렬</b>해야 해요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>SAM은 얼라인 결과를 담은 텍스트 파일이고, BAM은 이를 바이너리로 압축해 용량을 줄인 파일이다. BAM은 위치 순서로 <b>sort</b>해야 다음 분석과 시각화를 할 수 있고, <b>index(.bai)</b>를 만들어 원하는 위치를 빠르게 찾는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 정렬된 BAM의 목차 파일 확장자는 무엇일까요?</summary><p>.bai (BAM index)예요. samtools index로 만들어요.</p></details>
+
+<div class="done"><a class="go" href="c6-10.html">다음 카드 → SAM 한 줄에 적힌 것 — 11칸</a><div class="pn"><a href="c6-08.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

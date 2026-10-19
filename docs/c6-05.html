@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>머지 — 페어드엔드 조각 이어붙이기 (PEAR) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 5/14</span></div><h1>머지 — 페어드엔드 조각 이어붙이기 (PEAR)</h1>
+<p>5장에서 배운 <a class="w" href="words.html#w95" data-w="95">페어드엔드</a>는 <a class="w" href="words.html#w96" data-w="96">R1</a>과 R2 두 파일로 나와요. 이걸 가운데 겹치는 부분(overlap)으로 <b>한 줄로 이어붙이는 것</b>을 <a class="w" href="words.html#w109" data-w="109">머지</a>(merge)라고 해요. 도구 이름은 <b><a class="w" href="words.html#w108" data-w="108">PEAR</a></b>예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>두 장의 사진을 겹친 부분에 맞춰 이어 붙여 <b>파노라마 사진</b>을 만드는 것과 같아요.</p>
+</div>
+<ul>
+  <li>실습에서는 약 <b>70%</b>가 붙었어요(assembled).</li>
+  <li>안 붙은 조각은 겹침이 너무 짧거나 아예 없는 경우예요. 이런 <b>not assembled <a class="w" href="words.html#w73" data-w="73">read</a>도 버리지 않고 따로 <a class="w" href="words.html#w110" data-w="110">얼라인</a></b>해서 써요.</li>
+  <li>머지하지 않고 R1·R2 쌍 그대로 얼라인하는 방법도 있어요. 이때 짝 정보는 <a class="w" href="words.html#w117" data-w="117">SAM 파일</a>의 짝 칸(RNEXT·PNEXT·TLEN)에 담겨요.</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><b>PEAR</b>는 페어드엔드의 R1과 R2를 <b>overlap 구간으로 이어붙이는(머지) 도구</b>이며, 합쳐지지 않은 read도 버리지 않고 따로 얼라인한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 겹치는 부분이 없는 R1·R2는 PEAR로 합쳐질까요?</summary><p>합쳐지지 않아요. 이어붙일 겹침이 없기 때문이에요. 이런 read는 버리지 않고 따로 얼라인해서 써요.</p></details>
+
+<div class="done"><a class="go" href="c6-06.html">다음 카드 → 얼라인먼트 — 조각을 제자리에 놓기</a><div class="pn"><a href="c6-04.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

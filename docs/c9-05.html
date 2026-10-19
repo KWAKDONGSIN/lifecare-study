@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>구간 D — 변이 호출과 필터 (16~19단계) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 5/10</span></div><h1>구간 D — 변이 호출과 필터 (16~19단계)</h1>
+<p>드디어 <a class="w" href="words.html#w50" data-w="50">변이</a>를 찾는 단계예요. 실습에서는 06번과 07번 스크립트예요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>16. <a class="w" href="words.html#w147" data-w="147">변이 호출</a></td><td><code>gatk HaplotypeCaller</code> (<code>-ERC GVCF</code>)</td><td>final <a class="w" href="words.html#w118" data-w="118">BAM</a> + <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> + 분석 영역(<code>-L</code>) → <a class="w" href="words.html#w149" data-w="149">GVCF</a>(.g.vcf)</td><td><a class="w" href="words.html#w143" data-w="143">active region</a>과 <a class="w" href="words.html#w142" data-w="142">haplotype</a> 확률로 진짜 변이일 가능성이 높은 것을 찾아요. 모르는 위치도 <a class="w" href="words.html#w150" data-w="150">NON_REF</a>로 기록해요.</td></tr>
+  <tr><td>17. <a class="w" href="words.html#w153" data-w="153">Genotype</a> 부여</td><td><code>gatk GenotypeGVCFs</code></td><td>GVCF → <a class="w" href="words.html#w148" data-w="148">VCF</a>(raw, 확실한 변이만)</td><td>GVCF에서 최종 genotype(GT)을 붙여 변이만 추려요.</td></tr>
+  <tr><td>18. <a class="w" href="words.html#w51" data-w="51">SNP</a>와 <a class="w" href="words.html#w53" data-w="53">INDEL</a> 분리</td><td><code>gatk SelectVariants</code></td><td>raw VCF → SNP VCF, INDEL VCF</td><td>종류별로 다른 <a class="w" href="words.html#w157" data-w="157">필터</a>를 쓰려고 나눠요.</td></tr>
+  <tr><td>19. <a class="w" href="words.html#w158" data-w="158">하드 필터</a></td><td><code>gatk VariantFiltration</code> (QD, FS, MQ 등) + <code>bcftools view -f PASS</code></td><td>SNP VCF → FILTER 칸이 채워진 VCF, PASS만 모은 VCF</td><td>기준 미달 변이를 버려요. 통과하면 PASS, 못 통과하면 걸린 필터 이름이 찍혀요. 희귀 변이 탐색에서는 생략하기도 해요.</td></tr>
+</table></div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>변이 호출은 "GVCF 먼저 → VCF 추리기 → 필터"의 3박자예요. <a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a>(GVCF) → <a class="w" href="words.html#w151" data-w="151">GenotypeGVCFs</a>(VCF) → 하드 필터(PASS)로 외우세요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w139" data-w="139">GATK</a> HaplotypeCaller로 final BAM에서 GVCF를 만들고, GenotypeGVCFs로 genotype을 붙인 VCF를 추린 뒤, 하드 필터로 기준 미달 변이를 제거해 PASS인 변이만 남긴다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — SNP와 INDEL을 왜 따로 나눠서 필터링하나요?</summary>
+  <p>종류별로 다른 필터 기준을 적용하기 위해서예요. 그래서 SelectVariants로 먼저 나눠요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-06.html">다음 카드 → 구간 E — Annotation (20~22단계)</a><div class="pn"><a href="c9-04.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

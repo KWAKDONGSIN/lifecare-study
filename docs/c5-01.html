@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>먼저 용어 4개 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k5"><a href="index.html#c5">← 보드</a><span>5장 Depth · 어디를 읽을까 · 1/8</span></div><h1>먼저 용어 4개</h1>
+<p><a class="w" href="words.html#w3" data-w="3">DNA</a>를 읽는 기계(<a class="w" href="words.html#w58" data-w="58">NGS</a> 시퀀서)는 DNA를 아주 짧게 토막 내서 읽어요. 이때 읽은 토막 하나를 <b><a class="w" href="words.html#w73" data-w="73">read</a>(리드, 읽은 조각)</b>라고 불러요.</p>
+<p>이 조각들에 대해 숫자 4개를 물어보는 게 이 장의 시작이에요.</p>
+<div class="tw"><table>
+  <tr><th style="width:28%">용어</th><th>쉬운 뜻</th></tr>
+  <tr><td>Read 수</td><td>읽은 조각이 <b>모두 몇 개</b>인가</td></tr>
+  <tr><td><a class="w" href="words.html#w74" data-w="74">Read length</a></td><td>조각 <b>하나의 길이</b> (<a class="w" href="words.html#w71" data-w="71">Illumina</a> 기계는 약 150글자)</td></tr>
+  <tr><td><a class="w" href="words.html#w86" data-w="86">Depth</a> (깊이)</td><td><b>한 자리를 조각 몇 개가 겹쳐서 읽었나.</b> 5개가 겹치면 5x</td></tr>
+  <tr><td><a class="w" href="words.html#w87" data-w="87">Coverage</a> (덮은 비율)</td><td><b>전체 중 한 번이라도 읽힌 자리의 비율.</b> 10%가 비었으면 90%</td></tr>
+</table></div>
+<div class="box eg"><span class="t">비유</span>
+  <p>책 한 권을 여러 친구에게 나눠서 읽게 했다고 해 보세요. 어떤 줄은 친구 5명이 읽었고, 어떤 줄은 아무도 안 읽었어요.</p>
+  <p><b>한 줄을 몇 명이 읽었나가 depth</b>, <b>책 전체 중 적어도 한 명이 읽은 줄의 비율이 coverage</b>예요.</p>
+</div>
+<p>왜 둘을 따로 재냐면, 조각이 많아도 한쪽에만 몰려 있을 수 있기 때문이에요. 많이 읽었는지(depth)와 골고루 읽었는지(coverage)는 서로 다른 이야기예요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Depth는 <b>한 위치를 몇 개의 read가 겹쳐 읽었는지</b>(예 <a class="w" href="words.html#w88" data-w="88">30x</a>)를 뜻하고, coverage는 <b><a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 전체 중 한 번이라도 읽힌 비율</b>(예 99%)을 뜻한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — "5x"와 "90%" 중 depth는 어느 쪽일까요?</summary><p>"5x"가 depth예요. x는 "몇 번 읽었나"를 세는 단위이고, %는 "전체 중 얼마나 읽혔나"를 말하는 coverage예요.</p></details>
+
+<div class="done"><a class="go" href="c5-02.html">다음 카드 → 그림으로 보기</a><div class="pn"><a href="index.html#c5"><b>← 이전</b>보드로</a><a class="next" href="quiz.html#c5"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6주차 · 3. NGS · 5. DNA variant 분석 · 라이프03·07</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

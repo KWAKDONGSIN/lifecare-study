@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3주차·4주차 실습 코드 쉽게 읽기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 9/10</span></div><h1>3주차·4주차 실습 코드 쉽게 읽기</h1>
+<p><a class="w" href="words.html#w147" data-w="147">변이 호출</a> 실습 전에 3주차와 4주차에도 실습이 있었어요. 코드를 외울 필요는 없고, 무엇을 하는 코드인지만 이해하면 돼요.</p>
+<p><b>3주차 <a class="w" href="words.html#w73" data-w="73">read</a>_<a class="w" href="words.html#w78" data-w="78">fastq</a> 노트북</b>은 FASTQ를 4줄씩 묶어서 읽는 파이썬 코드예요. FASTQ는 read 하나가 4줄이기 때문이에요(ID, 서열, +, <a class="w" href="words.html#w81" data-w="81">퀄리티</a>).</p>
+<ul>
+  <li><code>open_fastq</code> — 파일 이름이 .gz(압축)로 끝나면 풀어서 열고, 아니면 보통대로 열어요.</li>
+  <li><code>parse_fastq</code> — 한 줄씩 4번 읽어서 ID·서열·+·퀄리티를 차례로 가져와요. 첫 줄이 비어 있으면 파일 끝이라 멈춰요.</li>
+  <li><code>yield</code> — "read 하나를 건네주고 다음에 이어서 계속"하는 방식이라 파일 전체를 메모리에 올리지 않아요.</li>
+</ul>
+<div class="box eg"><span class="t">비유</span>
+  <p>4칸짜리 도시락을 한 통씩 건네주는 자판기예요. 도시락 한 통이 read 하나이고, 자판기는 필요할 때마다 한 통씩만 꺼내 줘요.</p>
+</div>
+<p>실행 결과는 read가 <b>1,187개</b>, 평균 길이가 <b>151.0</b>이었어요. 파일이 4,748줄이니까 4,748 ÷ 4 = 1,187이 딱 맞아요. 교수님은 평균 길이를 150이라고 했지만 실제로는 151이에요.</p>
+<p><b>4주차 <a class="w" href="words.html#w103" data-w="103">FastQC</a> 실습</b>은 순서가 중요해요. 서버에 접속하고, <a class="w" href="words.html#w131" data-w="131">가상환경</a>(<code>conda activate</code>)에 들어가고, 내 폴더를 만들고, 데이터 파일을 복사하고, <code>fastqc 파일명</code>을 실행하고, 만들어진 HTML 리포트를 WinSCP로 내 PC에 가져와 열어요. 가상환경에 들어가면 프롬프트 앞의 이름이 (<a class="w" href="words.html#w8" data-w="8">base</a>)에서 바뀌어요.</p>
+<p>이어서 파일 만지기 5문제를 했어요. head로 엿보기, awk로 ID·서열·퀄리티 뽑기, grep으로 특정 서열 잡기, 서열 길이를 뽑아 uniq -c로 길이 분포 보기, vi로 셸 스크립트 만들어 실행하기예요. 교수님은 1~2번은 꼭 해 보라고 했어요. grep은 그 서열이 있는 줄만 남기는 도구이고, awk는 칸을 나눠서 필요한 칸만 꺼내는 도구예요.</p>
+<p>슬라이드 91쪽에는 <b><a class="w" href="words.html#w82" data-w="82">Q30</a> <a class="w" href="words.html#w157" data-w="157">필터</a>링</b> 코드(Biopython)도 있어요. 수업에서 직접 다루지는 않았어요. "맨 앞 7개 염기의 <a class="w" href="words.html#w80" data-w="80">Phred 점수</a>가 모두 30 이상인 read만 골라 저장"하는 코드이고, 앞 7개만 보는 것은 예시용 가정이에요. 직접 계산해 보니 실습 파일은 <a class="w" href="words.html#w96" data-w="96">R1</a>의 평균 Q가 약 36.6, R2가 약 24.6이라서 Q30 아래가 많은 쪽, 즉 버려야 할 쪽은 R2였어요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ는 read 하나가 ID, 염기서열, +, 퀄리티 점수의 4줄로 이루어져 있다. 실습 코드는 파일을 4줄씩 읽어 read 개수와 평균 길이를 구했고, Q30 미만의 저품질 read는 제거 대상이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 4,748줄짜리 FASTQ에는 read가 몇 개 들어 있나요?</summary>
+  <p>4,748 ÷ 4 = 1,187개예요. read 하나가 4줄이기 때문이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-10.html">다음 카드 → 이 장 3줄 요약</a><div class="pn"><a href="c9-08.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

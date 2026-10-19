@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FASTA와 FASTQ는 어떻게 다른가 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k4"><a href="index.html#c4">← 보드</a><span>4장 FASTQ와 품질 점수 · 4/5</span></div><h1>FASTA와 FASTQ는 어떻게 다른가</h1>
+<p>이름이 비슷해서 헷갈려요. <b><a class="w" href="words.html#w79" data-w="79">FASTA</a></b>는 표준 책, 즉 <b><a class="w" href="words.html#w84" data-w="84">레퍼런스</a>(정답지)</b>를 적는 파일이에요. <b><a class="w" href="words.html#w78" data-w="78">FASTQ</a></b>는 내가 읽은 <b><a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 결과</b>를 적는 파일이에요.</p>
+<div class="tw"><table>
+  <tr><th></th><th>FASTA</th><th>FASTQ</th></tr>
+  <tr><td>뭐에 쓰나</td><td><b>레퍼런스(표준 정답지)</b></td><td><b>내 시퀀싱 결과</b></td></tr>
+  <tr><td>모양</td><td><code>&gt;</code>이름 + 서열 (2줄)</td><td><code>@</code>이름, 서열, +, 점수 (4줄)</td></tr>
+  <tr><td><a class="w" href="words.html#w81" data-w="81">품질 점수</a></td><td>없음</td><td><b>있음</b></td></tr>
+</table></div>
+<div class="box eg"><span class="t">비유</span>
+  <p>FASTA는 모범답안지예요. 정답이 이미 확정되어 있어서 "얼마나 믿을 수 있나" 점수가 필요 없어요. FASTQ는 학생이 풀어서 낸 답안이에요. 칸마다 "자신 있게 썼나" 점수를 같이 적어야 해요.</p>
+</div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>Q가 들어간 FASTQ에는 Quality(품질) 점수가 있다</b>고 기억하세요. 둘을 구별하면 점수 줄이 있는지로 가를 수 있어요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTA는 레퍼런스 서열을 &<a class="w" href="words.html#w153" data-w="153">gt</a>;ID와 서열의 2줄로 저장하며 품질 점수가 없다. FASTQ는 시퀀싱 결과를 @ID, 서열, +, 품질 점수의 4줄로 저장하며 <a class="w" href="words.html#w8" data-w="8">염기</a>별 품질 정보를 포함한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 품질 점수가 들어 있는 파일은 FASTA와 FASTQ 중 어느 쪽인가요?</summary>
+  <p>FASTQ예요. FASTA는 서열만 있고 품질 점수가 없어요.</p>
+</details>
+
+<div class="done"><a class="go" href="c4-05.html">다음 카드 → 이 장 3줄 요약</a><div class="pn"><a href="c4-03.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c4"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

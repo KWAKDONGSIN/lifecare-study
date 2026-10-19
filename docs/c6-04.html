@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>트리밍 — 쓸모없는 가장자리 잘라내기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 4/14</span></div><h1>트리밍 — 쓸모없는 가장자리 잘라내기</h1>
+<div class="box def"><span class="t">트리밍 (trimming)</span>
+  <p><a class="w" href="words.html#w73" data-w="73">read</a>에서 <b><a class="w" href="words.html#w98" data-w="98">어댑터</a>와 품질 낮은 부분을 잘라내는 일</b>이에요. 어댑터를 잘라내는 걸 adapter <a class="w" href="words.html#w104" data-w="104">trimming</a>이라고 불러요.</p>
+</div>
+<div class="paper"><svg viewBox="0 0 380 66">
+  <text x="0" y="12" font-size="10" fill="#5d6b80">기계가 읽은 150글자</text>
+  <rect x="0" y="18" width="200" height="18" fill="#16a34a"/><text x="100" y="31" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">진짜 DNA (100)</text>
+  <rect x="200" y="18" width="70" height="18" fill="#94a3b8"/><text x="235" y="31" font-size="9" text-anchor="middle" fill="#fff">어댑터</text>
+  <rect x="270" y="18" width="110" height="18" fill="#fecaca"/><text x="325" y="31" font-size="9" text-anchor="middle" fill="#b91c1c">노이즈</text>
+  <line x1="200" y1="12" x2="200" y2="44" stroke="#d6264a" stroke-width="2" stroke-dasharray="3,2"/><text x="204" y="58" font-size="10" fill="#d6264a" font-weight="bold">✂ 여기서 자르기 = 트리밍</text>
+</svg></div>
+<div class="box eg"><span class="t">비유</span>
+  <p>사진을 찍었는데 <b>액자 테두리(어댑터)와 뒤쪽 벽(노이즈)</b>까지 같이 찍혔어요. 테두리부터 잘라내야 다음 단계에서 사진 속 장소를 제대로 찾아요. 실제로 <b>트리밍한 데이터가 <a class="w" href="words.html#w110" data-w="110">얼라인</a>율(제자리를 찾은 비율)이 훨씬 높다</b>는 비교 논문(2012)이 있어요.</p>
+</div>
+<p>트리밍 도구는 두 가지를 알아 두세요.</p>
+<ul>
+  <li><b><a class="w" href="words.html#w105" data-w="105">cutadapt</a></b> — 내가 지정한 어댑터만 정확히 잘라요. 교수님이 선호하세요. 어떤 read가 날아갈지 내가 통제할 수 있기 때문이에요.</li>
+  <li><b><a class="w" href="words.html#w106" data-w="106">Trim Galore</a></b> — 어댑터를 자르면서 품질이 낮은 부분까지 <b>자동으로</b> 걸러 줘서 편해요.</li>
+</ul>
+<p>실습 스크립트에서는 <a class="w" href="words.html#w107" data-w="107">fastp</a>라는 다른 도구도 썼어요. 도구마다 옵션이 달라서 시험에서는 도구 이름보다 "어댑터를 자르는 단계"라는 목적이 더 중요해요.</p>
+<figure class="slide"><img src="slides/v21.jpg"><figcaption>교수님 슬라이드 — Quality trimming + Adaptor trimming</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w100" data-w="100">인서트</a>가 짧으면 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a>이 어댑터와 노이즈까지 읽으므로 <b>adapter trimming</b>으로 제거해야 한다. 트리밍한 데이터는 얼라인율이 높아진다. 어댑터만 정확히 자르는 도구가 <b>cutadapt</b>, 품질 <a class="w" href="words.html#w157" data-w="157">필터</a>까지 자동으로 하는 도구가 <b>Trim Galore</b>이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — FastQC 그래프의 뒷부분이 급락했어요. 어떤 단계를 해야 할까요?</summary><p>어댑터를 의심하고 트리밍(adapter trimming)을 해요. 어댑터와 그 뒤 노이즈를 잘라내면 품질이 회복돼요.</p></details>
+
+<div class="done"><a class="go" href="c6-05.html">다음 카드 → 머지 — 페어드엔드 조각 이어붙이기 (PEAR)</a><div class="pn"><a href="c6-03.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

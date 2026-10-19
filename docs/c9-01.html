@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>실습 전체 지도 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 1/10</span></div><h1>실습 전체 지도</h1>
+<p>교수님은 개념을 모르면 실습할 때 지금 무슨 스텝인지 모른다고 여러 번 말했어요. 그래서 이 장은 실습을 "단계"로 나눠서 보여 줘요. 아래 번호는 이 책에서 편의상 붙인 단계 번호이고, 시험에 번호가 나오지는 않아요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>요리 순서와 같아요. 재료 손질(<a class="w" href="words.html#w102" data-w="102">품질 검사</a>·<a class="w" href="words.html#w104" data-w="104">트리밍</a>) → 위치 맞춰 담기(정렬) → 불순물 거르기(<a class="w" href="words.html#w133" data-w="133">중복 제거</a>·<a class="w" href="words.html#w136" data-w="136">BQSR</a>) → 맛 보며 골라내기(<a class="w" href="words.html#w147" data-w="147">변이 호출</a>·<a class="w" href="words.html#w157" data-w="157">필터</a>) → 의미 적기(<a class="w" href="words.html#w159" data-w="159">annotation</a>)로 이어져요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th>구간</th><th>단계 번호</th><th>하는 일</th></tr>
+  <tr><td>A. 준비와 점검</td><td>0~5</td><td>환경 준비, <a class="w" href="words.html#w78" data-w="78">FASTQ</a> 받기, 품질 검사, <a class="w" href="words.html#w98" data-w="98">어댑터</a> 자르기, 합치기, <a class="w" href="words.html#w113" data-w="113">BLAST</a> 구경</td></tr>
+  <tr><td>B. 정렬</td><td>6~12</td><td><a class="w" href="words.html#w73" data-w="73">read</a>를 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 위치에 맞추고 숫자와 눈으로 점검</td></tr>
+  <tr><td>C. 후처리</td><td>13~15</td><td><a class="w" href="words.html#w134" data-w="134">PCR 중복</a> 제거, BQSR (7장)</td></tr>
+  <tr><td>D. 변이 호출과 필터</td><td>16~19</td><td><a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a>, <a class="w" href="words.html#w151" data-w="151">GenotypeGVCFs</a>, <a class="w" href="words.html#w158" data-w="158">하드 필터</a> (7장)</td></tr>
+  <tr><td>E. Annotation</td><td>20~22</td><td><a class="w" href="words.html#w160" data-w="160">ANNOVAR</a>로 의미 붙이기 (8장)</td></tr>
+</table></div>
+<p>변이 호출 실습은 번호가 붙은 스크립트를 순서대로 돌렸어요. 02번 품질 검사·트리밍, 03번 정렬, 04번 후처리(MarkDuplicates), 05번 BQSR, 06번 변이 호출, 07번 하드 필터예요. 번호가 곧 순서예요.</p>
+<p>실습은 모두 <a class="w" href="words.html#w128" data-w="128">리눅스</a> 서버에서 했어요. 도구가 설치된 <a class="w" href="words.html#w131" data-w="131">가상환경</a>(conda)에 들어간 뒤, 내 폴더로 이동해서 스크립트를 돌렸어요. 결과 <a class="w" href="words.html#w118" data-w="118">BAM</a>·<a class="w" href="words.html#w119" data-w="119">BAI</a>는 WinSCP로 내 PC에 옮겨서 웹 <a class="w" href="words.html#w127" data-w="127">IGV</a>에 올려 봤어요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w50" data-w="50">변이</a> <a class="w" href="words.html#w165" data-w="165">분석 파이프라인</a>은 FASTQ를 QC·트리밍한 뒤 <a class="w" href="words.html#w114" data-w="114">BWA</a>로 정렬해 sorted BAM과 <a class="w" href="words.html#w115" data-w="115">index</a>를 만들고, MarkDuplicates와 BQSR로 후처리한 후 HaplotypeCaller(<a class="w" href="words.html#w149" data-w="149">GVCF</a>)와 GenotypeGVCFs(<a class="w" href="words.html#w148" data-w="148">VCF</a>), 하드 필터를 거쳐 ANNOVAR로 annotation하는 순서이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 실습에서 07번 스크립트는 파이프라인의 어디인가요?</summary>
+  <p>하드 필터 단계예요. 06번 변이 호출 다음에 기준 미달 변이를 버려요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-02.html">다음 카드 → 구간 A — 준비와 점검 (0~5단계)</a><div class="pn"><a href="index.html#c9"><b>← 이전</b>보드로</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

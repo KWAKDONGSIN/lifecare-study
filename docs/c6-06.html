@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>얼라인먼트 — 조각을 제자리에 놓기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 6/14</span></div><h1>얼라인먼트 — 조각을 제자리에 놓기</h1>
+<div class="box def"><span class="t">얼라인먼트 (alignment, 매핑)</span>
+  <p>짧은 조각(<a class="w" href="words.html#w73" data-w="73">read</a>)들이 <b><a class="w" href="words.html#w84" data-w="84">레퍼런스</a>(표준 <a class="w" href="words.html#w14" data-w="14">게놈</a>, 정답지)의 몇 번째 자리인지 찾아 맞추는 일</b>이에요. 자리를 알아야 "원래 G인데 여기는 A네" 하고 <a class="w" href="words.html#w50" data-w="50">변이</a>를 찾을 수 있어요.</p>
+</div>
+<div class="box eg"><span class="t">비유</span>
+  <p>퍼즐 상자 뚜껑에는 <b>완성 그림(레퍼런스)</b>이 있어요. <b>수억 개의 퍼즐 조각(read)</b>을 그 그림을 보면서 제자리에 하나하나 놓는 일이 <a class="w" href="words.html#w110" data-w="110">얼라인먼트</a>예요.</p>
+</div>
+<p>얼라인 방식은 두 종류가 있어요.</p>
+<div class="tw"><table>
+  <tr><th></th><th>Global (전체)</th><th>Local (부분)</th></tr>
+  <tr><td>방법</td><td>두 서열을 <b>처음부터 끝까지</b> 비교</td><td><b>가장 비슷한 부분</b>만 찾아 비교</td></tr>
+  <tr><td>비유</td><td>숲 보기 — 무슨 종인지</td><td>나무 보기 — 어디가 다른지</td></tr>
+  <tr><td><a class="w" href="words.html#w147" data-w="147">변이 찾기</a></td><td>잘 안 써요</td><td>이걸 써요</td></tr>
+</table></div>
+<p>산에서 캔 식물이 무슨 종인지 알고 싶을 때는 여러 종의 <a class="w" href="words.html#w3" data-w="3">DNA</a>와 통째로 비교하는 global이 알맞아요. 반면 변이 하나가 중요한 우리 분석은 가장 비슷한 부분을 세밀하게 보는 <b>local</b>을 써요.</p>
+<figure class="slide"><img src="slides/v26.jpg"><figcaption>교수님 슬라이드 — Global vs Local Alignment</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>얼라인먼트는 read가 레퍼런스의 <b>어느 위치</b>에 해당하는지 찾아 맞추는 과정으로, 그 위치를 알아야 변이를 찾을 수 있다. <a class="w" href="words.html#w111" data-w="111">global alignment</a>는 서열 전체를, <a class="w" href="words.html#w112" data-w="112">local alignment</a>는 가장 유사한 부분을 비교하며 변이 탐색에는 <b>local</b>을 쓴다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 변이를 찾는 분석에는 global과 local 중 어느 쪽을 쓸까요?</summary><p>local이에요. 변이는 전체가 아니라 비슷한 부분 안의 작은 차이를 찾는 일이라서요.</p></details>
+
+<div class="done"><a class="go" href="c6-07.html">다음 카드 → BLAST에서 BWA로 — 왜 더 빠를까</a><div class="pn"><a href="c6-05.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

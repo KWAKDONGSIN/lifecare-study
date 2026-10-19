@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>구간 A — 준비와 점검 (0~5단계) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 2/10</span></div><h1>구간 A — 준비와 점검 (0~5단계)</h1>
+<p>본격적인 분석 전에 서버를 준비하고, 데이터가 쓸 만한지 확인하고, 불필요한 부분을 잘라 내는 단계예요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>0. 환경 준비</td><td>ssh 접속, <code>conda activate</code>, 폴더 만들기</td><td>실습 데이터 → 내 작업 폴더</td><td>도구가 깔린 <a class="w" href="words.html#w131" data-w="131">가상환경</a>에 들어가야 해요. 안 들어가면 "도구가 없다"는 오류가 나요.</td></tr>
+  <tr><td>1. <a class="w" href="words.html#w77" data-w="77">Base calling</a></td><td><a class="w" href="words.html#w58" data-w="58">NGS</a> 기기(<a class="w" href="words.html#w71" data-w="71">Illumina</a> 등)</td><td><a class="w" href="words.html#w69" data-w="69">형광</a> 이미지 → <a class="w" href="words.html#w78" data-w="78">FASTQ</a> (<a class="w" href="words.html#w96" data-w="96">R1</a>, R2)</td><td>빛 사진을 ATGC 글자와 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>로 바꿔요.</td></tr>
+  <tr><td>2. <a class="w" href="words.html#w102" data-w="102">품질 검사</a>(QC)</td><td><code>fastqc</code></td><td>FASTQ → HTML 리포트</td><td>데이터가 쓸 만한지 <a class="w" href="words.html#w82" data-w="82">Q30</a> 기준으로 봐요. 뒤쪽 점수가 떨어지면 <a class="w" href="words.html#w98" data-w="98">어댑터</a>를 의심해요.</td></tr>
+  <tr><td>3. 어댑터 <a class="w" href="words.html#w104" data-w="104">트리밍</a></td><td><code>cutadapt</code> (<a class="w" href="words.html#w50" data-w="50">변이</a> 실습은 <code>fastp</code>)</td><td>FASTQ → 트리밍된 FASTQ</td><td>조각이 짧아 <a class="w" href="words.html#w73" data-w="73">read</a>에 딸려 온 어댑터와 뒤쪽 노이즈를 잘라 내요.</td></tr>
+  <tr><td>4. <a class="w" href="words.html#w95" data-w="95">페어드엔드</a> <a class="w" href="words.html#w109" data-w="109">머지</a>(연습용)</td><td><code>pear</code></td><td>R1 + R2 → 한 줄로 합친 긴 read</td><td>겹치는 부분(overlap)으로 두 read를 이어 붙여요. 합쳐지지 않은 read는 따로 정렬하고, <a class="w" href="words.html#w147" data-w="147">변이 호출</a> 스크립트에는 안 들어 있어요.</td></tr>
+  <tr><td>5. <a class="w" href="words.html#w113" data-w="113">BLAST</a>(웹 시연)</td><td>NCBI BLAST 웹페이지</td><td>짧은 서열 하나 → 일치하는 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 목록</td><td><a class="w" href="words.html#w112" data-w="112">local alignment</a>가 어떤 모습인지 눈으로 봐요. NGS 대량 데이터에는 너무 느려요.</td></tr>
+</table></div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w103" data-w="103">FastQC</a>로 FASTQ의 품질(Q30 기준)을 확인하고, <a class="w" href="words.html#w100" data-w="100">인서트</a>가 read보다 짧아 섞여 들어온 어댑터와 저품질 구간을 <a class="w" href="words.html#w105" data-w="105">cutadapt</a>나 <a class="w" href="words.html#w107" data-w="107">fastp</a>로 트리밍한다. 트리밍하지 않으면 레퍼런스에 없는 서열이 정렬을 방해하고 변이로 오인될 수 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — PEAR(머지)는 변이 호출 스크립트에 들어 있나요?</summary>
+  <p>아니요. 6주차에 도구 하나씩 연습한 용도였어요. 변이 호출 스크립트는 fastp로 트리밍한 뒤 곧바로 정렬해요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-03.html">다음 카드 → 구간 B — 정렬 (6~12단계)</a><div class="pn"><a href="c9-01.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

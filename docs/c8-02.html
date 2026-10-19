@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DB 사전 5권 — 각각 무엇을 물어보나요 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k8"><a href="index.html#c8">← 보드</a><span>8장 Annotation · 2/6</span></div><h1>DB 사전 5권 — 각각 무엇을 물어보나요</h1>
+<p>시험에 가장 자주 나오는 부분이에요. 각 DB가 어떤 질문에 답하는지만 짝지어 외우면 돼요.</p>
+<div class="tw"><table>
+  <tr><th style="width:30%">DB (사전)</th><th>답해 주는 질문</th></tr>
+  <tr><td><b><a class="w" href="words.html#w138" data-w="138">dbSNP</a></b></td><td>이 <a class="w" href="words.html#w50" data-w="50">변이</a> <b>이름</b>이 뭔가? (rs번호)</td></tr>
+  <tr><td><b><a class="w" href="words.html#w161" data-w="161">1000 Genomes</a></b></td><td>일반인한테 <b>흔한가</b>?</td></tr>
+  <tr><td><b><a class="w" href="words.html#w162" data-w="162">dbNSFP</a></b></td><td><b><a class="w" href="words.html#w15" data-w="15">단백질</a> 기능</b>에 영향을 주나?</td></tr>
+  <tr><td>dbscSNV · SPIDEX</td><td><b><a class="w" href="words.html#w31" data-w="31">스플라이싱</a></b>에 영향을 주나?</td></tr>
+  <tr><td class="red"><a class="w" href="words.html#w163" data-w="163">ClinVar</a></td><td class="red"><b>질병</b>과 관련 있나? (병원성 / 무해)</td></tr>
+</table></div>
+<p>풀어서 설명해 볼게요.</p>
+<ul>
+  <li><b>dbSNP</b> — 사람 번호표 같은 이름 사전이에요. 변이마다 <b>rs번호</b>라는 이름이 붙어 있어서 "rs○○○"로 불러요. <a class="w" href="words.html#w136" data-w="136">BQSR</a>(7장)에서 정답지로 쓴 것도 이 DB예요.</li>
+  <li><b>1000 Genomes</b> — 많은 사람의 <a class="w" href="words.html#w14" data-w="14">유전체</a>를 모아 둔 자료예요. 이 변이가 일반인에게 흔하면 병과 관련 없는 평범한 차이일 가능성이 커요.</li>
+  <li><b>dbNSFP</b> — 변이가 단백질 기능에 영향을 줄지 알려 줘요. 단백질이 만들어지는 데 쓰이는 부분이 바뀌면 단백질이 달라질 수 있어서예요.</li>
+  <li><b>dbscSNV · SPIDEX</b> — 스플라이싱(splicing)에 영향을 주는지 알려 줘요. 스플라이싱은 <a class="w" href="words.html#w4" data-w="4">RNA</a>에서 필요 없는 부분(<a class="w" href="words.html#w30" data-w="30">인트론</a>)을 잘라 내고 필요한 부분(<a class="w" href="words.html#w29" data-w="29">엑손</a>)만 이어 붙이는 과정이에요. 잘라 붙이는 자리가 바뀌면 결과물이 달라질 수 있어요.</li>
+  <li><b>ClinVar</b> — 병원에서 모은 변이와 질병의 관계 사전이에요. 결과는 병원성(pathogenic)인지 무해(benign)인지로 나와요.</li>
+</ul>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>이름(dbSNP) → 흔함(1000 Genomes) → 단백질(dbNSFP) → 스플라이싱(dbscSNV·SPIDEX) → 병(ClinVar). 질문 5개를 순서대로 외우세요. 시험의 단골은 <b>ClinVar = 질병 관련</b>이에요.</p>
+</div>
+<p>슬라이드 88쪽에는 암 관련 DB도 있었어요. <b>cosmic70</b>은 "암에서 발견된 적이 있나?", <b>nci60</b>은 "암 <a class="w" href="words.html#w0" data-w="0">세포</a>주에서 발견되나?"를 물어요. 위 5개보다는 덜 중요해요.</p>
+<figure class="slide"><img src="slides/v88.jpg"><figcaption>교수님 슬라이드 — ANNOVAR DB별 질문 (이 변이 이름이 뭔가? / 일반인에게 흔한가? / 질병과 관련 있나?)</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>변이가 질병과 관련 있는지 확인하는 대표 DB는 ClinVar이다. dbSNP는 변이의 이름(rs번호), 1000 Genomes는 일반인에서의 빈도, dbNSFP는 단백질 기능에 미치는 영향, dbscSNV·SPIDEX는 스플라이싱에 미치는 영향을 알려 준다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — "이 변이가 일반인한테 흔한가?"는 어느 DB에 물어보나요?</summary>
+  <p>1000 Genomes예요. 이름은 dbSNP, 단백질 기능은 dbNSFP, 질병은 ClinVar에 물어봐요.</p>
+</details>
+
+<div class="done"><a class="go" href="c8-03.html">다음 카드 → ANNOVAR의 방식 3가지</a><div class="pn"><a href="c8-01.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c8"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

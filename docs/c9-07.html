@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>파일 이름이 어떻게 바뀌나요 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 7/10</span></div><h1>파일 이름이 어떻게 바뀌나요</h1>
+<p>단계마다 파일의 이름과 모양이 바뀌어요. 이것만 알아도 <a class="w" href="words.html#w165" data-w="165">파이프라인</a>이 머릿속에 그려져요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>나오는 파일</th></tr>
+  <tr><td>시퀀서</td><td><b><a class="w" href="words.html#w78" data-w="78">FASTQ</a></b> (.fastq, .fq.gz) — <a class="w" href="words.html#w96" data-w="96">R1</a>, R2 두 개</td></tr>
+  <tr><td>정렬 직후</td><td><b><a class="w" href="words.html#w117" data-w="117">SAM</a></b>(텍스트) → <b><a class="w" href="words.html#w118" data-w="118">BAM</a></b>(이진) → <b>sorted BAM + <a class="w" href="words.html#w119" data-w="119">.bai</a></b></td></tr>
+  <tr><td><a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 쪽</td><td><b><a class="w" href="words.html#w79" data-w="79">FASTA</a></b> (.fa)와 그 <a class="w" href="words.html#w115" data-w="115">인덱스</a></td></tr>
+  <tr><td><a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a></td><td>dedup.bam + metrics 파일</td></tr>
+  <tr><td><a class="w" href="words.html#w136" data-w="136">BQSR</a></td><td>recal_data.table → 최종 BAM (final 또는 recal)</td></tr>
+  <tr><td><a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a></td><td><b>.<a class="w" href="words.html#w149" data-w="149">g.vcf</a></b> (GVCF)</td></tr>
+  <tr><td><a class="w" href="words.html#w151" data-w="151">GenotypeGVCFs</a></td><td><b>.<a class="w" href="words.html#w148" data-w="148">vcf</a></b> → <a class="w" href="words.html#w158" data-w="158">하드 필터</a> 후 <a class="w" href="words.html#w157" data-w="157">FILTER</a> 칸이 채워짐</td></tr>
+  <tr><td><a class="w" href="words.html#w160" data-w="160">ANNOVAR</a></td><td>.avinput → <a class="w" href="words.html#w159" data-w="159">annotation</a> 표</td></tr>
+</table></div>
+<p>교수님은 분석 준비가 끝난 지점을 ".bam까지 오면 이후 결과 확장자는 VCF"라고 정리했어요. BAM까지는 정렬과 후처리, 그 뒤로는 <a class="w" href="words.html#w50" data-w="50">변이</a> 파일이라는 뜻이에요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>시퀀서가 FASTQ를 만들고, 정렬하면 SAM이 나오며 이를 BAM으로 바꿔 <a class="w" href="words.html#w120" data-w="120">sort</a>하고 .bai 인덱스를 만든다. <a class="w" href="words.html#w147" data-w="147">변이 호출</a> 후에는 GVCF와 VCF가 나온다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 정렬된 BAM의 인덱스 파일 확장자는?</summary>
+  <p>.bai예요. 단답형으로 나온 적이 있어요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-08.html">다음 카드 → 실습 숫자는 무슨 뜻일까요</a><div class="pn"><a href="c9-06.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

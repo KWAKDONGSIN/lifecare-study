@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NGS가 읽는 원리 — SBS (Sequencing by Synthesis) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k3"><a href="index.html#c3">← 보드</a><span>3장 NGS · 5/9</span></div><h1>NGS가 읽는 원리 — SBS (Sequencing by Synthesis)</h1>
+<p><a class="w" href="words.html#w61" data-w="61">SBS</a>는 "합성하면서 읽는다"는 뜻이에요. 두 단계로 기억하세요.</p>
+<p><b>첫째, <a class="w" href="words.html#w63" data-w="63">클론 증폭(Clonal amplification)</a></b>이에요. <a class="w" href="words.html#w3" data-w="3">DNA</a> 한 가닥이 내는 빛은 너무 약해서 사진에 안 잡혀요. 그래서 <b>같은 조각을 약 1,000개로 복사해 한 점에 모아</b> 빛을 키워요. 이 한 점을 <b><a class="w" href="words.html#w62" data-w="62">클러스터(cluster)</a></b>라고 해요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>혼자 손전등을 켜면 멀리서 안 보여요. 그래서 같은 반 친구 1,000명이 한곳에 모여 동시에 켜는 거예요.</p>
+</div>
+<p><b>둘째, 글자 붙이며 감지(Sensing)</b>예요. 한 <a class="w" href="words.html#w70" data-w="70">사이클</a>(한 바퀴)마다 글자 하나를 붙이고 <b><a class="w" href="words.html#w69" data-w="69">형광</a> 사진</b>을 한 장 찍어요. 글자마다 빛 색이 달라서 색을 보면 무슨 글자인지 알아요. 이 바퀴를 약 150번 돌려요.</p>
+<p>같은 점의 색을 사진마다 이어서 읽으면 그 조각의 글자 순서가 나와요. 아래 표에서 점 ①은 1회 A, 2회 C, 3회 G, 4회 T라서 ACGT…로 읽혀요.</p>
+<p class="small" style="text-align:center"><b>사이클마다 사진 한 장 → 같은 점의 색을 이어 읽으면 서열</b></p>
+<div class="tw"><table class="seq">
+    <tr><td class="lb"></td><td class="lb">1회</td><td class="lb">2회</td><td class="lb">3회</td><td class="lb">4회</td><td class="lb"> </td><td class="lb">읽은 결과</td></tr>
+    <tr><td class="lb">점 ①</td><td class="g">A</td><td class="x">C</td><td class="m">G</td><td class="e">T</td><td></td><td class="lb" style="text-align:left"><b>ACGT…</b></td></tr>
+    <tr><td class="lb">점 ②</td><td class="m">G</td><td class="m">G</td><td class="g">A</td><td class="x">C</td><td></td><td class="lb" style="text-align:left"><b>GGAC…</b></td></tr>
+    <tr><td class="lb">점 ③</td><td class="e">T</td><td class="g">A</td><td class="g">A</td><td class="m">G</td><td></td><td class="lb" style="text-align:left"><b>TAAG…</b></td></tr>
+  </table></div>
+<p class="small" style="text-align:center">글자마다 형광 색이 달라서 사진 색으로 글자를 알아요 (색은 설명용)</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>운동장의 수억 개 전구가 한 번 켜질 때마다 색이 달라요. 드론이 매번 사진을 찍어 두면, 전구마다 "빨강, 초록, 파랑…" 하는 색 순서가 곧 그 조각의 글자 순서예요.</p>
+</div>
+<p>왜 150번쯤에서 멈출까요. 사이클을 반복할수록 먼지나 형광 물질이 끼어 점이 지저분해지고, 색을 헷갈리는 잡음이 쌓이기 때문이에요. 그래서 한 번에 읽는 길이가 짧아요.</p>
+<figure class="slide"><img src="slides/n11.jpg"><figcaption>교수님 슬라이드 — Sequencing by synthesis: 1.Arrange 2.Extend 3.Detect, Cycle 1·2·3</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>SBS는 두 단계로 이루어진다. 먼저 클론 증폭으로 같은 DNA 약 1,000개를 한 클러스터에 모아 형광 신호를 키운다. 이후 사이클마다 <a class="w" href="words.html#w8" data-w="8">염기</a> 하나를 합성하며 형광을 이미징하고, 이를 약 150회 반복해 각 클러스터의 염기서열을 얻는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 같은 조각을 약 1,000개로 복사해 한 점에 모으는 이유는 무엇인가요?</summary>
+  <p>DNA 한 가닥의 형광은 너무 약해서, 같은 조각을 모아 신호를 키워야 사진에 잡히기 때문이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c3-06.html">다음 카드 → 용어 두 개 — read length와 throughput</a><div class="pn"><a href="c3-04.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c3"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

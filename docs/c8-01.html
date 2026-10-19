@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Annotation이 뭐고, 왜 필요한가요 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k8"><a href="index.html#c8">← 보드</a><span>8장 Annotation · 1/6</span></div><h1>Annotation이 뭐고, 왜 필요한가요</h1>
+<p>7장까지 하면 <a class="w" href="words.html#w148" data-w="148">VCF 파일</a>이 나와요. 그런데 VCF는 "1번 <a class="w" href="words.html#w2" data-w="2">염색체</a> 100번째 자리가 C에서 T로 바뀌었다" 정도만 알려줘요. 그 <a class="w" href="words.html#w50" data-w="50">변이</a>가 흔한지, 병과 관련 있는지는 몰라요.</p>
+<p>이 변이의 뜻을 알려면 이미 알려진 자료를 찾아봐야 해요. 이 일을 <b><a class="w" href="words.html#w159" data-w="159">Annotation</a></b>이라고 하고, 쓰는 도구가 <b><a class="w" href="words.html#w160" data-w="160">ANNOVAR</a></b>예요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b>Annotation(주석 달기)</b>은 찾은 변이가 무슨 의미인지 데이터베이스(DB)와 연결하는 일이에요. <b>ANNOVAR</b>는 ANNOtate VARiation, 그러니까 "변이에 주석 달기"의 줄임말이에요.</p>
+</div>
+<div class="box eg"><span class="t">비유</span>
+  <p>오타 목록(VCF)을 들고 여러 가지 사전을 찾아보는 일이에요. "이 오타는 이름이 뭐지? 흔한 오타인가? 문장 뜻이 달라지나? 병이랑 관련 있나?" 하고 사전마다 물어봐요.</p>
+</div>
+<p>왜 사전이 여러 개일까요? 사전마다 아는 분야가 다르기 때문이에요. 이름 사전, 흔한 정도 사전, 병 사전을 모두 찾아야 변이의 뜻이 완성돼요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Annotation은 <a class="w" href="words.html#w147" data-w="147">variant calling</a>으로 찾은 변이가 어떤 의미를 갖는지 여러 데이터베이스와 연결해 해석하는 과정이며, 대표 도구는 ANNOVAR(ANNOtate VARiation)이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — VCF만으로는 왜 변이의 의미를 알 수 없나요?</summary>
+  <p>VCF에는 변이의 위치와 글자 변화만 있고, 그 변이가 흔한지·병과 관련 있는지 같은 정보는 없기 때문이에요. 그래서 DB와 연결하는 Annotation이 필요해요.</p>
+</details>
+
+<div class="done"><a class="go" href="c8-02.html">다음 카드 → DB 사전 5권 — 각각 무엇을 물어보나요</a><div class="pn"><a href="index.html#c8"><b>← 이전</b>보드로</a><a class="next" href="quiz.html#c8"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

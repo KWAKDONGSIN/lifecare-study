@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>점수는 어떻게 적히고, 얼마면 합격일까 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k4"><a href="index.html#c4">← 보드</a><span>4장 FASTQ와 품질 점수 · 3/5</span></div><h1>점수는 어떻게 적히고, 얼마면 합격일까</h1>
+<p><a class="w" href="words.html#w78" data-w="78">FASTQ</a>의 4번 줄은 점수를 숫자로 적지 않고 <b>문자 하나</b>로 적어요. 숫자로 적으면 두 자리가 되어 2번 줄과 글자 수가 어긋나기 때문이에요. 문자 하나로 쓰면 글자 하나에 점수 하나를 딱 맞출 수 있어요.</p>
+<p>문자를 점수로 바꾸는 규칙은 간단해요. 컴퓨터가 문자마다 가진 번호(ASCII 번호)에서 <b>33을 빼면 점수</b>예요. <a class="w" href="words.html#w71" data-w="71">Illumina</a> 1.8 이후 방식(<a class="w" href="words.html#w80" data-w="80">Phred</a>+33)이고 점수는 <b>0~41</b> 범위예요. 교수님 예는 B가 약 33점, C가 약 34점이에요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>비밀 암호표예요. "B는 33점, C는 34점, F는 37점, H는 39점"처럼 문자 한 개가 점수 하나를 대신해요. 위 예시 줄의 <code>BCCBBFFFF…HHHH</code>는 거의 다 30점대라서 좋은 데이터예요.</p>
+</div>
+<p>보통 정상적으로 읽으면 <b>30~40점</b>이 나와요. <a class="w" href="words.html#w102" data-w="102">QC</a>(품질 관리)의 기준은 보통 <b><a class="w" href="words.html#w82" data-w="82">Q30</a> 이상이면 합격</b>이에요. 이하면 다시 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a>을 고려해요. 교수님은 "꼭 정답은 아니지만 대부분 그렇게 한다"고 덧붙였어요.</p>
+<p>한 가지 더 알아 두세요. 조각 안에서도 점수는 보통 <b>뒤로 갈수록 떨어져요</b>. <a class="w" href="words.html#w70" data-w="70">사이클</a>이 쌓일수록 먼지와 <a class="w" href="words.html#w69" data-w="69">형광</a> 물질이 끼어 색을 헷갈리고, 조각이 짧으면 끝부분은 잡음만 찍기 때문이에요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ의 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>는 문자로 인코딩되며 ASCII 값에서 33을 뺀 값이 Phred 점수이다(Illumina 범위 0~41). QC에서는 보통 Q30 이상을 기준으로 삼고, <a class="w" href="words.html#w73" data-w="73">read</a> 뒤쪽으로 갈수록 노이즈가 누적되어 품질이 떨어지는 경향이 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 품질 점수를 숫자가 아니라 문자 하나로 적는 이유는 무엇인가요?</summary>
+  <p><a class="w" href="words.html#w8" data-w="8">염기</a> 하나에 점수 하나를 같은 글자 수로 맞춰 적기 위해서예요. 숫자는 두 자리가 되어 줄 길이가 어긋나요.</p>
+</details>
+
+<div class="done"><a class="go" href="c4-04.html">다음 카드 → FASTA와 FASTQ는 어떻게 다른가</a><div class="pn"><a href="c4-02.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c4"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

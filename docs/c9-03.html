@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>구간 B — 정렬 (6~12단계) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 3/10</span></div><h1>구간 B — 정렬 (6~12단계)</h1>
+<p><a class="w" href="words.html#w104" data-w="104">트리밍</a>한 <a class="w" href="words.html#w73" data-w="73">read</a>를 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 위의 제자리에 놓는 단계예요. 놓은 뒤에는 숫자와 눈으로 잘 됐는지 점검해요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>6. 레퍼런스 <a class="w" href="words.html#w115" data-w="115">인덱싱</a></td><td><code>bwa index</code> (한 번만)</td><td>레퍼런스 <a class="w" href="words.html#w79" data-w="79">FASTA</a> → 인덱스 파일들</td><td>레퍼런스에 포스트잇을 붙여 두어 정렬이 빨라져요. 실습에서는 교수님이 미리 해 두었어요.</td></tr>
+  <tr><td>7. <a class="w" href="words.html#w110" data-w="110">얼라인먼트</a></td><td><code>bwa mem</code> (실습은 <code>bwa-mem2</code>)</td><td>트리밍된 <a class="w" href="words.html#w78" data-w="78">FASTQ</a> + 인덱싱된 레퍼런스 → <a class="w" href="words.html#w117" data-w="117">SAM</a></td><td>짧은 read가 레퍼런스의 어느 위치인지 맞춰요(<a class="w" href="words.html#w116" data-w="116">seed-and-extend</a>).</td></tr>
+  <tr><td>8. SAM을 <a class="w" href="words.html#w118" data-w="118">BAM</a>으로</td><td><code>samtools view -b</code></td><td>SAM(텍스트, 큼) → BAM(이진, 작음)</td><td>인간 <a class="w" href="words.html#w14" data-w="14">유전체</a>는 31억 <a class="w" href="words.html#w8" data-w="8">염기</a>라 SAM이 너무 커서 압축해요. 실습에서는 <a class="w" href="words.html#w120" data-w="120">sort</a> 단계에 합쳐졌어요.</td></tr>
+  <tr><td>9. 정렬(sort)</td><td><code>samtools sort</code></td><td>BAM → sorted BAM</td><td>뒤죽박죽 순서를 <a class="w" href="words.html#w2" data-w="2">염색체</a>·위치 순으로 정리해요. 다음 단계와 <a class="w" href="words.html#w127" data-w="127">IGV</a>에 필수예요.</td></tr>
+  <tr><td>10. 인덱스</td><td><code>samtools index</code></td><td>sorted BAM → <a class="w" href="words.html#w119" data-w="119">.bai</a> 파일</td><td>BAM을 위치로 빨리 찾게 해 주는 색인이에요.</td></tr>
+  <tr><td>11. 통계 확인</td><td><code>samtools flagstat</code>, <code>samtools coverage</code></td><td>sorted BAM → 통계 텍스트</td><td>붙은 read 수, <a class="w" href="words.html#w134" data-w="134">duplicates</a>, <a class="w" href="words.html#w87" data-w="87">coverage</a>, mean <a class="w" href="words.html#w86" data-w="86">depth</a>를 숫자로 확인해요.</td></tr>
+  <tr><td>12. 눈으로 확인</td><td>IGV 웹앱</td><td>sorted BAM + BAI → 화면</td><td>read가 쌓인 모습과 레퍼런스와 다른 곳(색깔)을 눈으로 봐요.</td></tr>
+</table></div>
+<p>실습에서는 7~9단계를 <a class="w" href="words.html#w132" data-w="132">파이프</a>(<code>|</code>)로 이어서 한 번에 했어요. 파이프는 앞 명령의 결과를 파일로 저장하지 않고 곧바로 다음 명령에 넘겨주는 거예요. 그래서 큰 SAM 파일이 중간에 안 생겨요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>정렬(sort)은 도서관 책을 번호순으로 꽂는 일이고, 인덱스(.bai)는 "이 책은 몇 번째 칸"이라고 적은 목차예요. 목차가 있어야 원하는 위치를 바로 찾을 수 있어요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w114" data-w="114">BWA</a>는 레퍼런스를 미리 인덱싱하고 read를 짧은 seed로 쪼개 후보 위치를 찾은 뒤 확장하는 seed-and-extend 방식으로 정렬한다. 정렬 결과인 SAM을 BAM으로 바꿔 용량을 줄이고, 위치 순으로 sort한 뒤 index(.bai)를 만든다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 정렬 직후 samtools로 확인하는 숫자 두 가지는?</summary>
+  <p>flagstat(붙은 read 수와 duplicates)과 coverage(coverage와 mean depth)예요. 실습에서는 coverage 99%, depth 약 20x가 나왔어요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-04.html">다음 카드 → 구간 C — 후처리 (13~15단계)</a><div class="pn"><a href="c9-02.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

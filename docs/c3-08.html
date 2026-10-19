@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>승부를 가른 것은 비용 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k3"><a href="index.html#c3">← 보드</a><span>3장 NGS · 8/9</span></div><h1>승부를 가른 것은 비용</h1>
+<p>표를 보면 읽는 길이와 속도는 <a class="w" href="words.html#w72" data-w="72">Roche</a>가 더 좋아요. 그런데도 <a class="w" href="words.html#w71" data-w="71">Illumina</a>가 이긴 이유가 시험 단골 질문이에요.</p>
+<p>정답은 <b>비용</b>이에요. <a class="w" href="words.html#w75" data-w="75">처리량</a>이 약 100만 <a class="w" href="words.html#w73" data-w="73">reads</a> 대 30억 reads로 압도적으로 커서, 1Gb(<a class="w" href="words.html#w76" data-w="76">기가베이스</a>, 글자 10억 개)당 값이 Roche는 $9,500, Illumina는 $7로 <b>1,000배 이상</b> 차이가 났어요.</p>
+<div class="paper"><svg viewBox="0 0 380 70">
+    <text x="0" y="20" font-size="12" fill="#1b2333">Roche</text><rect x="58" y="8" width="300" height="16" rx="3" fill="#d6264a"/><text x="350" y="21" font-size="11" text-anchor="end" fill="#fff" font-weight="bold">$9,500</text>
+    <text x="0" y="52" font-size="12" fill="#1b2333">Illumina</text><rect x="58" y="40" width="2" height="16" fill="#0f7a4f"/><text x="66" y="53" font-size="11" fill="#0f7a4f" font-weight="bold">$7  ← 1,000배 이상 쌈</text>
+  </svg></div>
+<div class="box eg"><span class="t">비유</span>
+  <p>교수님 논리는 이래요. 연구자는 국가 연구비로 연구하니까, <a class="w" href="words.html#w57" data-w="57">시퀀싱</a>이 1,000만 원이냐 100만 원이냐 앞에서는 3일이 걸리고 150글자밖에 못 읽어도 100만 원짜리를 골라요. 에러가 적은 것도 좋은 점이지만 핵심은 아니었어요.</p>
+</div>
+<p>그 결과 Roche는 <b>2016년에 문을 닫았고</b>, Illumina는 시장 점유율 약 70%를 차지해요. 교수님의 결론은 한 문장이에요.</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>"기술 혁신은 결국 비용과 연결된다."</b> Illumina는 매년 새 기기를 내며 처리량을 올리고 가격을 낮춰요.</p>
+</div>
+<figure class="slide"><img src="slides/n20.jpg"><figcaption>교수님 슬라이드 — Roche "Shut down in 2016", Cost per Gb $9,500 vs $7</figcaption></figure>
+<figure class="slide"><img src="slides/n15.jpg"><figcaption>교수님 슬라이드 — Bridge PCR: 유리판(flow cell) 위 클러스터 만들기</figcaption></figure>
+<figure class="slide"><img src="slides/n18.jpg"><figcaption>교수님 슬라이드 — CRT: ①글자 붙이기 ②사진 찍기 ③형광 잘라내기 → 반복</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Illumina가 시장을 차지한 가장 큰 이유는 비용이다. Roche(454)는 <a class="w" href="words.html#w74" data-w="74">read length</a>(약 700 대 150)가 길었지만, Illumina는 처리량이 약 3B reads로 압도적이어서 Cost per Gb가 $7로 Roche의 $9,500보다 1,000배 이상 낮았다. Roche는 2016년 문을 닫았고, 이는 기술 혁신이 비용과 연결됨을 보여 준다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Roche가 읽는 길이는 더 길었는데 왜 졌나요?</summary>
+  <p>Illumina가 한 번에 훨씬 많이 읽어서 1Gb당 값이 $7로 Roche($9,500)보다 1,000배 이상 쌌기 때문이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c3-09.html">다음 카드 → 이 장 3줄 요약</a><div class="pn"><a href="c3-07.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c3"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

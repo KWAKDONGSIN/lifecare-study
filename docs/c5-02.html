@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>그림으로 보기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k5"><a href="index.html#c5">← 보드</a><span>5장 Depth · 어디를 읽을까 · 2/8</span></div><h1>그림으로 보기</h1>
+<p>아래 표는 <a class="w" href="words.html#w3" data-w="3">DNA</a> 14자리를 조각 6개가 읽은 모습이에요. 맨 윗줄은 자리 번호, 둘째 줄 "정답지"는 표준 <a class="w" href="words.html#w14" data-w="14">게놈</a>(<a class="w" href="words.html#w84" data-w="84">레퍼런스</a>)의 글자예요.</p>
+<p>조각1~6은 각 조각이 정답지의 어느 자리에 붙었는지를 보여 줘요. 파란 칸은 정답과 같은 글자, 붉은 칸과 노란 칸은 정답과 다른 글자예요. 맨 아랫줄 숫자가 그 자리의 <a class="w" href="words.html#w86" data-w="86">depth</a>예요.</p>
+<div class="tw"><table class="seq">
+  <tr><td class="lb">자리</td><td class="n">1</td><td class="n">2</td><td class="n">3</td><td class="n">4</td><td class="n">5</td><td class="n">6</td><td class="n">7</td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td><td class="n">13</td><td class="n">14</td></tr>
+  <tr><td class="lb">정답지</td><td class="r">A</td><td class="r">T</td><td class="r">G</td><td class="r">C</td><td class="r">C</td><td class="r">A</td><td class="r">T</td><td class="r">T</td><td class="r">G</td><td class="r">A</td><td class="r">C</td><td class="r">G</td><td class="r">T</td><td class="r">A</td></tr>
+  <tr><td class="lb">조각1</td><td class="m">A</td><td class="m">T</td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각2</td><td></td><td class="m">T</td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td class="m">A</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각3</td><td></td><td></td><td class="m">G</td><td class="m">C</td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각4</td><td></td><td></td><td></td><td class="m">C</td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td class="m">G</td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각5</td><td></td><td></td><td></td><td></td><td class="m">C</td><td class="x">G</td><td class="m">T</td><td class="m">T</td><td class="e">C</td><td></td><td></td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">조각6</td><td></td><td></td><td></td><td></td><td></td><td></td><td class="m">T</td><td class="m">T</td><td class="m">G</td><td class="m">A</td><td class="m">C</td><td></td><td></td><td></td></tr>
+  <tr><td class="lb">depth</td><td class="d">1</td><td class="d">2</td><td class="d">3</td><td class="d">4</td><td class="d">5</td><td class="d">4</td><td class="d">4</td><td class="d">4</td><td class="d">3</td><td class="d">1</td><td class="d">1</td><td class="z">0</td><td class="z">0</td><td class="z">0</td></tr>
+</table></div>
+<p>세 군데만 눈여겨보세요.</p>
+<ul>
+  <li><b>6번 자리</b> — 읽은 조각 4개 중 <b>3개가 G</b>예요(정답지는 A). 여러 조각이 똑같이 말하니까 <b>진짜 <a class="w" href="words.html#w50" data-w="50">변이</a></b>일 가능성이 높아요.</li>
+  <li><b>9번 자리</b> — 읽은 조각 3개 중 <b>1개만 C</b>예요(정답지는 G). 혼자 다른 말을 하니까 <b>기계가 실수한 것(<a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 에러)</b>일 가능성이 높아요.</li>
+  <li><b>12~14번 자리</b> — 아무도 읽지 않았어요(depth 0). 이게 <b><a class="w" href="words.html#w87" data-w="87">coverage</a> 구멍</b>이에요. 14자리 중 11자리만 읽혔으니 coverage는 약 <b>79%</b>예요.</li>
+</ul>
+<p>"변이"는 사람마다 다른 DNA 글자(정답지와 다른 글자)를 말해요. 변이를 찾는 게 이 수업의 최종 목표라서, 진짜 변이와 기계 실수를 가려내는 일이 중요해요.</p>
+<details class="check"><summary>잠깐 확인 — 12번 자리의 depth는 얼마이고, 이런 자리를 뭐라고 부를까요?</summary><p>depth는 0이고, 아무 조각도 닿지 않은 "coverage 구멍"이에요. 이런 자리가 많을수록 coverage가 낮아져요.</p></details>
+
+<div class="done"><a class="go" href="c5-03.html">다음 카드 → 왜 depth가 높아야 할까 — 투표 비유</a><div class="pn"><a href="c5-01.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c5"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6주차 · 3. NGS · 5. DNA variant 분석 · 라이프03·07</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

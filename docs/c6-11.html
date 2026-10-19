@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CIGAR — 어떻게 붙었는지 한 줄로 쓰기 (매 시간 반복) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 11/14</span></div><h1>CIGAR — 어떻게 붙었는지 한 줄로 쓰기 (매 시간 반복)</h1>
+<div class="box def"><span class="t">CIGAR</span>
+  <p>조각이 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a>에 <b>어떻게 붙었는지</b>를 <b>숫자 + 글자</b>로 이어서 쓴 것이에요. 읽을 때는 길 안내처럼 앞에서부터 하나씩 읽어요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th style="width:18%">글자</th><th style="width:28%">이름</th><th>쉬운 뜻</th></tr>
+  <tr><td><b>M</b></td><td>match (맞춤)</td><td>레퍼런스와 같은 자리에 <b>나란히 놓임</b></td></tr>
+  <tr><td><b>I</b></td><td>insertion (삽입)</td><td>조각에는 있는데 레퍼런스에는 <b>없는 글자가 끼어듦</b></td></tr>
+  <tr><td><b>D</b></td><td>deletion (결실)</td><td>레퍼런스에는 있는데 조각에는 <b>빠진 글자</b></td></tr>
+  <tr><td><b>S</b></td><td><a class="w" href="words.html#w125" data-w="125">soft clip</a> (소프트 클립)</td><td>조각의 끝이 안 맞아 <b>정렬하지 않고 남겨 둔 부분</b></td></tr>
+</table></div>
+<p><a class="w" href="words.html#w124" data-w="124">CIGAR</a>의 풀네임은 Compact Idiosyncratic Gapped <a class="w" href="words.html#w110" data-w="110">Alignment</a> Report예요. 풀네임은 알아 두기만 하세요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>지도 앱 길 안내처럼 "3칸 직진(3M), 1칸 끼어들기(1I), 3칸 직진(3M), 1칸 건너뛰기(1D), 5칸 직진(5M)"로 읽으면 돼요.</p>
+</div>
+<p>글자 수 계산에는 공식 두 개가 있어요.</p>
+<ul>
+  <li><b>조각 길이 = M + I + S</b> (조각에 실제로 있는 글자)</li>
+  <li><b>레퍼런스에서 차지하는 칸 수 = M + D</b> (정답지에서 덮는 자리)</li>
+</ul>
+<p><b>예 1</b> — <code>151M</code>은 151글자 전부가 쭉 맞춘 거예요. 조각 길이 151, 레퍼런스 151칸이에요.</p>
+<p><b>예 2</b> — <a class="w" href="words.html#w122" data-w="122">POS</a> 5, <code>3M1I3M1D5M</code> (교수님 슬라이드 예시)를 그림으로 볼게요.</p>
+<div class="tw"><table class="seq">
+  <tr><td class="lb">자리</td><td class="n">5</td><td class="n">6</td><td class="n">7</td><td class="n"></td><td class="n">8</td><td class="n">9</td><td class="n">10</td><td class="n">11</td><td class="n">12</td><td class="n">13</td><td class="n">14</td><td class="n">15</td><td class="n">16</td></tr>
+  <tr><td class="lb">정답지</td><td class="r">A</td><td class="r">C</td><td class="r">T</td><td class="n">-</td><td class="r">G</td><td class="r">A</td><td class="r">A</td><td class="r">C</td><td class="r">T</td><td class="r">G</td><td class="r">A</td><td class="r">C</td><td class="r">T</td></tr>
+  <tr><td class="lb">내 조각</td><td class="m">A</td><td class="m">C</td><td class="m">T</td><td class="g">A</td><td class="m">G</td><td class="m">A</td><td class="m">A</td><td class="x">-</td><td class="m">T</td><td class="m">G</td><td class="e">G</td><td class="m">C</td><td class="m">T</td></tr>
+  <tr><td class="lb">CIGAR</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d" style="color:var(--grn)">I</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="z">D</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d">M</td><td class="d">M</td></tr>
+</table></div>
+<p>앞에서부터 읽어 보세요. <b>3M</b>(5~7번 자리 맞춤) → <b>1I</b>(조각에만 A가 끼어듦) → <b>3M</b>(8~10번 맞춤) → <b>1D</b>(11번 자리 C가 조각에서 빠짐) → <b>5M</b>(12~16번 맞춤)이에요.</p>
+<p>조각 길이는 3+1+3+5 = 12글자, 레퍼런스 칸은 3+3+1+5 = 12칸(5번~16번)이라 공식과 딱 맞아요.</p>
+<p>그림의 14번 자리처럼 정답은 A인데 조각은 G로 글자가 달라도 <b>M으로 써요.</b> 다른 글자 정보는 따로 <a class="w" href="words.html#w126" data-w="126">MD</a>·NM 태그에 적어요.</p>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>POS + CIGAR만 있으면 조각이 어디에 어떻게 붙었는지 그릴 수 있다.</b> I는 조각 쪽에서 늘어나고, D는 정답지 쪽에서 늘어난다고 기억하세요.</p>
+</div>
+<figure class="slide"><img src="slides/v45.jpg"><figcaption>교수님 슬라이드 — POS 5, CIGAR 3M1I3M1D5M</figcaption></figure>
+<p><b>예 3</b> — 시험에 나온 형태예요. <code>5M2I10M</code>은 <b>5글자 맞춤, 2글자 삽입, 10글자 맞춤</b>이에요. 조각 길이는 5+2+10 = 17, 레퍼런스 칸은 5+10 = 15칸이에요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>CIGAR는 <a class="w" href="words.html#w73" data-w="73">read</a>가 레퍼런스에 정렬된 모양을 <b>숫자와 문자</b>로 나타낸 것으로, <b>M은 정렬됨(match), I는 삽입(insertion), D는 결실(deletion), S는 soft clip</b>이다. 예를 들어 <code>5M2I10M</code>은 5개 정렬, 2개 삽입, 10개 정렬을 뜻한다.</p>
+</div>
+<p>이제 직접 풀어 보세요.</p>
+<details class="check"><summary>직접 풀기 1 — CIGAR 5M2I10M의 뜻을 말해 보세요. 조각 길이는 몇 글자일까요?</summary><p>5글자 맞춤, 2글자 삽입, 10글자 맞춤이에요. 조각 길이는 M+I+S이니까 5+2+10 = 17글자예요.</p></details>
+<details class="check"><summary>직접 풀기 2 — POS 10, CIGAR 4M2D6M이면 레퍼런스의 몇 번 자리부터 몇 번 자리까지 덮을까요?</summary><p>레퍼런스 칸은 M+D = 4+2+6 = 12칸이니 10번부터 21번까지예요. 조각 글자는 M+I+S = 4+6 = 10글자예요.</p></details>
+<details class="check"><summary>직접 풀기 3 — POS 1, CIGAR 2M1D3M. 정답지가 A C G T A C라면 조각은 어떤 글자일까요?</summary><p>2M은 A C, 1D는 G가 빠짐, 3M은 T A C예요. 조각은 A C T A C (5글자)이고 빠진 글자는 G예요.</p></details>
+<details class="check"><summary>직접 풀기 4 — CIGAR 2S8M은 조각 길이가 몇 글자이고 레퍼런스를 몇 칸 덮을까요?</summary><p>조각 길이는 S+M = 2+8 = 10글자이고, 레퍼런스는 M만 덮으니 8칸이에요. S 2글자는 정렬하지 않고 남겨 둔 끝부분이에요.</p></details>
+
+<div class="done"><a class="go" href="c6-12.html">다음 카드 → IGV — 눈으로 확인하기</a><div class="pn"><a href="c6-10.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

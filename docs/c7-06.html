@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GVCF vs VCF · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k7"><a href="index.html#c7">← 보드</a><span>7장 진짜 변이 골라내기 · 6/9</span></div><h1>GVCF vs VCF</h1>
+<p><a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a>의 결과 파일은 두 가지 모양이 있어요. 교수님은 처음부터 <a class="w" href="words.html#w148" data-w="148">VCF</a>를 만들어도 되지만 <a class="w" href="words.html#w149" data-w="149">GVCF</a>를 먼저 만들고 거기서 VCF를 추리는 방식을 권했어요. GVCF를 갖고 있으면 나중에 다시 추적할 때 쓸모가 있기 때문이에요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p><b>출석부</b> GVCF는 반 전체의 출석부예요. 출석, 결석, 그리고 "잘 모르겠음(?)" 칸까지 다 적어요. VCF는 결석자(<a class="w" href="words.html#w50" data-w="50">변이</a>) 명단만 적은 종이예요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th></th><th>GVCF (Genomic VCF)</th><th>VCF (Variant Call Format)</th></tr>
+  <tr><td>적는 것</td><td><b>모든 위치</b>. 판단 못 한 곳은 <code>&lt;NON_REF&gt;</code></td><td><b>확실한 변이만</b></td></tr>
+  <tr><td>순서</td><td>먼저 만듦</td><td>GVCF에서 <b><a class="w" href="words.html#w151" data-w="151">GenotypeGVCFs</a></b>로 추림</td></tr>
+</table></div>
+<p><code>&lt;NON_REF&gt;</code>는 <a class="w" href="words.html#w87" data-w="87">coverage</a>가 낮거나 <a class="w" href="words.html#w73" data-w="73">read</a> 품질이 낮아서 변이인지 아닌지 판단할 수 없다는 표시예요. GVCF에서는 한 줄이 END 값까지의 구간을 묶어서 적어요.</p>
+<p>실습 순서도 같아요. 먼저 HaplotypeCaller를 <code>-ERC GVCF</code>로 돌려 GVCF를 만들고, 다음에 GenotypeGVCFs로 최종 <a class="w" href="words.html#w153" data-w="153">genotype</a>(GT)을 붙여 VCF를 만들어요. <code>-ERC</code>는 변이가 아닌 위치를 어떻게 다룰지 정하는 옵션이에요.</p>
+<p>하나 더 있어요. 변이만 출력하는 <code>--output-mode EMIT_VARIANTS_ONLY</code>는 VCF에서만 쓸 수 있어요. 모르는 위치까지 다 내는 GVCF에서는 쓸 수 없어요.</p>
+<figure class="slide"><img src="slides/v74.jpg"><figcaption>교수님 슬라이드 — GVCF(NON_REF 포함) vs VCF</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>GVCF(Genomic VCF)는 변이 여부를 판단할 수 없는 위치(coverage·품질 부족, &lt;<a class="w" href="words.html#w150" data-w="150">NON_REF</a>&gt;)까지 전체 위치를 기록하고, VCF(Variant Call Format)는 확실한 변이만 기록한다. 보통 GVCF를 먼저 만든 뒤 GenotypeGVCFs로 VCF를 추리며, GVCF는 나중에 다시 추적할 때 유용하다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 출석부 비유에서 GVCF와 VCF는 각각 무엇인가요?</summary>
+  <p>GVCF는 모르는 칸까지 다 적은 전체 출석부, VCF는 결석자(확실한 변이)만 적은 명단이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c7-07.html">다음 카드 → VCF 읽는 법 (1) — REF와 ALT로 변이 종류 맞히기</a><div class="pn"><a href="c7-05.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c7"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

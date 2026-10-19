@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>구간 E — Annotation (20~22단계) · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 6/10</span></div><h1>구간 E — Annotation (20~22단계)</h1>
+<p>8장에서 배운 <a class="w" href="words.html#w160" data-w="160">ANNOVAR</a> 순서 그대로예요. 다만 실습에서는 시간이 오래 걸려 이론으로만 다뤘어요.</p>
+<div class="tw"><table>
+  <tr><th>단계</th><th>도구</th><th>넣는 것 → 나오는 것</th><th>왜 하나요</th></tr>
+  <tr><td>20. DB 내려받기</td><td><code>annotate_variation.pl -downdb</code></td><td>(없음) → humandb 폴더의 DB 파일</td><td>쓸 DB를 먼저 받아 두어야 <a class="w" href="words.html#w159" data-w="159">annotation</a>을 할 수 있어요.</td></tr>
+  <tr><td>21. <a class="w" href="words.html#w148" data-w="148">VCF</a>를 avinput으로</td><td><code>convert2annovar.pl</code></td><td>VCF → .avinput(탭 구분 텍스트)</td><td>ANNOVAR가 읽기 쉬운 형식으로 바꿔요. <code>--vcfinput</code>으로 바로 넣을 수도 있어요.</td></tr>
+  <tr><td>22. Annotation</td><td><code>table_annovar.pl</code></td><td>VCF(또는 avinput) + humandb → annotation 표</td><td>찾은 <a class="w" href="words.html#w50" data-w="50">변이</a>가 무슨 의미인지 DB와 연결해요.</td></tr>
+</table></div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>ANNOVAR를 쓰려면 먼저 필요한 DB를 내려받고, VCF를 avinput으로 변환한 뒤 table_annovar로 annotation하여 변이의 위치와 질병 관련성 등을 얻는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — annotation을 하기 전에 가장 먼저 해야 하는 일은?</summary>
+  <p>쓸 DB를 먼저 내려받는 것이에요. DB가 없으면 변이를 찾아볼 사전이 없어요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-07.html">다음 카드 → 파일 이름이 어떻게 바뀌나요</a><div class="pn"><a href="c9-05.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

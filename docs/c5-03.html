@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>왜 depth가 높아야 할까 — 투표 비유 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k5"><a href="index.html#c5">← 보드</a><span>5장 Depth · 어디를 읽을까 · 3/8</span></div><h1>왜 depth가 높아야 할까 — 투표 비유</h1>
+<div class="box eg"><span class="t">비유</span>
+  <p><a class="w" href="words.html#w86" data-w="86">depth</a>는 "투표에 참여한 사람 수"예요. 100명(100x)에게 물었는데 1명만 "T"라고 했다면, 그 1명이 잘못 본 거예요. 99명이 같은 말을 했으니까요.</p>
+  <p>그런데 2명(2x)에게 물었는데 1명은 A, 1명은 T라고 하면 어느 쪽이 맞는지 알 수 없어요. 판단 불가예요.</p>
+</div>
+<p>정리하면 <b>depth가 높을수록 <a class="w" href="words.html#w50" data-w="50">변이</a> 판정이 정확해요.</b> 조각 하나가 틀려도 나<a class="w" href="words.html#w109" data-w="109">머지</a> 조각들이 바로잡아 주기 때문이에요.</p>
+<p>반대로 depth를 너무 낮게 잡으면 어떤 자리는 20번, 어떤 자리는 0번처럼 들쭉날쭉해져요. 0번인 자리가 생기면 <a class="w" href="words.html#w87" data-w="87">coverage</a>도 떨어져요. 그래서 연구자들은 "depth 100x, coverage 95%를 원한다"처럼 목표를 정하고 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a>을 맡겨요. 다만 많이 읽을수록 돈이 더 들어요.</p>
+<figure class="slide"><img src="slides/v10.jpg"><figcaption>교수님 슬라이드 — Depth of coverage vs Breadth of coverage. "High read depth gives high accuracy"</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Depth가 높을수록 한 <a class="w" href="words.html#w73" data-w="73">read</a>의 에러를 다른 read들이 보완해 <b>진짜 변이와 시퀀싱 에러를 구분</b>할 수 있다. 예를 들어 100x에서 하나만 다르면 에러로 걸러 내지만, 2x에서 하나가 다르면 판단할 수 없다. Depth가 너무 낮으면 안 읽힌 영역이 생겨 coverage도 떨어진다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 어떤 자리를 2번만 읽었더니 A 하나, T 하나였어요. 왜 변이라고 말할 수 없을까요?</summary><p>2명 중 1명씩 다른 말을 하면 누가 맞는지 알 수 없어서 "진짜 변이"인지 "기계 실수"인지 가릴 수 없기 때문이에요. depth가 낮아서 생기는 문제예요.</p></details>
+
+<div class="done"><a class="go" href="c5-04.html">다음 카드 → depth 계산식</a><div class="pn"><a href="c5-02.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c5"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6주차 · 3. NGS · 5. DNA variant 분석 · 라이프03·07</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

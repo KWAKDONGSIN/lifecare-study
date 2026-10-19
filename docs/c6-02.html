@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>QC — FastQC로 성적표 확인하기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 2/14</span></div><h1>QC — FastQC로 성적표 확인하기</h1>
+<div class="box def"><span class="t">QC (Quality Control, 품질 검사)</span>
+  <p>기계가 읽은 데이터가 <b>분석에 쓸 만한지</b> 확인하는 일이에요. 도구는 <b><a class="w" href="words.html#w103" data-w="103">FastQC</a></b>이고, 결과는 그래프가 가득한 성적표(HTML 파일)로 나와요.</p>
+</div>
+<p><a class="w" href="words.html#w102" data-w="102">QC</a>는 <a class="w" href="words.html#w110" data-w="110">얼라인먼트</a>(정렬) 앞에서 해야 해요. 얼라인먼트 도구는 글자만 맞춰 볼 뿐 <b><a class="w" href="words.html#w8" data-w="8">염기</a>마다 붙은 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>는 보지 않기</b> 때문이에요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p><a class="w" href="words.html#w23" data-w="23">번역</a>기는 흐릿하게 찍힌 사진 속 글자도 그대로 믿고 번역해요. 그래서 번역 전에 사진이 선명한지 사람이 먼저 확인해야 해요.</p>
+</div>
+<p>가장 중요한 그래프는 <b>Per base sequence quality(위치별 염기 품질)</b>예요.</p>
+<ul>
+  <li>가로 = 글자 위치(1~150번째), 세로 = 품질 점수(Q)</li>
+  <li>파란 선은 평균, 빨간 선은 중앙값, 노란 박스는 대부분(25~75%)이 모여 있는 범위예요.</li>
+  <li>점수가 높을수록 그 글자를 올바르게 읽었을 확률이 높아요. 예를 들어 <a class="w" href="words.html#w82" data-w="82">Q30</a>은 1000번 중 약 1번만 틀린다는 뜻이고, 보통 Q30 이상이면 쓸 만하다고 봐요.</li>
+</ul>
+<p>교수님이 보여 주신 예에서는 대부분의 <a class="w" href="words.html#w73" data-w="73">read</a> 평균 점수가 28~38이었어요.</p>
+<figure class="slide"><img src="slides/n39.jpg"><figcaption>교수님 슬라이드 — FastQC: 대부분 read의 평균 점수가 28~38</figcaption></figure>
+<p>또 하나, <b>ATGC 비율 그래프</b>(Per base sequence content)가 있어요. 이건 "좋고 나쁨"이 아니라 <b>목적에 따라 판단</b>하는 그래프예요.</p>
+<ul>
+  <li><b><a class="w" href="words.html#w89" data-w="89">WGS</a></b> — <a class="w" href="words.html#w14" data-w="14">게놈</a>을 무작위로 잘랐으니 어디서나 A·T·G·C가 <b>고르게</b> 섞여 나와야 정상이에요.</li>
+  <li><b><a class="w" href="words.html#w91" data-w="91">Targeted</a></b> — 특정 <a class="w" href="words.html#w13" data-w="13">유전자</a>만 골라 읽었으니 글자가 <b>고르지 않은 게 정상</b>이에요.</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>QC는 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 데이터(<a class="w" href="words.html#w78" data-w="78">FASTQ</a>)가 분석에 쓸 만한지 <b>FastQC</b>로 확인하는 단계이며, per base sequence quality 그래프로 위치별 품질을 본다. ATGC 비율은 WGS는 고르게, targeted는 고르지 않은 것이 정상이므로 <b>목적에 따라 판단</b>한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Targeted sequencing 데이터에서 A·T·G·C 비율이 고르지 않아요. 문제일까요?</summary><p>문제가 아니에요. 특정 유전자만 읽었으니 그 서열의 글자 구성대로 치우치는 게 정상이에요. 그래서 "목적에 따라 판단"해요.</p></details>
+
+<div class="done"><a class="go" href="c6-03.html">다음 카드 → 뒤로 갈수록 품질이 떨어지는 이유 (서술형 단골)</a><div class="pn"><a href="c6-01.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

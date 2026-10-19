@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>①~③ 읽기 전 준비 — 책을 찢어서 기계에 넣기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k1"><a href="index.html#c1">← 보드</a><span>1장 큰 그림 — 파이프라인 · 3/8</span></div><h1>①~③ 읽기 전 준비 — 책을 찢어서 기계에 넣기</h1>
+<p><b>① <a class="w" href="words.html#w3" data-w="3">DNA</a> 꺼내기</b>예요. DNA는 우리 몸 <a class="w" href="words.html#w0" data-w="0">세포</a> 속에 있어서 피나 조직에서 꺼내요. 이 과정을 DNA 추출이라고 하고, 사람의 DNA라서 <a class="w" href="words.html#w14" data-w="14">genomic</a> DNA라고 불러요.</p>
+<p><b>② 자르기</b>예요. 꺼낸 DNA를 아무 데나 랜덤하게 약 150글자 길이로 잘라요(fragmentation, 프래그멘테이션). 기계가 한 번에 읽는 길이에 맞추려는 거예요.</p>
+<p>자른 조각 양끝에는 <b><a class="w" href="words.html#w98" data-w="98">어댑터</a>(adapter)</b>라는 연결 부품을 붙여요. 어댑터는 조각을 유리판에 걸어 주고 기계가 알아보게 하는 손잡이예요. 이렇게 준비한 조각 모음을 <b><a class="w" href="words.html#w97" data-w="97">라이브러리</a>(library)</b>라고 불러요.</p>
+<p><b>③ <a class="w" href="words.html#w58" data-w="58">NGS</a> 기계로 읽기</b>예요. 기계는 조각마다 글자를 하나씩 읽으며 사진을 찍고, 그 사진을 A·T·G·C 글자로 바꿔요. 이 글자로 바꾸는 일을 <b><a class="w" href="words.html#w77" data-w="77">base calling</a>(베이스 콜링)</b>이라고 하고, 결과 파일이 <b><a class="w" href="words.html#w78" data-w="78">FASTQ</a></b>예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>두꺼운 책 한 권을 수억 개의 작은 쪽지로 찢어서 운동장에 깔아 놓고, 드론이 위에서 쪽지의 글자를 한꺼번에 사진 찍는 모습이에요. 사진을 글자로 옮겨 적은 노트가 FASTQ예요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>혈액이나 조직에서 genomic DNA를 추출해 약 150bp로 랜덤하게 절단(fragmentation)하고 어댑터를 붙여 라이브러리를 만든다. 이를 NGS 기기로 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a>하면 base calling을 거쳐 FASTQ 파일이 생성된다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — base calling은 무엇을 하는 일인가요?</summary>
+  <p>기계가 찍은 <a class="w" href="words.html#w69" data-w="69">형광</a> 사진을 A·T·G·C 글자로 바꾸는 일이에요. 그 결과 파일이 FASTQ예요.</p>
+</details>
+
+<div class="done"><a class="go" href="c1-04.html">다음 카드 → ④~⑤ 믿을 만한지 확인하고 다듬기</a><div class="pn"><a href="c1-02.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c1"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

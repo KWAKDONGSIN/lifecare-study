@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>⑥~⑧ 제자리에 붙이고 정리하기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k1"><a href="index.html#c1">← 보드</a><span>1장 큰 그림 — 파이프라인 · 5/8</span></div><h1>⑥~⑧ 제자리에 붙이고 정리하기</h1>
+<p><b>⑥ <a class="w" href="words.html#w110" data-w="110">얼라인먼트</a>(alignment, 정렬)</b>예요. 쪽지 수억 장이 정답지(<a class="w" href="words.html#w84" data-w="84">레퍼런스</a>)의 어디에서 왔는지 찾아 붙이는 일이에요. 교수님은 "퍼즐 조각 맞추기"라고 했어요.</p>
+<p>도구는 <b><a class="w" href="words.html#w114" data-w="114">BWA</a></b>(Burrows-Wheeler Aligner)예요. 결과는 먼저 글자 파일인 <b><a class="w" href="words.html#w117" data-w="117">SAM</a></b>(Sequence Alignment/Map)으로 나오고, 같은 내용을 컴퓨터가 빨리 읽게 압축한 것이 <b><a class="w" href="words.html#w118" data-w="118">BAM</a></b>이에요. 그다음 위치 순서로 줄을 세우고(<a class="w" href="words.html#w120" data-w="120">sort</a>) 찾아보기용 번호표(<a class="w" href="words.html#w115" data-w="115">index</a>, <a class="w" href="words.html#w119" data-w="119">BAI</a>)를 만들어요.</p>
+<p><b>⑦ <a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a>(마크 듀플리케이츠)</b>예요. 도구는 <b><a class="w" href="words.html#w135" data-w="135">Picard</a></b>예요. 준비 과정에서 같은 조각이 <a class="w" href="words.html#w27" data-w="27">PCR</a>(Polymerase Chain Reaction, <a class="w" href="words.html#w3" data-w="3">DNA</a> 복사 기술)로 여러 번 복사될 수 있는데, 이 복사본이 <a class="w" href="words.html#w50" data-w="50">변이</a> 비율을 부풀려요. 그래서 복사본을 표시하고 빼요.</p>
+<p><b>⑧ <a class="w" href="words.html#w136" data-w="136">BQSR</a></b>(Base Quality Score Recalibration, <a class="w" href="words.html#w8" data-w="8">염기</a> 품질 점수 재보정)예요. 도구는 <b><a class="w" href="words.html#w139" data-w="139">GATK</a></b>(Genome Analysis Toolkit)예요. 기계가 붙인 <a class="w" href="words.html#w81" data-w="81">품질 점수</a>에는 습관적인 <a class="w" href="words.html#w137" data-w="137">치우침</a>이 있어서, 이미 알려진 변이 목록(<a class="w" href="words.html#w51" data-w="51">SNP</a> 데이터베이스)을 기준으로 점수를 다시 맞춰요. 기계의 읽기 실수를 변이로 착각하지 않으려는 거예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>정렬은 찢어진 쪽지를 표준 책 위에 올려 제자리에 붙이는 일이에요. MarkDuplicates는 같은 쪽지를 복사기로 여러 장 뽑았을 때 한 장만 남기는 일이에요. BQSR은 체중계가 늘 1kg 많게 나오면 영점을 다시 맞추는 일이에요.</p>
+</div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>⑥~⑧에서 도구 이름은 <b>BWA(붙이기) → Picard(복사본 빼기) → GATK(점수 보정)</b> 순서로 외우세요. 한 단계씩 "왜 하는지"를 같이 말할 수 있으면 돼요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>BWA로 <a class="w" href="words.html#w73" data-w="73">read</a>를 레퍼런스에 정렬해 SAM을 만들고 BAM으로 변환한 뒤 위치순으로 정렬하고 인덱스를 만든다. Picard MarkDuplicates로 <a class="w" href="words.html#w134" data-w="134">PCR 중복 read</a>를 제거하고, GATK BQSR로 염기 품질 점수를 재보정해 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 에러가 변이로 오인되는 것을 막는다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — MarkDuplicates는 왜 필요한가요?</summary>
+  <p>PCR로 복사된 같은 조각이 여러 번 세어지면 변이 비율이 부풀려지기 때문에, 중복 복사본을 빼려고 해요.</p>
+</details>
+
+<div class="done"><a class="go" href="c1-06.html">다음 카드 → ⑨~⑩ 진짜 오타만 고르고 뜻 찾기</a><div class="pn"><a href="c1-04.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c1"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

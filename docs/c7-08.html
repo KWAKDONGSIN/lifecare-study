@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VCF 읽는 법 (2) — FILTER와 GT·DP·GQ·AD · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k7"><a href="index.html#c7">← 보드</a><span>7장 진짜 변이 골라내기 · 8/9</span></div><h1>VCF 읽는 법 (2) — FILTER와 GT·DP·GQ·AD</h1>
+<p>먼저 <a class="w" href="words.html#w157" data-w="157">FILTER</a> 칸이에요. 점수가 기준에 못 미치는 <a class="w" href="words.html#w50" data-w="50">변이</a>를 버리는 방법을 <b><a class="w" href="words.html#w158" data-w="158">hard filter</a>(하드 필터)</b>라고 해요. 기준을 통과하면 FILTER에 <b>PASS</b>가 적히고, 못 통과하면 걸린 필터 이름이 적혀요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>합격 커트라인이에요. 점수가 커트라인을 넘으면 PASS이고, 못 넘으면 "불합격 사유"가 찍혀요.</p>
+</div>
+<p>실습에서 쓴 <a class="w" href="words.html#w139" data-w="139">GATK</a> 권장 기준은 QD 2.0 미만, FS 60 초과, MQ 40 미만, MQRankSum -12.5 미만, ReadPosRankSum -8 미만, SOR 3 초과를 제거하는 거예요. 외울 것은 <b>"QD 2.0 미만 제거"</b>와 <b>"PASS의 뜻"</b> 정도예요.</p>
+<ul>
+  <li><b>QD</b> 변이 점수(QUAL)를 <a class="w" href="words.html#w86" data-w="86">depth</a>로 나눠 보정한 값이에요.</li>
+  <li><b>FS, SOR</b> 변이가 정방향(forward) 또는 역방향(reverse) <a class="w" href="words.html#w73" data-w="73">read</a> 한쪽에만 몰렸는지(strand <a class="w" href="words.html#w137" data-w="137">bias</a>) 보는 값이에요.</li>
+  <li><b>MQ</b> <a class="w" href="words.html#w123" data-w="123">매핑 품질</a>의 요약이에요. 실습 화면에서 MQ가 60인 변이는 통과, 21인 변이는 MQ_filter가 걸렸어요.</li>
+</ul>
+<p>하지만 희귀 변이를 찾을 때는 일부러 필터를 안 쓰기도 해요. 진짜 희귀 변이가 점수가 낮다는 이유로 버려질 수 있기 때문이에요. 그래서 시험에서는 "목적에 따라"가 정답이에요.</p>
+<p>다음은 <b><a class="w" href="words.html#w153" data-w="153">GT</a>(Genotype, 유전자형)</b>예요. 0은 정답지(<a class="w" href="words.html#w152" data-w="152">REF</a>) 글자이고 1은 바뀐 글자(ALT)예요. 사람은 엄마 <a class="w" href="words.html#w2" data-w="2">염색체</a>와 아빠 염색체 한 개씩이라서 숫자를 두 개 써요.</p>
+<div class="tw"><table>
+  <tr><th>GT</th><th>뜻</th><th>변이가 있나요</th></tr>
+  <tr><td><b>0/0</b></td><td>두 염색체 모두 정답지와 같음</td><td>없음</td></tr>
+  <tr><td><b>0/1</b></td><td>한쪽만 바뀜 (이형접합)</td><td>있음</td></tr>
+  <tr><td><b>1/1</b></td><td>양쪽 모두 바뀜 (동형접합)</td><td>있음</td></tr>
+</table></div>
+<p>GT에서 이어지는 숫자들도 있어요. <b>AN</b>은 전체 <a class="w" href="words.html#w54" data-w="54">allele</a>(염색체 한 개가 가진 글자) 수인데 사람은 보통 2예요. <b>AC</b>는 ALT allele 개수이고 <b>AF</b>는 ALT 빈도(AC ÷ AN)예요.</p>
+<ul>
+  <li>1/1이면 AC=2, AF=1.00이에요.</li>
+  <li>0/1이면 AC=1, AF=0.5예요.</li>
+</ul>
+<p>나<a class="w" href="words.html#w109" data-w="109">머지</a> 세 가지는 이렇게 읽어요. <b><a class="w" href="words.html#w154" data-w="154">DP</a></b>는 depth, 그러니까 그 위치를 덮은 read 수예요. <b><a class="w" href="words.html#w155" data-w="155">GQ</a></b>는 유전자형을 얼마나 확신하는지를 <a class="w" href="words.html#w80" data-w="80">Phred 점수</a>로 나타낸 값이에요. <b><a class="w" href="words.html#w156" data-w="156">AD</a></b>는 글자별로 몇 개의 조각이 있는지예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>한 위치를 20번 읽었고(DP=20), 정답지 글자가 10번, 바뀐 글자가 10번 나왔다면(AD=10,10) 반반이라 0/1이 자연스러워요. 교수님은 depth가 높아야 정확도가 올라간다는 것이 핵심 메시지라고 했어요.</p>
+</div>
+<figure class="slide"><img src="slides/v77.jpg"><figcaption>교수님 슬라이드 — GT 0/0 변이 없음, 0/1·1/1 변이 있음 / AD / DP / GQ / PL</figcaption></figure>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>GT는 "0은 정답지, 1은 바뀐 글자". 0/0은 없음, 0/1과 1/1은 있음. 이것만 확실하면 돼요. DP는 depth, GQ는 확신도(Genotype Quality), AD는 글자별 조각 수예요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><a class="w" href="words.html#w148" data-w="148">VCF</a>의 GT는 0이 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a>, 1이 ALT <a class="w" href="words.html#w8" data-w="8">염기</a>를 뜻하며 0/0은 변이 없음, 0/1과 1/1은 변이 있음이다. DP는 depth, GQ는 genotype quality(Phred 점수), AD는 염기별 read 수이고, FILTER가 PASS이면 hard filter 기준(예 QD 2.0 이상)을 통과한 것이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — GT가 0/1이면 어떤 상태인가요?</summary>
+  <p>엄마·아빠 염색체 중 한쪽만 바뀐 변이 있음 상태예요. AC는 1, AF는 0.5가 돼요.</p>
+</details>
+
+<div class="done"><a class="go" href="c7-09.html">다음 카드 → 이 장 3줄 요약</a><div class="pn"><a href="c7-07.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c7"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

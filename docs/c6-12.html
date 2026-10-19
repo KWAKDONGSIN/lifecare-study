@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IGV — 눈으로 확인하기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 12/14</span></div><h1>IGV — 눈으로 확인하기</h1>
+<p><b><a class="w" href="words.html#w127" data-w="127">IGV</a></b>(Integrative Genomics Viewer)는 <a class="w" href="words.html#w110" data-w="110">얼라인</a> 결과를 <b>지도 앱처럼 확대·축소하며 보는 프로그램</b>이에요. 숫자만 보지 않고 눈으로 확인하려고 써요.</p>
+<ul>
+  <li>올리는 파일 — <a class="w" href="words.html#w84" data-w="84">레퍼런스</a>(<a class="w" href="words.html#w79" data-w="79">FASTA</a> + <b>.fai</b>)와 내 결과(sorted <a class="w" href="words.html#w118" data-w="118">BAM</a> + <b><a class="w" href="words.html#w119" data-w="119">.bai</a></b>)</li>
+  <li>위쪽 <b>회색 막대</b> = 자리별 조각 수(<a class="w" href="words.html#w86" data-w="86">depth</a>)</li>
+  <li><b>화살표 막대</b> = 조각 하나(방향도 보여요). 빨강·파랑은 정방향·역방향이에요.</li>
+  <li><b>색칠된 글자</b> = 레퍼런스와 다른 글자(<a class="w" href="words.html#w50" data-w="50">변이</a> 후보)</li>
+</ul>
+<figure class="slide"><img src="slides/v57.jpg"><figcaption>교수님 슬라이드 — IGV로 본 BAM. 빨강·파랑 = 정방향·역방향 조각</figcaption></figure>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>교수님의 로직은 "단계마다 <b>눈(IGV)</b>과 <b>통계(<a class="w" href="words.html#w87" data-w="87">coverage</a>·depth)</b>로 잘 됐는지 확인한다"예요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>IGV는 레퍼런스(FASTA와 fai)와 정렬된 BAM(sorted BAM과 bai)을 올려 <a class="w" href="words.html#w73" data-w="73">read</a>의 위치, depth(회색 막대), 미스매치(색칠된 <a class="w" href="words.html#w8" data-w="8">염기</a>)를 <b>눈으로 확인</b>하는 시각화 도구이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — IGV에서 위쪽 회색 막대가 높을수록 무슨 뜻일까요?</summary><p>그 자리를 읽은 조각이 많다는 뜻, 즉 depth가 높다는 뜻이에요.</p></details>
+
+<div class="done"><a class="go" href="c6-13.html">다음 카드 → 리눅스 — 딱 이것만</a><div class="pn"><a href="c6-11.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

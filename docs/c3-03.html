@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>옛날 방식(Sanger)과 NGS의 차이 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k3"><a href="index.html#c3">← 보드</a><span>3장 NGS · 3/9</span></div><h1>옛날 방식(Sanger)과 NGS의 차이</h1>
+<p><a class="w" href="words.html#w58" data-w="58">NGS</a> 이전에 쓰던 방법은 <b><a class="w" href="words.html#w59" data-w="59">Sanger</a>(생어) <a class="w" href="words.html#w57" data-w="57">시퀀싱</a></b>이에요. 먼저 Sanger가 어떻게 읽는지 쉬운 말로 볼게요. 세 단계예요.</p>
+<ul>
+  <li><b>증폭(Amplification)</b> — 읽을 <a class="w" href="words.html#w3" data-w="3">DNA</a>를 <a class="w" href="words.html#w27" data-w="27">PCR</a>(Polymerase Chain Reaction)로 많이 복사해요. PCR은 DNA용 복사기예요.</li>
+  <li><b>늘리기(Extension)</b> — 글자를 붙여 DNA를 늘려요. <a class="w" href="words.html#w69" data-w="69">형광</a>이 달린 글자가 붙는 순간 멈춰서, 길이가 제각각인 조각이 많이 생겨요.</li>
+  <li><b>읽기(Detection)</b> — 가는 관(<a class="w" href="words.html#w60" data-w="60">캐필러리</a>)에 흘리면 짧은 조각이 먼저 지나가요. 끝 글자의 형광 색을 순서대로 읽으면 서열이 나와요.</li>
+</ul>
+<p>한 관에는 DNA 한 종류만 읽을 수 있어서 동시에 많이 읽기 어려워요. 관이 20개면 동시에 20종류가 한계예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p><b>Sanger</b>는 한 사람이 책을 한 줄씩 베껴 쓰는 것과 같아요. 관 하나에 한 종류만이라 동시에 약 20개예요.</p>
+  <p><b>NGS</b>는 책을 잘게 찢어 운동장에 수억 장 깔아 놓고, 드론이 위에서 한 글자씩 동시에 사진을 찍는 것과 같아요. 동시에 약 <b>10억(10⁹)개</b>예요.</p>
+</div>
+<div class="tw"><table>
+  <tr><th style="width:22%"></th><th>Sanger</th><th>NGS</th></tr>
+  <tr><td>순서</td><td>늘리기(Extend) → 관에 정렬(Arrange) → 읽기(Detect)</td><td><b>먼저 판에 고정(Arrange)</b> → <b>늘리기와 읽기를 동시에</b></td></tr>
+  <tr><td>한 칸 크기</td><td>관 지름 약 1cm</td><td>점 하나 약 <b>7μm</b></td></tr>
+  <tr><td>동시에</td><td>관 1개당 1종류 (약 20개)</td><td>판 하나에 <b>약 10⁹개</b></td></tr>
+</table></div>
+<p>크기 차이도 놀라워요. 1cm는 10,000μm(마이크로미터)라서, 한 칸이 1,000배 넘게 작아요. 작으니까 한 판에 수억 개를 깔 수 있는 거예요.</p>
+<p class="small">참고로 교수님이 말로는 점 크기를 약 1μm라고도 했지만, 슬라이드 숫자인 7μm로 외우세요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p>NGS가 Sanger와 다른 핵심은 <b>순서를 바꾼 것</b>이에요. 다 만들어서 흘려보내는 대신, <b>판에 먼저 박아 놓고(Arrange) 그 자리에서 늘리면서(Extend) 동시에 사진(Detect)</b>을 찍어요.</p>
+</div>
+<figure class="slide"><img src="slides/n08.jpg"><figcaption>교수님 슬라이드 — Sanger(1 read/capillary) vs NGS(10⁹ reads/array)</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>Sanger는 증폭, extension, 캐필러리를 통한 detection 순으로 진행되며 관 하나당 한 종류의 DNA만 읽어 병렬화가 어렵다. NGS는 기판에 DNA를 먼저 고정(arrangement)한 뒤 extension과 detection을 동시에 수행하며, 스팟이 μm 단위로 작아 약 10⁹개를 동시에 분석한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — Sanger는 왜 많은 DNA를 한꺼번에 읽기 어려운가요?</summary>
+  <p>관 하나에 DNA 한 종류만 넣어 읽을 수 있고, 관의 크기도 약 1cm로 커서 많이 늘어놓을 수 없기 때문이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c3-04.html">다음 카드 → 비용이 얼마나 떨어졌나</a><div class="pn"><a href="c3-02.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c3"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

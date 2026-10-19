@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>이 장 3줄 요약 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 14/14</span></div><h1>이 장 3줄 요약</h1><div class="box tip"><span class="t">이 장 3줄 요약</span>
+  <ul>
+    <li>흐름은 <a class="w" href="words.html#w78" data-w="78">FASTQ</a> → <a class="w" href="words.html#w102" data-w="102">QC</a>(<a class="w" href="words.html#w103" data-w="103">FastQC</a>, 뒤로 갈수록 품질이 떨어지는 이유 2개) → <a class="w" href="words.html#w104" data-w="104">트리밍</a>(<a class="w" href="words.html#w105" data-w="105">cutadapt</a>·<a class="w" href="words.html#w106" data-w="106">Trim Galore</a>, 필요하면 <a class="w" href="words.html#w108" data-w="108">PEAR</a> <a class="w" href="words.html#w109" data-w="109">머지</a>) → <a class="w" href="words.html#w110" data-w="110">얼라인먼트</a>(<a class="w" href="words.html#w114" data-w="114">BWA</a>의 <a class="w" href="words.html#w115" data-w="115">인덱스</a> + <a class="w" href="words.html#w116" data-w="116">seed-and-extend</a>, local) → sorted <a class="w" href="words.html#w118" data-w="118">BAM</a> + <a class="w" href="words.html#w119" data-w="119">.bai</a> → <a class="w" href="words.html#w127" data-w="127">IGV</a> 확인이에요.</li>
+    <li><a class="w" href="words.html#w117" data-w="117">SAM</a>(텍스트, 큼)은 BAM(바이너리, 작음)으로 줄이고, <a class="w" href="words.html#w120" data-w="120">sort</a>는 필수 단계, 색인은 .bai예요. SAM 11칸 중 <a class="w" href="words.html#w121" data-w="121">FLAG</a>(0/16/4), <a class="w" href="words.html#w122" data-w="122">POS</a>, <a class="w" href="words.html#w123" data-w="123">MAPQ</a> 60, <a class="w" href="words.html#w124" data-w="124">CIGAR</a>를 기억하세요.</li>
+    <li>CIGAR는 M 맞춤·I 삽입·D 결실·S <a class="w" href="words.html#w125" data-w="125">soft clip</a>이에요. 3M1I3M1D5M(POS 5), 5M2I10M처럼 읽고, 조각 길이는 M+I+S, <a class="w" href="words.html#w84" data-w="84">레퍼런스</a> 칸은 M+D예요.</li>
+  </ul>
+</div>
+<div class="done"><a class="go" href="c7-01.html">다음 카드 → 7장 진짜 변이 골라내기 시작</a><div class="pn"><a href="c6-13.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

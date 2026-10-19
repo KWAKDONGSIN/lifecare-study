@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>④~⑤ 믿을 만한지 확인하고 다듬기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k1"><a href="index.html#c1">← 보드</a><span>1장 큰 그림 — 파이프라인 · 4/8</span></div><h1>④~⑤ 믿을 만한지 확인하고 다듬기</h1>
+<p><b>④ <a class="w" href="words.html#w102" data-w="102">QC</a>(Quality Control, 품질 관리)</b>예요. <a class="w" href="words.html#w78" data-w="78">FASTQ</a>를 받으면 먼저 "이 데이터를 믿어도 되나" 성적표를 봐요. 이때 쓰는 도구가 <b><a class="w" href="words.html#w103" data-w="103">FastQC</a></b>예요. 기준은 보통 <a class="w" href="words.html#w82" data-w="82">Q30</a> 이상이에요(Q30은 4장에서 자세히 배워요).</p>
+<p>이유는 간단해요. 정렬 도구는 글자의 품질까지 따져 주지 않아서, 나쁜 글자가 섞여 있으면 그대로 오타처럼 보일 수 있어요.</p>
+<p><b>⑤ <a class="w" href="words.html#w104" data-w="104">트리밍</a>(trimming)과 <a class="w" href="words.html#w109" data-w="109">머지</a>(merge)</b>예요. 트리밍은 필요 없는 부분을 잘라 내는 일이고 도구는 <b><a class="w" href="words.html#w105" data-w="105">cutadapt</a></b>예요. 조각이 짧으면 기계가 끝까지 읽다가 손잡이(<a class="w" href="words.html#w98" data-w="98">어댑터</a>)나 잡음까지 읽어 버리기 때문이에요.</p>
+<p>머지는 두 방향으로 읽은 조각을 겹치는 부분에서 이어 붙여 더 길게 만드는 일이고 도구는 <b><a class="w" href="words.html#w108" data-w="108">PEAR</a></b>(Paired-End reAd mergeR)예요. 조각 하나를 양쪽 끝에서 읽는 방식을 <a class="w" href="words.html#w95" data-w="95">paired-end</a>라고 해요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>QC는 시험지를 채점하기 전에 "글씨가 알아볼 만한가" 보는 일이에요. 트리밍은 쪽지 끝에 묻은 얼룩과 손잡이를 가위로 잘라 내는 일이고, 머지는 반쪽씩 읽은 쪽지를 겹친 부분에 맞춰 풀로 붙이는 일이에요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FastQC로 <a class="w" href="words.html#w8" data-w="8">염기</a> 품질(Q30 기준)을 확인하고, cutadapt로 어댑터와 저품질 부분을 제거한다. paired-end 데이터는 PEAR로 <a class="w" href="words.html#w96" data-w="96">R1</a>과 R2를 겹치는 구간(overlap)에서 병합해 더 긴 <a class="w" href="words.html#w73" data-w="73">read</a>를 만든다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 트리밍을 하는 이유는 무엇인가요?</summary>
+  <p>조각이 짧으면 기계가 어댑터와 노이즈까지 읽기 때문에, 그 쓸모없는 부분을 잘라 내려고 해요.</p>
+</details>
+
+<div class="done"><a class="go" href="c1-05.html">다음 카드 → ⑥~⑧ 제자리에 붙이고 정리하기</a><div class="pn"><a href="c1-03.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c1"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·7주차 · 5. DNA variant 분석_수정.pdf · 라이프05·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

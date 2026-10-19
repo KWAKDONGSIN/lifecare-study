@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>실습 숫자는 무슨 뜻일까요 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k9"><a href="index.html#c9">← 보드</a><span>9장 실습 따라가기 · 8/10</span></div><h1>실습 숫자는 무슨 뜻일까요</h1>
+<p>실습 결과에는 숫자가 많이 나와요. 시험에서 숫자를 물으면 어디서 나온 숫자인지부터 기억하면 안 헷갈려요. 먼저 정렬 결과(NA12878의 20번 <a class="w" href="words.html#w2" data-w="2">염색체</a> 데이터)를 볼게요.</p>
+<div class="tw"><table>
+  <tr><th>숫자</th><th>어느 단계에서</th><th>이게 무슨 뜻이에요</th></tr>
+  <tr><td>전체 <b>8,592,478</b>개</td><td>정렬 후 flagstat</td><td>정렬한 <a class="w" href="words.html#w73" data-w="73">read</a>가 모두 약 859만 개라는 뜻이에요.</td></tr>
+  <tr><td><a class="w" href="words.html#w110" data-w="110">매핑</a> <b>100%</b>, 짝지어짐 <b>100%</b></td><td>flagstat</td><td>read가 전부 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a>에 자리를 잡았고, 짝(<a class="w" href="words.html#w96" data-w="96">R1</a>, R2)도 제대로 붙었다는 뜻이에요. 짝이 없는 singleton은 2개뿐이었어요.</td></tr>
+  <tr><td><a class="w" href="words.html#w87" data-w="87">coverage</a> <b>99.221%</b></td><td>samtools coverage</td><td>20번 염색체의 99.2%가 적어도 한 번은 읽혔다는 뜻이에요. 빈 곳이 거의 없다는 거예요.</td></tr>
+  <tr><td>mean <a class="w" href="words.html#w86" data-w="86">depth</a> <b>19.9649</b> (약 20x)</td><td>samtools coverage</td><td>한 위치를 평균 약 20번 읽었다는 뜻이에요. 많이 읽을수록 에러와 진짜를 구별하기 쉬워요.</td></tr>
+  <tr><td>평균 <a class="w" href="words.html#w8" data-w="8">염기</a> 품질 <b>23</b></td><td>samtools coverage</td><td>평균 Q23, 정확도로는 약 99.5%예요. <a class="w" href="words.html#w82" data-w="82">Q30</a>(99.9%) 기준보다는 낮은 평균이에요.</td></tr>
+  <tr><td>평균 <a class="w" href="words.html#w123" data-w="123">매핑 품질</a> <b>57.8</b></td><td>samtools coverage</td><td>MAPQ 60이 "잘 붙음"이라서, 평균이 60에 가까우면 대부분 제자리에 잘 붙었다는 뜻이에요.</td></tr>
+  <tr><td><a class="w" href="words.html#w134" data-w="134">duplicates</a> <b>0 → 1,542</b></td><td>flagstat (정렬 직후 → <a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a> 뒤)</td><td>처음엔 중복 표시가 0이었는데, MarkDuplicates가 복사본 1,542개를 찾아 표시했다는 뜻이에요. 전체의 약 0.018%로 아주 일부예요.</td></tr>
+  <tr><td>MQ <b>60</b>과 <b>21</b></td><td><a class="w" href="words.html#w158" data-w="158">하드 필터</a> 결과 화면</td><td>MQ 60인 <a class="w" href="words.html#w50" data-w="50">변이</a>는 통과, MQ 21인 변이는 기준(MQ 40 미만 제거)에 걸려 MQ_<a class="w" href="words.html#w157" data-w="157">filter</a>가 찍혔어요.</td></tr>
+</table></div>
+<p>6주차 실습 숫자도 있어요.</p>
+<div class="tw"><table>
+  <tr><th>숫자</th><th>어느 단계에서</th><th>이게 무슨 뜻이에요</th></tr>
+  <tr><td>32 read(<b>64.0%</b>), 4,225bp → 3,230bp(<b>76.4%</b>)</td><td><a class="w" href="words.html#w105" data-w="105">cutadapt</a> (50 read짜리 가짜 데이터)</td><td>50개 중 32개에 <a class="w" href="words.html#w98" data-w="98">어댑터</a>가 있었고, 어댑터를 자르니 전체 길이가 4,225bp에서 3,230bp로 줄었다는 뜻이에요.</td></tr>
+  <tr><td>48,277 / 51,122 (<b>94.435%</b>) assembled</td><td><a class="w" href="words.html#w108" data-w="108">PEAR</a> 실습 예시</td><td>51,122쌍 중 48,277쌍이 겹치는 부분으로 합쳐졌고, 2,845쌍(5.565%)은 못 합쳐졌다는 뜻이에요. 수업에서 학생들은 약 70%가 합쳐질 거라고 답했어요.</td></tr>
+</table></div>
+<p>마지막으로 교수님 말로는 이번 실습은 coverage 99%, mean depth 약 20x였고, 정렬 스크립트는 5분 이상 걸렸어요.</p>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>실습 데이터는 coverage가 약 99%로 대부분의 위치가 읽혔고 mean depth는 약 20x로 한 위치를 평균 20번 읽었다. depth가 높을수록 <a class="w" href="words.html#w57" data-w="57">시퀀싱</a> 에러와 진짜 변이를 구별하기 쉽다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — coverage 99%와 depth 20x의 차이는?</summary>
+  <p>coverage는 전체 중 몇 %를 읽었는지(99%), depth는 한 위치를 몇 번 읽었는지(약 20번)예요. 매 시간 반복되는 질문이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c9-09.html">다음 카드 → 3주차·4주차 실습 코드 쉽게 읽기</a><div class="pn"><a href="c9-07.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c9"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

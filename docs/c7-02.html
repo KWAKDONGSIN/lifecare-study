@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MarkDuplicates — 복사본 빼기 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k7"><a href="index.html#c7">← 보드</a><span>7장 진짜 변이 골라내기 · 2/9</span></div><h1>MarkDuplicates — 복사본 빼기</h1>
+<p><a class="w" href="words.html#w57" data-w="57">시퀀싱</a>을 하려는데 <a class="w" href="words.html#w3" data-w="3">DNA</a>가 모자랄 때가 있어요. 그러면 <a class="w" href="words.html#w27" data-w="27">PCR</a>(Polymerase Chain Reaction, DNA를 복사기처럼 불리는 기술)로 DNA를 늘려요. 이때 같은 조각의 복사본이 여러 개 생겨요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b><a class="w" href="words.html#w134" data-w="134">PCR duplicate</a>(PCR 중복)</b>는 PCR 때문에 같은 DNA 조각이 복사되어 똑같이 여러 번 읽힌 <a class="w" href="words.html#w73" data-w="73">read</a>예요.</p>
+</div>
+<p>복사본은 어떻게 알아볼까요? DNA를 무작위로 잘랐다면 시작점과 끝점이 똑같은 조각이 우연히 여러 개 나올 리가 없어요. 그래서 시작 위치와 끝 위치가 같으면 복사본으로 보고 하나만 남겨요.</p>
+<p>실제로는 <a class="w" href="words.html#w2" data-w="2">염색체</a>(Chr), 위치(Position), <a class="w" href="words.html#w124" data-w="124">CIGAR</a>(조각이 <a class="w" href="words.html#w84" data-w="84">레퍼런스</a>에 어떻게 맞는지 적은 암호)가 모두 같은지를 봐요. 이 세 가지가 같으면 PCR 중복이에요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p><b>부정 투표</b> 한 사람이 투표용지를 복사해서 여러 번 내면 결과가 왜곡돼요. 그래서 한 사람 한 표만 인정하는 거예요. 설문조사에서 한 사람이 같은 답을 열 번 낸 것을 한 표로 세는 것과 같아요.</p>
+</div>
+<p>왜 이게 중요할까요? 복사본이 많으면 <a class="w" href="words.html#w50" data-w="50">변이</a> 비율이 실제보다 크게 보이기 때문이에요. 숫자로 볼게요.</p>
+<ul>
+  <li>진짜는 조각 10개 중 변이 조각 3개, 그러니까 <b>30%</b>예요.</li>
+  <li>그런데 변이 조각 3개가 PCR로 28개까지 불어나면 28 ÷ (28+7) = <b>80%</b>로 보여요.</li>
+  <li>그러면 병이 실제보다 훨씬 심한 "말기"로 오판할 수 있어요. 복사본을 지우면 약 30%라서 "중기 정도"로 바르게 판단해요.</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p><b>생략해도 되는 경우까지 물어봐요.</b> <a class="w" href="words.html#w101" data-w="101">Amplicon</a>(<a class="w" href="words.html#w91" data-w="91">targeted</a>) 데이터는 원하는 부위만 PCR로 뽑은 것이라서 원래 모든 조각의 시작과 끝이 같아요. 이때 <a class="w" href="words.html#w133" data-w="133">MarkDuplicates</a>를 하면 멀쩡한 read까지 다 지워지니 생략해요.</p>
+  <p>무작위로 자른 DNA(gDNA)에서만 해요. 정리하면 "목적에 따라 판단"이에요.</p>
+</div>
+<p>도구는 <b><a class="w" href="words.html#w135" data-w="135">Picard</a></b>예요. 끝나면 <a class="w" href="words.html#w118" data-w="118">BAM</a>을 위치 순서로 다시 정렬해요(<b><a class="w" href="words.html#w120" data-w="120">SortSam</a></b>). 다음 단계들이 위치순으로 정리된 BAM을 필요로 하기 때문이에요.</p>
+<p>실습에서도 확인했어요. 정렬 직후 flagstat의 duplicates는 0이었는데 MarkDuplicates 뒤에는 1,542로 올랐어요. 전체 8,592,478개의 약 0.018%예요.</p>
+<figure class="slide"><img src="slides/v63.jpg"><figcaption>교수님 슬라이드 — 같은 위치에 정렬된 reads = Amplification duplicate로 판단해 제거</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>DNA가 부족하면 PCR로 증폭하는데 이때 같은 조각의 <a class="w" href="words.html#w21" data-w="21">복제</a>본(PCR duplicate)이 생긴다. 무작위로 자른 DNA는 시작점과 끝점이 우연히 같을 수 없으므로, 같은 위치에서 시작하고 끝나는 read는 중복으로 보고 Picard MarkDuplicates로 하나만 남긴다. 그대로 두면 변이 비율이 부풀려져(예 30%가 80%) 오판하며, 특정 부위를 PCR로 뽑은 amplicon 데이터는 원래 시작·끝이 같으므로 생략한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — amplicon 데이터에서는 MarkDuplicates를 왜 안 하나요?</summary>
+  <p>원하는 부위만 PCR로 뽑았기 때문에 모든 조각의 시작과 끝이 원래 같아요. 그대로 하면 진짜 read까지 중복으로 지워 버려요.</p>
+</details>
+
+<div class="done"><a class="go" href="c7-03.html">다음 카드 → BQSR — 기계 점수 영점 맞추기</a><div class="pn"><a href="c7-01.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c7"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FASTQ는 어떤 파일인가 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k4"><a href="index.html#c4">← 보드</a><span>4장 FASTQ와 품질 점수 · 1/5</span></div><h1>FASTQ는 어떤 파일인가</h1>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b><a class="w" href="words.html#w78" data-w="78">FASTQ</a></b>는 <a class="w" href="words.html#w58" data-w="58">NGS</a> 기계가 찍은 사진을 글자로 바꾼(<a class="w" href="words.html#w77" data-w="77">base calling</a>) 결과 파일이에요. <b>조각(<a class="w" href="words.html#w73" data-w="73">read</a>) 하나가 4줄</b>로 적혀요.</p>
+</div>
+<p>기계는 조각마다 <a class="w" href="words.html#w69" data-w="69">형광</a> 사진을 찍어요. 사진 속 색을 A·T·G·C 글자로 바꾸는 일이 base calling(베이스 콜링)이에요. FASTQ는 그 글자와 "이 글자를 얼마나 믿을 수 있는지" 점수를 함께 적은 노트예요.</p>
+<p>아래가 실제 모양이에요. 4줄이 한 세트이고, 한 세트가 조각 하나예요.</p>
+<div class="code"><span class="h">@M02595:107:...:1:1101:17207:1849 1:N:0:130</span>
+<span class="k">TGTGATGCCTATCCCCTGTGTGCCTGGCAGTC</span>
++
+<span class="q">BCCBBFFFFFFFGGGGGGGGGGHHHHHHHHHH</span></div>
+<div class="tw"><table>
+  <tr><th style="width:15%">줄</th><th>뭐가 적혀 있나</th></tr>
+  <tr><td><b>1</b></td><td><b>ID</b> — <code>@</code>로 시작. 기계 판의 레인·타일·<b>x,y 좌표</b> = 조각의 주소. <b>주소라서 겹치면 안 돼요</b> (같으면 오류)</td></tr>
+  <tr><td><b>2</b></td><td><b>서열</b> — 읽은 ATGC. <b>N</b> = 색이 섞여서 <b>무슨 글자인지 못 읽은 자리</b></td></tr>
+  <tr><td><b>3</b></td><td><b>+</b> — 그냥 구분선</td></tr>
+  <tr><td><b>4</b></td><td><b><a class="w" href="words.html#w81" data-w="81">품질 점수</a></b> — 2번 줄 글자 하나하나를 <b>얼마나 믿을 수 있는지</b>, 문자 한 개로 표시</td></tr>
+</table></div>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p><b>이름표 → 글자 → + → 점수</b> 순서로 외우세요.</p>
+</div>
+<p>1번 줄의 ID를 더 볼게요. 기계 속 유리판(<a class="w" href="words.html#w66" data-w="66">flow cell</a>)은 레인(길)으로 나뉘고, 레인은 타일(칸)로 나뉘고, 타일 안에는 점(<a class="w" href="words.html#w62" data-w="62">클러스터</a>)이 2~3만 개 있어요. 그래서 "몇 번 레인, 몇 번 타일, 가로 x, 세로 y"를 적으면 점 하나의 위치가 딱 정해져요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>ID는 택배 주소와 같아요. "○○시 ○○동 ○○번지"처럼 레인·타일·x·y로 점의 위치를 적어요. 같은 주소가 두 개면 안 되니까, 같은 ID가 나오면 오류예요.</p>
+</div>
+<p>2번 줄의 <b>N</b>은 여러 색이 섞여 글자를 알아보지 못한 자리예요. 시험 문제로 자주 나와요. 그 자리는 잘못 읽었을 가능성이 커요.</p>
+<p>4번 줄을 보면 2번 줄과 <b>글자 수가 항상 같아요</b>. 위 예시는 둘 다 32글자예요. 글자 하나에 점수 하나가 짝으로 붙어 있기 때문이에요.</p>
+<figure class="slide"><img src="slides/n24.jpg"><figcaption>교수님 슬라이드 — ID / Sequence / Q-score, 그리고 Phred 점수표</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>FASTQ는 read 하나가 4줄로 구성된다. 1줄은 @로 시작하는 ID(레인·타일·x,y 좌표 기반의 고유값), 2줄은 <a class="w" href="words.html#w8" data-w="8">염기</a>서열(N은 염기를 판별하지 못한 자리), 3줄은 구분자 +, 4줄은 염기마다의 품질 점수이다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — FASTQ의 첫 줄 ID가 같은 read가 두 개 있다면 어떤 상태인가요?</summary>
+  <p>오류예요. ID는 점의 위치 주소라서 read마다 달라야 하기 때문이에요.</p>
+</details>
+
+<div class="done"><a class="go" href="c4-02.html">다음 카드 → Phred 품질 점수 — 0의 개수만 세면 돼요</a><div class="pn"><a href="index.html#c4"><b>← 이전</b>보드로</a><a class="next" href="quiz.html#c4"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3주차 · 3. NGS 기술소개_리눅스환경.pdf · 라이프03</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

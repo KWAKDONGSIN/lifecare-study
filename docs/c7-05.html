@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HaplotypeCaller는 어떻게 판단하나 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k7"><a href="index.html#c7">← 보드</a><span>7장 진짜 변이 골라내기 · 5/9</span></div><h1>HaplotypeCaller는 어떻게 판단하나</h1>
+<p><a class="w" href="words.html#w141" data-w="141">HaplotypeCaller</a>의 핵심 아이디어는 <a class="w" href="words.html#w50" data-w="50">변이</a>를 하나씩 따로 보지 않고 여러 개를 묶음으로 본다는 거예요. 그 묶음의 이름이 <a class="w" href="words.html#w142" data-w="142">haplotype</a>이에요.</p>
+<div class="box def"><span class="t">한 줄 정의</span>
+  <p><b>Haplotype(하플로타입)</b>은 한 <a class="w" href="words.html#w2" data-w="2">염색체</a> 위에서 같이 붙어서 유전되는 변이들의 묶음이에요.</p>
+</div>
+<div class="box eg"><span class="t">비유</span>
+  <p>세트 메뉴를 떠올려 보세요. 햄버거만 따로 오는 게 아니라 햄버거+감자튀김+콜라가 한 세트로 와요. 엄마가 준 염색체에는 A-C-G 세트가, 아빠가 준 염색체에는 G-T-G 세트가 들어 있는 식이에요.</p>
+</div>
+<p>세트라서 첫 번째가 A면 두 번째는 거의 C, 세 번째는 거의 G예요. 이 규칙을 이용하면 가짜를 찾을 수 있어요. 아래 그림을 볼게요.</p>
+<div class="tw"><table class="seq">
+    <tr><td class="lb">엄마 쪽</td><td class="x">A</td><td class="r">·</td><td class="r">·</td><td class="x">C</td><td class="r">·</td><td class="r">·</td><td class="x">G</td></tr>
+    <tr><td class="lb">아빠 쪽</td><td class="m">G</td><td class="r">·</td><td class="r">·</td><td class="m">T</td><td class="r">·</td><td class="r">·</td><td class="m">G</td></tr>
+    <tr><td class="lb">조각 a</td><td class="x">A</td><td class="r">·</td><td class="r">·</td><td class="x">C</td><td></td><td></td><td></td></tr>
+    <tr><td class="lb">조각 b</td><td></td><td></td><td></td><td class="m">T</td><td class="r">·</td><td class="r">·</td><td class="m">G</td></tr>
+    <tr><td class="lb">조각 c</td><td class="x">A</td><td class="r">·</td><td class="r">·</td><td class="e">T</td><td></td><td></td><td></td></tr>
+</table></div>
+<p>조각 a는 엄마 세트(A···C)와 딱 맞고, 조각 b는 아빠 세트(T···G)와 딱 맞아요. 그래서 진짜예요. 조각 c는 "A 다음에 T"인데 어느 세트에도 없어요. 그래서 에러일 가능성이 높아요.</p>
+<p>이제 HaplotypeCaller가 일하는 순서를 볼게요.</p>
+<ol>
+  <li><b><a class="w" href="words.html#w143" data-w="143">Active region</a> 정하기</b> — 다른 글자가 몰려 있는 동네만 골라서 집중해요. 전부 보기엔 너무 많아서예요. 나<a class="w" href="words.html#w109" data-w="109">머지</a>는 <a class="w" href="words.html#w58" data-w="58">NGS</a> 에러로 보고 넘어가요.</li>
+  <li><b>Haplotype 후보 만들기</b> — 그 동네에서 가능한 세트들을 만들어요.</li>
+  <li><b><a class="w" href="words.html#w144" data-w="144">PairHMM</a>으로 점수 매기기</b> — "이 조각이 이 세트에서 나왔을 확률"을 계산해요. HMM은 Hidden Markov Model의 약자이고, 에러와 삽입·결실까지 고려하는 채점기라고 생각하면 돼요.</li>
+  <li><b><a class="w" href="words.html#w145" data-w="145">베이지안 모델</a>로 정리하기</b> — 확률을 갱신해서 확률이 높은 변이만 변이로 불러요.</li>
+</ol>
+<div class="box eg"><span class="t">비유</span>
+  <p><b>베이지안은 "증거가 쌓일수록 믿음이 바뀐다"는 생각이에요.</b> 아침에는 비가 올지 반반이라고 생각해요. 하늘이 흐리면 더 믿게 되고, 우산 든 사람이 많이 보이면 거의 확신하게 돼요.</p>
+  <p>처음 추측이 <b>사전 확률</b>이고, 증거를 보고 고친 믿음이 <b>사후 확률</b>이에요. 교수님 설명으로는 PairHMM이 계산한 값이 사전 확률이고, 베이지안 모델이 이것을 반복(iteration)해서 고쳐 사후 확률을 올려요. 그래서 확실한 것만 남아요.</p>
+</div>
+<p>HaplotypeCaller를 실행할 때 알아 둘 옵션은 두 개뿐이에요.</p>
+<ul>
+  <li><code>-L</code> — 분석할 영역을 정해요. 병원의 암 진단은 알려진 위치만 보면 되니까 영역을 좁혀서 빨리 끝내요. 안 정하면 모든 영역에서 새로운(<a class="w" href="words.html#w93" data-w="93">de novo</a>) 변이를 찾느라 오래 걸려요.</li>
+  <li><code>-ploidy 2</code> — 사람은 <a class="w" href="words.html#w146" data-w="146">이배체</a>(diploid)라는 뜻이에요. 염색체가 엄마 한 벌, 아빠 한 벌로 두 벌이어서 2예요.</li>
+</ul>
+<div class="box tip"><span class="t">외우기 팁</span>
+  <p>코드는 읽을 수만 있으면 돼요. 교수님이 "코드는 심플하고 개념만 알면 된다"고 했어요. 옵션 중 <code>--standard-min-confidence-threshold-for-calling 30</code>은 확신 점수 30 이상일 때만 변이로 부르라는 뜻이라는 정도만 알면 충분해요.</p>
+</div>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>HaplotypeCaller는 변이가 몰린 active region을 정한 뒤, 한 염색체에서 함께 유전되는 변이 조합인 haplotype을 기준으로 PairHMM이 <a class="w" href="words.html#w73" data-w="73">read</a>가 각 haplotype에서 나왔을 확률을 계산한다. 이를 베이지안 모델로 갱신해 haplotype 패턴과 맞는 변이는 진짜로, 맞지 않는 것은 에러로 판단하여 확률이 높은 변이만 호출한다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 조각 c(A 다음에 T)는 왜 에러일 가능성이 높나요?</summary>
+  <p>엄마 세트(A-C-G)에도 아빠 세트(G-T-G)에도 "A 다음에 T"는 없기 때문이에요. 변이는 세트로 같이 다니므로 어느 세트와도 안 맞는 조각은 에러로 봐요.</p>
+</details>
+
+<div class="done"><a class="go" href="c7-06.html">다음 카드 → GVCF vs VCF</a><div class="pn"><a href="c7-04.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c7"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 7주차 · 5. DNA variant 분석_수정.pdf · 라이프08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

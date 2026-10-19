@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>리눅스 — 딱 이것만 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k6"><a href="index.html#c6">← 보드</a><span>6장 QC → 얼라인먼트 → BAM · 13/14</span></div><h1>리눅스 — 딱 이것만</h1>
+<p>교수님이 "명령어 세부는 디테일이라 안 본다"고 하셨어요. 개념만 알면 돼요.</p>
+<div class="box def"><span class="t">왜 리눅스?</span>
+  <p>생물정보 분석 도구들이 수십 년간 <b>오픈소스(무료·공개)인 <a class="w" href="words.html#w128" data-w="128">리눅스</a></b> 위에서 만들어져 쌓였기 때문이에요. 교수님 표현으로 "선택이 아니라 하려면 리눅스에서 할 수밖에 없는" 상황이에요.</p>
+</div>
+<ul>
+  <li><b>커널(kernel)</b> = 운영체제의 핵심으로 메모리 같은 하드웨어를 관리해요. <b>셸(<a class="w" href="words.html#w129" data-w="129">shell</a>)</b> = 껍데기, 우리가 친 명령어를 해석해 커널에 전달해요. 이 수업은 셸 중 <b><a class="w" href="words.html#w130" data-w="130">bash</a></b>를 써요.</li>
+  <li><b>셸 스크립트</b> = 명령어를 여러 줄 모아 둔 파일이에요. 첫 줄에 <code>#!/bin/bash</code>를 적어요.</li>
+  <li><b><a class="w" href="words.html#w131" data-w="131">가상환경</a>(conda)</b> = 도구마다 필요한 버전이 달라 서로 꼬이니까, 목적별로 <b>작은 방</b>을 따로 만들고 필요한 도구만 깔아 두는 것이에요.</li>
+</ul>
+<div class="box eg"><span class="t">비유</span>
+  <p>식당에서 주방이 커널이라면, 주문을 받아 주방에 전달하는 홀 직원이 셸이에요. 손님(우리)은 직원에게만 말하면 돼요. 가상환경은 요리마다 쓰는 <b>전용 주방 칸</b>이라고 생각하세요.</p>
+</div>
+<p><b>파일 권한</b>은 읽기·쓰기·실행을 숫자로 적어요. <b>r(읽기)=4, w(쓰기)=2, x(실행)=1</b>이에요.</p>
+<ul>
+  <li><code>ls -al</code>로 보면 <code>-rw-r--r--</code>처럼 나와요. 맨 앞 글자는 파일(<code>-</code>)인지 폴더(<code>d</code>)인지이고, 나<a class="w" href="words.html#w109" data-w="109">머지</a> 9글자는 <b>user(주인) / group(모둠) / other(남들)</b> 세 칸씩이에요.</li>
+  <li><code>rw-</code> = 4+2 = 6, <code>r--</code> = 4이니 <code>-rw-r--r--</code>는 <b>644</b>예요.</li>
+  <li><code>chmod 755</code> = 나는 전부(4+2+1=7), 나머지는 읽기와 실행(4+1=5). <code>777</code> = 모두에게 전부 허용.</li>
+</ul>
+<p>그 밖에 두 가지만 더 알아 두세요.</p>
+<ul>
+  <li><b>리다이렉션</b> — 결과를 화면 대신 파일에 저장해요. <code>&gt;</code>는 덮어쓰기, <code>&gt;&gt;</code>는 이어쓰기, <code>2&gt;</code>는 에러만 저장이에요.</li>
+  <li><b><a class="w" href="words.html#w132" data-w="132">파이프</a> <code>|</code></b> — 앞 명령의 출력을 뒤 명령의 입력으로 넘겨요(앞에서 본 컨베이어 벨트).</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>생물정보 분석 도구는 오픈소스인 <b>리눅스</b> 환경에서 수십 년간 발전해 왔기 때문에 리눅스 사용이 필수다. 도구마다 버전이 달라 충돌하므로 <b>가상환경(conda)</b>을 만들어 목적별로 분리하고, 파일 권한은 r=4, w=2, x=1의 합으로 나타낸다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 권한 rwxr-xr-x를 숫자로 쓰면?</summary><p>755예요. rwx = 4+2+1 = 7, r-x = 4+1 = 5, r-x = 5이기 때문이에요.</p></details>
+
+<div class="done"><a class="go" href="c6-14.html">다음 카드 → 이 장 3줄 요약</a><div class="pn"><a href="c6-12.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c6"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 4·6·7주차 · 3. NGS(리눅스) · 5. DNA variant 분석 · 라이프05·07·08</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>

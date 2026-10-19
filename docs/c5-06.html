@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>싱글엔드 vs 페어드엔드 · 라이프케어 시험공부</title>
+<meta name="description" content="라이프케어빅데이터분석 중간고사를 생물 처음인 사람도 이해하게 정리한 공부 사이트">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="top"><div class="top-in">
+<a class="brand" href="index.html"><span class="bases"><i class="a">A</i><i class="t">T</i><i class="g">G</i><i class="c">C</i></span>라이프케어 시험공부</a>
+<nav class="nav" aria-label="메뉴"><a href="index.html" class=on>보드</a><a href="quiz.html">퀴즈</a><a href="essay.html">서술형</a><a href="cards.html">암기카드</a><a href="words.html">낱말사전</a><a href="cheat.html">시험 전 1장</a></nav>
+</div></header>
+<main>
+<div class="crumb k5"><a href="index.html#c5">← 보드</a><span>5장 Depth · 어디를 읽을까 · 6/8</span></div><h1>싱글엔드 vs 페어드엔드</h1>
+<p><a class="w" href="words.html#w58" data-w="58">NGS</a> 기계는 <a class="w" href="words.html#w3" data-w="3">DNA</a> 조각을 한쪽 끝에서 <b>150~250글자</b>까지밖에 못 읽어요. 이 한계를 넘으려는 방법이 <a class="w" href="words.html#w95" data-w="95">페어드엔드</a>예요.</p>
+<div class="box eg"><span class="t">비유</span>
+  <p>긴 터널을 뚫을 때 한쪽에서만 파는 것보다, <b>양쪽 입구에서 동시에 파다가 가운데서 만나게</b> 하면 더 빨리 길게 뚫을 수 있어요. 페어드엔드가 그 방식이에요.</p>
+</div>
+<div class="paper"><svg viewBox="0 0 380 100">
+  <text x="0" y="14" font-size="10" fill="#5d6b80">DNA 조각 (약 250글자)</text>
+  <rect x="20" y="22" width="340" height="12" rx="3" fill="#cbd5e1"/>
+  <rect x="154" y="40" width="72" height="44" fill="#fbbf24" opacity="0.3"/>
+  <rect x="20" y="45" width="196" height="7" fill="#d6264a"/><path d="M214,41 L228,48.5 L214,56 z" fill="#d6264a"/>
+  <text x="20" y="66" font-size="10" fill="#d6264a" font-weight="bold">R1 → 150</text>
+  <rect x="164" y="72" width="196" height="7" fill="#1d4ed8"/><path d="M166,68 L152,75.5 L166,83 z" fill="#1d4ed8"/>
+  <text x="360" y="96" font-size="10" fill="#1d4ed8" font-weight="bold" text-anchor="end">150 ← R2</text>
+  <text x="190" y="96" font-size="9" text-anchor="middle" fill="#8a5a00" font-weight="bold">겹침 ~50</text>
+</svg></div>
+<ul>
+  <li><b><a class="w" href="words.html#w94" data-w="94">싱글엔드</a></b> — 조각의 한쪽 끝에서만 읽어요.</li>
+  <li><b>페어드엔드(paired-end)</b> — 조각의 <b>양쪽 끝에서 각각</b> 읽어요. 왼쪽에서 읽은 것이 <b><a class="w" href="words.html#w96" data-w="96">R1</a></b>(정방향, forward), 오른쪽에서 읽은 것이 <b>R2</b>(역방향, reverse)예요. 가운데 <b>겹치는 부분(overlap, 약 50글자)</b>으로 이어붙여요.</li>
+  <li><b>2×150</b> — 양쪽에서 150글자씩 읽었다는 표기예요. 파일 이름에 <b>R1, R2</b>가 붙어서 두 파일로 나와요.</li>
+</ul>
+<p>계산해 보면 150 + 150 − 겹침 50 = <b>약 250글자</b>짜리 조각을 통째로 알 수 있어요.</p>
+<p>장점은 두 가지예요. 첫째, <b>더 길게 읽어요.</b> 둘째, 읽다 보면 뒤로 갈수록 품질이 떨어지는데, 그 부분을 <b>반대쪽에서 읽은 것이 보완(교정)</b>해 줘요.</p>
+<figure class="slide"><img src="slides/v08.jpg"><figcaption>교수님 슬라이드 — Single End Read vs Paired-End Read</figcaption></figure>
+<div class="box exam"><span class="t">시험엔 이렇게 써요</span>
+  <p>페어드엔드는 DNA 조각의 양 끝에서 각각 읽어(R1, R2) 겹치는 부분으로 합치는 방식이다. <b>더 긴 서열을 읽을 수 있고</b>, 뒤로 갈수록 떨어지는 품질을 <b>반대쪽 <a class="w" href="words.html#w73" data-w="73">read</a>가 보완</b>한다는 장점이 있다.</p>
+</div>
+<details class="check"><summary>잠깐 확인 — 2×150으로 읽고 겹침이 50이면, 합친 조각은 대략 몇 글자일까요?</summary><p>약 250글자예요. 150 + 150 = 300에서 겹친 50을 한 번 빼 주면 돼요.</p></details>
+
+<div class="done"><a class="go" href="c5-07.html">다음 카드 → 라이브러리 — 조각에 붙이는 꼬리표</a><div class="pn"><a href="c5-05.html"><b>← 이전</b>이전 카드</a><a class="next" href="quiz.html#c5"><b>연습</b>이 장 문제 풀기</a></div><p class="muted small">자료: 3·6주차 · 3. NGS · 5. DNA variant 분석 · 라이프03·07</p></div>
+</main>
+<script src="assets/words.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
