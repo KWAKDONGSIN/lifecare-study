@@ -21,7 +21,7 @@ CHS = [  # (id, 제목, 한 줄 설명, 문제 그룹, 자료 출처 — 바탕�
     ("c9", "실습 따라가기", "명령 하나하나가 파이프라인의 어디인지", ["practice"], "3·6·7주차 실습 · read_fastq.ipynb · 5. DNA variant_실습_수정.pdf"),
 ]
 GROUPS = {g for c in CHS for g in c[3]}
-NAV = [("index.html", "보드"), ("bplus.html", "B+코스"), ("quiz.html", "퀴즈"), ("essay.html", "서술형"),
+NAV = [("index.html", "보드"), ("b.html", "B코스"), ("bplus.html", "B+코스"), ("quiz.html", "퀴즈"), ("essay.html", "서술형"),
        ("cards.html", "암기카드"), ("words.html", "낱말사전"), ("cheat.html", "시험 전 1장")]
 VOID = {"br", "img", "meta", "link", "hr", "input", "source", "wbr", "col", "area", "base", "embed", "param", "track"}
 SKIP = {"svg", "code", "h1", "h2", "h3", "summary", "figcaption", "a", "button", "script", "style", "th"}
@@ -249,7 +249,8 @@ def main():
     start = f"""<section class="col kS" id="start"><div class="colhead"><b>시작하기</b><small>먼저 이 칸부터</small></div>
 <div class="post note"><b>10/20(화) 12:30 중간고사</b><span id="dday">종이 시험 · 서술형+단답형</span><span>범위: 기본생물학 → NGS → FASTQ부터 variant calling까지. 코딩 문제 없음.</span></div>
 <div class="post note"><b>쓰는 법</b><span>① 카드를 누르면 크게 열려요 ② 밑줄 친 낱말을 누르면 쉬운 뜻 ③ 옆으로 밀면 다음 장 칸 ④ 장 끝에서 "문제 풀기"</span></div>
-<a class="post bplus" href="bplus.html"><b>★ 시간 없으면 여기만: B+ 최단 코스</b><span>약 2시간 · 핵심 카드 21장 · 약어 15 · 서술형 6 · 핵심 문제</span></a>
+<a class="post bplus" href="b.html"><b>★ 오늘 이것만: B 코스 (약 1시간)</b><span>제일 쉬운 설명 · 핵심 12개 · 약어 10 · 숫자 5 · 서술형 4</span></a>
+<a class="post note" href="bplus.html"><b>★ 시간 없으면 여기만: B+ 최단 코스</b><span>약 2시간 · 핵심 카드 21장 · 약어 15 · 서술형 6 · 핵심 문제</span></a>
 <a class="post go2" href="c0-01.html"><b>▶ 0장 첫 카드부터 시작</b><span>생물 처음이면 여기부터 순서대로</span></a>
 <details class="post note"><summary><b>교수님 시험 힌트 (7주차)</b></summary><ul><li>"NGS가 뭔가" 같은 개념 설명</li><li>"GATK가 이니셜이 뭔가" — 약어 풀네임</li><li>디테일은 빼고 자주 나온 쉬운 개념</li><li>바이오 기초 · 파이프라인 순서와 이유 · NGS 개념</li></ul></details>
 <details class="post note"><summary><b>자료 확인 — 바탕화면 파일과 주차</b></summary><p class="small">바탕화면 '라이프케어' 폴더 18개 파일이 이 사이트에 쓴 자료와 내용까지 같아요. 녹취 번호는 03 다음부터 하나씩 밀려 있어요.</p><div class="tw"><table><tr><th>파일</th><th>실제</th><th>같이 본 자료</th></tr>{ftab}</table></div><p class="small muted">1주차(오리엔테이션) 녹취는 이 폴더엔 없어요. 수업계획서는 평가 비율(중간 25%)만 썼어요.</p></details>
@@ -319,6 +320,11 @@ def main():
     memo = "".join(f'<div class="box gray"><span class="t">{html.escape(c["title"])}</span><p>{c["body"]}</p></div>' for c in ex[2]["concepts"])
     cheat = link_words(webify(pdf_section(9)) + '<h2 style="margin-top:30px">헷갈리는 숫자</h2>' + memo + webify(pdf_section(11)), rx, idx)
     write("cheat.html", "시험 전 1장", cheat, "cheat.html", wscript)
+
+    # B 코스 (시험 당일, 가장 쉬운 한 페이지)
+    bb = open(os.path.join(C, "b.html"), encoding="utf-8").read()
+    bb = link_words(webify(re.sub(r"^\s*<!--.*?-->\s*", "", bb, flags=re.S)), rx, idx)
+    write("b.html", "B 코스", bb, "b.html", wscript)
 
     # B+ 최단 코스
     bp = open(os.path.join(C, "bplus.html"), encoding="utf-8").read()

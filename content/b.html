@@ -1,0 +1,124 @@
+<!-- B 코스 — 시험 당일, B만 받으면 될 때 보는 가장 쉬운 한 페이지 (핵심 12개 · 약어 10 · 숫자 5 · 서술형 4) -->
+<h1>B 코스 — 오늘 이것만</h1>
+<p class="lead">어려운 건 다 뺐어요. <b>12개 개념 + 약어 10개 + 숫자 5개 + 서술형 4개</b>만 보면 돼요. 약 1시간이에요. 위에서부터 차례로 읽으세요.</p>
+
+<div class="box exam"><span class="t">B 받는 법</span>
+<p>① 약어·숫자 문제는 다 맞힌다 ② 서술형은 <b>빈칸 없이</b> 아래 "시험엔 이 한 문장"을 쓴다. 모르면 비슷한 걸 쓴다. 이 둘이면 B예요.</p></div>
+
+<h2>먼저 큰 그림 한 줄</h2>
+<p>이 과목은 결국 이거예요. <b>사람 DNA를 기계로 읽어서, 표준이랑 비교해 다른 곳(변이)을 찾는다.</b></p>
+<div class="box tip"><span class="t">순서 (시험지 여백에 먼저 쓰기)</span>
+<p class="big">FASTQ → QC → 트리밍 → 얼라인먼트 → BAM → MarkDuplicates → BQSR → Variant calling → VCF → Annotation</p>
+<p class="small">외우는 요령 — <b>읽고(FASTQ) → 검사하고(QC) → 자르고(트리밍) → 붙이고(얼라인먼트) → 복사본 빼고(MarkDup) → 점수 고치고(BQSR) → 변이 찾고(VCF) → 뜻 찾기(Annotation)</b></p></div>
+
+<h2>꼭 알아야 할 12개</h2>
+
+<h3>1. DNA · 유전자 · 단백질</h3>
+<p>DNA는 몸의 <b>설계도 책</b>이에요. 글자가 A·T·G·C 네 개뿐이고, 사람은 약 <b>30억 글자</b>예요. 유전자는 그 책의 <b>레시피 한 개</b>, 단백질은 레시피로 만든 <b>요리</b>(몸에서 일하는 것)예요.</p>
+<p>DNA → RNA로 베끼는 걸 <b>전사</b>, RNA → 단백질로 만드는 걸 <b>번역</b>이라고 해요. 이 흐름을 <b>센트럴 도그마</b>라고 불러요.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>센트럴 도그마는 DNA가 전사(transcription)되어 RNA가 되고, RNA가 번역(translation)되어 단백질이 되는 과정이다.</p></div>
+<details class="check"><summary>확인 — RNA → 단백질 과정의 이름은?</summary><p>번역(translation). DNA → RNA는 전사.</p></details>
+
+<h3>2. 돌연변이 3종</h3>
+<p>DNA 글자 하나가 바뀌는 걸 돌연변이라고 해요. 문장 "나는 밥을 먹었다"로 생각하면 쉬워요.</p>
+<ul>
+<li><b>침묵</b> — "먹엇다"처럼 오타지만 <b>뜻이 같음</b> (같은 아미노산)</li>
+<li><b>넌센스</b> — "나는 밥을." 처럼 <b>중간에 끝나 버림</b> (종결 코돈)</li>
+<li><b>미스센스</b> — "나는 <b>빵</b>을 먹었다"처럼 <b>뜻이 바뀜</b> (다른 아미노산). 예) 겸상 적혈구 빈혈증</li>
+</ul>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>미스센스 변이는 염기 하나가 바뀌어 다른 아미노산이 만들어지는 변이로, 겸상 적혈구 빈혈증(GAG→GTG)이 대표적이다.</p></div>
+<details class="check"><summary>확인 — 글자는 바뀌었는데 같은 아미노산이면?</summary><p>침묵(silent) 돌연변이.</p></details>
+
+<h3>3. DNA 메틸화</h3>
+<p>DNA 글자는 그대로인데, <b>C 글자에 작은 클립(메틸기)이 붙어서 그 유전자를 꺼 버리는 것</b>이에요. 책 페이지를 클립으로 집어서 못 펴게 하는 것과 같아요.</p>
+<p>암에서는 <b>암을 막는 유전자(브레이크)가 클립으로 꺼져서</b> 문제가 생겨요.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>DNA 메틸화는 서열 변화 없이 사이토신(C)에 메틸기가 붙어 유전자 발현을 끄는 것이며, 암에서는 종양억제유전자 프로모터가 과메틸화되어 꺼진다.</p></div>
+<details class="check"><summary>확인 — 메틸화는 어떤 글자에 붙나?</summary><p>C (사이토신).</p></details>
+
+<h3>4. NGS란? ★제일 중요</h3>
+<p>예전 방식(Sanger)은 DNA를 <b>한 줄씩</b> 읽었어요. NGS는 DNA를 잘게 잘라 판 위에 깔아 놓고, 글자를 하나씩 붙이면서 사진을 찍어 <b>수억 조각을 한꺼번에</b> 읽어요.</p>
+<p>그래서 사람 한 명 DNA 읽는 값이 <b>30억 달러 → 약 200달러</b>로 확 싸졌어요.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장 (꼭 외우기)</span><p>NGS(Next Generation Sequencing)는 DNA 조각을 기판에 고정하고 염기를 합성하면서 동시에 형광으로 읽는(Sequencing by Synthesis) 방식으로, 수억 개의 조각을 병렬로 읽어 비용을 크게 낮춘 기술이다.</p></div>
+<details class="check"><summary>확인 — NGS 원리를 영어 3단어로?</summary><p>Sequencing by Synthesis (SBS).</p></details>
+
+<h3>5. Illumina가 이긴 이유</h3>
+<p>NGS 기계 회사 두 곳의 경쟁이에요. Roche는 길게 읽었지만, Illumina가 <b>훨씬 쌌어요</b>. 1Gb 읽는 값이 Illumina <b>$7</b>, Roche <b>$9,500</b>. 그래서 Illumina가 이겼고 Roche는 <b>2016년</b>에 문을 닫았어요.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>Roche는 read 길이가 길었지만 Illumina는 처리량이 커서 1Gb당 비용이 $7로 Roche($9,500)보다 훨씬 쌌기 때문에 시장을 차지했다. 기술 혁신은 결국 비용과 연결된다.</p></div>
+<details class="check"><summary>확인 — 이긴 이유 한 단어?</summary><p>비용(가격).</p></details>
+
+<h3>6. FASTQ와 Q30</h3>
+<p>NGS 기계가 읽은 결과 파일이 <b>FASTQ</b>예요. 조각 하나가 <b>4줄</b>이에요. ① 이름표(@) ② 읽은 글자 ③ + ④ 품질 점수.</p>
+<p>품질 점수 <b>Q30 = 99.9% 맞음</b>이에요. 요령은 "30이면 0이 3개" → 1,000번에 1번 틀림. 보통 Q30 이상이면 합격이에요.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>FASTQ는 한 read가 ID, 염기서열, +, 품질 점수의 4줄로 되어 있으며, Phred Q30은 에러 확률 1/1,000, 정확도 99.9%를 뜻한다.</p></div>
+<details class="check"><summary>확인 — FASTQ는 몇 줄이 한 세트?</summary><p>4줄.</p></details>
+
+<h3>7. Depth와 Coverage ★매 시간 나옴</h3>
+<p><b>Depth</b> = 한 자리를 <b>몇 번</b> 읽었나 (30번이면 30x).<br><b>Coverage</b> = 전체 중 <b>몇 %</b>를 읽었나 (90%).</p>
+<p>왜 depth가 중요할까요? 100명한테 물었는데 1명만 다르게 말하면 그 1명이 틀린 거죠. 그런데 2명한테 물었는데 1명이 다르면 누가 맞는지 몰라요. 그래서 <b>많이 읽을수록 정확해요.</b></p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>Depth는 한 위치를 몇 개의 read가 읽었는지, coverage는 전체 중 읽힌 비율이다. Depth가 높을수록 시퀀싱 에러와 진짜 변이를 구별할 수 있어 정확하다.</p></div>
+<details class="check"><summary>확인 — 전체의 10%가 안 읽혔으면 coverage는?</summary><p>90%.</p></details>
+
+<h3>8. WGS · WES · Targeted</h3>
+<p>기계가 읽을 수 있는 양은 정해져 있어요. 페인트 한 통으로 넓은 벽을 칠하면 얇게, 좁은 벽을 칠하면 두껍게 칠해지죠.</p>
+<ul><li><b>WGS</b> = 전부 읽기 (얇게, 약 30x)</li><li><b>WES</b> = 단백질 만드는 부분(엑손)만 (50~100x)</li><li><b>Targeted</b> = 필요한 유전자만 아주 두껍게 (500x 이상) → <b>암처럼 아주 적은 변이</b> 찾을 때</li></ul>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>읽는 범위가 좁을수록 depth가 깊어지므로, WGS는 전체를 약 30x, WES는 엑손만 50~100x, Targeted는 특정 유전자를 500x 이상 읽어 낮은 비율의 변이를 찾는다.</p></div>
+<details class="check"><summary>확인 — 암 조기진단처럼 적은 변이를 찾을 땐?</summary><p>Targeted (깊게 읽기).</p></details>
+
+<h3>9. 페어드엔드</h3>
+<p>NGS는 한 번에 150글자 정도밖에 못 읽어요. 그래서 조각의 <b>양쪽 끝에서 각각 읽고</b> 겹치는 부분으로 이어 붙여요. "2×150"은 양쪽에서 150씩이라는 뜻이에요.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>페어드엔드는 DNA 조각의 양쪽 끝에서 각각 읽어 겹치는 부분으로 합치는 방법으로, 더 길게 읽고 정확도를 높인다.</p></div>
+<details class="check"><summary>확인 — 2×150의 뜻은?</summary><p>양쪽에서 150씩 읽는 페어드엔드.</p></details>
+
+<h3>10. 얼라인먼트와 CIGAR</h3>
+<p><b>얼라인먼트</b> = 잘게 찢어 읽은 조각을 <b>표준 DNA(레퍼런스)의 제자리에 붙이는 것</b>이에요. 퍼즐 조각을 완성 그림에 맞추는 것과 같아요. 도구는 <b>BWA</b>, 결과 파일은 <b>SAM → BAM</b>(BAM은 압축판)이에요.</p>
+<p><b>CIGAR</b>는 어떻게 붙었는지 적는 암호예요. <b>M = 맞음, I = 끼어듦(삽입), D = 빠짐(결실)</b>. 예) 5M2I10M = 5개 맞고, 2개 끼어들고, 10개 맞음.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>얼라인먼트는 짧은 read를 레퍼런스 게놈의 위치에 맞추는 과정으로, 위치를 알아야 다른 곳(변이)을 찾을 수 있다. CIGAR에서 M은 매치, I는 삽입, D는 결실이다.</p></div>
+<details class="check"><summary>확인 — CIGAR 3M1D4M은?</summary><p>3개 맞음, 1개 빠짐(결실), 4개 맞음.</p></details>
+
+<h3>11. MarkDuplicates와 BQSR (왜 하나만)</h3>
+<p><b>MarkDuplicates</b> = <b>복사본 빼기</b>. 실험 중 같은 조각이 여러 번 복사되면, 한 사람이 투표를 여러 번 한 것처럼 결과가 왜곡돼요. 그래서 하나만 남겨요.</p>
+<p><b>BQSR</b> = <b>점수 영점 맞추기</b>. 기계가 매긴 품질 점수가 살짝 틀려 있어서, 실수를 변이로 착각하지 않게 고쳐요.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>MarkDuplicates는 PCR로 생긴 중복 read를 제거해 변이 비율이 부풀지 않게 하고, BQSR은 품질 점수의 bias를 보정해 시퀀싱 에러를 변이로 오인하지 않게 한다.</p></div>
+<details class="check"><summary>확인 — 복사본 빼는 단계 이름은?</summary><p>MarkDuplicates.</p></details>
+
+<h3>12. Variant calling과 VCF ★</h3>
+<p>표준과 다른 곳을 찾는 건 <b>틀린 그림 찾기</b>처럼 쉬워요. 그런데 그중엔 기계 실수도 섞여 있어요. 그래서 <b>진짜 변이일 확률을 계산해서 확실한 것만 고르는 것</b>이 variant calling이에요. 도구는 <b>GATK HaplotypeCaller</b>, 결과는 <b>VCF</b> 파일이에요.</p>
+<p>VCF의 GT 칸: <b>0/0 = 변이 없음</b>, 0/1 = 한쪽만 변이, 1/1 = 양쪽 다 변이.</p>
+<div class="box exam"><span class="t">시험엔 이 한 문장</span><p>Variant calling은 레퍼런스와 다른 위치를 변이로 가정한 뒤 진짜 변이일 확률을 계산해 확실한 변이만 고르는 과정이며, 결과는 VCF 파일로 저장된다.</p></div>
+<details class="check"><summary>확인 — GT가 0/0이면?</summary><p>변이 없음 (표준과 같음).</p></details>
+
+<h2>약어 10개 (풀네임 쓰기 문제)</h2>
+<div class="tw"><table>
+<tr><th>약어</th><th>풀네임</th></tr>
+<tr><td><b>NGS</b></td><td>Next Generation Sequencing</td></tr>
+<tr><td><b>PCR</b></td><td>Polymerase Chain Reaction</td></tr>
+<tr><td><b>SNP</b></td><td>Single Nucleotide Polymorphism</td></tr>
+<tr><td><b>WGS</b></td><td>Whole Genome Sequencing</td></tr>
+<tr><td><b>WES</b></td><td>Whole Exome Sequencing</td></tr>
+<tr><td><b>QC</b></td><td>Quality Control</td></tr>
+<tr><td><b>BWA</b></td><td>Burrows-Wheeler Aligner</td></tr>
+<tr><td><b>BQSR</b></td><td>Base Quality Score Recalibration</td></tr>
+<tr><td><b>GATK</b></td><td>Genome Analysis Toolkit</td></tr>
+<tr><td><b>VCF</b></td><td>Variant Call Format</td></tr>
+</table></div>
+<p class="small muted">SAM = Sequence Alignment/Map, BAM = 그 압축판(Binary)도 같이 보면 좋아요.</p>
+
+<h2>숫자 5개</h2>
+<ul>
+<li>사람 DNA = <b>약 30억</b> 글자(염기쌍)</li>
+<li>휴먼 게놈 프로젝트 = <b>13년, 30억 달러</b> → 지금 <b>약 200달러</b></li>
+<li><b>Q30 = 99.9%</b> (1,000번에 1번 틀림)</li>
+<li>Illumina <b>$7</b> vs Roche <b>$9,500</b> (1Gb당) · Roche <b>2016년</b> 폐업</li>
+<li>WGS <b>30x</b> · WES <b>50~100x</b> · Targeted <b>500x 이상</b></li>
+</ul>
+
+<h2>서술형 4개 — 이것만 연습</h2>
+<p>가리고 종이에 한 번씩 써 보세요. 위 "시험엔 이 한 문장"을 이어 붙이면 답이 돼요.</p>
+<details class="card"><summary>1. NGS란 무엇인지 설명하시오.</summary><div class="in"><div class="model"><p>NGS는 DNA 조각을 기판에 고정하고 염기를 합성하면서 동시에 형광으로 읽는(Sequencing by Synthesis) 기술이다. 예전 Sanger 방식은 하나씩 읽었지만 NGS는 수억 개 조각을 한꺼번에 읽는다. 그래서 사람 게놈 분석 비용이 30억 달러에서 약 200달러로 크게 줄었다.</p></div></div></details>
+<details class="card"><summary>2. Depth와 coverage의 차이를 설명하시오.</summary><div class="in"><div class="model"><p>Depth는 한 위치를 몇 개의 read가 읽었는지(예 30x)이고, coverage는 전체 중 한 번이라도 읽힌 비율(예 99%)이다. Depth가 높을수록 한 read의 에러를 다른 read가 보완해 진짜 변이와 에러를 구별할 수 있다.</p></div></div></details>
+<details class="card"><summary>3. FASTQ에서 VCF까지 분석 순서를 쓰시오.</summary><div class="in"><div class="model"><p>FASTQ → QC(품질 확인) → 트리밍(어댑터 제거) → 얼라인먼트(BWA로 레퍼런스에 맞춤) → BAM → MarkDuplicates(중복 제거) → BQSR(품질 점수 보정) → Variant calling(진짜 변이 고르기) → VCF → Annotation(변이 의미 찾기) 순서이다. 각 단계는 시퀀싱 에러와 진짜 변이를 구별하기 위해 필요하다.</p></div></div></details>
+<details class="card"><summary>4. Illumina가 시장을 차지한 이유를 쓰시오.</summary><div class="in"><div class="model"><p>Roche는 read 길이가 길었지만, Illumina는 처리량이 커서 1Gb당 비용이 $7로 Roche($9,500)보다 훨씬 쌌다. 연구자들은 비용이 싼 쪽을 골랐고 Roche는 2016년 문을 닫았다. 기술 혁신은 결국 비용과 연결된다.</p></div></div></details>
+
+<div class="box pro"><span class="t">시험장에서</span>
+<p>① 여백에 위 순서 한 줄 먼저 쓰기 ② 약어·숫자부터 풀기 ③ 서술형은 모르면 비슷한 "시험엔 이 한 문장"이라도 써서 <b>빈칸 만들지 않기</b>. 화이팅!</p></div>
+<p class="small muted">시간이 남으면 <a href="bplus.html">B+ 코스</a>나 <a href="quiz.html#core">핵심 문제</a>를 풀어 보세요.</p>
